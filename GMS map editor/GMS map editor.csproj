@@ -66,6 +66,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -76,6 +77,81 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

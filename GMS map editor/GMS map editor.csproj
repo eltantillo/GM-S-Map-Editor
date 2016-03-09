@@ -52,6 +52,13 @@
     <Compile Include="InterfazBasica.Designer.cs">
       <DependentUpon>InterfazBasica.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProjectAssets\Room\Background.cs" />
+    <Compile Include="ProjectAssets\Room\Instance.cs" />
+    <Compile Include="ProjectAssets\Room\MakerSettings.cs" />
+    <Compile Include="ProjectAssets\Room\Project.cs" />
+    <Compile Include="ProjectAssets\Room\Room.cs" />
+    <Compile Include="ProjectAssets\Room\View.cs" />
+    <Compile Include="ProjectAssets\Tile.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

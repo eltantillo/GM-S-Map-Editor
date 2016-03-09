@@ -4,3 +4,5 @@ git commit -m "UPDATE"
 pause
 git push
 pause
+git pull
+pause

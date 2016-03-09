@@ -5,3 +5,5 @@ C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map edi
 C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.exe
 C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.pdb
 C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\WindowsFormsApplication1.InterfazBasica.resources
+D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.exe
+D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.pdb

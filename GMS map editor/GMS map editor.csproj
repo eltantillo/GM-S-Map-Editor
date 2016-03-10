@@ -46,12 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfazBasica.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InterfazBasica.Designer.cs">
       <DependentUpon>InterfazBasica.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProjectAssets\Grafico\BackgroundTile.cs" />
+    <Compile Include="ProjectAssets\Grafico\SimpleLayer.cs" />
+    <Compile Include="ProjectAssets\Grafico\SimpleRoom.cs" />
+    <Compile Include="ProjectAssets\Grafico\SimpleTile.cs" />
     <Compile Include="ProjectAssets\Room\Background.cs" />
     <Compile Include="ProjectAssets\Room\Instance.cs" />
     <Compile Include="ProjectAssets\Room\MakerSettings.cs" />
@@ -75,6 +85,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -159,6 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

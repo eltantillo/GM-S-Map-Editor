@@ -8,16 +8,22 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using WindowsFormsApplication1.ProjectAssets.Grafico;
 
 namespace WindowsFormsApplication1{
     public partial class InterfazBasica : Form{
+
+        Object bt;
+        Object sr;
+
         public InterfazBasica(){
             InitializeComponent();
         }
 
         private void InterfazBasica_Load(object sender, EventArgs e){
-            
+
         }
+
         private void InterfazBasica_SizeChanged(object sender, EventArgs e){
             //MessageBox.Show("Error Message", "Error Title", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             div_left.Width = int.Parse(Math.Floor(this.Width * 0.25) + "");
@@ -33,6 +39,7 @@ namespace WindowsFormsApplication1{
             div_right.Dock = DockStyle.Left;
             div_right.Location = new Point(div_center.Height, 0);
             div_right.SetAutoScrollMargin(12, div_left.Height);
+            barra2.Width = this.Width;
         }
 
         private void noseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -81,47 +88,27 @@ namespace WindowsFormsApplication1{
             }
         }
 
-        private void deleteDelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void queEsEstoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e){
             int gridus = int.Parse(info.Text);
+            int gridus2 = int.Parse(info2.Text);
             div_left.Controls.Clear();
             // Create an instance of the open file dialog box.
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.Multiselect = false;
             openFileDialog1.ShowDialog();
-            Image i = Image.FromFile(openFileDialog1.FileName);
 
-            //MessageBox.Show("Estado: IH=" + i.Height + " IW=" + i.Width + " FIH=" + (i.Height / gridus) + " FIW=" + (i.Width / gridus));
+            bt = new BackgroundTile(openFileDialog1.FileName, gridus, gridus);
+            ((BackgroundTile)bt).drawBackgroundTile(div_left);
 
-            for (int y = 0; y < (i.Height/gridus); y++){
-                for (int x = 0; x < (i.Width/gridus); x++){
-                    PictureBox p = new PictureBox();
-                    p.Location = new Point(x*gridus, y*gridus);
-                    Bitmap testu = i as Bitmap;
-                    
-                    p.Width = gridus;
-                    p.Height = gridus;
-                    p.Image = testu.Clone(
-                        new Rectangle(new Point(x*gridus, y*gridus),
-                        new Size(gridus, gridus)),
-                        testu.PixelFormat
-                    );
-                    div_left.Controls.Add(p);
-                    //MessageBox.Show("It: x=" + x + " y=" + y);
-                    //MessageBox.Show("x < i.Width " + x + "<" + i.Width);
-                }
-                //MessageBox.Show("y < i.Height " + y + "<" + i.Height);
-            }
+            sr = new SimpleRoom(gridus2, gridus2, gridus, gridus);
+            ((SimpleRoom)sr).drawSimpleRoom(div_center);
+            //bt.drawBackgroundTile(div_right);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e){
+            TestForm f = new TestForm();
+            f.Show();
         }
 
     }

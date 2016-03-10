@@ -5,8 +5,7 @@ using System.Text;
 
 namespace WindowsFormsApplication1.ProjectAssets
 {
-    class Tile
-    {
+    class Tile{
         public string bgName;
         public int x;
         public int y;

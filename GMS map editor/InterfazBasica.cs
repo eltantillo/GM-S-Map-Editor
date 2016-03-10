@@ -8,17 +8,26 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+<<<<<<< HEAD
 using WindowsFormsApplication1.ProjectAssets;
+=======
+using WindowsFormsApplication1.ProjectAssets.Grafico;
+>>>>>>> 1bb7d8ca52002faeb84fa4300af4b9af2edf9ddf
 
 namespace WindowsFormsApplication1{
     public partial class InterfazBasica : Form{
+
+        Object bt;
+        Object sr;
+
         public InterfazBasica(){
             InitializeComponent();
         }
 
         private void InterfazBasica_Load(object sender, EventArgs e){
-            
+
         }
+
         private void InterfazBasica_SizeChanged(object sender, EventArgs e){
             //MessageBox.Show("Error Message", "Error Title", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             div_left.Width = int.Parse(Math.Floor(this.Width * 0.25) + "");
@@ -34,9 +43,7 @@ namespace WindowsFormsApplication1{
             div_right.Dock = DockStyle.Left;
             div_right.Location = new Point(div_center.Height, 0);
             div_right.SetAutoScrollMargin(12, div_left.Height);
-
-            testu.Height = 500; //
-            testu.Width = 500; // 
+            barra2.Width = this.Width;
         }
 
         private void noseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -84,6 +91,7 @@ namespace WindowsFormsApplication1{
             }
         }
 
+<<<<<<< HEAD
         private void backgroundRead(string xmlFile, ProjectAssets.Project project)
         {
             String xmlString = File.ReadAllText(xmlFile).ToString();
@@ -99,6 +107,29 @@ namespace WindowsFormsApplication1{
                 }
             }
             project.backgrounds[0].data = xmlFile;
+=======
+        private void contentsToolStripMenuItem_Click(object sender, EventArgs e){
+            int gridus = int.Parse(info.Text);
+            int gridus2 = int.Parse(info2.Text);
+            div_left.Controls.Clear();
+            // Create an instance of the open file dialog box.
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Multiselect = false;
+            openFileDialog1.ShowDialog();
+
+            bt = new BackgroundTile(openFileDialog1.FileName, gridus, gridus);
+            ((BackgroundTile)bt).drawBackgroundTile(div_left);
+
+            sr = new SimpleRoom(gridus2, gridus2, gridus, gridus);
+            ((SimpleRoom)sr).drawSimpleRoom(div_center);
+            //bt.drawBackgroundTile(div_right);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e){
+            TestForm f = new TestForm();
+            f.Show();
+>>>>>>> 1bb7d8ca52002faeb84fa4300af4b9af2edf9ddf
         }
 
     }

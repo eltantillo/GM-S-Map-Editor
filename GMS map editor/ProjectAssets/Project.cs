@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WindowsFormsApplication1.Room.ProjectAssets
+namespace WindowsFormsApplication1.ProjectAssets
 {
     class Project
     {
         public string configs;
+        public List<Backgrounds.Background> backgrounds = new List<Backgrounds.Background>();
     }
 }

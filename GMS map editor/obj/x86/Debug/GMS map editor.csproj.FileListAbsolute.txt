@@ -12,9 +12,5 @@ D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\WindowsFormsApplication
 D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.csproj.GenerateResource.Cache
 D:\Projects\GM-S-Map-Editor\GMS map editor\bin\Debug\GMS map editor.exe
 D:\Projects\GM-S-Map-Editor\GMS map editor\bin\Debug\GMS map editor.pdb
-<<<<<<< HEAD
 D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.csprojResolveAssemblyReference.cache
-=======
-C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.csprojResolveAssemblyReference.cache
-C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\WindowsFormsApplication1.TestForm.resources
->>>>>>> 1bb7d8ca52002faeb84fa4300af4b9af2edf9ddf
+D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\WindowsFormsApplication1.TestForm.resources

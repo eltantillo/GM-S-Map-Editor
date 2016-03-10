@@ -8,11 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
-<<<<<<< HEAD
 using WindowsFormsApplication1.ProjectAssets;
-=======
 using WindowsFormsApplication1.ProjectAssets.Grafico;
->>>>>>> 1bb7d8ca52002faeb84fa4300af4b9af2edf9ddf
 
 namespace WindowsFormsApplication1{
     public partial class InterfazBasica : Form{
@@ -91,7 +88,6 @@ namespace WindowsFormsApplication1{
             }
         }
 
-<<<<<<< HEAD
         private void backgroundRead(string xmlFile, ProjectAssets.Project project)
         {
             String xmlString = File.ReadAllText(xmlFile).ToString();
@@ -99,7 +95,7 @@ namespace WindowsFormsApplication1{
             {
                 while (reader.Read())
                 {
-                    reader.ReadToFollowing("");
+                    reader.ReadToFollowing("background");
                     if (reader.NodeType == XmlNodeType.Element)
                     {
 
@@ -107,7 +103,8 @@ namespace WindowsFormsApplication1{
                 }
             }
             project.backgrounds[0].data = xmlFile;
-=======
+        }
+
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e){
             int gridus = int.Parse(info.Text);
             int gridus2 = int.Parse(info2.Text);
@@ -129,7 +126,6 @@ namespace WindowsFormsApplication1{
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e){
             TestForm f = new TestForm();
             f.Show();
->>>>>>> 1bb7d8ca52002faeb84fa4300af4b9af2edf9ddf
         }
 
     }

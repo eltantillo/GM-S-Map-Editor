@@ -66,7 +66,9 @@ namespace WindowsFormsApplication1{
                 ProjectAssets.Project project = new ProjectAssets.Project();
                 directory = Path.GetDirectoryName(projectFile.FileName) + @"\";
                 xmlRead(projectFile.FileName, project, "background");
-                MessageBox.Show(project.backgrounds[0].data);
+                foreach(ProjectAssets.Backgrounds.Background background in project.backgrounds){
+                    MessageBox.Show(background.istileset.ToString());
+                }
             }
         }
 
@@ -93,16 +95,33 @@ namespace WindowsFormsApplication1{
             String xmlString = File.ReadAllText(xmlFile).ToString();
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {
-                while (reader.Read())
-                {
-                    reader.ReadToFollowing("background");
-                    if (reader.NodeType == XmlNodeType.Element)
-                    {
-
-                    }
-                }
+                reader.ReadToFollowing("istileset");
+                project.backgrounds[project.backgrounds.Count - 1].istileset = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                reader.ReadToFollowing("tilewidth");
+                project.backgrounds[project.backgrounds.Count - 1].tilewidth = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tileheight");
+                project.backgrounds[project.backgrounds.Count - 1].tileheight = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tilexoff");
+                project.backgrounds[project.backgrounds.Count - 1].tilexoff = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tileyoff");
+                project.backgrounds[project.backgrounds.Count - 1].tileyoff = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tilehsep");
+                project.backgrounds[project.backgrounds.Count - 1].tilehsep = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tilevsep");
+                project.backgrounds[project.backgrounds.Count - 1].tilevsep = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("HTile");
+                project.backgrounds[project.backgrounds.Count - 1].HTile = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                reader.ReadToFollowing("VTile");
+                project.backgrounds[project.backgrounds.Count - 1].VTile = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                reader.ReadToFollowing("For3D");
+                project.backgrounds[project.backgrounds.Count - 1].For3D = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                reader.ReadToFollowing("width");
+                project.backgrounds[project.backgrounds.Count - 1].width = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("height");
+                project.backgrounds[project.backgrounds.Count - 1].height = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("data");
+                project.backgrounds[project.backgrounds.Count - 1].data = reader.ReadElementContentAsString();
             }
-            project.backgrounds[0].data = xmlFile;
         }
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e){

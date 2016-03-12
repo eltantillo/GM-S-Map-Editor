@@ -67,7 +67,7 @@ namespace WindowsFormsApplication1{
                 directory = Path.GetDirectoryName(projectFile.FileName) + @"\";
                 xmlRead(projectFile.FileName, project, "background");
                 foreach(ProjectAssets.Backgrounds.Background background in project.backgrounds){
-                    MessageBox.Show(background.istileset.ToString());
+                    MessageBox.Show(background.ToString());
                 }
             }
         }
@@ -95,32 +95,43 @@ namespace WindowsFormsApplication1{
             String xmlString = File.ReadAllText(xmlFile).ToString();
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {
+                int num = project.backgrounds.Count - 1;
                 reader.ReadToFollowing("istileset");
-                project.backgrounds[project.backgrounds.Count - 1].istileset = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                project.backgrounds[num].istileset = Convert.ToBoolean(reader.ReadElementContentAsInt());
                 reader.ReadToFollowing("tilewidth");
-                project.backgrounds[project.backgrounds.Count - 1].tilewidth = reader.ReadElementContentAsInt();
+                project.backgrounds[num].tilewidth = reader.ReadElementContentAsInt();
                 reader.ReadToFollowing("tileheight");
-                project.backgrounds[project.backgrounds.Count - 1].tileheight = reader.ReadElementContentAsInt();
+                project.backgrounds[num].tileheight = reader.ReadElementContentAsInt();
                 reader.ReadToFollowing("tilexoff");
-                project.backgrounds[project.backgrounds.Count - 1].tilexoff = reader.ReadElementContentAsInt();
+                project.backgrounds[num].tilexoff = reader.ReadElementContentAsInt();
                 reader.ReadToFollowing("tileyoff");
-                project.backgrounds[project.backgrounds.Count - 1].tileyoff = reader.ReadElementContentAsInt();
+                project.backgrounds[num].tileyoff = reader.ReadElementContentAsInt();
                 reader.ReadToFollowing("tilehsep");
-                project.backgrounds[project.backgrounds.Count - 1].tilehsep = reader.ReadElementContentAsInt();
+                project.backgrounds[num].tilehsep = reader.ReadElementContentAsInt();
                 reader.ReadToFollowing("tilevsep");
-                project.backgrounds[project.backgrounds.Count - 1].tilevsep = reader.ReadElementContentAsInt();
+                project.backgrounds[num].tilevsep = reader.ReadElementContentAsInt();
                 reader.ReadToFollowing("HTile");
-                project.backgrounds[project.backgrounds.Count - 1].HTile = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                project.backgrounds[num].HTile = Convert.ToBoolean(reader.ReadElementContentAsInt());
                 reader.ReadToFollowing("VTile");
-                project.backgrounds[project.backgrounds.Count - 1].VTile = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                project.backgrounds[num].VTile = Convert.ToBoolean(reader.ReadElementContentAsInt());
+
+                reader.ReadToFollowing("TextureGroups");
+                int i = 0;
+                reader.ReadToFollowing("TextureGroup" + i);
+                do
+                {
+                    project.backgrounds[num].TextureGroups.Add(reader.ReadElementContentAsInt());
+                    i++;
+                } while (reader.ReadToNextSibling("TextureGroup" + i));
+
                 reader.ReadToFollowing("For3D");
-                project.backgrounds[project.backgrounds.Count - 1].For3D = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                project.backgrounds[num].For3D = Convert.ToBoolean(reader.ReadElementContentAsInt());
                 reader.ReadToFollowing("width");
-                project.backgrounds[project.backgrounds.Count - 1].width = reader.ReadElementContentAsInt();
+                project.backgrounds[num].width = reader.ReadElementContentAsInt();
                 reader.ReadToFollowing("height");
-                project.backgrounds[project.backgrounds.Count - 1].height = reader.ReadElementContentAsInt();
+                project.backgrounds[num].height = reader.ReadElementContentAsInt();
                 reader.ReadToFollowing("data");
-                project.backgrounds[project.backgrounds.Count - 1].data = reader.ReadElementContentAsString();
+                project.backgrounds[num].data = reader.ReadElementContentAsString();
             }
         }
 

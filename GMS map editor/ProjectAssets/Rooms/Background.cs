@@ -7,15 +7,15 @@ namespace GMSMapEditor.ProjectAssets.Rooms
 {
     public class Background
     {
-        public bool visible;
-        public bool foreground;
-        public string name;
-        public int x;
-        public int y;
-        public bool htiled;
-        public bool vtiled;
-        public int hspeed;
-        public int vspeed;
-        public bool stretch;
+        public bool visible = false;
+        public bool foreground = false;
+        public string name = "";
+        public int x = 0;
+        public int y = 0;
+        public bool htiled = true;
+        public bool vtiled = true;
+        public int hspeed = 0;
+        public int vspeed = 0;
+        public bool stretch = false;
     }
 }

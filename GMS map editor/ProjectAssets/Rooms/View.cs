@@ -7,19 +7,19 @@ namespace GMSMapEditor.ProjectAssets.Rooms
 {
     public class View
     {
-        public bool visible;
-        public string objName;
-        public int xview;
-        public int yview;
-        public int wview;
-        public int hview;
-        public int xport;
-        public int yport;
-        public int wport;
-        public int hport;
-        public int hborder;
-        public int vborder;
-        public int hspeed;
-        public int vspeed;
+        public bool visible = false;
+        public string objName = "";
+        public int xview = 0;
+        public int yview = 0;
+        public int wview = 1024;
+        public int hview = 768;
+        public int xport = 0;
+        public int yport = 0;
+        public int wport = 1024;
+        public int hport = 768;
+        public int hborder = 32;
+        public int vborder = 32;
+        public int hspeed = -1;
+        public int vspeed = -1;
     }
 }

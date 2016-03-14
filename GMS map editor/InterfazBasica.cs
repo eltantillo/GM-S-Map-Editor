@@ -160,31 +160,69 @@ namespace GMSMapEditor{
                 reader.ReadToFollowing("yoffset");
                 Project.assets.rooms[num].makerSettings.yoffset = reader.ReadElementContentAsInt();
 
+                int i = 0;
                 reader.ReadToFollowing("background");
                 do
                 {
-                    //MessageBox.Show(reader.GetAttribute("name"));
                     Project.assets.rooms[num].backgrounds.Add(new ProjectAssets.Rooms.Background());
+                    Project.assets.rooms[num].backgrounds[i].visible = Convert.ToBoolean(Convert.ToInt32(reader.GetAttribute("visible")));
+                    Project.assets.rooms[num].backgrounds[i].foreground = Convert.ToBoolean(Convert.ToInt32(reader.GetAttribute("foreground")));
+                    Project.assets.rooms[num].backgrounds[i].name = reader.GetAttribute("name");
+                    Project.assets.rooms[num].backgrounds[i].x = Convert.ToInt32(reader.GetAttribute("x"));
+                    Project.assets.rooms[num].backgrounds[i].y = Convert.ToInt32(reader.GetAttribute("y"));
+                    Project.assets.rooms[num].backgrounds[i].htiled = Convert.ToBoolean(Convert.ToInt32(reader.GetAttribute("htiled")));
+                    Project.assets.rooms[num].backgrounds[i].vtiled = Convert.ToBoolean(Convert.ToInt32(reader.GetAttribute("vtiled")));
+                    Project.assets.rooms[num].backgrounds[i].hspeed = Convert.ToInt32(reader.GetAttribute("hspeed"));
+                    Project.assets.rooms[num].backgrounds[i].vspeed = Convert.ToInt32(reader.GetAttribute("vspeed"));
+                    Project.assets.rooms[num].backgrounds[i].stretch = Convert.ToBoolean(Convert.ToInt32(reader.GetAttribute("stretch")));
+                    i++;
                 } while (reader.ReadToNextSibling("background"));
 
+                i = 0;
                 reader.ReadToFollowing("view");
                 do
                 {
-                    //MessageBox.Show(reader.GetAttribute("wview"));
                     Project.assets.rooms[num].views.Add(new ProjectAssets.Rooms.View());
+                    Project.assets.rooms[num].views[i].visible = Convert.ToBoolean(Convert.ToInt32(reader.GetAttribute("visible")));
+                    Project.assets.rooms[num].views[i].objName = reader.GetAttribute("objName");
+                    Project.assets.rooms[num].views[i].xview = Convert.ToInt32(reader.GetAttribute("xview"));
+                    Project.assets.rooms[num].views[i].yview = Convert.ToInt32(reader.GetAttribute("yview"));
+                    Project.assets.rooms[num].views[i].wview = Convert.ToInt32(reader.GetAttribute("wview"));
+                    Project.assets.rooms[num].views[i].hview = Convert.ToInt32(reader.GetAttribute("hview"));
+                    Project.assets.rooms[num].views[i].xport = Convert.ToInt32(reader.GetAttribute("xport"));
+                    Project.assets.rooms[num].views[i].yport = Convert.ToInt32(reader.GetAttribute("yport"));
+                    Project.assets.rooms[num].views[i].wport = Convert.ToInt32(reader.GetAttribute("wport"));
+                    Project.assets.rooms[num].views[i].hport = Convert.ToInt32(reader.GetAttribute("hport"));
+                    Project.assets.rooms[num].views[i].hborder = Convert.ToInt32(reader.GetAttribute("hborder"));
+                    Project.assets.rooms[num].views[i].vborder = Convert.ToInt32(reader.GetAttribute("vborder"));
+                    Project.assets.rooms[num].views[i].hspeed = Convert.ToInt32(reader.GetAttribute("hspeed"));
+                    Project.assets.rooms[num].views[i].vspeed = Convert.ToInt32(reader.GetAttribute("vspeed"));
+                    i++;
                 } while (reader.ReadToNextSibling("view")) ;
 
+                i = 0;
                 reader.ReadToFollowing("instances");
                 if (!reader.IsEmptyElement)
                 {
                     reader.ReadToFollowing("instance");
                     do
                     {
-                        //MessageBox.Show(reader.GetAttribute("objName"));
                         Project.assets.rooms[num].instances.Add(new ProjectAssets.Rooms.Instance());
+                        Project.assets.rooms[num].instances[i].objName = reader.GetAttribute("objName");
+                        Project.assets.rooms[num].instances[i].x = Convert.ToInt32(reader.GetAttribute("x"));
+                        Project.assets.rooms[num].instances[i].y = Convert.ToInt32(reader.GetAttribute("y"));
+                        Project.assets.rooms[num].instances[i].name = reader.GetAttribute("name");
+                        Project.assets.rooms[num].instances[i].locked = Convert.ToBoolean(Convert.ToInt32(reader.GetAttribute("locked")));
+                        Project.assets.rooms[num].instances[i].code = reader.GetAttribute("code");
+                        Project.assets.rooms[num].instances[i].scaleX = Convert.ToDouble(reader.GetAttribute("scaleX"));
+                        Project.assets.rooms[num].instances[i].scaleY = Convert.ToDouble(reader.GetAttribute("scaleY"));
+                        Project.assets.rooms[num].instances[i].colour = reader.GetAttribute("colour");
+                        Project.assets.rooms[num].instances[i].rotation = Convert.ToDouble(reader.GetAttribute("rotation"));
+                        i++;
                     } while (reader.ReadToNextSibling("instance"));
                 }
 
+                i = 0;
                 reader.ReadToFollowing("tiles");
                 if (!reader.IsEmptyElement)
                 {
@@ -193,6 +231,21 @@ namespace GMSMapEditor{
                     {
                         //MessageBox.Show(reader.GetAttribute("bgName"));
                         Project.assets.rooms[num].tiles.Add(new ProjectAssets.Rooms.Tile());
+                        Project.assets.rooms[num].tiles[i].bgName = reader.GetAttribute("bgName");
+                        Project.assets.rooms[num].tiles[i].x = Convert.ToInt32(reader.GetAttribute("x"));
+                        Project.assets.rooms[num].tiles[i].y = Convert.ToInt32(reader.GetAttribute("y"));
+                        Project.assets.rooms[num].tiles[i].w = Convert.ToInt32(reader.GetAttribute("w"));
+                        Project.assets.rooms[num].tiles[i].h = Convert.ToInt32(reader.GetAttribute("h"));
+                        Project.assets.rooms[num].tiles[i].xo = Convert.ToInt32(reader.GetAttribute("xo"));
+                        Project.assets.rooms[num].tiles[i].yo = Convert.ToInt32(reader.GetAttribute("yo"));
+                        Project.assets.rooms[num].tiles[i].id = Convert.ToInt32(reader.GetAttribute("id"));
+                        Project.assets.rooms[num].tiles[i].name = reader.GetAttribute("name");
+                        Project.assets.rooms[num].tiles[i].depth = Convert.ToInt32(reader.GetAttribute("depth"));
+                        Project.assets.rooms[num].tiles[i].locked = Convert.ToBoolean(Convert.ToInt32(reader.GetAttribute("locked")));
+                        Project.assets.rooms[num].tiles[i].colour = reader.GetAttribute("colour");
+                        Project.assets.rooms[num].tiles[i].scaleX = Convert.ToDouble(reader.GetAttribute("scaleX"));
+                        Project.assets.rooms[num].tiles[i].scaleY = Convert.ToDouble(reader.GetAttribute("scaleY"));
+                        i++;
                     } while (reader.ReadToNextSibling("tile"));
                 }
 

@@ -7,19 +7,19 @@ namespace GMSMapEditor.ProjectAssets.Rooms
 {
     public class MakerSettings
     {
-        public bool isSet;
-        public int w;
-        public int h;
-        public bool showGrid;
-        public bool showObjects;
-        public bool showTiles;
-        public bool showBackgrounds;
-        public bool showForegrounds;
-        public bool showViews;
-        public bool deleteUnderlyingObj;
-        public bool deleteUnderlyingTiles;
-        public int page;
-        public int xoffset;
-        public int yoffset;
+        public bool isSet = false;
+        public int w = 0;
+        public int h = 0;
+        public bool showGrid = true;
+        public bool showObjects = false;
+        public bool showTiles = false;
+        public bool showBackgrounds = false;
+        public bool showForegrounds = false;
+        public bool showViews = false;
+        public bool deleteUnderlyingObj = false;
+        public bool deleteUnderlyingTiles = false;
+        public int page = 0;
+        public int xoffset = 0;
+        public int yoffset = 0;
     }
 }

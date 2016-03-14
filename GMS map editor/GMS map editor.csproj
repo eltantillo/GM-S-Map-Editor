@@ -8,7 +8,7 @@
     <ProjectGuid>{FA40D5F5-1778-4225-8B4C-30E0B4BEF3DC}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1</RootNamespace>
+    <RootNamespace>GMSMapEditor</RootNamespace>
     <AssemblyName>GMS map editor</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -46,8 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Project.cs" />
     <Compile Include="ProjectAssets\Backgrounds\Background.cs" />
-    <Compile Include="ProjectAssets\Project.cs" />
+    <Compile Include="ProjectAssets\Assets.cs" />
     <Compile Include="ProjectAssets\Rooms\Background.cs" />
     <Compile Include="ProjectAssets\Rooms\Instance.cs" />
     <Compile Include="ProjectAssets\Rooms\MakerSettings.cs" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <None Include="Resources\test1.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

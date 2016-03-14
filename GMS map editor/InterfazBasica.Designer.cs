@@ -1,5 +1,5 @@
-﻿using WindowsFormsApplication1.ProjectAssets.Grafico;
-namespace WindowsFormsApplication1
+﻿using GMSMapEditor.ProjectAssets.Grafico;
+namespace GMSMapEditor
 {
     partial class InterfazBasica
     {
@@ -643,7 +643,7 @@ namespace WindowsFormsApplication1
             // barra2
             // 
             this.barra2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.barra2.Image = global::WindowsFormsApplication1.Properties.Resources.icon1;
+            this.barra2.Image = global::GMSMapEditor.Properties.Resources.icon1;
             this.barra2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.barra2.Name = "barra2";
             this.barra2.Size = new System.Drawing.Size(23, 20);
@@ -652,7 +652,7 @@ namespace WindowsFormsApplication1
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::WindowsFormsApplication1.Properties.Resources.icon2;
+            this.toolStripButton2.Image = global::GMSMapEditor.Properties.Resources.icon2;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(23, 20);
@@ -661,7 +661,7 @@ namespace WindowsFormsApplication1
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::WindowsFormsApplication1.Properties.Resources.icon3;
+            this.toolStripButton3.Image = global::GMSMapEditor.Properties.Resources.icon3;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 20);
@@ -675,7 +675,7 @@ namespace WindowsFormsApplication1
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::WindowsFormsApplication1.Properties.Resources.icon4;
+            this.toolStripButton4.Image = global::GMSMapEditor.Properties.Resources.icon4;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(23, 20);
@@ -684,7 +684,7 @@ namespace WindowsFormsApplication1
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::WindowsFormsApplication1.Properties.Resources.icon5;
+            this.toolStripButton5.Image = global::GMSMapEditor.Properties.Resources.icon5;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(23, 20);
@@ -693,7 +693,7 @@ namespace WindowsFormsApplication1
             // toolStripButton6
             // 
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::WindowsFormsApplication1.Properties.Resources.icon6;
+            this.toolStripButton6.Image = global::GMSMapEditor.Properties.Resources.icon6;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(23, 20);
@@ -702,7 +702,7 @@ namespace WindowsFormsApplication1
             // toolStripButton7
             // 
             this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = global::WindowsFormsApplication1.Properties.Resources.icon7;
+            this.toolStripButton7.Image = global::GMSMapEditor.Properties.Resources.icon7;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(23, 20);
@@ -716,7 +716,7 @@ namespace WindowsFormsApplication1
             // toolStripButton8
             // 
             this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton8.Image = global::WindowsFormsApplication1.Properties.Resources.icon8;
+            this.toolStripButton8.Image = global::GMSMapEditor.Properties.Resources.icon8;
             this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton8.Name = "toolStripButton8";
             this.toolStripButton8.Size = new System.Drawing.Size(23, 20);
@@ -730,7 +730,7 @@ namespace WindowsFormsApplication1
             // toolStripButton9
             // 
             this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton9.Image = global::WindowsFormsApplication1.Properties.Resources.icon9;
+            this.toolStripButton9.Image = global::GMSMapEditor.Properties.Resources.icon9;
             this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton9.Name = "toolStripButton9";
             this.toolStripButton9.Size = new System.Drawing.Size(23, 20);
@@ -739,7 +739,7 @@ namespace WindowsFormsApplication1
             // toolStripButton10
             // 
             this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton10.Image = global::WindowsFormsApplication1.Properties.Resources.icon10;
+            this.toolStripButton10.Image = global::GMSMapEditor.Properties.Resources.icon10;
             this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton10.Name = "toolStripButton10";
             this.toolStripButton10.Size = new System.Drawing.Size(23, 20);
@@ -748,7 +748,7 @@ namespace WindowsFormsApplication1
             // toolStripButton11
             // 
             this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton11.Image = global::WindowsFormsApplication1.Properties.Resources.icon11;
+            this.toolStripButton11.Image = global::GMSMapEditor.Properties.Resources.icon11;
             this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton11.Name = "toolStripButton11";
             this.toolStripButton11.Size = new System.Drawing.Size(23, 20);
@@ -757,7 +757,7 @@ namespace WindowsFormsApplication1
             // toolStripButton12
             // 
             this.toolStripButton12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton12.Image = global::WindowsFormsApplication1.Properties.Resources.icon12;
+            this.toolStripButton12.Image = global::GMSMapEditor.Properties.Resources.icon12;
             this.toolStripButton12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton12.Name = "toolStripButton12";
             this.toolStripButton12.Size = new System.Drawing.Size(23, 20);
@@ -771,7 +771,7 @@ namespace WindowsFormsApplication1
             // toolStripButton13
             // 
             this.toolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton13.Image = global::WindowsFormsApplication1.Properties.Resources.icon13;
+            this.toolStripButton13.Image = global::GMSMapEditor.Properties.Resources.icon13;
             this.toolStripButton13.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton13.Name = "toolStripButton13";
             this.toolStripButton13.Size = new System.Drawing.Size(23, 20);
@@ -780,7 +780,7 @@ namespace WindowsFormsApplication1
             // toolStripButton14
             // 
             this.toolStripButton14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton14.Image = global::WindowsFormsApplication1.Properties.Resources.icon14;
+            this.toolStripButton14.Image = global::GMSMapEditor.Properties.Resources.icon14;
             this.toolStripButton14.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton14.Name = "toolStripButton14";
             this.toolStripButton14.Size = new System.Drawing.Size(23, 20);
@@ -789,7 +789,7 @@ namespace WindowsFormsApplication1
             // toolStripButton15
             // 
             this.toolStripButton15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton15.Image = global::WindowsFormsApplication1.Properties.Resources.icon15;
+            this.toolStripButton15.Image = global::GMSMapEditor.Properties.Resources.icon15;
             this.toolStripButton15.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton15.Name = "toolStripButton15";
             this.toolStripButton15.Size = new System.Drawing.Size(23, 20);
@@ -798,7 +798,7 @@ namespace WindowsFormsApplication1
             // toolStripButton16
             // 
             this.toolStripButton16.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton16.Image = global::WindowsFormsApplication1.Properties.Resources.icon16;
+            this.toolStripButton16.Image = global::GMSMapEditor.Properties.Resources.icon16;
             this.toolStripButton16.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton16.Name = "toolStripButton16";
             this.toolStripButton16.Size = new System.Drawing.Size(23, 20);
@@ -807,7 +807,7 @@ namespace WindowsFormsApplication1
             // toolStripButton17
             // 
             this.toolStripButton17.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton17.Image = global::WindowsFormsApplication1.Properties.Resources.icon17;
+            this.toolStripButton17.Image = global::GMSMapEditor.Properties.Resources.icon17;
             this.toolStripButton17.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton17.Name = "toolStripButton17";
             this.toolStripButton17.Size = new System.Drawing.Size(23, 20);
@@ -821,7 +821,7 @@ namespace WindowsFormsApplication1
             // toolStripButton18
             // 
             this.toolStripButton18.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton18.Image = global::WindowsFormsApplication1.Properties.Resources.icon18;
+            this.toolStripButton18.Image = global::GMSMapEditor.Properties.Resources.icon18;
             this.toolStripButton18.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton18.Name = "toolStripButton18";
             this.toolStripButton18.Size = new System.Drawing.Size(23, 20);
@@ -830,7 +830,7 @@ namespace WindowsFormsApplication1
             // toolStripButton19
             // 
             this.toolStripButton19.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton19.Image = global::WindowsFormsApplication1.Properties.Resources.icon19;
+            this.toolStripButton19.Image = global::GMSMapEditor.Properties.Resources.icon19;
             this.toolStripButton19.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton19.Name = "toolStripButton19";
             this.toolStripButton19.Size = new System.Drawing.Size(23, 20);
@@ -839,7 +839,7 @@ namespace WindowsFormsApplication1
             // toolStripButton20
             // 
             this.toolStripButton20.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton20.Image = global::WindowsFormsApplication1.Properties.Resources.icon20;
+            this.toolStripButton20.Image = global::GMSMapEditor.Properties.Resources.icon20;
             this.toolStripButton20.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton20.Name = "toolStripButton20";
             this.toolStripButton20.Size = new System.Drawing.Size(23, 20);
@@ -853,7 +853,7 @@ namespace WindowsFormsApplication1
             // toolStripButton21
             // 
             this.toolStripButton21.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton21.Image = global::WindowsFormsApplication1.Properties.Resources.icon21;
+            this.toolStripButton21.Image = global::GMSMapEditor.Properties.Resources.icon21;
             this.toolStripButton21.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton21.Name = "toolStripButton21";
             this.toolStripButton21.Size = new System.Drawing.Size(23, 20);
@@ -862,7 +862,7 @@ namespace WindowsFormsApplication1
             // toolStripButton22
             // 
             this.toolStripButton22.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton22.Image = global::WindowsFormsApplication1.Properties.Resources.icon22;
+            this.toolStripButton22.Image = global::GMSMapEditor.Properties.Resources.icon22;
             this.toolStripButton22.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton22.Name = "toolStripButton22";
             this.toolStripButton22.Size = new System.Drawing.Size(23, 20);
@@ -871,7 +871,7 @@ namespace WindowsFormsApplication1
             // toolStripButton23
             // 
             this.toolStripButton23.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton23.Image = global::WindowsFormsApplication1.Properties.Resources.icon23;
+            this.toolStripButton23.Image = global::GMSMapEditor.Properties.Resources.icon23;
             this.toolStripButton23.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton23.Name = "toolStripButton23";
             this.toolStripButton23.Size = new System.Drawing.Size(23, 20);
@@ -880,7 +880,7 @@ namespace WindowsFormsApplication1
             // toolStripButton24
             // 
             this.toolStripButton24.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton24.Image = global::WindowsFormsApplication1.Properties.Resources.icon24;
+            this.toolStripButton24.Image = global::GMSMapEditor.Properties.Resources.icon24;
             this.toolStripButton24.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton24.Name = "toolStripButton24";
             this.toolStripButton24.Size = new System.Drawing.Size(23, 20);
@@ -894,7 +894,7 @@ namespace WindowsFormsApplication1
             // toolStripButton25
             // 
             this.toolStripButton25.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton25.Image = global::WindowsFormsApplication1.Properties.Resources.icon25;
+            this.toolStripButton25.Image = global::GMSMapEditor.Properties.Resources.icon25;
             this.toolStripButton25.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton25.Name = "toolStripButton25";
             this.toolStripButton25.Size = new System.Drawing.Size(23, 20);

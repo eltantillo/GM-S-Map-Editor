@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1.ProjectAssets.Grafico
+namespace GMSMapEditor.ProjectAssets.Grafico
 {
     class SimpleRoom{
         public ArrayList layers = new ArrayList();

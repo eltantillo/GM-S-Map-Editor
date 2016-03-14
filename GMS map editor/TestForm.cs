@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using WindowsFormsApplication1.ProjectAssets.Grafico;
+using GMSMapEditor.ProjectAssets.Grafico;
 
-namespace WindowsFormsApplication1
+namespace GMSMapEditor
 {
     public partial class TestForm : Form
     {

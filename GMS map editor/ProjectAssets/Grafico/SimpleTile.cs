@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1.ProjectAssets.Grafico
+namespace GMSMapEditor.ProjectAssets.Grafico
 {
     class SimpleTile{
         public int xo,yo;

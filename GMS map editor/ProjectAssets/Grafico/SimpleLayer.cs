@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1.ProjectAssets.Grafico
+namespace GMSMapEditor.ProjectAssets.Grafico
 {
     class SimpleLayer{
         public int layer;
@@ -27,7 +27,7 @@ namespace WindowsFormsApplication1.ProjectAssets.Grafico
                     st.w = tw;
                     st.xo = x * tw;
                     st.yo = y * th;
-                    st.image = WindowsFormsApplication1.Properties.Resources.test;
+                    st.image = GMSMapEditor.Properties.Resources.test;
                     t[x][y] = st;
                 }
             }

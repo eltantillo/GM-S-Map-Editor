@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WindowsFormsApplication1.ProjectAssets
+namespace GMSMapEditor.ProjectAssets.Rooms
 {
-    class Tile{
+    public class Tile
+    {
         public string bgName;
         public int x;
         public int y;

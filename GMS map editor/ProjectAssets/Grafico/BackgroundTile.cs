@@ -6,7 +6,7 @@ using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1.ProjectAssets.Grafico{
+namespace GMSMapEditor.ProjectAssets.Grafico{
     class BackgroundTile{
         String data;
         int width, height;

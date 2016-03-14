@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WindowsFormsApplication1.ProjectAssets.Room
+namespace GMSMapEditor.ProjectAssets.Rooms
 {
-    class View
+    public class View
     {
         public bool visible;
         public string objName;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WindowsFormsApplication1.ProjectAssets.Room
+namespace GMSMapEditor.ProjectAssets.Rooms
 {
-    class MakerSettings
+    public class MakerSettings
     {
         public bool isSet;
         public int w;

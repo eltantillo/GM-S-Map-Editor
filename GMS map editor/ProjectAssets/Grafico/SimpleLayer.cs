@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace WindowsFormsApplication1.ProjectAssets.Grafico
+namespace GMSMapEditor.ProjectAssets.Grafico
 {
     class SimpleLayer{
         public int layer;
@@ -24,11 +24,20 @@ namespace WindowsFormsApplication1.ProjectAssets.Grafico
             for (int y = 0; y < w; y++){
                 for (int x = 0; x < w; x++){
                     //MessageBox.Show("x,y = " + x + "," + y + "SIS: W,H "+w+","+h);
+<<<<<<< HEAD
                     CheckBox st = new CheckBox();
                     st.Height = th;
                     st.Width = tw;
                     st.Location = new Point(x * tw,y * th);
                     st.Image = WindowsFormsApplication1.Properties.Resources.test;
+=======
+                    SimpleTile st = new SimpleTile();
+                    st.h = th;
+                    st.w = tw;
+                    st.xo = x * tw;
+                    st.yo = y * th;
+                    st.image = GMSMapEditor.Properties.Resources.test;
+>>>>>>> dff2d84ed27e709261070faa57abbe6b55fa0817
                     t[x][y] = st;
                 }
             }

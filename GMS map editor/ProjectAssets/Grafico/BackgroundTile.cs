@@ -13,6 +13,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         int tWidth, tHeight;
         CheckBox[][] tiles;
         String origin;
+        Image img;
 
         public BackgroundTile(String url, int tw, int th) {
             data = url;
@@ -48,6 +49,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             Image i = Image.FromFile(data);
             width = i.Width;
             height = i.Height;
+            img = i;
             int id=0;
             int maxx = width / tWidth;
             int maxy = height / tHeight;
@@ -55,14 +57,14 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             tiles = new CheckBox[maxy][];
             for (int y = 0; y < maxy; y++){
                 tiles[y] = new CheckBox[maxx];
-            }
+            }/*
             for (int y = 0; y < (i.Height / tHeight); y++){
                 for (int x = 0; x < (i.Width / tWidth); x++){
                     CheckBox p = new CheckBox();
                     p.Location = new Point(x * tWidth, y * tHeight);
                     p.Height = tHeight;
                     p.Width = tWidth;
-                    Bitmap testu = i as Bitmap;
+                    /*Bitmap testu = i as Bitmap;
                     p.Image = testu.Clone(
                         new Rectangle(new Point(x * tWidth, y * tHeight),
                         new Size(tWidth, tHeight)),
@@ -72,15 +74,20 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                     p.MouseClick += new MouseEventHandler((o, a) => selectOne(p.Name));
                     tiles[y][x] = p;
                 }
-            }
+            }*/
         }
 
-        public void drawBackgroundTile(Panel p){
+        public void drawBackgroundTile(PictureBox ib){
+            ib.Image = (Image)img.Clone();
+            ib.Height = height;
+            ib.Width = width;
+            ib.Location = new Point(0,0);
+            /*
             for (int y = 0; y < (height / tHeight); y++){
                 for (int x = 0; x < (width / tWidth); x++){
                     p.Controls.Add(tiles[y][x]);
                 }
-            }
+            }*/
         }
 
         public void selectOne(String id) {
@@ -106,6 +113,9 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                 }
                 origin = "";
             }
+        }
+        public Image getClonedImage(){
+            return (Image)img.Clone();
         }
 
     }

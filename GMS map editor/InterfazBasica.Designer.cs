@@ -89,41 +89,46 @@ namespace GMSMapEditor
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.barra2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton14 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton17 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton18 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton19 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton20 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton21 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton22 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton23 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton24 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton25 = new System.Windows.Forms.ToolStripButton();
+            this.coords = new System.Windows.Forms.Label();
+            this.pb = new System.Windows.Forms.PictureBox();
             this.div_left.SuspendLayout();
+            this.div_center.SuspendLayout();
+            this.div_right.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
             this.SuspendLayout();
             // 
             // div_left
@@ -131,23 +136,25 @@ namespace GMSMapEditor
             this.div_left.AutoScroll = true;
             this.div_left.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.div_left.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.div_left.Controls.Add(this.info2);
-            this.div_left.Controls.Add(this.info);
+            this.div_left.Controls.Add(this.pb);
             this.div_left.Location = new System.Drawing.Point(12, 117);
             this.div_left.Name = "div_left";
             this.div_left.Size = new System.Drawing.Size(210, 241);
             this.div_left.TabIndex = 1;
+            this.div_left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            this.div_left.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
+            this.div_left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             // 
             // info2
             // 
-            this.info2.Location = new System.Drawing.Point(4, 30);
+            this.info2.Location = new System.Drawing.Point(3, 29);
             this.info2.Name = "info2";
             this.info2.Size = new System.Drawing.Size(79, 20);
             this.info2.TabIndex = 1;
             // 
             // info
             // 
-            this.info.Location = new System.Drawing.Point(4, 4);
+            this.info.Location = new System.Drawing.Point(3, 3);
             this.info.Name = "info";
             this.info.Size = new System.Drawing.Size(79, 20);
             this.info.TabIndex = 0;
@@ -156,6 +163,8 @@ namespace GMSMapEditor
             // 
             this.div_center.AutoScroll = true;
             this.div_center.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.div_center.Controls.Add(this.info);
+            this.div_center.Controls.Add(this.info2);
             this.div_center.Location = new System.Drawing.Point(228, 117);
             this.div_center.Name = "div_center";
             this.div_center.Size = new System.Drawing.Size(237, 212);
@@ -164,6 +173,7 @@ namespace GMSMapEditor
             // div_right
             // 
             this.div_right.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.div_right.Controls.Add(this.coords);
             this.div_right.Location = new System.Drawing.Point(474, 117);
             this.div_right.Name = "div_right";
             this.div_right.Size = new System.Drawing.Size(237, 212);
@@ -605,41 +615,6 @@ namespace GMSMapEditor
             this.toolStrip1.TabStop = true;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 23);
-            //
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 23);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 23);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 23);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 23);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 23);
-            // 
             // barra2
             // 
             this.barra2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -671,7 +646,7 @@ namespace GMSMapEditor
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
-            //
+            // 
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -707,12 +682,12 @@ namespace GMSMapEditor
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton7.Text = "toolStripButton7";
-            //
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 23);
-            //
+            // 
             // toolStripButton8
             // 
             this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -721,12 +696,12 @@ namespace GMSMapEditor
             this.toolStripButton8.Name = "toolStripButton8";
             this.toolStripButton8.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton8.Text = "toolStripButton8";
-            //
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 23);
-            //
+            // 
             // toolStripButton9
             // 
             this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -762,12 +737,12 @@ namespace GMSMapEditor
             this.toolStripButton12.Name = "toolStripButton12";
             this.toolStripButton12.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton12.Text = "toolStripButton12";
-            //
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 23);
-            //
+            // 
             // toolStripButton13
             // 
             this.toolStripButton13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -900,6 +875,26 @@ namespace GMSMapEditor
             this.toolStripButton25.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton25.Text = "toolStripButton25";
             // 
+            // coords
+            // 
+            this.coords.AutoSize = true;
+            this.coords.Location = new System.Drawing.Point(19, 13);
+            this.coords.Name = "coords";
+            this.coords.Size = new System.Drawing.Size(31, 13);
+            this.coords.TabIndex = 0;
+            this.coords.Text = "Algo:";
+            // 
+            // pb
+            // 
+            this.pb.Location = new System.Drawing.Point(3, 3);
+            this.pb.Name = "pb";
+            this.pb.Size = new System.Drawing.Size(100, 50);
+            this.pb.TabIndex = 2;
+            this.pb.TabStop = false;
+            this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
+            this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            // 
             // InterfazBasica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -917,11 +912,15 @@ namespace GMSMapEditor
             this.Load += new System.EventHandler(this.InterfazBasica_Load);
             this.SizeChanged += new System.EventHandler(this.InterfazBasica_SizeChanged);
             this.div_left.ResumeLayout(false);
-            this.div_left.PerformLayout();
+            this.div_center.ResumeLayout(false);
+            this.div_center.PerformLayout();
+            this.div_right.ResumeLayout(false);
+            this.div_right.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1022,6 +1021,8 @@ namespace GMSMapEditor
         private System.Windows.Forms.ToolStripButton toolStripButton25;
         private System.Windows.Forms.TextBox info;
         private System.Windows.Forms.TextBox info2;
+        private System.Windows.Forms.Label coords;
+        private System.Windows.Forms.PictureBox pb;
 
 
     }

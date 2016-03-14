@@ -56,10 +56,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             for (int y = 0; y < maxy; y++){
                 tiles[y] = new CheckBox[maxx];
             }
-            MessageBox.Show("x"+maxx+" y"+maxy);
             for (int y = 0; y < (i.Height / tHeight); y++){
                 for (int x = 0; x < (i.Width / tWidth); x++){
-                    MessageBox.Show("x" + x + " y" + y);
                     CheckBox p = new CheckBox();
                     p.Location = new Point(x * tWidth, y * tHeight);
                     p.Height = tHeight;
@@ -72,7 +70,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                     );
                     p.Name = x + "," + y;
                     p.MouseClick += new MouseEventHandler((o, a) => selectOne(p.Name));
-                    tiles[x][y] = p;
+                    tiles[y][x] = p;
                 }
             }
         }
@@ -80,7 +78,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         public void drawBackgroundTile(Panel p){
             for (int y = 0; y < (height / tHeight); y++){
                 for (int x = 0; x < (width / tWidth); x++){
-                    p.Controls.Add(tiles[x][y]);
+                    p.Controls.Add(tiles[y][x]);
                 }
             }
         }
@@ -90,8 +88,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                 origin = id;
                 for (int y = 0; y < (height / tHeight); y++){
                     for (int x = 0; x < (width/ tWidth); x++){
-                         if (!tiles[x][y].Name.Equals(id)){
-                            tiles[x][y].Checked = false;
+                         if (!tiles[y][x].Name.Equals(id)){
+                            tiles[y][x].Checked = false;
                         }
                     }
                 }
@@ -101,8 +99,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                 int yf = int.Parse(id.Split(',')[1]);
                 for (int y = int.Parse(origin.Split(',')[1]); y <= yf; y++){
                     for (int x = int.Parse(origin.Split(',')[0]); x <= xf; x++){
-                        if (tiles[x][y].Name.Equals(x+","+y)){
-                            tiles[x][y].Checked = true;
+                        if (tiles[y][x].Name.Equals(x+","+y)){
+                            tiles[y][x].Checked = true;
                         }
                     }
                 }

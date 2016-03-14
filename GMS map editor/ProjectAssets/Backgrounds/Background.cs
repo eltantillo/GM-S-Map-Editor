@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.IO;
+using GMSMapEditor.Classes;
 
 namespace GMSMapEditor.ProjectAssets.Backgrounds
 {
@@ -21,6 +24,51 @@ namespace GMSMapEditor.ProjectAssets.Backgrounds
         public int width;
         public int height;
         public string data;
+
+        public void BackgroundRead(string xmlFile)
+        {
+            String xmlString = File.ReadAllText(xmlFile).ToString();
+            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+            {
+                int num = Project.assets.backgrounds.Count - 1;
+                reader.ReadToFollowing("istileset");
+                Project.assets.backgrounds[num].istileset = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                reader.ReadToFollowing("tilewidth");
+                Project.assets.backgrounds[num].tilewidth = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tileheight");
+                Project.assets.backgrounds[num].tileheight = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tilexoff");
+                Project.assets.backgrounds[num].tilexoff = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tileyoff");
+                Project.assets.backgrounds[num].tileyoff = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tilehsep");
+                Project.assets.backgrounds[num].tilehsep = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("tilevsep");
+                Project.assets.backgrounds[num].tilevsep = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("HTile");
+                Project.assets.backgrounds[num].HTile = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                reader.ReadToFollowing("VTile");
+                Project.assets.backgrounds[num].VTile = Convert.ToBoolean(reader.ReadElementContentAsInt());
+
+                reader.ReadToFollowing("TextureGroups");
+                int i = 0;
+                reader.ReadToFollowing("TextureGroup" + i);
+                while (reader.ReadToNextSibling("TextureGroup" + i))
+                {
+                    Project.assets.backgrounds[num].TextureGroups.Add(reader.ReadElementContentAsInt());
+                    i++;
+                }
+
+                reader.ReadToFollowing("For3D");
+                Project.assets.backgrounds[num].For3D = Convert.ToBoolean(reader.ReadElementContentAsInt());
+                reader.ReadToFollowing("width");
+                Project.assets.backgrounds[num].width = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("height");
+                Project.assets.backgrounds[num].height = reader.ReadElementContentAsInt();
+                reader.ReadToFollowing("data");
+                Project.assets.backgrounds[num].data = reader.ReadElementContentAsString();
+            }
+        }
 
         public override String ToString()
         {

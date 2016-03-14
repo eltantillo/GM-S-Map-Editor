@@ -65,12 +65,12 @@ namespace GMSMapEditor{
                 Project.projectFolder = Path.GetDirectoryName(projectFile.FileName) + @"\";
                 Project.projectName = Path.GetFileName(projectFile.FileName);
 
-                xmlRead(Project.projectFolder + Project.projectName, "background");
-                xmlRead(Project.projectFolder + Project.projectName, "room");
+                XmlRead(Project.projectFolder + Project.projectName, "background");
+                XmlRead(Project.projectFolder + Project.projectName, "room");
             }
         }
 
-        private void xmlRead(string xmlFile, string section)
+        private void XmlRead(string xmlFile, string section)
         {
             String xmlString = File.ReadAllText(xmlFile).ToString();
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
@@ -80,18 +80,18 @@ namespace GMSMapEditor{
                     if (section == "background")
                     {
                         Project.assets.backgrounds.Add(new ProjectAssets.Backgrounds.Background());
-                        backgroundRead(Project.projectFolder + reader.ReadElementContentAsString() + "." + section + ".gmx");
+                        BackgroundRead(Project.projectFolder + reader.ReadElementContentAsString() + "." + section + ".gmx");
                     }
                     else if (section == "room")
                     {
                         Project.assets.rooms.Add(new ProjectAssets.Rooms.Room());
-                        roomRead(Project.projectFolder + reader.ReadElementContentAsString() + "." + section + ".gmx");
+                        RoomRead(Project.projectFolder + reader.ReadElementContentAsString() + "." + section + ".gmx");
                     }
                 }
             }
         }
 
-        private void roomRead(string xmlFile)
+        private void RoomRead(string xmlFile)
         {
             String xmlString = File.ReadAllText(xmlFile).ToString();
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
@@ -214,7 +214,7 @@ namespace GMSMapEditor{
             }
         }
 
-        private void backgroundRead(string xmlFile)
+        private void BackgroundRead(string xmlFile)
         {
             String xmlString = File.ReadAllText(xmlFile).ToString();
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))

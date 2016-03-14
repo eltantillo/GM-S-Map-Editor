@@ -20,3 +20,6 @@ D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.Properties
 D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.InterfazBasica.resources
 D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.TestForm.resources
 >>>>>>> dff2d84ed27e709261070faa57abbe6b55fa0817
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.InterfazBasica.resources
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.Properties.Resources.resources
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.TestForm.resources

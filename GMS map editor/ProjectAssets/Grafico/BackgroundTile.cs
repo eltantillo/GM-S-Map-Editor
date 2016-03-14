@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1.ProjectAssets.Grafico{
         String data;
         int width, height;
         int tWidth, tHeight;
-        ArrayList tiles = new ArrayList();
+        CheckBox[][] tiles;
         String origin;
 
         public BackgroundTile(String url, int tw, int th) {
@@ -49,8 +49,17 @@ namespace WindowsFormsApplication1.ProjectAssets.Grafico{
             width = i.Width;
             height = i.Height;
             int id=0;
+            int maxx = width / tWidth;
+            int maxy = height / tHeight;
+
+            tiles = new CheckBox[maxy][];
+            for (int y = 0; y < maxy; y++){
+                tiles[y] = new CheckBox[maxx];
+            }
+            MessageBox.Show("x"+maxx+" y"+maxy);
             for (int y = 0; y < (i.Height / tHeight); y++){
                 for (int x = 0; x < (i.Width / tWidth); x++){
+                    MessageBox.Show("x" + x + " y" + y);
                     CheckBox p = new CheckBox();
                     p.Location = new Point(x * tWidth, y * tHeight);
                     p.Height = tHeight;
@@ -63,38 +72,42 @@ namespace WindowsFormsApplication1.ProjectAssets.Grafico{
                     );
                     p.Name = x + "," + y;
                     p.MouseClick += new MouseEventHandler((o, a) => selectOne(p.Name));
-                    tiles.Add(p);
+                    tiles[x][y] = p;
                 }
             }
         }
 
-        public void drawBackgroundTile(Panel p) {
-            foreach (CheckBox pb in tiles){
-                p.Controls.Add(pb);
+        public void drawBackgroundTile(Panel p){
+            for (int y = 0; y < (height / tHeight); y++){
+                for (int x = 0; x < (width / tWidth); x++){
+                    p.Controls.Add(tiles[x][y]);
+                }
             }
         }
 
         public void selectOne(String id) {
             if (origin.Equals("")){
                 origin = id;
-                MessageBox.Show("origin :" + origin);
+                for (int y = 0; y < (height / tHeight); y++){
+                    for (int x = 0; x < (width/ tWidth); x++){
+                         if (!tiles[x][y].Name.Equals(id)){
+                            tiles[x][y].Checked = false;
+                        }
+                    }
+                }
             }
             else {
                 int xf = int.Parse(id.Split(',')[0]);
                 int yf = int.Parse(id.Split(',')[1]);
-                MessageBox.Show("origin :" + origin);
                 for (int y = int.Parse(origin.Split(',')[1]); y <= yf; y++){
                     for (int x = int.Parse(origin.Split(',')[0]); x <= xf; x++){
-                        foreach (CheckBox b in tiles){
-                            if (b.Name.Equals(x+","+y)){
-                                b.Checked = true;
-                            }
+                        if (tiles[x][y].Name.Equals(x+","+y)){
+                            tiles[x][y].Checked = true;
                         }
                     }
                 }
                 origin = "";
             }
-            MessageBox.Show("Click en :" + id);
         }
 
     }

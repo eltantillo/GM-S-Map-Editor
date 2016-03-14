@@ -46,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProjectAssets\Backgrounds\Background.cs" />
+    <Compile Include="ProjectAssets\Project.cs" />
+    <Compile Include="ProjectAssets\Rooms\Background.cs" />
+    <Compile Include="ProjectAssets\Rooms\Instance.cs" />
+    <Compile Include="ProjectAssets\Rooms\MakerSettings.cs" />
+    <Compile Include="ProjectAssets\Rooms\Room.cs" />
+    <Compile Include="ProjectAssets\Rooms\Tile.cs" />
+    <Compile Include="ProjectAssets\Rooms\View.cs" />
     <Compile Include="TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,19 +69,12 @@
     <Compile Include="ProjectAssets\Grafico\BackgroundTile.cs" />
     <Compile Include="ProjectAssets\Grafico\SimpleLayer.cs" />
     <Compile Include="ProjectAssets\Grafico\SimpleRoom.cs" />
-    <Compile Include="ProjectAssets\Grafico\SimpleTile.cs" />
-    <Compile Include="ProjectAssets\Room\Background.cs" />
-    <Compile Include="ProjectAssets\Room\Instance.cs" />
-    <Compile Include="ProjectAssets\Room\MakerSettings.cs" />
-    <Compile Include="ProjectAssets\Room\Project.cs" />
-    <Compile Include="ProjectAssets\Room\Room.cs" />
-    <Compile Include="ProjectAssets\Room\View.cs" />
-    <Compile Include="ProjectAssets\Tile.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="InterfazBasica.resx">
       <DependentUpon>InterfazBasica.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

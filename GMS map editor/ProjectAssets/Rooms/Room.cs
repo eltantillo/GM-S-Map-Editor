@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WindowsFormsApplication1.Room.ProjectAssets
+namespace WindowsFormsApplication1.ProjectAssets.Room
 {
     class Room
     {

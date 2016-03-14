@@ -3,31 +3,41 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace GMSMapEditor.ProjectAssets.Grafico
 {
     class SimpleLayer{
         public int layer;
-        public SimpleTile[][] t;
+        public CheckBox[][] t;
         public int w, h;
 
-        public SimpleLayer(int w, int h, int tw, int th) { 
-            t= new SimpleTile[h][];
+        public SimpleLayer(int l,int w, int h, int tw, int th) {
+            layer = l;
             this.w = w;
             this.h = h;
-            for(int y = 0; y<w; y++) {
-                t[y] = new SimpleTile[w];
+            t = new CheckBox[h][];
+            for(int y = 0; y<h; y++) {
+                t[y] = new CheckBox[w];
             }
 
             for (int y = 0; y < w; y++){
                 for (int x = 0; x < w; x++){
                     //MessageBox.Show("x,y = " + x + "," + y + "SIS: W,H "+w+","+h);
+<<<<<<< HEAD
+                    CheckBox st = new CheckBox();
+                    st.Height = th;
+                    st.Width = tw;
+                    st.Location = new Point(x * tw,y * th);
+                    st.Image = WindowsFormsApplication1.Properties.Resources.test;
+=======
                     SimpleTile st = new SimpleTile();
                     st.h = th;
                     st.w = tw;
                     st.xo = x * tw;
                     st.yo = y * th;
                     st.image = GMSMapEditor.Properties.Resources.test;
+>>>>>>> dff2d84ed27e709261070faa57abbe6b55fa0817
                     t[x][y] = st;
                 }
             }
@@ -35,9 +45,20 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         public void drawSimpleLayer(Panel p) {
             for (int y = 0; y < w; y++){
                 for (int x = 0; x < w; x++){
-                    p.Controls.Add(t[x][y].getCheckBox());
+                    p.Controls.Add(t[x][y]);
                 }
             }
         }
+
+        public void addTiles(ArrayList tiles) {
+            foreach (CheckBox cb in tiles){
+                for (int y = 0; y < w; y++){
+                    for (int x = 0; x < w; x++){
+                        
+                    }
+                }
+            }
+        }
+
     }
 }

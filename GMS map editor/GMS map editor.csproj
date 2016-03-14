@@ -70,7 +70,6 @@
     <Compile Include="ProjectAssets\Grafico\BackgroundTile.cs" />
     <Compile Include="ProjectAssets\Grafico\SimpleLayer.cs" />
     <Compile Include="ProjectAssets\Grafico\SimpleRoom.cs" />
-    <Compile Include="ProjectAssets\Grafico\SimpleTile.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

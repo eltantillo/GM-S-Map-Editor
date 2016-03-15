@@ -31,7 +31,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             Bitmap bitmap = new Bitmap(1000, 1000);
             foreach (Point[] p1 in p){
                 foreach (Point p2 in p1){
-                    Image org = bt.getTruncateImage(p2.X,p2.Y,bt.tWidth,bt.tHeight);
+                    Image org = bt.getSelectedImage();
                     using (Graphics g = Graphics.FromImage(bitmap)){
                         g.DrawImage(i, 0, 0);
                         

@@ -41,7 +41,7 @@ namespace GMSMapEditor
             BackgroundTile bt = new BackgroundTile(openFileDialog1.FileName, gridus, gridus);
             //bt.drawBackgroundTile(div_left);
 
-            SimpleRoom sr = new SimpleRoom(gridus2, gridus2, gridus, gridus);
+            //SimpleRoom sr = new SimpleRoom(gridus2, gridus2, gridus, gridus);
             //sr.drawSimpleRoom(div_center);
             //bt.drawBackgroundTile(div_right);
         }

@@ -29,10 +29,12 @@ namespace GMSMapEditor
         private void InitializeComponent()
         {
             this.div_left = new System.Windows.Forms.Panel();
-            this.info2 = new System.Windows.Forms.TextBox();
-            this.info = new System.Windows.Forms.TextBox();
+            this.pb = new System.Windows.Forms.PictureBox();
             this.div_center = new System.Windows.Forms.Panel();
+            this.pb2 = new System.Windows.Forms.PictureBox();
             this.div_right = new System.Windows.Forms.Panel();
+            this.otro = new System.Windows.Forms.Label();
+            this.coords = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.holaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,14 +123,13 @@ namespace GMSMapEditor
             this.toolStripButton24 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton25 = new System.Windows.Forms.ToolStripButton();
-            this.coords = new System.Windows.Forms.Label();
-            this.pb = new System.Windows.Forms.PictureBox();
             this.div_left.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
             this.div_center.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb2)).BeginInit();
             this.div_right.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
             this.SuspendLayout();
             // 
             // div_left
@@ -145,39 +146,65 @@ namespace GMSMapEditor
             this.div_left.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
             this.div_left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             // 
-            // info2
+            // pb
             // 
-            this.info2.Location = new System.Drawing.Point(3, 29);
-            this.info2.Name = "info2";
-            this.info2.Size = new System.Drawing.Size(79, 20);
-            this.info2.TabIndex = 1;
-            // 
-            // info
-            // 
-            this.info.Location = new System.Drawing.Point(3, 3);
-            this.info.Name = "info";
-            this.info.Size = new System.Drawing.Size(79, 20);
-            this.info.TabIndex = 0;
+            this.pb.Location = new System.Drawing.Point(3, 182);
+            this.pb.Name = "pb";
+            this.pb.Size = new System.Drawing.Size(0, 0);
+            this.pb.TabIndex = 2;
+            this.pb.TabStop = false;
+            this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
+            this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             // 
             // div_center
             // 
             this.div_center.AutoScroll = true;
             this.div_center.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.div_center.Controls.Add(this.info);
-            this.div_center.Controls.Add(this.info2);
+            this.div_center.Controls.Add(this.pb2);
             this.div_center.Location = new System.Drawing.Point(228, 117);
             this.div_center.Name = "div_center";
             this.div_center.Size = new System.Drawing.Size(237, 212);
             this.div_center.TabIndex = 2;
             // 
+            // pb2
+            // 
+            this.pb2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pb2.Location = new System.Drawing.Point(3, 184);
+            this.pb2.Name = "pb2";
+            this.pb2.Size = new System.Drawing.Size(0, 0);
+            this.pb2.TabIndex = 3;
+            this.pb2.TabStop = false;
+            this.pb2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseClick);
+            this.pb2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseMove);
+            // 
             // div_right
             // 
             this.div_right.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.div_right.Controls.Add(this.otro);
             this.div_right.Controls.Add(this.coords);
             this.div_right.Location = new System.Drawing.Point(474, 117);
             this.div_right.Name = "div_right";
             this.div_right.Size = new System.Drawing.Size(237, 212);
             this.div_right.TabIndex = 3;
+            // 
+            // otro
+            // 
+            this.otro.AutoSize = true;
+            this.otro.Location = new System.Drawing.Point(19, 96);
+            this.otro.Name = "otro";
+            this.otro.Size = new System.Drawing.Size(25, 13);
+            this.otro.TabIndex = 2;
+            this.otro.Text = "otro";
+            // 
+            // coords
+            // 
+            this.coords.AutoSize = true;
+            this.coords.Location = new System.Drawing.Point(19, 13);
+            this.coords.Name = "coords";
+            this.coords.Size = new System.Drawing.Size(31, 13);
+            this.coords.TabIndex = 0;
+            this.coords.Text = "Algo:";
             // 
             // menuStrip1
             // 
@@ -875,26 +902,6 @@ namespace GMSMapEditor
             this.toolStripButton25.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton25.Text = "toolStripButton25";
             // 
-            // coords
-            // 
-            this.coords.AutoSize = true;
-            this.coords.Location = new System.Drawing.Point(19, 13);
-            this.coords.Name = "coords";
-            this.coords.Size = new System.Drawing.Size(31, 13);
-            this.coords.TabIndex = 0;
-            this.coords.Text = "Algo:";
-            // 
-            // pb
-            // 
-            this.pb.Location = new System.Drawing.Point(3, 3);
-            this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(100, 50);
-            this.pb.TabIndex = 2;
-            this.pb.TabStop = false;
-            this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
-            this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            // 
             // InterfazBasica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -912,15 +919,15 @@ namespace GMSMapEditor
             this.Load += new System.EventHandler(this.InterfazBasica_Load);
             this.SizeChanged += new System.EventHandler(this.InterfazBasica_SizeChanged);
             this.div_left.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.div_center.ResumeLayout(false);
-            this.div_center.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb2)).EndInit();
             this.div_right.ResumeLayout(false);
             this.div_right.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1019,10 +1026,10 @@ namespace GMSMapEditor
         private System.Windows.Forms.ToolStripButton toolStripButton24;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton toolStripButton25;
-        private System.Windows.Forms.TextBox info;
-        private System.Windows.Forms.TextBox info2;
         private System.Windows.Forms.Label coords;
         private System.Windows.Forms.PictureBox pb;
+        private System.Windows.Forms.PictureBox pb2;
+        private System.Windows.Forms.Label otro;
 
 
     }

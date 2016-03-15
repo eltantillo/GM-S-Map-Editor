@@ -29,10 +29,12 @@ namespace GMSMapEditor
         private void InitializeComponent()
         {
             this.div_left = new System.Windows.Forms.Panel();
+            this.pb = new System.Windows.Forms.PictureBox();
             this.info2 = new System.Windows.Forms.TextBox();
             this.info = new System.Windows.Forms.TextBox();
             this.div_center = new System.Windows.Forms.Panel();
             this.div_right = new System.Windows.Forms.Panel();
+            this.coords = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.holaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.noseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,14 +123,12 @@ namespace GMSMapEditor
             this.toolStripButton24 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton25 = new System.Windows.Forms.ToolStripButton();
-            this.coords = new System.Windows.Forms.Label();
-            this.pb = new System.Windows.Forms.PictureBox();
             this.div_left.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
             this.div_center.SuspendLayout();
             this.div_right.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
             this.SuspendLayout();
             // 
             // div_left
@@ -144,6 +144,17 @@ namespace GMSMapEditor
             this.div_left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             this.div_left.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
             this.div_left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            // 
+            // pb
+            // 
+            this.pb.Location = new System.Drawing.Point(3, 3);
+            this.pb.Name = "pb";
+            this.pb.Size = new System.Drawing.Size(100, 50);
+            this.pb.TabIndex = 2;
+            this.pb.TabStop = false;
+            this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
+            this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             // 
             // info2
             // 
@@ -178,6 +189,15 @@ namespace GMSMapEditor
             this.div_right.Name = "div_right";
             this.div_right.Size = new System.Drawing.Size(237, 212);
             this.div_right.TabIndex = 3;
+            // 
+            // coords
+            // 
+            this.coords.AutoSize = true;
+            this.coords.Location = new System.Drawing.Point(19, 13);
+            this.coords.Name = "coords";
+            this.coords.Size = new System.Drawing.Size(31, 13);
+            this.coords.TabIndex = 0;
+            this.coords.Text = "Algo:";
             // 
             // menuStrip1
             // 
@@ -237,6 +257,7 @@ namespace GMSMapEditor
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
             this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.saveProjectToolStripMenuItem.Text = "Save Project..";
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -875,26 +896,6 @@ namespace GMSMapEditor
             this.toolStripButton25.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton25.Text = "toolStripButton25";
             // 
-            // coords
-            // 
-            this.coords.AutoSize = true;
-            this.coords.Location = new System.Drawing.Point(19, 13);
-            this.coords.Name = "coords";
-            this.coords.Size = new System.Drawing.Size(31, 13);
-            this.coords.TabIndex = 0;
-            this.coords.Text = "Algo:";
-            // 
-            // pb
-            // 
-            this.pb.Location = new System.Drawing.Point(3, 3);
-            this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(100, 50);
-            this.pb.TabIndex = 2;
-            this.pb.TabStop = false;
-            this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
-            this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            // 
             // InterfazBasica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -912,6 +913,7 @@ namespace GMSMapEditor
             this.Load += new System.EventHandler(this.InterfazBasica_Load);
             this.SizeChanged += new System.EventHandler(this.InterfazBasica_SizeChanged);
             this.div_left.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.div_center.ResumeLayout(false);
             this.div_center.PerformLayout();
             this.div_right.ResumeLayout(false);
@@ -920,7 +922,6 @@ namespace GMSMapEditor
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

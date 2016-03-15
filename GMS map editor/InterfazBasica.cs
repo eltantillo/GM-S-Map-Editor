@@ -67,7 +67,6 @@ namespace GMSMapEditor{
                 Project.projectFolder = Path.GetDirectoryName(projectFile.FileName) + @"\";
                 Project.projectName = Path.GetFileName(projectFile.FileName);
                 Project.OpenProject();
-                Project.SaveProject();
             }
         }
 
@@ -143,6 +142,19 @@ namespace GMSMapEditor{
 
                     }
                 }
+            }
+        }
+
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Project.SaveProject();
+                MessageBox.Show("El proyecto se ha guardado.");
+            }
+            catch
+            {
+                MessageBox.Show("Ocurrió un error al guardar el proyecto.");
             }
         }
     }

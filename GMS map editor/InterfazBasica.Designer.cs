@@ -145,14 +145,9 @@ namespace GMSMapEditor
             this.div_left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             this.div_left.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
             this.div_left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            this.pb.Location = new System.Drawing.Point(3, 3);
-            this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(100, 50);
-            this.pb.TabIndex = 2;
-            this.pb.TabStop = false;
-            this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
-            this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            // 
+            // pb
+            // 
             this.pb.Location = new System.Drawing.Point(3, 182);
             this.pb.Name = "pb";
             this.pb.Size = new System.Drawing.Size(0, 0);
@@ -201,7 +196,7 @@ namespace GMSMapEditor
             this.otro.Size = new System.Drawing.Size(25, 13);
             this.otro.TabIndex = 2;
             this.otro.Text = "otro";
-            //
+            // 
             // coords
             // 
             this.coords.AutoSize = true;

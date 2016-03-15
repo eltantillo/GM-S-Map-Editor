@@ -30,29 +30,33 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         public Image getClonedImage(){
             return (Image)img.Clone();
         }
-        public Image getTruncateImage(int xo, int yo, int difx, int dify) {
-            xo = inicio.X; yo = inicio.Y;
+        public Image getSelectedImage() {
             if(difx>0&&difx>0){
-                //MessageBox.Show("drawable: \n"+xo + "," + yo+" "+difx+","+dify);
                 try
                 {
                     Bitmap testu = img as Bitmap;
                     return testu.Clone(
-                        new Rectangle(new Point(xo * tWidth, yo * tHeight),
+                        new Rectangle(new Point(inicio.X * tWidth, inicio.Y * tHeight),
                         new Size(tWidth * difx, tHeight * dify)),
                         testu.PixelFormat
                     );
                 }
                 catch (Exception ex) {
-                    MessageBox.Show("drawable: \n"+xo + "," + yo+" "+difx+","+dify);
+                    MessageBox.Show("drawable: \n" + inicio.X + "," + inicio.Y + " " + difx + "," + dify);
                 }
             }
             return null;
         }
 
         public void setSelection(Point inicio,Point final) {
-            this.inicio = inicio;
-            this.final = final;
+            this.inicio = new Point(
+                (inicio.X > final.X ? final.X : inicio.X),
+                (inicio.Y > final.Y ? final.Y : inicio.Y)
+            );
+            this.final = new Point(
+                (inicio.X < final.X ? final.X+1 : inicio.X+1),
+                (inicio.Y < final.Y ? final.Y+1 : inicio.Y+1)
+            );
         }
         public Bitmap drawRectangle() {
             Bitmap bp = img.Clone() as Bitmap;
@@ -60,27 +64,27 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             Pen blackpen = new Pen(Color.White);
             blackpen.Width = 5;
 
+            // ------>
             drawArea.DrawLine(blackpen,
                 new Point(inicio.X * tWidth, inicio.Y * tHeight),
                 new Point(final.X * tWidth, inicio.Y * tHeight)
             );
-            // 
-            // 
+            // |
+            // v
             drawArea.DrawLine(blackpen,
-                new Point((final.X * tWidth), inicio.X * tWidth),
-                new Point((final.X * tWidth), (final.Y * tHeight))
+                new Point(final.X * tWidth, inicio.Y * tHeight),
+                new Point(final.X * tWidth, final.Y * tHeight)
+            );
+            // <-------
+            drawArea.DrawLine(blackpen,
+                new Point(final.X * tWidth, final.Y * tHeight),
+                new Point(inicio.X * tWidth, final.Y * tHeight)
             );
             //  ^
             //  |
             drawArea.DrawLine(blackpen,
-                new Point(inicio.X * tWidth, (final.Y * tHeight)),
-                new Point((final.X * tWidth), (final.Y * tHeight))
-            );
-            //  ^
-            //  |
-            drawArea.DrawLine(blackpen,
-                new Point(inicio.X * tWidth, inicio.Y * tHeight),
-                new Point(inicio.X * tWidth, (final.Y * tHeight))
+                new Point(inicio.X * tWidth, final.Y * tHeight),
+                new Point(inicio.X * tWidth, inicio.Y * tHeight)
             );
             difx = (final.X > inicio.X ? final.X - inicio.X : inicio.X - final.X);
             dify = (final.Y > inicio.Y ? final.Y - inicio.Y : inicio.Y - final.Y);

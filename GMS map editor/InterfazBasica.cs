@@ -123,7 +123,7 @@ namespace GMSMapEditor{
                     tilePositionXF = ((BackgroundTile)bt).positionX(e.Location.X);
                     tilePositionYF = ((BackgroundTile)bt).positionY(e.Location.Y);
 
-                    coords.Text="Donde esta el origen?\n"+tilePositionXO+tilePositionYO;
+                    coords.Text="Donde esta el origen?\n"+tilePositionXO+","+tilePositionYO;
 
                     ((BackgroundTile)bt).setSelection(new Point(tilePositionXO,tilePositionYO),new Point(tilePositionXF,tilePositionYF));
 
@@ -148,12 +148,7 @@ namespace GMSMapEditor{
             otro.Text = "Dif:" + dimsX +","+dimsY+ "\nCOX" + mapPositionX + "," + "COY" + mapPositionY + "\n" + "CFX" + Math.Floor((Decimal)e.Location.X / gridus) + "," + "CFY" + Math.Floor((Decimal)e.Location.Y / gridus);
 
             Graphics mapArea = pb2.CreateGraphics();
-            Image i = ((BackgroundTile)bt).getTruncateImage(
-                    tilePositionXO,
-                    tilePositionYO,
-                    tamX,
-                    tamY
-                );
+            Image i = ((BackgroundTile)bt).getSelectedImage();
             if (i != null){
                 mapArea.DrawImage(
                     i,

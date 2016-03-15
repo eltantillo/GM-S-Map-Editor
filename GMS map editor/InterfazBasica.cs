@@ -189,9 +189,6 @@ namespace GMSMapEditor{
             }
             pb2.Image = ((SimpleRoom)sr).getSimpleRoomImage((BackgroundTile)bt);
         }
-<<<<<<< HEAD
-        
-=======
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -205,6 +202,5 @@ namespace GMSMapEditor{
                 MessageBox.Show("Ocurrió un error al guardar el proyecto.");
             }
         }
->>>>>>> 6b4407a97c7445f05aeeb7e0e7464cca3b9ac5d7
     }
 }

@@ -30,18 +30,10 @@ namespace GMSMapEditor
         {
             this.div_left = new System.Windows.Forms.Panel();
             this.pb = new System.Windows.Forms.PictureBox();
-<<<<<<< HEAD
-=======
-            this.info2 = new System.Windows.Forms.TextBox();
-            this.info = new System.Windows.Forms.TextBox();
->>>>>>> 6b4407a97c7445f05aeeb7e0e7464cca3b9ac5d7
             this.div_center = new System.Windows.Forms.Panel();
             this.pb2 = new System.Windows.Forms.PictureBox();
             this.div_right = new System.Windows.Forms.Panel();
-<<<<<<< HEAD
             this.otro = new System.Windows.Forms.Label();
-=======
->>>>>>> 6b4407a97c7445f05aeeb7e0e7464cca3b9ac5d7
             this.coords = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.holaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,11 +145,6 @@ namespace GMSMapEditor
             this.div_left.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             this.div_left.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
             this.div_left.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            // 
-            // pb
-<<<<<<< HEAD
-=======
-            // 
             this.pb.Location = new System.Drawing.Point(3, 3);
             this.pb.Name = "pb";
             this.pb.Size = new System.Drawing.Size(100, 50);
@@ -166,17 +153,6 @@ namespace GMSMapEditor
             this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
             this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            // 
-            // info2
-            // 
-            this.info2.Location = new System.Drawing.Point(3, 29);
-            this.info2.Name = "info2";
-            this.info2.Size = new System.Drawing.Size(79, 20);
-            this.info2.TabIndex = 1;
-            // 
-            // info
->>>>>>> 6b4407a97c7445f05aeeb7e0e7464cca3b9ac5d7
-            // 
             this.pb.Location = new System.Drawing.Point(3, 182);
             this.pb.Name = "pb";
             this.pb.Size = new System.Drawing.Size(0, 0);
@@ -217,7 +193,6 @@ namespace GMSMapEditor
             this.div_right.Size = new System.Drawing.Size(237, 212);
             this.div_right.TabIndex = 3;
             // 
-<<<<<<< HEAD
             // otro
             // 
             this.otro.AutoSize = true;
@@ -226,9 +201,7 @@ namespace GMSMapEditor
             this.otro.Size = new System.Drawing.Size(25, 13);
             this.otro.TabIndex = 2;
             this.otro.Text = "otro";
-            // 
-=======
->>>>>>> 6b4407a97c7445f05aeeb7e0e7464cca3b9ac5d7
+            //
             // coords
             // 
             this.coords.AutoSize = true;

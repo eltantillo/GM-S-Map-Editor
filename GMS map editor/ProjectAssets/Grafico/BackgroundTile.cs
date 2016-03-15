@@ -64,6 +64,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                 new Point(inicio.X * tWidth, inicio.Y * tHeight),
                 new Point(final.X * tWidth, inicio.Y * tHeight)
             );
+            // 
+            // 
             drawArea.DrawLine(blackpen,
                 new Point((final.X * tWidth), inicio.X * tWidth),
                 new Point((final.X * tWidth), (final.Y * tHeight))

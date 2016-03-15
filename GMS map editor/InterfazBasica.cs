@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using System.IO;
 using GMSMapEditor.Classes;
 using GMSMapEditor.ProjectAssets;
@@ -31,7 +30,6 @@ namespace GMSMapEditor{
         }
 
         private void InterfazBasica_SizeChanged(object sender, EventArgs e){
-            //MessageBox.Show("Error Message", "Error Title", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             div_left.Width = int.Parse(Math.Floor(this.Width * 0.25) + "");
             div_left.Dock = DockStyle.Left;
             div_left.SetAutoScrollMargin(12, div_left.Height);
@@ -68,34 +66,8 @@ namespace GMSMapEditor{
                 Project.assets = new ProjectAssets.Assets();
                 Project.projectFolder = Path.GetDirectoryName(projectFile.FileName) + @"\";
                 Project.projectName = Path.GetFileName(projectFile.FileName);
-
-                XmlRead(Project.projectFolder + Project.projectName, "background");
-                XmlRead(Project.projectFolder + Project.projectName, "room");
-            }
-        }
-
-        private void XmlRead(string xmlFile, string section)
-        {
-            String xmlString = File.ReadAllText(xmlFile).ToString();
-            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
-            {
-                while (reader.ReadToFollowing(section))
-                {
-                    if (section == "background")
-                    {
-                        Project.assets.backgrounds.Add(new ProjectAssets.Backgrounds.Background());
-                        int num = Project.assets.backgrounds.Count - 1;
-                        Project.assets.backgrounds[num].BackgroundRead(Project.projectFolder + reader.ReadElementContentAsString() + "." + section + ".gmx");
-                        MessageBox.Show(Project.assets.backgrounds[num].ToString());
-                    }
-                    else if (section == "room")
-                    {
-                        Project.assets.rooms.Add(new ProjectAssets.Rooms.Room());
-                        int num = Project.assets.rooms.Count - 1;
-                        Project.assets.rooms[num].RoomRead(Project.projectFolder + reader.ReadElementContentAsString() + "." + section + ".gmx");
-                        MessageBox.Show(Project.assets.rooms[num].ToString());
-                    }
-                }
+                Project.OpenProject();
+                Project.SaveProject();
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GMSMapEditor.Classes;
 
 namespace GMSMapEditor.ProjectAssets
 {
@@ -11,4 +12,5 @@ namespace GMSMapEditor.ProjectAssets
         public List<Backgrounds.Background> backgrounds = new List<Backgrounds.Background>();
         public List<Rooms.Room> rooms = new List<Rooms.Room>();
     }
+
 }

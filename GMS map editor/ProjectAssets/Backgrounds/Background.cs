@@ -5,11 +5,15 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using GMSMapEditor.Classes;
+using System.Windows.Forms;
 
 namespace GMSMapEditor.ProjectAssets.Backgrounds
 {
     public class Background
     {
+        public bool hasChanges = false;
+        public bool isNew = false;
+        public string name = "";
         public bool istileset;
         public int tilewidth;
         public int tileheight;
@@ -27,6 +31,8 @@ namespace GMSMapEditor.ProjectAssets.Backgrounds
 
         public void BackgroundRead(string xmlFile)
         {
+            name = xmlFile.Split('\\')[1];
+            xmlFile = Project.projectFolder + xmlFile + ".background.gmx";
             String xmlString = File.ReadAllText(xmlFile).ToString();
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {

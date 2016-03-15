@@ -8,6 +8,11 @@ namespace GMSMapEditor.ProjectAssets.Rooms
     public class Tile
     {
         public string bgName = "";
+        public string name;
+        public string colour = "4294967295";
+        public double scaleX = 1;
+        public double scaleY = 1;
+        public bool locked = false;
         public int x = 0;
         public int y = 0;
         public int w = 0;
@@ -15,11 +20,12 @@ namespace GMSMapEditor.ProjectAssets.Rooms
         public int xo = 0;
         public int yo = 0;
         public int id = 10000000;
-        public string name = "inst_";
         public int depth = 1000000;
-        public bool locked = false;
-        public string colour = "4294967295";
-        public double scaleX = 1;
-        public double scaleY = 1;
+
+        public Tile()
+        {
+            Random random = new Random();
+            this.name = "inst_" + random.Next(0, 999999999);
+        }
     }
 }

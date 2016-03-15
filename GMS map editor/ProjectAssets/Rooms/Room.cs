@@ -6,17 +6,22 @@ using System.Net;
 using System.Xml;
 using System.IO;
 using GMSMapEditor.Classes;
+using System.Windows.Forms;
 
 namespace GMSMapEditor.ProjectAssets.Rooms
 {
     public class Room
     {
+        public bool hasChanges = false;
+        public bool isNew = false;
+        public string name = "";
         public string caption = "";
         public int width = 1024;
         public int height = 768;
         public int vsnap = 16;
         public int hsnap = 16;
         public int isometric = 0; //??
+
         public int speed = 30;
         public bool persistent = false;
         public int colour = 255;
@@ -41,6 +46,8 @@ namespace GMSMapEditor.ProjectAssets.Rooms
 
         public void RoomRead(string xmlFile)
         {
+            name = xmlFile.Split('\\')[1];
+            xmlFile = Project.projectFolder + xmlFile + ".room.gmx";
             String xmlString = File.ReadAllText(xmlFile).ToString();
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
             {

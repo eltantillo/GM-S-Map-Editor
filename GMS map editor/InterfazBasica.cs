@@ -108,7 +108,7 @@ namespace GMSMapEditor{
             }
         }
         private void pb_MouseMove(object sender, MouseEventArgs e){
-            if (e.Button == System.Windows.Forms.MouseButtons.Left){
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && pb.Image != null){
                 Control control = (Control) sender;
                 if (control.Capture){
                     control.Capture = false;

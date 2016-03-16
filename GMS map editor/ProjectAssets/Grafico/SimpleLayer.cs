@@ -28,7 +28,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico
                     st.Height = th;
                     st.Width = tw;
                     st.Location = new Point(x * tw,y * th);
-                    st.Image = GMSMapEditor.Properties.Resources.test;
+                    //st.Image = GMSMapEditor.Properties.Resources.test;
                     t[x][y] = st;
                 }
             }

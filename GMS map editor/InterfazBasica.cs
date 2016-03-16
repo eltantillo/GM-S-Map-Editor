@@ -50,12 +50,11 @@ namespace GMSMapEditor{
             div_right.Dock = DockStyle.Left;
             div_right.Location = new Point(div_center.Height, 0);
             div_right.SetAutoScrollMargin(12, div_left.Height);
-            barra2.Width = this.Width;
         }
 
         private void noseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Project.NewProject();
         }
 
         private void deleteDelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -65,16 +64,7 @@ namespace GMSMapEditor{
 
         private void queEsEstoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog projectFile = new OpenFileDialog();
-            projectFile.Filter = "GameMaker: Studio Project Files|*.project.gmx";
-
-            if (projectFile.ShowDialog() == DialogResult.OK)
-            {
-                Project.assets = new ProjectAssets.Assets();
-                Project.projectFolder = Path.GetDirectoryName(projectFile.FileName) + @"\";
-                Project.projectName = Path.GetFileName(projectFile.FileName);
-                Project.OpenProject();
-            }
+            Project.OpenProject();
         }
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e){
@@ -111,7 +101,7 @@ namespace GMSMapEditor{
             }
         }
         private void pb_MouseMove(object sender, MouseEventArgs e){
-            if (e.Button == System.Windows.Forms.MouseButtons.Left){
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && pb.Image != null){
                 Control control = (Control) sender;
                 if (control.Capture){
                     control.Capture = false;
@@ -194,7 +184,7 @@ namespace GMSMapEditor{
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e){
             try{
                 Project.SaveProject();
-                MessageBox.Show("El proyecto se ha guardado.");
+                MessageBox.Show("El proyecto se ha guardado exitosamente.");
             }
             catch{
                 MessageBox.Show("Ocurrió un error al guardar el proyecto.");

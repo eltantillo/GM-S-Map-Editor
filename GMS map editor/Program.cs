@@ -15,7 +15,7 @@ namespace GMSMapEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InterfazBasica());
+            Application.Run(new MainWindow());
         }
     }
 }

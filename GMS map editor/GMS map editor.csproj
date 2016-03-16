@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Project.cs" />
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectAssets\Backgrounds\Background.cs" />
     <Compile Include="ProjectAssets\Assets.cs" />
     <Compile Include="ProjectAssets\Rooms\Background.cs" />
@@ -77,6 +83,9 @@
       <DependentUpon>InterfazBasica.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -101,84 +110,50 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon1.png" />
+    <None Include="Resources\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon2.png" />
+    <None Include="Resources\backward.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon3.png" />
+    <None Include="Resources\copy.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon4.png" />
+    <None Include="Resources\cut.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon5.png" />
+    <None Include="Resources\delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon6.png" />
+    <None Include="Resources\forward.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon7.png" />
+    <None Include="Resources\layer.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon8.png" />
+    <None Include="Resources\newProject.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon9.png" />
+    <None Include="Resources\object.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon10.png" />
+    <None Include="Resources\openProject.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon11.png" />
+    <None Include="Resources\paste.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon12.png" />
+    <None Include="Resources\redo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon13.png" />
+    <None Include="Resources\room.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon14.png" />
+    <None Include="Resources\saveProject.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon15.png" />
+    <None Include="Resources\undo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon17.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon18.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon19.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon20.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon21.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon22.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon23.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon25.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\test1.png" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

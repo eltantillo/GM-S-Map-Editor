@@ -99,34 +99,41 @@ namespace GMSMapEditor.Classes
 
         public static void SaveProject()
         {
-            var doc = XDocument.Parse(File.ReadAllText(projectFolder + projectName));
-
-            foreach (ProjectAssets.Rooms.Room room in assets.rooms)
+            try
             {
-                if (room.isNew)
-                {
-                    doc.Descendants("rooms").FirstOrDefault().Add(new XElement("room", "rooms\\" + room.name));
-                    File.WriteAllText(projectFolder + "rooms\\" + room.name + ".room.gmx", room.ToString());
-                }
-                if (room.hasChanges)
-                {
-                    File.WriteAllText(projectFolder + "rooms\\" + room.name + ".room.gmx", room.ToString());
-                }
-            }
+                var doc = XDocument.Parse(File.ReadAllText(projectFolder + projectName));
 
-            foreach (ProjectAssets.Backgrounds.Background background in assets.backgrounds)
+                foreach (ProjectAssets.Rooms.Room room in assets.rooms)
+                {
+                    if (room.isNew)
+                    {
+                        doc.Descendants("rooms").FirstOrDefault().Add(new XElement("room", "rooms\\" + room.name));
+                        File.WriteAllText(projectFolder + "rooms\\" + room.name + ".room.gmx", room.ToString());
+                    }
+                    if (room.hasChanges)
+                    {
+                        File.WriteAllText(projectFolder + "rooms\\" + room.name + ".room.gmx", room.ToString());
+                    }
+                }
+
+                foreach (ProjectAssets.Backgrounds.Background background in assets.backgrounds)
+                {
+                    if (background.isNew)
+                    {
+                        doc.Descendants("backgrounds").FirstOrDefault().Add(new XElement("background", "background\\" + background.name));
+                    }
+                    if (background.hasChanges)
+                    {
+                        File.WriteAllText(projectFolder + "background\\" + background.name + ".background.gmx", background.ToString());
+                    }
+                }
+
+                doc.Save(projectFolder + projectName);
+            }
+            catch
             {
-                if (background.isNew)
-                {
-                    doc.Descendants("backgrounds").FirstOrDefault().Add(new XElement("background", "background\\" + background.name));
-                }
-                if (background.hasChanges)
-                {
-                    File.WriteAllText(projectFolder + "background\\" + background.name + ".background.gmx", background.ToString());
-                }
+                MessageBox.Show("Ocurrió un error al guardar el proyecto");
             }
-
-            doc.Save(projectFolder + projectName);
         }
 
         public static void DeepCopy(DirectoryInfo source, DirectoryInfo target)

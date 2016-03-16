@@ -32,41 +32,6 @@ namespace GMSMapEditor{
             
         }
 
-        private void InterfazBasica_Load(object sender, EventArgs e){
-
-        }
-
-        private void InterfazBasica_SizeChanged(object sender, EventArgs e){
-            div_left.Width = int.Parse(Math.Floor(this.Width * 0.25) + "");
-            div_left.Dock = DockStyle.Left;
-            div_left.SetAutoScrollMargin(12, div_left.Height);
-
-            div_center.Width = int.Parse(Math.Floor(this.Width * 0.5) + "");
-            div_center.Dock = DockStyle.Left;
-            div_center.Location = new Point(div_left.Height,0);
-            div_center.SetAutoScrollMargin(12, div_left.Height);
-
-            div_right.Width = int.Parse(Math.Floor(this.Width * 0.25) + "");
-            div_right.Dock = DockStyle.Left;
-            div_right.Location = new Point(div_center.Height, 0);
-            div_right.SetAutoScrollMargin(12, div_left.Height);
-        }
-
-        private void noseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Project.NewProject();
-        }
-
-        private void deleteDelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void queEsEstoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Project.OpenProject();
-        }
-
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e){
             gridus = 32;
             int gridus2 = 50;
@@ -85,10 +50,6 @@ namespace GMSMapEditor{
             bp = new Bitmap((gridus2 * gridus)+1, (gridus2 * gridus)+1);
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e){
-            TestForm f = new TestForm();
-            f.Show();
-        }
         private void div_left_MouseClick(object sender, MouseEventArgs e){
             if (clicked){
                 clicked = false;
@@ -178,16 +139,6 @@ namespace GMSMapEditor{
                         new Point(tilePositionXO + x, tilePositionXF + y)
                     );
                 }
-            }
-        }
-
-        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e){
-            try{
-                Project.SaveProject();
-                MessageBox.Show("El proyecto se ha guardado exitosamente");
-            }
-            catch{
-                MessageBox.Show("Ocurrió un error al guardar el proyecto");
             }
         }
 

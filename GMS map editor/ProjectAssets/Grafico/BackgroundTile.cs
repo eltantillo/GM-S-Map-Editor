@@ -87,18 +87,18 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             Bitmap bp = img.Clone() as Bitmap;
             Graphics drawArea = Graphics.FromImage(bp);
             Pen blackpen = new Pen(Color.White);
-            blackpen.Width = 5;
+            blackpen.Width = 3;
 
             // ------>
             drawArea.DrawLine(blackpen,
-                new Point(inicio.X * tWidth, inicio.Y * tHeight),
-                new Point(final.X * tWidth, inicio.Y * tHeight)
+                new Point(inicio.X * tWidth - 1, inicio.Y * tHeight),
+                new Point(final.X * tWidth + 2, inicio.Y * tHeight)
             );
             // |
             // v
             drawArea.DrawLine(blackpen,
                 new Point(final.X * tWidth, inicio.Y * tHeight),
-                new Point(final.X * tWidth, final.Y * tHeight)
+                new Point(final.X * tWidth, final.Y * tHeight + 2)
             );
             // <-------
             drawArea.DrawLine(blackpen,
@@ -108,7 +108,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             //  ^
             //  |
             drawArea.DrawLine(blackpen,
-                new Point(inicio.X * tWidth, final.Y * tHeight),
+                new Point(inicio.X * tWidth, final.Y * tHeight + 2),
                 new Point(inicio.X * tWidth, inicio.Y * tHeight)
             );
             difx = (final.X > inicio.X ? final.X - inicio.X : inicio.X - final.X);

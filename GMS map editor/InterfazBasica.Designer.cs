@@ -180,32 +180,11 @@ namespace GMSMapEditor
             this.holaToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.holaToolStripMenuItem.Text = "File";
             // 
-            // noseToolStripMenuItem
-            // 
-            this.noseToolStripMenuItem.Name = "noseToolStripMenuItem";
-            this.noseToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.noseToolStripMenuItem.Text = "New Project...";
-            this.noseToolStripMenuItem.Click += new System.EventHandler(this.noseToolStripMenuItem_Click);
-            // 
-            // queEsEstoToolStripMenuItem
-            // 
-            this.queEsEstoToolStripMenuItem.Name = "queEsEstoToolStripMenuItem";
-            this.queEsEstoToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.queEsEstoToolStripMenuItem.Text = "Open Project...";
-            this.queEsEstoToolStripMenuItem.Click += new System.EventHandler(this.queEsEstoToolStripMenuItem_Click);
-            // 
             // holaQueHaceToolStripMenuItem
             // 
             this.holaQueHaceToolStripMenuItem.Name = "holaQueHaceToolStripMenuItem";
             this.holaQueHaceToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.holaQueHaceToolStripMenuItem.Text = "Close Project...";
-            // 
-            // saveProjectToolStripMenuItem
-            // 
-            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.saveProjectToolStripMenuItem.Text = "Save Project..";
-            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -533,13 +512,6 @@ namespace GMSMapEditor
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
             this.toolStripMenuItem10.Size = new System.Drawing.Size(119, 6);
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.aboutToolStripMenuItem.Text = "About...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // pb
             // 
             this.pb.Location = new System.Drawing.Point(3, 182);
@@ -578,8 +550,6 @@ namespace GMSMapEditor
             this.Name = "InterfazBasica";
             this.Text = "InterfazBasica";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.InterfazBasica_Load);
-            this.SizeChanged += new System.EventHandler(this.InterfazBasica_SizeChanged);
             this.div_center.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pb2)).EndInit();
             this.div_right.ResumeLayout(false);

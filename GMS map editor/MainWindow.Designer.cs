@@ -29,14 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            this.statusBar = new System.Windows.Forms.StatusStrip();
             this.toolBar = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toggleProjectFiles = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.roomSettingsTab = new System.Windows.Forms.TabControl();
             this.tilesTab = new System.Windows.Forms.TabPage();
+            this.div_left = new System.Windows.Forms.Panel();
+            this.pb = new System.Windows.Forms.PictureBox();
             this.objectsTab = new System.Windows.Forms.TabPage();
+            this.div_center = new System.Windows.Forms.Panel();
+            this.pb2 = new System.Windows.Forms.PictureBox();
             this.resourcesTabs = new System.Windows.Forms.TabControl();
             this.roomsTab = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -57,9 +64,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.statusBar = new System.Windows.Forms.StatusStrip();
             this.toolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -67,20 +72,18 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.roomSettingsTab.SuspendLayout();
+            this.tilesTab.SuspendLayout();
+            this.div_left.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
+            this.div_center.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb2)).BeginInit();
             this.resourcesTabs.SuspendLayout();
             this.roomsTab.SuspendLayout();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // statusBar
-            // 
-            this.statusBar.Location = new System.Drawing.Point(0, 388);
-            this.statusBar.Name = "statusBar";
-            this.statusBar.Size = new System.Drawing.Size(904, 22);
-            this.statusBar.TabIndex = 2;
-            this.statusBar.Text = "statusStrip1";
             // 
             // toolBar
             // 
@@ -89,7 +92,8 @@
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripButton3,
-            this.toolStripSeparator1});
+            this.toolStripSeparator1,
+            this.toggleProjectFiles});
             this.toolBar.Location = new System.Drawing.Point(0, 24);
             this.toolBar.Name = "toolBar";
             this.toolBar.Size = new System.Drawing.Size(904, 25);
@@ -106,9 +110,43 @@
             this.toolStripButton1.Text = "New Project...";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::GMSMapEditor.Properties.Resources.openProject;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "Open Project...";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = global::GMSMapEditor.Properties.Resources.saveProject;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "Save Project";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toggleProjectFiles
+            // 
+            this.toggleProjectFiles.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toggleProjectFiles.Image = global::GMSMapEditor.Properties.Resources.projectFiles;
+            this.toggleProjectFiles.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toggleProjectFiles.Name = "toggleProjectFiles";
+            this.toggleProjectFiles.Size = new System.Drawing.Size(23, 22);
+            this.toggleProjectFiles.Text = "Toggle Project Files";
+            this.toggleProjectFiles.Click += new System.EventHandler(this.toggleProjectFiles_Click);
+            // 
             // splitContainer1
             // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 49);
             this.splitContainer1.Name = "splitContainer1";
@@ -128,7 +166,6 @@
             // 
             // splitContainer2
             // 
-            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
@@ -136,6 +173,10 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.roomSettingsTab);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.div_center);
             this.splitContainer2.Size = new System.Drawing.Size(748, 339);
             this.splitContainer2.SplitterDistance = 150;
             this.splitContainer2.SplitterWidth = 3;
@@ -148,31 +189,84 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.roomSettingsTab.Controls.Add(this.tilesTab);
             this.roomSettingsTab.Controls.Add(this.objectsTab);
-            this.roomSettingsTab.Location = new System.Drawing.Point(3, 3);
+            this.roomSettingsTab.Location = new System.Drawing.Point(0, 0);
+            this.roomSettingsTab.Margin = new System.Windows.Forms.Padding(0);
             this.roomSettingsTab.Name = "roomSettingsTab";
+            this.roomSettingsTab.Padding = new System.Drawing.Point(0, 0);
             this.roomSettingsTab.SelectedIndex = 0;
-            this.roomSettingsTab.Size = new System.Drawing.Size(140, 305);
+            this.roomSettingsTab.Size = new System.Drawing.Size(152, 341);
             this.roomSettingsTab.TabIndex = 0;
             // 
             // tilesTab
             // 
+            this.tilesTab.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tilesTab.Controls.Add(this.div_left);
             this.tilesTab.Location = new System.Drawing.Point(4, 22);
+            this.tilesTab.Margin = new System.Windows.Forms.Padding(0);
             this.tilesTab.Name = "tilesTab";
-            this.tilesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.tilesTab.Size = new System.Drawing.Size(132, 279);
+            this.tilesTab.Size = new System.Drawing.Size(144, 315);
             this.tilesTab.TabIndex = 0;
             this.tilesTab.Text = "Tiles";
-            this.tilesTab.UseVisualStyleBackColor = true;
+            // 
+            // div_left
+            // 
+            this.div_left.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.div_left.AutoScroll = true;
+            this.div_left.BackColor = System.Drawing.SystemColors.Window;
+            this.div_left.Controls.Add(this.pb);
+            this.div_left.Location = new System.Drawing.Point(0, 0);
+            this.div_left.Margin = new System.Windows.Forms.Padding(0);
+            this.div_left.Name = "div_left";
+            this.div_left.Size = new System.Drawing.Size(144, 315);
+            this.div_left.TabIndex = 2;
+            this.div_left.MouseClick += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            // 
+            // pb
+            // 
+            this.pb.Location = new System.Drawing.Point(3, 182);
+            this.pb.Name = "pb";
+            this.pb.Size = new System.Drawing.Size(0, 0);
+            this.pb.TabIndex = 2;
+            this.pb.TabStop = false;
+            this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
+            this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             // 
             // objectsTab
             // 
             this.objectsTab.Location = new System.Drawing.Point(4, 22);
             this.objectsTab.Name = "objectsTab";
             this.objectsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.objectsTab.Size = new System.Drawing.Size(132, 279);
+            this.objectsTab.Size = new System.Drawing.Size(144, 315);
             this.objectsTab.TabIndex = 1;
             this.objectsTab.Text = "Objects";
             this.objectsTab.UseVisualStyleBackColor = true;
+            // 
+            // div_center
+            // 
+            this.div_center.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.div_center.AutoScroll = true;
+            this.div_center.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.div_center.Controls.Add(this.pb2);
+            this.div_center.Location = new System.Drawing.Point(0, 0);
+            this.div_center.Name = "div_center";
+            this.div_center.Size = new System.Drawing.Size(597, 339);
+            this.div_center.TabIndex = 3;
+            // 
+            // pb2
+            // 
+            this.pb2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pb2.Location = new System.Drawing.Point(3, 184);
+            this.pb2.Name = "pb2";
+            this.pb2.Size = new System.Drawing.Size(0, 0);
+            this.pb2.TabIndex = 3;
+            this.pb2.TabStop = false;
+            this.pb2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseClick);
+            this.pb2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseMove);
             // 
             // resourcesTabs
             // 
@@ -181,10 +275,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.resourcesTabs.Controls.Add(this.roomsTab);
             this.resourcesTabs.Controls.Add(this.tabPage4);
-            this.resourcesTabs.Location = new System.Drawing.Point(3, 3);
+            this.resourcesTabs.Location = new System.Drawing.Point(0, 0);
             this.resourcesTabs.Name = "resourcesTabs";
             this.resourcesTabs.SelectedIndex = 0;
-            this.resourcesTabs.Size = new System.Drawing.Size(148, 305);
+            this.resourcesTabs.Size = new System.Drawing.Size(157, 341);
             this.resourcesTabs.TabIndex = 0;
             // 
             // roomsTab
@@ -192,9 +286,9 @@
             this.roomsTab.BackColor = System.Drawing.Color.Transparent;
             this.roomsTab.Controls.Add(this.treeView1);
             this.roomsTab.Location = new System.Drawing.Point(4, 22);
+            this.roomsTab.Margin = new System.Windows.Forms.Padding(0);
             this.roomsTab.Name = "roomsTab";
-            this.roomsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.roomsTab.Size = new System.Drawing.Size(140, 279);
+            this.roomsTab.Size = new System.Drawing.Size(149, 315);
             this.roomsTab.TabIndex = 0;
             this.roomsTab.Text = "Rooms";
             // 
@@ -203,9 +297,9 @@
             this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.Location = new System.Drawing.Point(6, 6);
+            this.treeView1.Location = new System.Drawing.Point(-1, -1);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(124, 291);
+            this.treeView1.Size = new System.Drawing.Size(149, 317);
             this.treeView1.TabIndex = 0;
             // 
             // tabPage4
@@ -214,7 +308,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(140, 279);
+            this.tabPage4.Size = new System.Drawing.Size(149, 315);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "tabPage4";
             // 
@@ -276,6 +370,7 @@
             this.closeProjectToolStripMenuItem.Name = "closeProjectToolStripMenuItem";
             this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.closeProjectToolStripMenuItem.Text = "Close Project";
+            this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -337,30 +432,14 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // toolStripButton2
+            // statusBar
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::GMSMapEditor.Properties.Resources.openProject;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "Open Project...";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::GMSMapEditor.Properties.Resources.saveProject;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "Save Project";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.statusBar.GripMargin = new System.Windows.Forms.Padding(0);
+            this.statusBar.Location = new System.Drawing.Point(0, 388);
+            this.statusBar.Name = "statusBar";
+            this.statusBar.Size = new System.Drawing.Size(904, 22);
+            this.statusBar.TabIndex = 2;
+            this.statusBar.Text = "statusStrip1";
             // 
             // MainWindow
             // 
@@ -382,9 +461,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.roomSettingsTab.ResumeLayout(false);
+            this.tilesTab.ResumeLayout(false);
+            this.div_left.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
+            this.div_center.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb2)).EndInit();
             this.resourcesTabs.ResumeLayout(false);
             this.roomsTab.ResumeLayout(false);
             this.menuBar.ResumeLayout(false);
@@ -396,7 +481,6 @@
 
         #endregion
 
-        private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStrip toolBar;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
@@ -427,6 +511,12 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Panel div_left;
+        private System.Windows.Forms.PictureBox pb;
+        private System.Windows.Forms.Panel div_center;
+        private System.Windows.Forms.PictureBox pb2;
+        private System.Windows.Forms.StatusStrip statusBar;
+        private System.Windows.Forms.ToolStripButton toggleProjectFiles;
 
     }
 }

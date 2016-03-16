@@ -18,17 +18,18 @@ namespace GMSMapEditor{
         int tilePositionXO,tilePositionYO,tilePositionXF, tilePositionYF;
         int mapPositionX, mapPositionY;
         int gridus;
-        int dimsX, dimsY;
 
         Object bt;
         Object sr;
         bool clicked;
         bool clickedV2;
+        Bitmap bp;
 
         public InterfazBasica(){
             InitializeComponent();
             clicked = false;
             clickedV2 = false;
+            
         }
 
         private void InterfazBasica_Load(object sender, EventArgs e){
@@ -78,7 +79,7 @@ namespace GMSMapEditor{
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e){
             gridus = 32;
-            int gridus2 = 32;
+            int gridus2 = 50;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.Multiselect = false;
@@ -87,10 +88,11 @@ namespace GMSMapEditor{
             bt = new BackgroundTile(openFileDialog1.FileName, gridus, gridus);
             ((BackgroundTile)bt).drawBackgroundTile(pb);
 
-            sr = new SimpleRoom(gridus2, gridus2);
+            sr = new SimpleRoom(gridus2, gridus2,gridus,gridus);
             pb2.Location = new Point(0,0);
             pb2.Height = gridus2 * gridus;
             pb2.Width = gridus2 * gridus;
+            bp = new Bitmap((gridus2 * gridus)+1, (gridus2 * gridus)+1);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e){
@@ -105,6 +107,7 @@ namespace GMSMapEditor{
                 tilePositionXO = ((BackgroundTile)bt).positionX(e.Location.X);
                 tilePositionYO = ((BackgroundTile)bt).positionY(e.Location.Y);
                 clicked = true;
+                ((BackgroundTile)bt).setSelection(new Point(tilePositionXO,tilePositionYO),new Point(tilePositionXO,tilePositionYO));
             }
         }
         private void pb_MouseMove(object sender, MouseEventArgs e){
@@ -123,8 +126,6 @@ namespace GMSMapEditor{
                     tilePositionXF = ((BackgroundTile)bt).positionX(e.Location.X);
                     tilePositionYF = ((BackgroundTile)bt).positionY(e.Location.Y);
 
-                    coords.Text="Donde esta el origen?\n"+tilePositionXO+","+tilePositionYO;
-
                     ((BackgroundTile)bt).setSelection(new Point(tilePositionXO,tilePositionYO),new Point(tilePositionXF,tilePositionYF));
 
                     pb.Image = ((BackgroundTile)bt).drawRectangle();
@@ -133,69 +134,85 @@ namespace GMSMapEditor{
         }
 
         private void pb2_MouseMove(object sender, MouseEventArgs e){
-            int tamY = dimsY+1;
-            int tamX = dimsX+1;
             if (mapPositionX != ((int)Math.Floor((Decimal)e.Location.X / gridus) * gridus)+gridus){
-                pb2.Image = (Image)((SimpleRoom)sr).i.Clone();
+                pb2.Image = (Image)((SimpleRoom)sr).tuneada.Clone();
             }
             if (mapPositionY != ((int)Math.Floor((Decimal)e.Location.Y / gridus) * gridus)+gridus){
-                pb2.Image = (Image)((SimpleRoom)sr).i.Clone();
+                pb2.Image = (Image)((SimpleRoom)sr).tuneada.Clone();
             }
             
             mapPositionX = ((int)Math.Floor((Decimal)e.Location.X / gridus) * gridus)+gridus;
             mapPositionY = ((int)Math.Floor((Decimal)e.Location.Y / gridus) * gridus)+gridus;
-
-            otro.Text = "Dif:" + dimsX +","+dimsY+ "\nCOX" + mapPositionX + "," + "COY" + mapPositionY + "\n" + "CFX" + Math.Floor((Decimal)e.Location.X / gridus) + "," + "CFY" + Math.Floor((Decimal)e.Location.Y / gridus);
 
             Graphics mapArea = pb2.CreateGraphics();
             Image i = ((BackgroundTile)bt).getSelectedImage();
             if (i != null){
                 mapArea.DrawImage(
                     i,
-                    new Point(mapPositionX-(tamX*gridus),mapPositionY-(tamY*gridus))
+                    new Point(mapPositionX - (((BackgroundTile)bt).difx * gridus), mapPositionY - (((BackgroundTile)bt).dify * gridus))
                 );
             }
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-            {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left){
+                /*
                 Control control = (Control)sender;
-                if (control.Capture)
-                {
+                if (control.Capture){
                     control.Capture = false;
                 }
-                if (control.ClientRectangle.Contains(e.Location))
-                {
-                    for(int x=0;x<dimsX;x++){
-                        for(int y=0;y<dimsY;y++){
-                            ((SimpleRoom)sr).setImage(((int)Math.Floor((Decimal)e.Location.X / gridus)),((int)Math.Floor((Decimal)e.Location.Y / gridus)),new Point(tilePositionXO+x,tilePositionXF+y));
+                if (control.ClientRectangle.Contains(e.Location)){
+                    for(int x=0;x<((BackgroundTile)bt).difx;x++){
+                        for(int y=0;y<((BackgroundTile)bt).dify;y++){
+                            ((SimpleRoom)sr).setImage(
+                                ((int)Math.Floor((Decimal)e.Location.X / gridus)),
+                                ((int)Math.Floor((Decimal)e.Location.Y / gridus)),
+                                new Point(tilePositionXO+x,tilePositionXF+y)
+                            );
                         }
                     }
                     pb2.Image = ((SimpleRoom)sr).getSimpleRoomImage((BackgroundTile)bt);
-                }
+                }*/
             }
         }
 
         private void pb2_MouseClick(object sender, MouseEventArgs e){
-            for (int x = 0; x < dimsX; x++)
-            {
-                for (int y = 0; y < dimsY; y++)
-                {
-                    ((SimpleRoom)sr).setImage(((int)Math.Floor((Decimal)e.Location.X / gridus)), ((int)Math.Floor((Decimal)e.Location.Y / gridus)), new Point(tilePositionXO + x, tilePositionXF + y));
+            pb2.Image = setImage();/*(sr as SimpleRoom).setImage(
+                (int)Math.Floor((Decimal)e.Location.X / gridus), 
+                (int)Math.Floor((Decimal)e.Location.Y / gridus), 
+                (bt as BackgroundTile)
+            );*/
+            (sr as SimpleRoom).tuneada = pb2.Image as Bitmap;
+            for (int x = 0; x < ((BackgroundTile)bt).difx; x++){
+                for (int y = 0; y < ((BackgroundTile)bt).dify; y++){
+                    ((SimpleRoom)sr).setImage(
+                        ((int)Math.Floor((Decimal)e.Location.X / gridus)),
+                        ((int)Math.Floor((Decimal)e.Location.Y / gridus)),
+                        new Point(tilePositionXO + x, tilePositionXF + y)
+                    );
                 }
             }
-            pb2.Image = ((SimpleRoom)sr).getSimpleRoomImage((BackgroundTile)bt);
         }
 
-        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e){
+            try{
                 Project.SaveProject();
                 MessageBox.Show("El proyecto se ha guardado.");
             }
-            catch
-            {
+            catch{
                 MessageBox.Show("Ocurrió un error al guardar el proyecto.");
             }
+        }
+
+        public Bitmap setImage(){
+            Graphics mapArea = Graphics.FromImage(bp);
+            Image i = (bt as BackgroundTile).getSelectedImage();
+            if (i != null)
+            {
+                mapArea.DrawImage(
+                    i,
+                    new Point(mapPositionX - (((BackgroundTile)bt).difx * gridus), mapPositionY - (((BackgroundTile)bt).dify * gridus))
+                );
+            }
+            (sr as SimpleRoom).setImage(pb2.Image);
+            return bp;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         public int tWidth, tHeight;
         public Point inicio, final;
         public Image img;
-        int difx, dify;
+        public int difx, dify;
 
         public BackgroundTile(String url, int tw, int th) {
             tWidth = tw;
@@ -31,10 +31,10 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             return (Image)img.Clone();
         }
         public Image getSelectedImage() {
+            Bitmap testu = img as Bitmap;
             if(difx>0&&difx>0){
                 try
                 {
-                    Bitmap testu = img as Bitmap;
                     return testu.Clone(
                         new Rectangle(new Point(inicio.X * tWidth, inicio.Y * tHeight),
                         new Size(tWidth * difx, tHeight * dify)),
@@ -45,7 +45,32 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                     MessageBox.Show("drawable: \n" + inicio.X + "," + inicio.Y + " " + difx + "," + dify);
                 }
             }
-            return null;
+            return testu.Clone(
+                new Rectangle(new Point(inicio.X * tWidth, inicio.Y * tHeight),
+                new Size(tWidth, tHeight)),
+                testu.PixelFormat
+            );
+        }
+
+        public Image getSelectedImage(Point a){
+            Bitmap testu = img as Bitmap;
+            try{
+                MessageBox.Show("drawable: \n" + a.X + "," + a.Y);
+                return testu.Clone(
+                    new Rectangle(new Point(a.X, a.Y),
+                    new Size(tWidth, tHeight)),
+                    testu.PixelFormat
+                );
+            }
+            catch (Exception ex){
+                MessageBox.Show("drawable: \n" + inicio.X + "," + inicio.Y + " " + difx + "," + dify);
+                return testu.Clone(
+                    new Rectangle(new Point(0, 0),
+                    new Size(tWidth, tHeight)),
+                    testu.PixelFormat
+                );
+            }
+            
         }
 
         public void setSelection(Point inicio,Point final) {

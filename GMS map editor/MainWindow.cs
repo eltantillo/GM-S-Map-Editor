@@ -108,11 +108,11 @@ namespace GMSMapEditor
                     tilePositionXO = ((BackgroundTile)bt).positionX(e.Location.X);
                     tilePositionYO = ((BackgroundTile)bt).positionY(e.Location.Y);
                     clicked = true;
+                    pb_MouseMove(sender, e);
                     ((BackgroundTile)bt).setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXO, tilePositionYO));
                 }
             }
         }
-
 
         private void pb_MouseMove(object sender, MouseEventArgs e)
         {
@@ -139,6 +139,7 @@ namespace GMSMapEditor
                     ((BackgroundTile)bt).setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXF, tilePositionYF));
 
                     pb.Image = ((BackgroundTile)bt).drawRectangle();
+                    pb.Refresh();
                 }
             }
         }

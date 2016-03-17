@@ -55,8 +55,8 @@ namespace GMSMapEditor{
                 clicked = false;
             }
             else{
-                tilePositionXO = ((BackgroundTile)bt).positionX(e.Location.X);
-                tilePositionYO = ((BackgroundTile)bt).positionY(e.Location.Y);
+                tilePositionXO = ((BackgroundTile)bt).simplificacion(e.Location.X);
+                tilePositionYO = ((BackgroundTile)bt).simplificacion(e.Location.Y);
                 clicked = true;
                 ((BackgroundTile)bt).setSelection(new Point(tilePositionXO,tilePositionYO),new Point(tilePositionXO,tilePositionYO));
             }
@@ -74,8 +74,8 @@ namespace GMSMapEditor{
                     if (tilePositionYF != (int)Math.Floor((Decimal)e.Location.Y / 32)){
                         pb.Image = ((BackgroundTile)bt).getClonedImage();
                     }
-                    tilePositionXF = ((BackgroundTile)bt).positionX(e.Location.X);
-                    tilePositionYF = ((BackgroundTile)bt).positionY(e.Location.Y);
+                    tilePositionXF = ((BackgroundTile)bt).simplificacion(e.Location.X);
+                    tilePositionYF = ((BackgroundTile)bt).simplificacion(e.Location.Y);
 
                     ((BackgroundTile)bt).setSelection(new Point(tilePositionXO,tilePositionYO),new Point(tilePositionXF,tilePositionYF));
 

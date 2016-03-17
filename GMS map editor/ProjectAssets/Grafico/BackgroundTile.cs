@@ -117,11 +117,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         }
 
         // simplificador //
-        public int positionX(int mouseX) {
-            return (int)Math.Floor((Decimal)mouseX / tWidth);
-        }
-        public int positionY(int mouseY){
-            return (int)Math.Floor((Decimal)mouseY / tHeight);
+        public int simplificacion(int mouse) {
+            return ((int)Math.Floor((Decimal)mouse) / tWidth);
         }
     }
 }

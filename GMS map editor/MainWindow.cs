@@ -149,10 +149,12 @@ namespace GMSMapEditor
             if (mapPositionX != ((int)Math.Floor((Decimal)e.Location.X / gridus) * gridus) + gridus)
             {
                 pb2.Image = (Image)((SimpleRoom)sr).tuneada.Clone();
+                pb2.Refresh();
             }
             if (mapPositionY != ((int)Math.Floor((Decimal)e.Location.Y / gridus) * gridus) + gridus)
             {
                 pb2.Image = (Image)((SimpleRoom)sr).tuneada.Clone();
+                pb2.Refresh();
             }
 
             mapPositionX = ((int)Math.Floor((Decimal)e.Location.X / gridus) * gridus) + gridus;

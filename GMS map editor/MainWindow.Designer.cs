@@ -40,10 +40,10 @@
             this.roomSettingsTab = new System.Windows.Forms.TabControl();
             this.tilesTab = new System.Windows.Forms.TabPage();
             this.div_left = new System.Windows.Forms.Panel();
-            this.pb = new System.Windows.Forms.PictureBox();
+            this.tileBox = new System.Windows.Forms.PictureBox();
             this.objectsTab = new System.Windows.Forms.TabPage();
             this.div_center = new System.Windows.Forms.Panel();
-            this.pb2 = new System.Windows.Forms.PictureBox();
+            this.mapBox = new System.Windows.Forms.PictureBox();
             this.resourcesTabs = new System.Windows.Forms.TabControl();
             this.roomsTab = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -77,9 +77,9 @@
             this.roomSettingsTab.SuspendLayout();
             this.tilesTab.SuspendLayout();
             this.div_left.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tileBox)).BeginInit();
             this.div_center.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapBox)).BeginInit();
             this.resourcesTabs.SuspendLayout();
             this.roomsTab.SuspendLayout();
             this.menuBar.SuspendLayout();
@@ -214,8 +214,8 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.div_left.AutoScroll = true;
-            this.div_left.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.div_left.Controls.Add(this.pb);
+            this.div_left.BackColor = System.Drawing.SystemColors.Window;
+            this.div_left.Controls.Add(this.tileBox);
             this.div_left.Location = new System.Drawing.Point(0, 0);
             this.div_left.Margin = new System.Windows.Forms.Padding(0);
             this.div_left.Name = "div_left";
@@ -225,14 +225,14 @@
             // 
             // pb
             // 
-            this.pb.Location = new System.Drawing.Point(3, 182);
-            this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(0, 0);
-            this.pb.TabIndex = 2;
-            this.pb.TabStop = false;
-            this.pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
-            this.pb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
-            this.pb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            this.tileBox.Location = new System.Drawing.Point(3, 182);
+            this.tileBox.Name = "pb";
+            this.tileBox.Size = new System.Drawing.Size(0, 0);
+            this.tileBox.TabIndex = 2;
+            this.tileBox.TabStop = false;
+            this.tileBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
+            this.tileBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb_MouseMove);
+            this.tileBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             // 
             // objectsTab
             // 
@@ -251,7 +251,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.div_center.AutoScroll = true;
             this.div_center.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.div_center.Controls.Add(this.pb2);
+            this.div_center.Controls.Add(this.mapBox);
             this.div_center.Location = new System.Drawing.Point(0, 0);
             this.div_center.Name = "div_center";
             this.div_center.Size = new System.Drawing.Size(594, 339);
@@ -259,14 +259,14 @@
             // 
             // pb2
             // 
-            this.pb2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pb2.Location = new System.Drawing.Point(3, 184);
-            this.pb2.Name = "pb2";
-            this.pb2.Size = new System.Drawing.Size(0, 0);
-            this.pb2.TabIndex = 3;
-            this.pb2.TabStop = false;
-            this.pb2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseClick);
-            this.pb2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseMove);
+            this.mapBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.mapBox.Location = new System.Drawing.Point(3, 184);
+            this.mapBox.Name = "pb2";
+            this.mapBox.Size = new System.Drawing.Size(0, 0);
+            this.mapBox.TabIndex = 3;
+            this.mapBox.TabStop = false;
+            this.mapBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseClick);
+            this.mapBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseMove);
             // 
             // resourcesTabs
             // 
@@ -467,9 +467,9 @@
             this.roomSettingsTab.ResumeLayout(false);
             this.tilesTab.ResumeLayout(false);
             this.div_left.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tileBox)).EndInit();
             this.div_center.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mapBox)).EndInit();
             this.resourcesTabs.ResumeLayout(false);
             this.roomsTab.ResumeLayout(false);
             this.menuBar.ResumeLayout(false);
@@ -512,9 +512,9 @@
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Panel div_left;
-        private System.Windows.Forms.PictureBox pb;
+        private System.Windows.Forms.PictureBox tileBox;
         private System.Windows.Forms.Panel div_center;
-        private System.Windows.Forms.PictureBox pb2;
+        private System.Windows.Forms.PictureBox mapBox;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripButton toggleProjectFiles;
 

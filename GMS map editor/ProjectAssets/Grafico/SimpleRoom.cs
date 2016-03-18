@@ -14,6 +14,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         public Bitmap original;
         public Bitmap tuneada;
         public Point [][]p;
+        public static int CONTEXT_W = 1;
+        public static int CONTEXT_H = 2;
 
         public SimpleRoom(int _w,int _h, int _tw, int _th) {
             w = _w;
@@ -28,7 +30,6 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             }
         }
         public void setImage(int x,int y,Point ps) {
-            MessageBox.Show(x+","+y+" "+ps.X+","+ps.Y);
             p[y][x] = ps;
         }
         public void echoMatrix() {
@@ -41,7 +42,6 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             }
             MessageBox.Show(p3);
         }
-
         public void setImage(Image i){
             Bitmap bp = tuneada as Bitmap;
             Graphics mapArea = Graphics.FromImage(bp);
@@ -64,6 +64,10 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             }
             //(sr as SimpleRoom).setImage(pb2.Image);
             return tuneada;
+        }
+
+        public int toGrid(int mouse, int opc) {
+            return ((int)Math.Floor((Decimal)mouse / (opc == 1 ? tw : th)) * (opc == 1 ? tw : th)) + (opc == 1 ? tw : th);
         }
 
     }

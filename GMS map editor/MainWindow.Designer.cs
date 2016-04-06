@@ -254,7 +254,7 @@
             this.div_center.Controls.Add(this.mapBox);
             this.div_center.Location = new System.Drawing.Point(0, 0);
             this.div_center.Name = "div_center";
-            this.div_center.Size = new System.Drawing.Size(597, 339);
+            this.div_center.Size = new System.Drawing.Size(594, 339);
             this.div_center.TabIndex = 3;
             // 
             // pb2
@@ -278,7 +278,7 @@
             this.resourcesTabs.Location = new System.Drawing.Point(0, 0);
             this.resourcesTabs.Name = "resourcesTabs";
             this.resourcesTabs.SelectedIndex = 0;
-            this.resourcesTabs.Size = new System.Drawing.Size(157, 341);
+            this.resourcesTabs.Size = new System.Drawing.Size(158, 341);
             this.resourcesTabs.TabIndex = 0;
             // 
             // roomsTab
@@ -288,7 +288,7 @@
             this.roomsTab.Location = new System.Drawing.Point(4, 22);
             this.roomsTab.Margin = new System.Windows.Forms.Padding(0);
             this.roomsTab.Name = "roomsTab";
-            this.roomsTab.Size = new System.Drawing.Size(149, 315);
+            this.roomsTab.Size = new System.Drawing.Size(150, 315);
             this.roomsTab.TabIndex = 0;
             this.roomsTab.Text = "Rooms";
             // 
@@ -308,7 +308,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(149, 315);
+            this.tabPage4.Size = new System.Drawing.Size(150, 315);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "tabPage4";
             // 

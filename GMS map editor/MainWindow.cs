@@ -153,15 +153,16 @@ namespace GMSMapEditor
                 }
             }
         }
-
         private void pb2_MouseMove(object sender, MouseEventArgs e){
             // if move //
             if (mapPositionX != ((int)Math.Floor((Decimal)e.Location.X / tileWH) * tileWH) + tileWH){
                 // change mapbox image //
                 mapBox.Image = (Image) sr.tuneada.Clone();
+                mapBox.Refresh();
             }
             if (mapPositionY != ((int)Math.Floor((Decimal)e.Location.Y / tileWH) * tileWH) + tileWH){
                 mapBox.Image = (Image)sr.tuneada.Clone();
+                mapBox.Refresh();
             }
 
             mapPositionX = ((int)Math.Floor((Decimal)e.Location.X / tileWH) * tileWH) + tileWH;

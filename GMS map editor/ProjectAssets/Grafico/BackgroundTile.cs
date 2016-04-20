@@ -32,7 +32,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         }
         public Image getSelectedImage() {
             Bitmap testu = img as Bitmap;
-            if(difx>0&&difx>0){
+            if(difx > 0 && dify > 0){
                 try
                 {
                     return testu.Clone(

@@ -12,16 +12,10 @@ using GMSMapEditor.ProjectAssets;
 using GMSMapEditor.ProjectAssets.Grafico;
 using System.Drawing.Drawing2D;
 
-<<<<<<< HEAD
-
 namespace GMSMapEditor
 {
     public partial class MainWindow : Form
     {
-=======
-namespace GMSMapEditor{
-    public partial class MainWindow : Form{
->>>>>>> 5c55da1fe3f5e92951bef2c07919bdd43cf6a4c5
         int tilePositionXO, tilePositionYO, tilePositionXF, tilePositionYF;
         int mapPositionX, mapPositionY;
         int tileWH;

@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using GMSMapEditor.ProjectAssets;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace GMSMapEditor.Classes
 {
@@ -16,7 +17,7 @@ namespace GMSMapEditor.Classes
         public static string projectFolder;
         public static Assets assets;
 
-        public static void OpenProject()
+        public static void OpenProject(ListBox roomsList)
         {
             OpenFileDialog projectFile = new OpenFileDialog();
             projectFile.Filter = "GameMaker: Studio Project Files|*.project.gmx";
@@ -34,7 +35,11 @@ namespace GMSMapEditor.Classes
                         assets.backgrounds.Add(new ProjectAssets.Backgrounds.Background());
                         int num = assets.backgrounds.Count - 1;
                         assets.backgrounds[num].BackgroundRead(reader.ReadElementContentAsString());
+                        assets.backgrounds[num].image = Image.FromFile(projectFolder + "background\\" + assets.backgrounds[num].data);
                     }
+                }
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+                {
                     while (reader.ReadToFollowing("room"))
                     {
                         assets.rooms.Add(new ProjectAssets.Rooms.Room());
@@ -43,6 +48,13 @@ namespace GMSMapEditor.Classes
                     }
                 }
 
+                List<string> _rooms = new List<string>();
+                foreach (ProjectAssets.Rooms.Room room in Project.assets.rooms)
+                {
+                    _rooms.Add(room.name);
+                }
+                roomsList.DataSource = null;
+                roomsList.DataSource = _rooms;
             }
         }
 

@@ -46,6 +46,7 @@
             this.mapBox = new System.Windows.Forms.PictureBox();
             this.resourcesTabs = new System.Windows.Forms.TabControl();
             this.roomsTab = new System.Windows.Forms.TabPage();
+            this.roomsList = new System.Windows.Forms.ListBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.menuBar = new System.Windows.Forms.MenuStrip();
@@ -223,10 +224,10 @@
             this.div_left.TabIndex = 2;
             this.div_left.MouseClick += new System.Windows.Forms.MouseEventHandler(this.div_left_MouseClick);
             // 
-            // pb
+            // tileBox
             // 
             this.tileBox.Location = new System.Drawing.Point(3, 182);
-            this.tileBox.Name = "pb";
+            this.tileBox.Name = "tileBox";
             this.tileBox.Size = new System.Drawing.Size(0, 0);
             this.tileBox.TabIndex = 2;
             this.tileBox.TabStop = false;
@@ -254,14 +255,14 @@
             this.div_center.Controls.Add(this.mapBox);
             this.div_center.Location = new System.Drawing.Point(0, 0);
             this.div_center.Name = "div_center";
-            this.div_center.Size = new System.Drawing.Size(594, 339);
+            this.div_center.Size = new System.Drawing.Size(596, 339);
             this.div_center.TabIndex = 3;
             // 
-            // pb2
+            // mapBox
             // 
             this.mapBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.mapBox.Location = new System.Drawing.Point(3, 184);
-            this.mapBox.Name = "pb2";
+            this.mapBox.Name = "mapBox";
             this.mapBox.Size = new System.Drawing.Size(0, 0);
             this.mapBox.TabIndex = 3;
             this.mapBox.TabStop = false;
@@ -278,19 +279,34 @@
             this.resourcesTabs.Location = new System.Drawing.Point(0, 0);
             this.resourcesTabs.Name = "resourcesTabs";
             this.resourcesTabs.SelectedIndex = 0;
-            this.resourcesTabs.Size = new System.Drawing.Size(158, 341);
+            this.resourcesTabs.Size = new System.Drawing.Size(160, 341);
             this.resourcesTabs.TabIndex = 0;
             // 
             // roomsTab
             // 
             this.roomsTab.BackColor = System.Drawing.Color.Transparent;
+            this.roomsTab.Controls.Add(this.roomsList);
             this.roomsTab.Controls.Add(this.treeView1);
             this.roomsTab.Location = new System.Drawing.Point(4, 22);
             this.roomsTab.Margin = new System.Windows.Forms.Padding(0);
             this.roomsTab.Name = "roomsTab";
-            this.roomsTab.Size = new System.Drawing.Size(150, 315);
+            this.roomsTab.Size = new System.Drawing.Size(152, 315);
             this.roomsTab.TabIndex = 0;
             this.roomsTab.Text = "Rooms";
+            // 
+            // roomsList
+            // 
+            this.roomsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.roomsList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.roomsList.FormattingEnabled = true;
+            this.roomsList.Location = new System.Drawing.Point(-1, 3);
+            this.roomsList.Margin = new System.Windows.Forms.Padding(0);
+            this.roomsList.Name = "roomsList";
+            this.roomsList.Size = new System.Drawing.Size(149, 312);
+            this.roomsList.TabIndex = 1;
+            this.roomsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.roomsList_MouseDoubleClick);
             // 
             // treeView1
             // 
@@ -308,7 +324,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(150, 315);
+            this.tabPage4.Size = new System.Drawing.Size(152, 315);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "tabPage4";
             // 
@@ -517,6 +533,7 @@
         private System.Windows.Forms.PictureBox mapBox;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripButton toggleProjectFiles;
+        private System.Windows.Forms.ListBox roomsList;
 
     }
 }

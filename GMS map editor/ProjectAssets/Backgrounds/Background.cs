@@ -6,6 +6,7 @@ using System.Xml;
 using System.IO;
 using GMSMapEditor.Classes;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace GMSMapEditor.ProjectAssets.Backgrounds
 {
@@ -28,6 +29,7 @@ namespace GMSMapEditor.ProjectAssets.Backgrounds
         public int width;
         public int height;
         public string data;
+        public Image image;
 
         public void BackgroundRead(string xmlFile)
         {

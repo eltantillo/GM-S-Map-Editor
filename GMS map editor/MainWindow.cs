@@ -12,6 +12,7 @@ using GMSMapEditor.ProjectAssets;
 using GMSMapEditor.ProjectAssets.Grafico;
 using System.Drawing.Drawing2D;
 
+
 namespace GMSMapEditor
 {
     public partial class MainWindow : Form
@@ -45,7 +46,7 @@ namespace GMSMapEditor
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Project.OpenProject();
+            Project.OpenProject(roomsList);
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace GMSMapEditor
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            Project.OpenProject();
+            Project.OpenProject(roomsList);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -229,6 +230,15 @@ namespace GMSMapEditor
             }
             sr.setImage(mapBox.Image);
             return canvas;
+        }
+
+        private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = roomsList.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches)
+            {
+                MessageBox.Show(Project.assets.rooms[index].ToString());
+            }
         }
     }
 }

@@ -61,21 +61,11 @@
     <Compile Include="ProjectAssets\Rooms\Room.cs" />
     <Compile Include="ProjectAssets\Rooms\Tile.cs" />
     <Compile Include="ProjectAssets\Rooms\View.cs" />
-    <Compile Include="InterfazBasica.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InterfazBasica.Designer.cs">
-      <DependentUpon>InterfazBasica.cs</DependentUpon>
-    </Compile>
     <Compile Include="ProjectAssets\Grafico\BackgroundTile.cs" />
     <Compile Include="ProjectAssets\Grafico\SimpleRoom.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="InterfazBasica.resx">
-      <DependentUpon>InterfazBasica.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

@@ -12,8 +12,10 @@ using GMSMapEditor.ProjectAssets;
 using GMSMapEditor.ProjectAssets.Grafico;
 using System.Drawing.Drawing2D;
 
-namespace GMSMapEditor{
-    public partial class MainWindow : Form{
+namespace GMSMapEditor
+{
+    public partial class MainWindow : Form
+    {
         int tilePositionXO, tilePositionYO, tilePositionXF, tilePositionYF;
         int mapPositionX, mapPositionY;
         int tileWH;
@@ -21,7 +23,6 @@ namespace GMSMapEditor{
         private BackgroundTile bt;
         private SimpleRoom sr;
         bool clicked;
-        Bitmap canvas;
 
         public MainWindow(){
             InitializeComponent();
@@ -42,7 +43,7 @@ namespace GMSMapEditor{
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Project.OpenProject();
+            Project.OpenProject(roomsList);
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,7 +58,7 @@ namespace GMSMapEditor{
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            Project.OpenProject();
+            Project.OpenProject(roomsList);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -87,9 +88,6 @@ namespace GMSMapEditor{
             mapBox.Location = new Point(0, 0);
             mapBox.Height = mapSizeSimple * tileWH;
             mapBox.Width = mapSizeSimple * tileWH;
-            
-            // Bitmap to draw all graphics //
-            canvas = new Bitmap((mapSizeSimple * tileWH) + 1, (mapSizeSimple * tileWH) + 1);
         }
 
         private void div_left_MouseClick(object sender, MouseEventArgs e){
@@ -148,6 +146,15 @@ namespace GMSMapEditor{
         {
             mapPositionX = sr.toGrid(e.Location.X, SimpleRoom.TO_X);
             mapPositionY = sr.toGrid(e.Location.Y, SimpleRoom.TO_Y);
+        }
+
+        private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = roomsList.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches)
+            {
+                MessageBox.Show(Project.assets.rooms[index].ToString());
+            }
         }
     }
 }

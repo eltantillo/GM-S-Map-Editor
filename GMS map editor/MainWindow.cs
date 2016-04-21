@@ -73,13 +73,8 @@ namespace GMSMapEditor
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e){
             tileWH = 32;
             int mapSizeSimple = 32;
-            
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.Multiselect = false;
-            openFileDialog1.ShowDialog();
 
-            bt = new BackgroundTile(openFileDialog1.FileName, tileWH, tileWH);
+            bt = new BackgroundTile(Project.assets.backgrounds[0].image, Project.assets.backgrounds[0].name, tileWH, tileWH);
             
             ((BackgroundTile)bt).drawBackgroundTile(tileBox);
 

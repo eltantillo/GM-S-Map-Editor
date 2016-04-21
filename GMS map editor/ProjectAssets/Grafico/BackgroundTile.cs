@@ -13,14 +13,15 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         public Point inicio, final;
         public Image img;
         public int difx, dify;
+        public String backgroundName;
 
-        public BackgroundTile(Image url, int tw, int th)
-        {
+        public BackgroundTile(Image url, String name, int tw, int th){
             tWidth = tw;
             tHeight = th;
             img = url;
             width = img.Width;
             height = img.Height;
+            backgroundName = name;
         }
         public BackgroundTile(String url, int tw, int th) {
             tWidth = tw;

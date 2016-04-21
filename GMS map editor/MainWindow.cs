@@ -142,17 +142,14 @@ namespace GMSMapEditor
             sr.click(mapBox, mapPositionX, mapPositionY);
         }
 
-        private void mapBox_MouseMove(object sender, MouseEventArgs e)
-        {
+        private void mapBox_MouseMove(object sender, MouseEventArgs e){
             mapPositionX = sr.toGrid(e.Location.X, SimpleRoom.TO_X);
             mapPositionY = sr.toGrid(e.Location.Y, SimpleRoom.TO_Y);
         }
 
-        private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
+        private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){
             int index = roomsList.IndexFromPoint(e.Location);
-            if (index != System.Windows.Forms.ListBox.NoMatches)
-            {
+            if (index != System.Windows.Forms.ListBox.NoMatches){
                 MessageBox.Show(Project.assets.rooms[index].ToString());
             }
         }

@@ -44,6 +44,18 @@ namespace GMSMapEditor
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Project.OpenProject(roomsList);
+            tileWH = 32;
+            int mapSizeSimple = 32;
+
+            bt = new BackgroundTile(Project.assets.backgrounds[0].image, Project.assets.backgrounds[0].name, tileWH, tileWH);
+
+            ((BackgroundTile)bt).drawBackgroundTile(tileBox);
+
+            sr = new SimpleRoom(mapSizeSimple, mapSizeSimple, tileWH, tileWH);
+
+            mapBox.Location = new Point(0, 0);
+            mapBox.Height = mapSizeSimple * tileWH;
+            mapBox.Width = mapSizeSimple * tileWH;
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -71,18 +83,7 @@ namespace GMSMapEditor
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e){
-            /*tileWH = 32;
-            int mapSizeSimple = 32;
-
-            bt = new BackgroundTile(Project.assets.backgrounds[0].image, Project.assets.backgrounds[0].name, tileWH, tileWH);
-            
-            ((BackgroundTile)bt).drawBackgroundTile(tileBox);
-
-            sr = new SimpleRoom(mapSizeSimple, mapSizeSimple, tileWH, tileWH);
-
-            mapBox.Location = new Point(0, 0);
-            mapBox.Height = mapSizeSimple * tileWH;
-            mapBox.Width = mapSizeSimple * tileWH;*/
+            /**/
         }
 
         private void div_left_MouseClick(object sender, MouseEventArgs e){

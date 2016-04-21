@@ -47,9 +47,14 @@ namespace GMSMapEditor
             tileWH = 32;
             int mapSizeSimple = 32;
 
-            bt = new BackgroundTile(Project.assets.backgrounds[0].image, Project.assets.backgrounds[0].name, tileWH, tileWH);
-
-            ((BackgroundTile)bt).drawBackgroundTile(tileBox);
+            foreach (ProjectAssets.Backgrounds.Background background in Project.assets.backgrounds)
+            {
+                if (background.istileset){
+                    bt = new BackgroundTile(background.image, Project.assets.backgrounds[0].name, tileWH, tileWH);
+                    ((BackgroundTile)bt).drawBackgroundTile(tileBox);
+                    break;
+                }
+            }
 
             sr = new SimpleRoom(mapSizeSimple, mapSizeSimple, tileWH, tileWH);
 
@@ -141,6 +146,7 @@ namespace GMSMapEditor
         private void mapBox_MouseMove(object sender, MouseEventArgs e){
             mapPositionX = sr.toGrid(e.Location.X, SimpleRoom.TO_X);
             mapPositionY = sr.toGrid(e.Location.Y, SimpleRoom.TO_Y);
+            //roomsList.
         }
 
         private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){

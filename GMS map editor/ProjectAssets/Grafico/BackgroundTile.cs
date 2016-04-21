@@ -88,12 +88,14 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         public Bitmap drawRectangle() {
             Bitmap bp = img.Clone() as Bitmap;
             Graphics drawArea = Graphics.FromImage(bp);
-            Pen blackpen = new Pen(Color.White);
-            blackpen.Width = 3;
+            Pen blackpen = new Pen(Color.Black);
+            Pen whitepen = new Pen(Color.White);
+            blackpen.Width = 4;
+            whitepen.Width = 2;
 
             // ------>
             drawArea.DrawLine(blackpen,
-                new Point(inicio.X * tWidth - 1, inicio.Y * tHeight),
+                new Point(inicio.X * tWidth - 2, inicio.Y * tHeight),
                 new Point(final.X * tWidth + 2, inicio.Y * tHeight)
             );
             // |
@@ -113,8 +115,39 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                 new Point(inicio.X * tWidth, final.Y * tHeight + 2),
                 new Point(inicio.X * tWidth, inicio.Y * tHeight)
             );
+
+            // ------>
+            drawArea.DrawLine(blackpen,
+                new Point(inicio.X * tWidth - 1, inicio.Y * tHeight),
+                new Point(final.X * tWidth + 2, inicio.Y * tHeight)
+            );
+
+            // White inner color
+            // |
+            // v
+            drawArea.DrawLine(whitepen,
+                new Point(final.X * tWidth, inicio.Y * tHeight),
+                new Point(final.X * tWidth, final.Y * tHeight + 1)
+            );
+            // <-------
+            drawArea.DrawLine(whitepen,
+                new Point(final.X * tWidth, final.Y * tHeight),
+                new Point(inicio.X * tWidth - 1, final.Y * tHeight)
+            );
+            //  ^
+            //  |
+            drawArea.DrawLine(whitepen,
+                new Point(inicio.X * tWidth, final.Y * tHeight + 1),
+                new Point(inicio.X * tWidth, inicio.Y * tHeight)
+            );
             difx = (final.X > inicio.X ? final.X - inicio.X : inicio.X - final.X);
             dify = (final.Y > inicio.Y ? final.Y - inicio.Y : inicio.Y - final.Y);
+
+            // ------>
+            drawArea.DrawLine(whitepen,
+                new Point(inicio.X * tWidth - 1, inicio.Y * tHeight),
+                new Point(final.X * tWidth + 1, inicio.Y * tHeight)
+            );
             return bp;
         }
 

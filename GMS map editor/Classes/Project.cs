@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using GMSMapEditor.ProjectAssets;
 using System.Windows.Forms;
 using System.Drawing;
+using GMSMapEditor.ProjectAssets.Grafico;
 
 namespace GMSMapEditor.Classes
 {
@@ -16,6 +17,13 @@ namespace GMSMapEditor.Classes
         public static string projectName;
         public static string projectFolder;
         public static Assets assets;
+        public static List<BackgroundTile> bts;
+        public static List<SimpleRoom> srs;
+
+        static Project(){
+            bts = new List<BackgroundTile>();
+            srs = new List<SimpleRoom>();
+        }
 
         public static void OpenProject(ListBox roomsList)
         {
@@ -55,6 +63,17 @@ namespace GMSMapEditor.Classes
                 }
                 roomsList.DataSource = null;
                 roomsList.DataSource = _rooms;
+                foreach(GMSMapEditor.ProjectAssets.Rooms.Room r in assets.rooms){
+                    srs.Add(new SimpleRoom(r.width, r.height,r.tiles));
+                }
+                foreach(GMSMapEditor.ProjectAssets.Backgrounds.Background t in assets.backgrounds){
+                    if(t.istileset){
+                        bts.Add(new BackgroundTile(t.image,t.name,t.tilewidth,t.tileheight));
+                    }
+                }
+                foreach(SimpleRoom sr in srs){
+                    sr.roomIni(bts);
+                }
             }
         }
 

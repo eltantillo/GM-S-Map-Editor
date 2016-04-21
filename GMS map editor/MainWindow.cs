@@ -19,10 +19,8 @@ namespace GMSMapEditor
         int tilePositionXO, tilePositionYO, tilePositionXF, tilePositionYF;
         int mapPositionX, mapPositionY;
         int tileWH;
-
-        private BackgroundTile bt;
-        private SimpleRoom sr;
         bool clicked;
+        int roomIndex;
 
         public MainWindow(){
             InitializeComponent();
@@ -45,17 +43,18 @@ namespace GMSMapEditor
         {
             Project.OpenProject(roomsList);
             tileWH = 32;
-            int mapSizeSimple = 32;
+            //int mapSizeSimple = 32;
 
-            bt = new BackgroundTile(Project.assets.backgrounds[0].image, Project.assets.backgrounds[0].name, tileWH, tileWH);
+            //bt = new BackgroundTile(Project.assets.backgrounds[0].image, Project.assets.backgrounds[0].name, tileWH, tileWH);
 
-            ((BackgroundTile)bt).drawBackgroundTile(tileBox);
+            //((BackgroundTile)bt).drawBackgroundTile(tileBox);
 
-            sr = new SimpleRoom(mapSizeSimple, mapSizeSimple, tileWH, tileWH);
+            //sr = new SimpleRoom(mapSizeSimple, mapSizeSimple, tileWH, tileWH);
+            Project.bts[0].drawBackgroundTile(tileBox);
 
             mapBox.Location = new Point(0, 0);
-            mapBox.Height = mapSizeSimple * tileWH;
-            mapBox.Width = mapSizeSimple * tileWH;
+            mapBox.Height = Project.srs[roomIndex].h;
+            mapBox.Width = Project.srs[roomIndex].w;
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -93,11 +92,11 @@ namespace GMSMapEditor
                 }
                 else{
                     // set new start position //
-                    tilePositionXO = bt.simplificacion(e.Location.X);
-                    tilePositionYO = bt.simplificacion(e.Location.Y);
+                    tilePositionXO = Project.bts[0].simplificacion(e.Location.X);
+                    tilePositionYO = Project.bts[0].simplificacion(e.Location.Y);
                     clicked = true;
                     //pb_MouseMove(sender, e);
-                    bt.setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXO, tilePositionYO));
+                    Project.bts[0].setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXO, tilePositionYO));
                 }
             }
         }
@@ -110,20 +109,20 @@ namespace GMSMapEditor
                 }
                 if (control.ClientRectangle.Contains(e.Location)){
                     if (tilePositionXF != (int)Math.Floor((Decimal)e.Location.X / 32)){
-                        tileBox.Image = bt.getClonedImage();
+                        tileBox.Image = Project.bts[0].getClonedImage();
                     }
                     if (tilePositionYF != (int)Math.Floor((Decimal)e.Location.Y / 32)){
-                        tileBox.Image = bt.getClonedImage();
+                        tileBox.Image = Project.bts[0].getClonedImage();
                     }
-                    
-                    tilePositionXF = bt.simplificacion(e.Location.X);
-                    tilePositionYF = bt.simplificacion(e.Location.Y);
 
-                    bt.setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXF, tilePositionYF));
+                    tilePositionXF = Project.bts[0].simplificacion(e.Location.X);
+                    tilePositionYF = Project.bts[0].simplificacion(e.Location.Y);
 
-                    tileBox.Image = bt.drawRectangle();
+                    Project.bts[0].setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXF, tilePositionYF));
+
+                    tileBox.Image = Project.bts[0].drawRectangle();
                     tileBox.Refresh();
-                    sr.updateSelected(bt.getSelectedImage());
+                    Project.srs[roomIndex].updateSelected(Project.bts[0].getSelectedImage());
                 }
             }
         }
@@ -131,22 +130,35 @@ namespace GMSMapEditor
 
 
         private void mapBox_Paint(object sender, PaintEventArgs e){
-            sr.update(mapBox, mapPositionX, mapPositionY);
+            Project.srs[roomIndex].update(mapBox, mapPositionX, mapPositionY);
         }
 
         private void mapBox_Click(object sender, EventArgs e){
-            sr.click(mapBox, mapPositionX, mapPositionY);
+            Project.srs[roomIndex].click(mapBox, mapPositionX, mapPositionY);
         }
 
         private void mapBox_MouseMove(object sender, MouseEventArgs e){
-            mapPositionX = sr.toGrid(e.Location.X, SimpleRoom.TO_X);
-            mapPositionY = sr.toGrid(e.Location.Y, SimpleRoom.TO_Y);
+            mapPositionX = Project.srs[roomIndex].toGrid(e.Location.X, SimpleRoom.TO_X);
+            mapPositionY = Project.srs[roomIndex].toGrid(e.Location.Y, SimpleRoom.TO_Y);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left && tileBox.Image != null)
+            {
+                Control control = (Control)sender;
+                if (control.Capture)
+                {
+                    control.Capture = false;
+                }
+                if (control.ClientRectangle.Contains(e.Location)){
+                    Project.srs[roomIndex].click(mapBox, mapPositionX, mapPositionY);
+                }
+            }
         }
 
         private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){
             int index = roomsList.IndexFromPoint(e.Location);
             if (index != System.Windows.Forms.ListBox.NoMatches){
-                MessageBox.Show(Project.assets.rooms[index].ToString());
+                //MessageBox.Show(Project.assets.rooms[index].ToString());
+                //sr = new SimpleRoom((Project.assets.rooms[index].width / Project.assets.rooms[index].tiles[0].w), (Project.assets.rooms[index].height / Project.assets.rooms[index].tiles[0].h), Project.assets.rooms[index].tiles[0].w, Project.assets.rooms[index].tiles[0].h);
+                //sr.roomIni(Project.assets.rooms[index].tiles,Project.assets.backgrounds,mapBox);
             }
         }
     }

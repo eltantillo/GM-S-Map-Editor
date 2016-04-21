@@ -86,10 +86,10 @@ namespace GMSMapEditor{
 
         private void pb2_MouseMove(object sender, MouseEventArgs e){
             if (mapPositionX != ((int)Math.Floor((Decimal)e.Location.X / gridus) * gridus)+gridus){
-                pb2.Image = (Image)((SimpleRoom)sr).tuneada.Clone();
+                //pb2.Image = (Image)((SimpleRoom)sr).tuneada.Clone();
             }
             if (mapPositionY != ((int)Math.Floor((Decimal)e.Location.Y / gridus) * gridus)+gridus){
-                pb2.Image = (Image)((SimpleRoom)sr).tuneada.Clone();
+                //pb2.Image = (Image)((SimpleRoom)sr).tuneada.Clone();
             }
             
             mapPositionX = ((int)Math.Floor((Decimal)e.Location.X / gridus) * gridus)+gridus;
@@ -125,11 +125,11 @@ namespace GMSMapEditor{
         }
 
         private void pb2_MouseClick(object sender, MouseEventArgs e){
-            pb2.Image = setImage();/*(sr as SimpleRoom).setImage(
+            /*pb2.Image = setImage();(sr as SimpleRoom).setImage(
                 (int)Math.Floor((Decimal)e.Location.X / gridus), 
                 (int)Math.Floor((Decimal)e.Location.Y / gridus), 
                 (bt as BackgroundTile)
-            );*/
+            );
             (sr as SimpleRoom).tuneada = pb2.Image as Bitmap;
             for (int x = 0; x < ((BackgroundTile)bt).difx; x++){
                 for (int y = 0; y < ((BackgroundTile)bt).dify; y++){
@@ -139,21 +139,8 @@ namespace GMSMapEditor{
                         new Point(tilePositionXO + x, tilePositionXF + y)
                     );
                 }
-            }
+            }*/
         }
 
-        public Bitmap setImage(){
-            Graphics mapArea = Graphics.FromImage(bp);
-            Image i = (bt as BackgroundTile).getSelectedImage();
-            if (i != null)
-            {
-                mapArea.DrawImage(
-                    i,
-                    new Point(mapPositionX - (((BackgroundTile)bt).difx * gridus), mapPositionY - (((BackgroundTile)bt).dify * gridus))
-                );
-            }
-            (sr as SimpleRoom).setImage(pb2.Image);
-            return bp;
-        }
     }
 }

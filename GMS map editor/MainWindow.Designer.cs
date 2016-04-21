@@ -255,7 +255,11 @@
             this.div_center.Controls.Add(this.mapBox);
             this.div_center.Location = new System.Drawing.Point(0, 0);
             this.div_center.Name = "div_center";
+<<<<<<< HEAD
             this.div_center.Size = new System.Drawing.Size(596, 339);
+=======
+            this.div_center.Size = new System.Drawing.Size(597, 339);
+>>>>>>> 5c55da1fe3f5e92951bef2c07919bdd43cf6a4c5
             this.div_center.TabIndex = 3;
             // 
             // mapBox
@@ -266,8 +270,9 @@
             this.mapBox.Size = new System.Drawing.Size(0, 0);
             this.mapBox.TabIndex = 3;
             this.mapBox.TabStop = false;
-            this.mapBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseClick);
-            this.mapBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pb2_MouseMove);
+            this.mapBox.Click += new System.EventHandler(this.mapBox_Click);
+            this.mapBox.Paint += new System.Windows.Forms.PaintEventHandler(this.mapBox_Paint);
+            this.mapBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapBox_MouseMove);
             // 
             // resourcesTabs
             // 
@@ -279,7 +284,11 @@
             this.resourcesTabs.Location = new System.Drawing.Point(0, 0);
             this.resourcesTabs.Name = "resourcesTabs";
             this.resourcesTabs.SelectedIndex = 0;
+<<<<<<< HEAD
             this.resourcesTabs.Size = new System.Drawing.Size(160, 341);
+=======
+            this.resourcesTabs.Size = new System.Drawing.Size(161, 341);
+>>>>>>> 5c55da1fe3f5e92951bef2c07919bdd43cf6a4c5
             this.resourcesTabs.TabIndex = 0;
             // 
             // roomsTab
@@ -290,7 +299,11 @@
             this.roomsTab.Location = new System.Drawing.Point(4, 22);
             this.roomsTab.Margin = new System.Windows.Forms.Padding(0);
             this.roomsTab.Name = "roomsTab";
+<<<<<<< HEAD
             this.roomsTab.Size = new System.Drawing.Size(152, 315);
+=======
+            this.roomsTab.Size = new System.Drawing.Size(153, 315);
+>>>>>>> 5c55da1fe3f5e92951bef2c07919bdd43cf6a4c5
             this.roomsTab.TabIndex = 0;
             this.roomsTab.Text = "Rooms";
             // 
@@ -324,7 +337,11 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+<<<<<<< HEAD
             this.tabPage4.Size = new System.Drawing.Size(152, 315);
+=======
+            this.tabPage4.Size = new System.Drawing.Size(153, 315);
+>>>>>>> 5c55da1fe3f5e92951bef2c07919bdd43cf6a4c5
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "tabPage4";
             // 

@@ -68,7 +68,6 @@
       <DependentUpon>InterfazBasica.cs</DependentUpon>
     </Compile>
     <Compile Include="ProjectAssets\Grafico\BackgroundTile.cs" />
-    <Compile Include="ProjectAssets\Grafico\SimpleLayer.cs" />
     <Compile Include="ProjectAssets\Grafico\SimpleRoom.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Program.cs" />

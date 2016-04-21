@@ -6,4 +6,16 @@ D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.Properties
 D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.csproj.GenerateResource.Cache
 D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.exe
 D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.pdb
+<<<<<<< HEAD
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.exe
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.pdb
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\bin\Debug\GMS map editor.exe
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\bin\Debug\GMS map editor.pdb
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.csprojResolveAssemblyReference.cache
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.InterfazBasica.resources
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.MainWindow.resources
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMSMapEditor.Properties.Resources.resources
+C:\Users\MarcoM\gitsave\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.csproj.GenerateResource.Cache
+=======
 D:\Projects\GM-S-Map-Editor\GMS map editor\obj\x86\Debug\GMS map editor.csprojResolveAssemblyReference.cache
+>>>>>>> 8f7575541861a282a7b52676b0bb99e738cb1abf

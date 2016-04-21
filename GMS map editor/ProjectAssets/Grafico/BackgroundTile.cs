@@ -23,13 +23,6 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             height = img.Height;
             backgroundName = name;
         }
-        public BackgroundTile(String url, int tw, int th) {
-            tWidth = tw;
-            tHeight = th;
-            img = Image.FromFile(url);
-            width = img.Width;
-            height = img.Height;
-        }
         public void drawBackgroundTile(PictureBox ib){
             ib.Image = (Image)img.Clone();
             ib.Height = height;

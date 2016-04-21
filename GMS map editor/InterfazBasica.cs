@@ -33,6 +33,7 @@ namespace GMSMapEditor{
         }
 
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e){
+            /*
             gridus = 32;
             int gridus2 = 50;
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -47,7 +48,7 @@ namespace GMSMapEditor{
             pb2.Location = new Point(0,0);
             pb2.Height = gridus2 * gridus;
             pb2.Width = gridus2 * gridus;
-            bp = new Bitmap((gridus2 * gridus)+1, (gridus2 * gridus)+1);
+            bp = new Bitmap((gridus2 * gridus)+1, (gridus2 * gridus)+1);*/
         }
 
         private void div_left_MouseClick(object sender, MouseEventArgs e){

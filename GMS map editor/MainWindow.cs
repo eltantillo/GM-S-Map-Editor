@@ -71,7 +71,7 @@ namespace GMSMapEditor
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e){
-            tileWH = 32;
+            /*tileWH = 32;
             int mapSizeSimple = 32;
             
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -87,7 +87,7 @@ namespace GMSMapEditor
 
             mapBox.Location = new Point(0, 0);
             mapBox.Height = mapSizeSimple * tileWH;
-            mapBox.Width = mapSizeSimple * tileWH;
+            mapBox.Width = mapSizeSimple * tileWH;*/
         }
 
         private void div_left_MouseClick(object sender, MouseEventArgs e){

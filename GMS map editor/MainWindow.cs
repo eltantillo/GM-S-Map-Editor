@@ -23,7 +23,6 @@ namespace GMSMapEditor
         private BackgroundTile bt;
         private SimpleRoom sr;
         bool clicked;
-        Bitmap canvas;
 
         public MainWindow(){
             InitializeComponent();
@@ -89,9 +88,6 @@ namespace GMSMapEditor
             mapBox.Location = new Point(0, 0);
             mapBox.Height = mapSizeSimple * tileWH;
             mapBox.Width = mapSizeSimple * tileWH;
-            
-            // Bitmap to draw all graphics //
-            canvas = new Bitmap((mapSizeSimple * tileWH) + 1, (mapSizeSimple * tileWH) + 1);
         }
 
         private void div_left_MouseClick(object sender, MouseEventArgs e){

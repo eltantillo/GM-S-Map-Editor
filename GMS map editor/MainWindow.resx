@@ -124,9 +124,10 @@
   <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACFSURBVDhPY2CAADZGBqZLQPwDB/7FyMC4C6hODKoegxIA
-        anyBSxKouQEofx2I7wDVqGJTR9AABgamCiCOAxryDGiAFboheA0AaowBanwHxA+A+BvUtSzIhhAwAKxU
-        FogVQBhowGsgLUCqAXD1UBeMGjAaiKB8Q910QCg7o2fzS6AiAJQ0AeDHNe0ztkq/AAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACHSURBVDhPY4ACNkYGpktA/AMH/sXIwLgLqE4MohwTCAAV
+        vYCyMQBQcwNQ/joQ3wFyVSGiqICgAQwMTBVAHAdU9wwoZAWRQQC8BgA1xgDl3wHxAyD+BlXLApGDAAIG
+        gIEsECuAMFDtayAtABKEAWIMgAOo2lEDRg2gvgGEsjM6vgTSw8DAwAAA4Mc17aOrkE0AAAAASUVORK5C
+        YII=
 </value>
   </data>
   <metadata name="menuBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

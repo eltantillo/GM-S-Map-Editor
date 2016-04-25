@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace GMSMapEditor.ProjectAssets.Grafico{
-    class BackgroundTile{
+    public class BackgroundTile{
         public int width, height;
         public int tWidth, tHeight;
         public Point inicio, final;
@@ -48,7 +48,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                 }
             }
             return testu.Clone(
-                new Rectangle(new Point(inicio.X * tWidth, inicio.Y * tHeight),
+                new Rectangle(new Point(inicio.X, inicio.Y),
                 new Size(tWidth, tHeight)),
                 testu.PixelFormat
             );

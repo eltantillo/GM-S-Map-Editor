@@ -5,42 +5,64 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Collections.Generic;
 
 namespace GMSMapEditor.ProjectAssets.Grafico
 {
-    class SimpleRoom{
+    public class SimpleRoom{
 
         public int w, h;
         public int tw, th;
-        public Point[][] p;
         public static int TO_X = 1;
         public static int TO_Y = 2;
 
-        ArrayList i, iperma;
+        List<Image> i, iperma;
         int antX,antY;
         public int capa;
         Image temp;
         Image m;
-
+        List<Rooms.Tile> tiles;
+        //new room
         public SimpleRoom(int _w,int _h, int _tw, int _th){
-            i = new ArrayList();
+            i = new List<Image>();
             i.Add(new Bitmap((_w * _tw) + 1, (_h * _th) + 1));
-            iperma = new ArrayList();
+            iperma = new List<Image>();
             iperma.Add(new Bitmap((_w * _tw) + 1, (_h * _th) + 1));
             capa = 0;
-            temp = (iperma[0] as Image).Clone() as Image;
+            temp = iperma[0].Clone() as Image;
             w = _w;
             h = _h;
             tw = _tw;
             th = _th;
-            p = new Point[_h][];
-            for (int x = 0; x < _w; x++){
-                p[x] = new Point[_w];
-            }
+        }
+        //load room
+        public SimpleRoom(int _w, int _h,List<Rooms.Tile> tl){
+            i = new List<Image>();
+            i.Add(new Bitmap(_w, _h));
+            iperma = new List<Image>();
+            iperma.Add(new Bitmap(_w, _h));
+            capa = 0;
+            temp = iperma[0].Clone() as Image;
+            w = _w;
+            h = _h;
+            tiles = tl;
+            tw = tl[0].w;
+            th = tl[0].h;
         }
 
         public void updateSelected(Image i){
             m = i;
+        }
+        public void roomIni(List<BackgroundTile>bt){
+            foreach(Rooms.Tile tile in tiles){
+                foreach(BackgroundTile b in bt){
+                    if (b.backgroundName.Equals(tile.bgName)){
+                        b.setSelection(new Point(tile.xo,tile.yo), new Point(tile.xo + tile.w,tile.yo+tile.h));
+                        m = b.getSelectedImage();
+                        click(tile.x, tile.y);
+                    }
+                }
+            }
         }
 
         private Bitmap cropea() {
@@ -81,18 +103,15 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         }
 
         public void update(PictureBox p, int x, int y){
-            if (antX != x || antY != y) {
-                antX = x; antY = y;
-                temp.Dispose();
-                temp = (iperma[capa] as Image).Clone() as Image;
-            }
+            antX = x; antY = y;
+            temp.Dispose();
+            temp = (iperma[capa] as Image).Clone() as Image;
             for (int xdx = 0; xdx < iperma.Count; xdx++ )
                 using (Graphics grfx = Graphics.FromImage(temp)){
                     grfx.DrawImage(iperma[xdx] as Image, 0, 0);
                 }
             p.Image = temp;
-            using (Graphics grfx = Graphics.FromImage(p.Image))
-            {
+            using (Graphics grfx = Graphics.FromImage(p.Image)){
                 grfx.DrawImage(cropea(), x, y);
             }
         }
@@ -104,16 +123,25 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             }
         }
         public void click(PictureBox p, int x, int y) {
-            p.Image = iperma[capa] as Image;
-            using (Graphics grfx = Graphics.FromImage(p.Image))
+            using (Graphics grfx = Graphics.FromImage(iperma[capa] as Image))
             {
                 grfx.DrawImage(borra(x, y), 0, 0);
             }
-            using (Graphics grfx = Graphics.FromImage(p.Image))
+            using (Graphics grfx = Graphics.FromImage(iperma[capa] as Image))
             {
                 grfx.DrawImage(cropea(), x, y);
             }
             update(p,x,y);
+        }
+        public void click(int x, int y){
+            using (Graphics grfx = Graphics.FromImage(iperma[capa] as Image))
+            {
+                grfx.DrawImage(borra(x, y), 0, 0);
+            }
+            using (Graphics grfx = Graphics.FromImage(iperma[capa] as Image))
+            {
+                grfx.DrawImage(cropea(), x, y);
+            }
         }
 
         public int toGrid(int mouse, int opc) {

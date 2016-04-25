@@ -74,6 +74,17 @@ namespace GMSMapEditor.Classes
                 }
                 tilesList.DataSource = null;
                 tilesList.DataSource = _tiles;
+
+                var acsc = new AutoCompleteStringCollection();
+                foreach (string elem in _tiles)
+                {
+                    acsc.Add(elem);
+                }
+
+                tilesList.AutoCompleteCustomSource = acsc;
+                tilesList.AutoCompleteMode = AutoCompleteMode.Suggest;
+                tilesList.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
                 foreach(GMSMapEditor.ProjectAssets.Rooms.Room r in assets.rooms){
                     srs.Add(new SimpleRoom(r.width, r.height,r.tiles));
                 }

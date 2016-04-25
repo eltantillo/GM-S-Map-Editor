@@ -154,11 +154,12 @@ namespace GMSMapEditor
         }
 
         private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){
-            int index = roomsList.IndexFromPoint(e.Location);
-            if (index != System.Windows.Forms.ListBox.NoMatches){
-                //MessageBox.Show(Project.assets.rooms[index].ToString());
+            roomIndex = roomsList.IndexFromPoint(e.Location);
+            if (roomIndex != System.Windows.Forms.ListBox.NoMatches){
+                //MessageBox.Show(Project.assets.rooms[index].ToString()); joto el que lo descomente.
                 //sr = new SimpleRoom((Project.assets.rooms[index].width / Project.assets.rooms[index].tiles[0].w), (Project.assets.rooms[index].height / Project.assets.rooms[index].tiles[0].h), Project.assets.rooms[index].tiles[0].w, Project.assets.rooms[index].tiles[0].h);
                 //sr.roomIni(Project.assets.rooms[index].tiles,Project.assets.backgrounds,mapBox);
+                
             }
         }
     }

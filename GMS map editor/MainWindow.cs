@@ -43,7 +43,7 @@ namespace GMSMapEditor
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Project.OpenProject(roomsList);
+            Project.OpenProject(roomsListBox, tilesListBox);
             tileWH = 32;
             int mapSizeSimple = 32;
 
@@ -75,7 +75,7 @@ namespace GMSMapEditor
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            Project.OpenProject(roomsList);
+            Project.OpenProject(roomsListBox, tilesListBox);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -150,9 +150,22 @@ namespace GMSMapEditor
         }
 
         private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){
-            int index = roomsList.IndexFromPoint(e.Location);
+            int index = roomsListBox.IndexFromPoint(e.Location);
             if (index != System.Windows.Forms.ListBox.NoMatches){
                 MessageBox.Show(Project.assets.rooms[index].ToString());
+            }
+        }
+
+        private void tilesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (ProjectAssets.Backgrounds.Background background in Project.assets.backgrounds)
+            {
+                if (background.name == tilesListBox.SelectedItem.ToString())
+                {
+                    bt = new BackgroundTile(background.image, Project.assets.backgrounds[0].name, tileWH, tileWH);
+                    ((BackgroundTile)bt).drawBackgroundTile(tileBox);
+                    break;
+                }
             }
         }
     }

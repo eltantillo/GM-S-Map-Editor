@@ -17,7 +17,7 @@ namespace GMSMapEditor.Classes
         public static string projectFolder;
         public static Assets assets;
 
-        public static void OpenProject(ListBox roomsList)
+        public static void OpenProject(ListBox roomsList, ComboBox tilesList)
         {
             OpenFileDialog projectFile = new OpenFileDialog();
             projectFile.Filter = "GameMaker: Studio Project Files|*.project.gmx";
@@ -55,6 +55,17 @@ namespace GMSMapEditor.Classes
                 }
                 roomsList.DataSource = null;
                 roomsList.DataSource = _rooms;
+
+                List<string> _tiles = new List<string>();
+                foreach (ProjectAssets.Backgrounds.Background tile in Project.assets.backgrounds)
+                {
+                    if (tile.istileset)
+                    {
+                        _tiles.Add(tile.name);
+                    }
+                }
+                tilesList.DataSource = null;
+                tilesList.DataSource = _tiles;
             }
         }
 

@@ -44,21 +44,14 @@ namespace GMSMapEditor
             Project.OpenProject(roomsListBox, tilesListBox);
             tileWH = 32;
             //int mapSizeSimple = 32;
-
-<<<<<<< HEAD
-            foreach (ProjectAssets.Backgrounds.Background background in Project.assets.backgrounds)
+            /*foreach (ProjectAssets.Backgrounds.Background background in Project.assets.backgrounds)
             {
                 if (background.istileset){
                     bt = new BackgroundTile(background.image, Project.assets.backgrounds[0].name, tileWH, tileWH);
                     ((BackgroundTile)bt).drawBackgroundTile(tileBox);
                     break;
                 }
-            }
-=======
-            //bt = new BackgroundTile(Project.assets.backgrounds[0].image, Project.assets.backgrounds[0].name, tileWH, tileWH);
-
-            //((BackgroundTile)bt).drawBackgroundTile(tileBox);
->>>>>>> a3da07a4bf9cc4f63f47a908a4105980fc265003
+            }*/
 
             //sr = new SimpleRoom(mapSizeSimple, mapSizeSimple, tileWH, tileWH);
             Project.bts[0].drawBackgroundTile(tileBox);
@@ -149,11 +142,6 @@ namespace GMSMapEditor
         }
 
         private void mapBox_MouseMove(object sender, MouseEventArgs e){
-<<<<<<< HEAD
-            mapPositionX = sr.toGrid(e.Location.X, SimpleRoom.TO_X);
-            mapPositionY = sr.toGrid(e.Location.Y, SimpleRoom.TO_Y);
-            //roomsList.
-=======
             mapPositionX = Project.srs[roomIndex].toGrid(e.Location.X, SimpleRoom.TO_X);
             mapPositionY = Project.srs[roomIndex].toGrid(e.Location.Y, SimpleRoom.TO_Y);
             if (e.Button == System.Windows.Forms.MouseButtons.Left && tileBox.Image != null)
@@ -167,7 +155,6 @@ namespace GMSMapEditor
                     Project.srs[roomIndex].click(mapBox, mapPositionX, mapPositionY);
                 }
             }
->>>>>>> a3da07a4bf9cc4f63f47a908a4105980fc265003
         }
 
         private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){
@@ -183,12 +170,12 @@ namespace GMSMapEditor
         {
             foreach (ProjectAssets.Backgrounds.Background background in Project.assets.backgrounds)
             {
-                if (background.name == tilesListBox.SelectedItem.ToString())
+                /*if (background.name == tilesListBox.SelectedItem.ToString())
                 {
                     bt = new BackgroundTile(background.image, Project.assets.backgrounds[0].name, tileWH, tileWH);
                     ((BackgroundTile)bt).drawBackgroundTile(tileBox);
                     break;
-                }
+                }*/
             }
         }
     }

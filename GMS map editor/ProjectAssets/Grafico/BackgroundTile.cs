@@ -79,8 +79,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                 (inicio.Y > final.Y ? final.Y : inicio.Y)
             );
             this.final = new Point(
-                (inicio.X < final.X ? final.X+1 : inicio.X+1) + tWidth,
-                (inicio.Y < final.Y ? final.Y+1 : inicio.Y+1) + tHeight
+                (inicio.X < final.X ? final.X : inicio.X) + tWidth,
+                (inicio.Y < final.Y ? final.Y : inicio.Y) + tHeight
             );
         }
         public Bitmap drawRectangle() {
@@ -104,20 +104,14 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             );
             // <-------
             drawArea.DrawLine(blackpen,
-                new Point(final.X, final.Y * tHeight),
-                new Point(inicio.X, final.Y * tHeight)
+                new Point(final.X, final.Y),
+                new Point(inicio.X, final.Y)
             );
             //  ^
             //  |
             drawArea.DrawLine(blackpen,
                 new Point(inicio.X, final.Y+ 2),
                 new Point(inicio.X, inicio.Y)
-            );
-
-            // ------>
-            drawArea.DrawLine(blackpen,
-                new Point(inicio.X  - 1, inicio.Y ),
-                new Point(final.X + 2, inicio.Y )
             );
 
             // White inner color

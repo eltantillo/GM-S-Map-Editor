@@ -21,6 +21,7 @@ namespace GMSMapEditor
         int tileWH;
         bool clicked;
         int roomIndex;
+        int backgroundIndex;
 
         public MainWindow(){
             InitializeComponent();
@@ -96,11 +97,11 @@ namespace GMSMapEditor
                 }
                 else{
                     // set new start position //
-                    tilePositionXO = Project.bts[0].simplificacion(e.Location.X);
-                    tilePositionYO = Project.bts[0].simplificacion(e.Location.Y);
+                    tilePositionXO = Project.bts[backgroundIndex].toGrid(e.Location.X, 1);
+                    tilePositionYO = Project.bts[backgroundIndex].toGrid(e.Location.Y, 2);
                     clicked = true;
                     //pb_MouseMove(sender, e);
-                    Project.bts[0].setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXO, tilePositionYO));
+                    Project.bts[backgroundIndex].setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXO, tilePositionYO));
                 }
             }
         }
@@ -112,21 +113,20 @@ namespace GMSMapEditor
                     control.Capture = false;
                 }
                 if (control.ClientRectangle.Contains(e.Location)){
-                    if (tilePositionXF != (int)Math.Floor((Decimal)e.Location.X / 32)){
-                        tileBox.Image = Project.bts[0].getClonedImage();
+                    if (tilePositionXF != Project.bts[backgroundIndex].toGrid(e.Location.X, 1)){
+                        tileBox.Image = Project.bts[backgroundIndex].getClonedImage();
                     }
-                    if (tilePositionYF != (int)Math.Floor((Decimal)e.Location.Y / 32)){
-                        tileBox.Image = Project.bts[0].getClonedImage();
+                    if (tilePositionYF != Project.bts[backgroundIndex].toGrid(e.Location.Y, 2)){
+                        tileBox.Image = Project.bts[backgroundIndex].getClonedImage();
                     }
+                    tilePositionXF = Project.bts[backgroundIndex].toGrid(e.Location.X,1);
+                    tilePositionYF = Project.bts[backgroundIndex].toGrid(e.Location.Y,2);
 
-                    tilePositionXF = Project.bts[0].simplificacion(e.Location.X);
-                    tilePositionYF = Project.bts[0].simplificacion(e.Location.Y);
+                    Project.bts[backgroundIndex].setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXF, tilePositionYF));
 
-                    Project.bts[0].setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXF, tilePositionYF));
-
-                    tileBox.Image = Project.bts[0].drawRectangle();
+                    tileBox.Image = Project.bts[backgroundIndex].drawRectangle();
                     tileBox.Refresh();
-                    Project.srs[roomIndex].updateSelected(Project.bts[0].getSelectedImage());
+                    Project.srs[roomIndex].updateSelected(Project.bts[backgroundIndex].getSelectedImage());
                 }
             }
         }
@@ -158,25 +158,37 @@ namespace GMSMapEditor
         }
 
         private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){
-            int index = roomsListBox.IndexFromPoint(e.Location);
-            if (index != System.Windows.Forms.ListBox.NoMatches){
-                //MessageBox.Show(Project.assets.rooms[index].ToString());
+            roomIndex = roomsListBox.IndexFromPoint(e.Location);
+            if (roomIndex != System.Windows.Forms.ListBox.NoMatches){
+                //MessageBox.Show(Project.assets.rooms[index].ToString()); joto el que lo descomente.
                 //sr = new SimpleRoom((Project.assets.rooms[index].width / Project.assets.rooms[index].tiles[0].w), (Project.assets.rooms[index].height / Project.assets.rooms[index].tiles[0].h), Project.assets.rooms[index].tiles[0].w, Project.assets.rooms[index].tiles[0].h);
                 //sr.roomIni(Project.assets.rooms[index].tiles,Project.assets.backgrounds,mapBox);
+                
             }
         }
 
         private void tilesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (ProjectAssets.Backgrounds.Background background in Project.assets.backgrounds)
+            try
             {
-                /*if (background.name == tilesListBox.SelectedItem.ToString())
+                backgroundIndex = tilesListBox.SelectedIndex;
+                if (backgroundIndex < 0)
                 {
+                    backgroundIndex = 0;
+                }
+                Project.bts[backgroundIndex].drawBackgroundTile(tileBox);
+            }
+            catch (Exception ex) { }
+            /* foreach (BackgroundTile background in Project.bts){
+                if (background.backgroundName == tilesListBox.SelectedItem.ToString()){
+
+                    /*
                     bt = new BackgroundTile(background.image, Project.assets.backgrounds[0].name, tileWH, tileWH);
                     ((BackgroundTile)bt).drawBackgroundTile(tileBox);
+
                     break;
-                }*/
-            }
+                }
+            }*/
         }
     }
 }

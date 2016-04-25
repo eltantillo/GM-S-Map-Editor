@@ -46,8 +46,10 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             w = _w;
             h = _h;
             tiles = tl;
-            tw = tl[0].w;
-            th = tl[0].h;
+            if(tl.Count>0){
+                tw = tl[0].w;
+                th = tl[0].h;
+            }
         }
 
         public void updateSelected(Image i){

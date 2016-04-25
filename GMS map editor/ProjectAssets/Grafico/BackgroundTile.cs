@@ -44,7 +44,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                     );
                 }
                 catch (Exception ex) {
-                    MessageBox.Show("drawable: \n" + inicio.X + "," + inicio.Y + " " + difx + "," + dify);
+                    //MessageBox.Show("drawable: \n" + inicio.X + "," + inicio.Y + " " + difx + "," + dify);
                 }
             }
             return testu.Clone(
@@ -151,9 +151,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
             return bp;
         }
 
-        // simplificador //
-        public int simplificacion(int mouse) {
-            return ((int)Math.Floor((Decimal)mouse) / tWidth);
+        public int toGrid(int mouse, int opc){
+            return ((int)Math.Floor((Decimal)mouse / (opc == 1 ? tWidth : tHeight)) * (opc == 1 ? tWidth : tHeight));
         }
     }
 }

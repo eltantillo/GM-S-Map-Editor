@@ -96,42 +96,35 @@ namespace GMSMapEditor
                     clicked = false;
                 }
                 else{
-                    // set new start position //
                     tilePositionXO = Project.bts[backgroundIndex].toGrid(e.Location.X, 1);
                     tilePositionYO = Project.bts[backgroundIndex].toGrid(e.Location.Y, 2);
                     clicked = true;
-                    //pb_MouseMove(sender, e);
                     Project.bts[backgroundIndex].setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXO, tilePositionYO));
+                    Project.bts[backgroundIndex].drawBackgroundTile(tileBox);
+                    Project.srs[roomIndex].updateSelected(Project.bts[backgroundIndex].getSelectedImage());
                 }
             }
         }
 
         private void pb_MouseMove(object sender, MouseEventArgs e){
+            tilePositionXF = Project.bts[backgroundIndex].toGrid(e.Location.X, 1);
+            tilePositionYF = Project.bts[backgroundIndex].toGrid(e.Location.Y, 2);
+            
             if (e.Button == System.Windows.Forms.MouseButtons.Left && tileBox.Image != null){
                 Control control = (Control)sender;
                 if (control.Capture){
                     control.Capture = false;
                 }
                 if (control.ClientRectangle.Contains(e.Location)){
-                    if (tilePositionXF != Project.bts[backgroundIndex].toGrid(e.Location.X, 1)){
-                        tileBox.Image = Project.bts[backgroundIndex].getClonedImage();
-                    }
-                    if (tilePositionYF != Project.bts[backgroundIndex].toGrid(e.Location.Y, 2)){
-                        tileBox.Image = Project.bts[backgroundIndex].getClonedImage();
-                    }
-                    tilePositionXF = Project.bts[backgroundIndex].toGrid(e.Location.X,1);
-                    tilePositionYF = Project.bts[backgroundIndex].toGrid(e.Location.Y,2);
-
                     Project.bts[backgroundIndex].setSelection(new Point(tilePositionXO, tilePositionYO), new Point(tilePositionXF, tilePositionYF));
-
-                    tileBox.Image = Project.bts[backgroundIndex].drawRectangle();
+                    Project.bts[backgroundIndex].drawBackgroundTile(tileBox);
                     tileBox.Refresh();
                     Project.srs[roomIndex].updateSelected(Project.bts[backgroundIndex].getSelectedImage());
+                    helpToolStripMenuItem.Text = "X" + tilePositionXO + " Y" + tilePositionYO + " XF" + tilePositionXF + " YF" + tilePositionYF;
+                    menuBar.Refresh();
                 }
             }
         }
-
-
 
         private void mapBox_Paint(object sender, PaintEventArgs e){
             Project.srs[roomIndex].update(mapBox, mapPositionX, mapPositionY);
@@ -177,6 +170,9 @@ namespace GMSMapEditor
                     backgroundIndex = 0;
                 }
                 Project.bts[backgroundIndex].drawBackgroundTile(tileBox);
+                Project.srs[roomIndex].th = Project.bts[backgroundIndex].tHeight;
+                Project.srs[roomIndex].tw = Project.bts[backgroundIndex].tWidth;
+
             }
             catch (Exception ex) { }
             /* foreach (BackgroundTile background in Project.bts){

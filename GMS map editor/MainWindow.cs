@@ -41,13 +41,17 @@ namespace GMSMapEditor
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Project.OpenProject(roomsList);
+            Project.OpenProject(roomsListBox, tilesListBox);
             tileWH = 32;
             //int mapSizeSimple = 32;
-
-            //bt = new BackgroundTile(Project.assets.backgrounds[0].image, Project.assets.backgrounds[0].name, tileWH, tileWH);
-
-            //((BackgroundTile)bt).drawBackgroundTile(tileBox);
+            /*foreach (ProjectAssets.Backgrounds.Background background in Project.assets.backgrounds)
+            {
+                if (background.istileset){
+                    bt = new BackgroundTile(background.image, Project.assets.backgrounds[0].name, tileWH, tileWH);
+                    ((BackgroundTile)bt).drawBackgroundTile(tileBox);
+                    break;
+                }
+            }*/
 
             //sr = new SimpleRoom(mapSizeSimple, mapSizeSimple, tileWH, tileWH);
             Project.bts[0].drawBackgroundTile(tileBox);
@@ -69,7 +73,7 @@ namespace GMSMapEditor
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            Project.OpenProject(roomsList);
+            Project.OpenProject(roomsListBox, tilesListBox);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -154,12 +158,31 @@ namespace GMSMapEditor
         }
 
         private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){
+<<<<<<< HEAD
             roomIndex = roomsList.IndexFromPoint(e.Location);
             if (roomIndex != System.Windows.Forms.ListBox.NoMatches){
                 //MessageBox.Show(Project.assets.rooms[index].ToString()); joto el que lo descomente.
+=======
+            int index = roomsListBox.IndexFromPoint(e.Location);
+            if (index != System.Windows.Forms.ListBox.NoMatches){
+                //MessageBox.Show(Project.assets.rooms[index].ToString());
+>>>>>>> 34b6c17fd4fede60c1375c8af427dd2ebc3c77d7
                 //sr = new SimpleRoom((Project.assets.rooms[index].width / Project.assets.rooms[index].tiles[0].w), (Project.assets.rooms[index].height / Project.assets.rooms[index].tiles[0].h), Project.assets.rooms[index].tiles[0].w, Project.assets.rooms[index].tiles[0].h);
                 //sr.roomIni(Project.assets.rooms[index].tiles,Project.assets.backgrounds,mapBox);
                 
+            }
+        }
+
+        private void tilesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (ProjectAssets.Backgrounds.Background background in Project.assets.backgrounds)
+            {
+                /*if (background.name == tilesListBox.SelectedItem.ToString())
+                {
+                    bt = new BackgroundTile(background.image, Project.assets.backgrounds[0].name, tileWH, tileWH);
+                    ((BackgroundTile)bt).drawBackgroundTile(tileBox);
+                    break;
+                }*/
             }
         }
     }

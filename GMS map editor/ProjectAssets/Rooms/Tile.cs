@@ -25,7 +25,7 @@ namespace GMSMapEditor.ProjectAssets.Rooms
         public Tile()
         {
             Random random = new Random();
-            this.name = "inst_" + random.Next(0, 999999999);
+            this.name = "inst_" + random.Next(0, 999999999).ToString("X");
         }
     }
 }

@@ -11,6 +11,7 @@ using GMSMapEditor.Classes;
 using GMSMapEditor.ProjectAssets;
 using GMSMapEditor.ProjectAssets.Grafico;
 using System.Drawing.Drawing2D;
+using System.Threading;
 
 namespace GMSMapEditor
 {
@@ -84,6 +85,7 @@ namespace GMSMapEditor
 
         private void toggleProjectFiles_Click(object sender, EventArgs e){
             splitContainer1.Panel2Collapsed = !splitContainer1.Panel2Collapsed;
+            splitContainer1.Refresh();
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e){
@@ -127,6 +129,7 @@ namespace GMSMapEditor
         }
 
         private void mapBox_Paint(object sender, PaintEventArgs e){
+            Thread.Sleep(1000/60);
             Project.srs[roomIndex].update(mapBox, mapPositionX, mapPositionY);
         }
 
@@ -185,6 +188,18 @@ namespace GMSMapEditor
                     break;
                 }
             }*/
+        }
+
+        private void MainWindow_Resize(object sender, EventArgs e)
+        {
+            splitContainer1.Refresh();
+            menuBar.Refresh();
+            toolBar.Refresh();
+        }
+
+        private void resourcesTabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            splitContainer1.Refresh();
         }
     }
 }

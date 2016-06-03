@@ -12,6 +12,18 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
+
+import java.io.File;
+import java.io.IOException;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 /**
  *
  * @author MarcoM
@@ -62,6 +74,7 @@ public class Interfaz extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         showGrid = new javax.swing.JToggleButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         cargar = new javax.swing.JMenuItem();
@@ -174,6 +187,17 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(showGrid);
+
+        jButton2.setText("Test");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton2);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -408,6 +432,41 @@ public class Interfaz extends javax.swing.JFrame {
         srs.get(currentSimpleRoom).grid();
     }//GEN-LAST:event_showGridActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            File fXmlFile = new File("C:\\test.gmx");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+            //objects
+            NodeList nList = doc.getElementsByTagName("objects");            
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    if(eElement.getAttribute("name").equals("objects")){
+                        NodeList objects = eElement.getElementsByTagName("object");
+                        System.out.println("Folder name : " + eElement.getAttribute("name"));
+                        System.out.println("------------------------");
+                        for(int i = 0; i < objects.getLength(); i++){
+                            System.out.println("Object : " + objects.item(i).getTextContent());
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        xml.Project.assets = new xml.projectAssets.Assets();
+        xml.Project.assets.backgrounds.add(0, new xml.projectAssets.backgrounds.Background());
+        xml.Project.assets.rooms.add(0, new xml.projectAssets.rooms.Room());
+        System.out.println(xml.Project.assets.backgrounds.get(0).toString());
+        System.out.println(xml.Project.assets.rooms.get(0).toString());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -446,6 +505,7 @@ public class Interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cargar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

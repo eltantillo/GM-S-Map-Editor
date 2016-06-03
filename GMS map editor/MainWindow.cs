@@ -61,6 +61,9 @@ namespace GMSMapEditor
             mapBox.Location = new Point(0, 0);
             mapBox.Height = Project.srs[roomIndex].h;
             mapBox.Width = Project.srs[roomIndex].w;
+            TimeSpan start = new TimeSpan(DateTime.Now.Ticks);
+            helpToolStripMenuItem.Text = Project.stop.Subtract(start).TotalMilliseconds+"";
+            menuBar.Refresh();
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -154,13 +157,20 @@ namespace GMSMapEditor
         }
 
         private void roomsList_MouseDoubleClick(object sender, MouseEventArgs e){
+            Project.stop = new TimeSpan(DateTime.Now.Ticks);
             roomIndex = roomsListBox.IndexFromPoint(e.Location);
             if (roomIndex != System.Windows.Forms.ListBox.NoMatches){
+                mapBox.Width = Project.srs[roomIndex].w;
+                mapBox.Height = Project.srs[roomIndex].h;
+                mapBox.Location = new Point(0,0);
+                Project.srs[roomIndex].roomIni(Project.bts);
                 //MessageBox.Show(Project.assets.rooms[index].ToString()); joto el que lo descomente.
                 //sr = new SimpleRoom((Project.assets.rooms[index].width / Project.assets.rooms[index].tiles[0].w), (Project.assets.rooms[index].height / Project.assets.rooms[index].tiles[0].h), Project.assets.rooms[index].tiles[0].w, Project.assets.rooms[index].tiles[0].h);
                 //sr.roomIni(Project.assets.rooms[index].tiles,Project.assets.backgrounds,mapBox);
-                
             }
+            TimeSpan start = new TimeSpan(DateTime.Now.Ticks);
+            helpToolStripMenuItem.Text = Project.stop.Subtract(start).TotalMilliseconds + "";
+            menuBar.Refresh();
         }
 
         private void tilesListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -197,8 +207,7 @@ namespace GMSMapEditor
             toolBar.Refresh();
         }
 
-        private void resourcesTabs_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void resourcesTabs_SelectedIndexChanged(object sender, EventArgs e){
             splitContainer1.Refresh();
         }
     }

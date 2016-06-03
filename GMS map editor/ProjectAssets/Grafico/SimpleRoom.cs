@@ -16,7 +16,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         public static int TO_X = 1;
         public static int TO_Y = 2;
 
-        List<Image> i, iperma;
+        List<Image> iperma;
         int antX,antY;
         public int capa;
         Image temp;
@@ -24,8 +24,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         List<Rooms.Tile> tiles;
         //new room
         public SimpleRoom(int _w,int _h, int _tw, int _th){
-            i = new List<Image>();
-            i.Add(new Bitmap((_w * _tw) + 1, (_h * _th) + 1));
+            //i = new List<Image>();
+            //i.Add(new Bitmap((_w * _tw) + 1, (_h * _th) + 1));
             iperma = new List<Image>();
             iperma.Add(new Bitmap((_w * _tw) + 1, (_h * _th) + 1));
             capa = 0;
@@ -37,8 +37,8 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         }
         //load room
         public SimpleRoom(int _w, int _h,List<Rooms.Tile> tl){
-            i = new List<Image>();
-            i.Add(new Bitmap(_w, _h));
+            //i = new List<Image>();
+            //i.Add(new Bitmap(_w, _h));
             iperma = new List<Image>();
             iperma.Add(new Bitmap(_w, _h));
             capa = 0;
@@ -59,9 +59,9 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             foreach(Rooms.Tile tile in tiles){
                 foreach(BackgroundTile b in bt){
                     if (b.backgroundName.Equals(tile.bgName)){
-                        b.setSelection(new Point(tile.xo,tile.yo), new Point(tile.xo + tile.w,tile.yo+tile.h));
-                        m = b.getSelectedImage();
+                        m = b.getSelectedImage(new Point(tile.xo, tile.yo));
                         click(tile.x, tile.y);
+                        break;
                     }
                 }
             }
@@ -71,11 +71,10 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             Bitmap target = new Bitmap(1,1);
             if (m != null){
                 Rectangle cropRect = new Rectangle(new Point(0, 0), new Size(m.Width, m.Height));
-                Bitmap src = m as Bitmap;
                 target = new Bitmap(cropRect.Width, cropRect.Height);
                 using (Graphics g = Graphics.FromImage(target))
                 {
-                    g.DrawImage(src, new Rectangle(0, 0, target.Width, target.Height),
+                    g.DrawImage(m, new Rectangle(0, 0, target.Width, target.Height),
                         cropRect,
                         GraphicsUnit.Pixel);
                 }
@@ -84,7 +83,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         }
         private Bitmap borra(int x, int y) {
             Rectangle r = new Rectangle(x,y,m.Width,m.Height);
-            Graphics e = Graphics.FromImage(iperma[capa] as Image);
+            Graphics e = Graphics.FromImage(iperma[capa]);
             e.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
             using (var br = new SolidBrush(Color.FromArgb(0, 255, 255, 255))){
                 e.FillRectangle(br, r);
@@ -93,13 +92,14 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         }
         private Bitmap cropea2(int x, int y){
             Rectangle cropRect = new Rectangle(new Point(x, y), new Size(33, 44));
-            Bitmap src = i[capa] as Bitmap;
             Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
-
             using (Graphics g = Graphics.FromImage(target)){
-                g.DrawImage(src, new Rectangle(0, 0, target.Width, target.Height),
-                     cropRect,
-                     GraphicsUnit.Pixel);
+                g.DrawImage(
+                    iperma[capa], 
+                    new Rectangle(0, 0, target.Width, target.Height),
+                    cropRect,
+                    GraphicsUnit.Pixel
+                );
             }
             return target;
         }
@@ -107,9 +107,10 @@ namespace GMSMapEditor.ProjectAssets.Grafico
         public void update(PictureBox p, int x, int y){
             antX = x; antY = y;
             temp.Dispose();
-            temp = (iperma[capa] as Image).Clone() as Image;
+            temp = iperma[capa].Clone() as Image;
             for (int xdx = 0; xdx < iperma.Count; xdx++ )
                 using (Graphics grfx = Graphics.FromImage(temp)){
+                    grfx.SmoothingMode = SmoothingMode.None;
                     grfx.DrawImage(iperma[xdx] as Image, 0, 0);
                 }
             p.Image = temp;
@@ -118,35 +119,33 @@ namespace GMSMapEditor.ProjectAssets.Grafico
             }
         }
         public void borra(PictureBox p, int x, int y){
-            p.Image = iperma[capa] as Image;
+            p.Image = iperma[capa];
             using (Graphics grfx = Graphics.FromImage(p.Image))
             {
                 grfx.DrawImage(borra(x, y), 0, 0);
             }
         }
         public void click(PictureBox p, int x, int y) {
-            using (Graphics grfx = Graphics.FromImage(iperma[capa] as Image))
+            using (Graphics grfx = Graphics.FromImage(iperma[capa]))
             {
                 grfx.DrawImage(borra(x, y), 0, 0);
             }
-            using (Graphics grfx = Graphics.FromImage(iperma[capa] as Image))
+            using (Graphics grfx = Graphics.FromImage(iperma[capa]))
             {
                 grfx.DrawImage(cropea(), x, y);
             }
             update(p,x,y);
         }
         public void click(int x, int y){
-            using (Graphics grfx = Graphics.FromImage(iperma[capa] as Image))
-            {
-                grfx.DrawImage(borra(x, y), 0, 0);
-            }
-            using (Graphics grfx = Graphics.FromImage(iperma[capa] as Image))
-            {
+            using (Graphics grfx = Graphics.FromImage(iperma[capa])){
                 grfx.DrawImage(cropea(), x, y);
             }
         }
 
         public int toGrid(int mouse, int opc) {
+            if(tw == 0 || th==0){
+                return 0;
+            }
             return ((int)Math.Floor((Decimal)mouse / (opc == 1 ? tw : th)) * (opc == 1 ? tw : th));
         }
     }

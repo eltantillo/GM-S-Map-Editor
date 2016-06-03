@@ -19,6 +19,7 @@ namespace GMSMapEditor.Classes
         public static Assets assets;
         public static List<BackgroundTile> bts;
         public static List<SimpleRoom> srs;
+        public static TimeSpan stop;
 
         static Project(){
             bts = new List<BackgroundTile>();
@@ -27,6 +28,7 @@ namespace GMSMapEditor.Classes
 
         public static void OpenProject(ListBox roomsList, ComboBox tilesList)
         {
+            stop = new TimeSpan(DateTime.Now.Ticks);
             OpenFileDialog projectFile = new OpenFileDialog();
             projectFile.Filter = "GameMaker: Studio Project Files|*.project.gmx";
 
@@ -85,16 +87,18 @@ namespace GMSMapEditor.Classes
                 tilesList.AutoCompleteMode = AutoCompleteMode.Suggest;
                 tilesList.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-                foreach(GMSMapEditor.ProjectAssets.Rooms.Room r in assets.rooms){
-                    srs.Add(new SimpleRoom(r.width, r.height,r.tiles));
-                }
-                foreach(GMSMapEditor.ProjectAssets.Backgrounds.Background t in assets.backgrounds){
-                    if(t.istileset){
-                        bts.Add(new BackgroundTile(t.image,t.name,t.tilewidth,t.tileheight));
+                //backgrounds
+                foreach (GMSMapEditor.ProjectAssets.Backgrounds.Background t in assets.backgrounds){
+                    if (t.istileset){
+                        bts.Add(new BackgroundTile(t.image, t.name, t.tilewidth, t.tileheight));
                     }
                 }
-                foreach(SimpleRoom sr in srs){
-                    sr.roomIni(bts);
+                //rooms
+                int x = 0;
+                foreach(GMSMapEditor.ProjectAssets.Rooms.Room r in assets.rooms){
+                    SimpleRoom sr = new SimpleRoom(r.width, r.height, r.tiles);
+                    //sr.roomIni(bts);
+                    srs.Add(sr);
                 }
             }
         }

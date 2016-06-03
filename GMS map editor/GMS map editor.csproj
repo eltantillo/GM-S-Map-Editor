@@ -63,7 +63,6 @@
     <Compile Include="ProjectAssets\Rooms\View.cs" />
     <Compile Include="ProjectAssets\Grafico\BackgroundTile.cs" />
     <Compile Include="ProjectAssets\Grafico\SimpleRoom.cs" />
-    <Compile Include="Tile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainWindow.resx">

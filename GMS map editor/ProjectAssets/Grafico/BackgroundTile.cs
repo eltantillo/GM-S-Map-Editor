@@ -33,8 +33,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         public Image getSelectedImage() {
             Bitmap testu = img as Bitmap;
             if(difx > 0 && dify > 0){
-                try
-                {
+                try{
                     return testu.Clone(
                         new Rectangle(new Point(inicio.X, inicio.Y),
                         new Size(difx,dify)),
@@ -55,7 +54,6 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
         public Image getSelectedImage(Point a){
             Bitmap testu = img as Bitmap;
             try{
-                MessageBox.Show("drawable: \n" + a.X + "," + a.Y);
                 return testu.Clone(
                     new Rectangle(new Point(a.X, a.Y),
                     new Size(tWidth, tHeight)),
@@ -63,7 +61,7 @@ namespace GMSMapEditor.ProjectAssets.Grafico{
                 );
             }
             catch (Exception ex){
-                MessageBox.Show("drawable: \n" + inicio.X + "," + inicio.Y + " " + difx + "," + dify);
+                MessageBox.Show("Error: \n" + inicio.X + "," + inicio.Y + " " + difx + "," + dify);
                 return testu.Clone(
                     new Rectangle(new Point(0, 0),
                     new Size(tWidth, tHeight)),

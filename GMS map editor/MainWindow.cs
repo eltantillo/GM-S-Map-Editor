@@ -56,7 +56,7 @@ namespace GMSMapEditor
             }*/
 
             //sr = new SimpleRoom(mapSizeSimple, mapSizeSimple, tileWH, tileWH);
-            Project.bts[0].drawBackgroundTile(tileBox);
+            //Project.bts[0].drawBackgroundTile(tileBox);
 
             mapBox.Location = new Point(0, 0);
             mapBox.Height = Project.srs[roomIndex].h;

@@ -9,7 +9,13 @@ package xml.projectAssets.backgrounds;
  *
  * @author eltan
  */
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
 
 public class Background {
     public boolean hasChanges = false;
@@ -29,53 +35,45 @@ public class Background {
     public int width;
     public int height;
     public String data;
-    //public Image image;
+    public BufferedImage image;
 
     public void BackgroundRead(String xmlFile)
     {
-        /*name = xmlFile.Split('\\')[1];
-        xmlFile = MapEditor.Project.projectFolder + xmlFile + ".background.gmx";
-        String xmlString = File.ReadAllText(xmlFile).ToString();
-        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
-        {
-            int num = MapEditor.Project.assets.backgrounds.Count - 1;
-            reader.ReadToFollowing("istileset");
-            MapEditor.Project.assets.backgrounds[num].istileset = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("tilewidth");
-            MapEditor.Project.assets.backgrounds[num].tilewidth = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("tileheight");
-            MapEditor.Project.assets.backgrounds[num].tileheight = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("tilexoff");
-            MapEditor.Project.assets.backgrounds[num].tilexoff = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("tileyoff");
-            MapEditor.Project.assets.backgrounds[num].tileyoff = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("tilehsep");
-            MapEditor.Project.assets.backgrounds[num].tilehsep = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("tilevsep");
-            MapEditor.Project.assets.backgrounds[num].tilevsep = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("HTile");
-            MapEditor.Project.assets.backgrounds[num].HTile = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("VTile");
-            MapEditor.Project.assets.backgrounds[num].VTile = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-
-            reader.ReadToFollowing("TextureGroups");
-            int i = 0;
-            reader.ReadToFollowing("TextureGroup" + i);
-            while (reader.ReadToNextSibling("TextureGroup" + i))
-            {
-                MapEditor.Project.assets.backgrounds[num].TextureGroups.Add(reader.ReadElementContentAsInt());
-                i++;
+        name = xmlFile.split("\\\\")[1];
+        xmlFile = xml.Project.projectFolder + xmlFile + ".background.gmx";
+        int num = xml.Project.assets.backgrounds.size() - 1;
+        File fXmlFile = new File(xmlFile);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+            
+            xml.Project.assets.backgrounds.get(num).istileset = doc.getElementsByTagName("istileset").item(0).getTextContent().equals("-1");
+            xml.Project.assets.backgrounds.get(num).tilewidth = Integer.valueOf(doc.getElementsByTagName("tilewidth").item(0).getTextContent());
+            xml.Project.assets.backgrounds.get(num).tileheight = Integer.valueOf(doc.getElementsByTagName("tileheight").item(0).getTextContent());
+            xml.Project.assets.backgrounds.get(num).tilexoff = Integer.valueOf(doc.getElementsByTagName("tilexoff").item(0).getTextContent());
+            xml.Project.assets.backgrounds.get(num).tileyoff = Integer.valueOf(doc.getElementsByTagName("tileyoff").item(0).getTextContent());
+            xml.Project.assets.backgrounds.get(num).tilehsep = Integer.valueOf(doc.getElementsByTagName("tilehsep").item(0).getTextContent());
+            xml.Project.assets.backgrounds.get(num).tilevsep = Integer.valueOf(doc.getElementsByTagName("tilevsep").item(0).getTextContent());
+            xml.Project.assets.backgrounds.get(num).HTile = doc.getElementsByTagName("HTile").item(0).getTextContent().equals("-1");
+            xml.Project.assets.backgrounds.get(num).VTile = doc.getElementsByTagName("VTile").item(0).getTextContent().equals("-1");
+            
+            int temp = 0;
+            int tSize = doc.getElementsByTagName("TextureGroup" + temp).getLength();
+            while (temp < tSize) {
+                xml.Project.assets.backgrounds.get(num).TextureGroups.add(Integer.valueOf(doc.getElementsByTagName("TextureGroup" + temp).item(0).getTextContent()));
+                temp++;
             }
-
-            reader.ReadToFollowing("For3D");
-            MapEditor.Project.assets.backgrounds[num].For3D = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("width");
-            MapEditor.Project.assets.backgrounds[num].width = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("height");
-            MapEditor.Project.assets.backgrounds[num].height = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("data");
-            MapEditor.Project.assets.backgrounds[num].data = reader.ReadElementContentAsString();
-        }*/
+            
+            xml.Project.assets.backgrounds.get(num).For3D = doc.getElementsByTagName("For3D").item(0).getTextContent().equals("-1");
+            xml.Project.assets.backgrounds.get(num).width = Integer.valueOf(doc.getElementsByTagName("width").item(0).getTextContent());
+            xml.Project.assets.backgrounds.get(num).height = Integer.valueOf(doc.getElementsByTagName("height").item(0).getTextContent());
+            xml.Project.assets.backgrounds.get(num).data = doc.getElementsByTagName("data").item(0).getTextContent();
+            xml.Project.assets.backgrounds.get(num).image = ImageIO.read(new File(xml.Project.projectFolder + "background\\" + xml.Project.assets.backgrounds.get(num).data));
+        }
+            catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     @Override

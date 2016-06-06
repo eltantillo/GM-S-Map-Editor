@@ -9,49 +9,76 @@ package xml;
  *
  * @author eltan
  */
-import javafx.stage.FileChooser;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public final class Project {
     public static String projectName;
     public static String projectFolder;
     public static xml.projectAssets.Assets assets;
 
+    public static NodeList xmlScan(Document doc, String assetTag, String folder){
+        NodeList nList = doc.getElementsByTagName(assetTag + "s");
+        NodeList objects = null;
+        for (int temp = 0; temp < nList.getLength(); temp++) {
+            Node nNode = nList.item(temp);
+            if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element eElement = (Element) nNode;
+                if(eElement.getAttribute("name").equals(folder)){
+                    objects = eElement.getElementsByTagName(assetTag);
+                }
+            }
+        }
+        return objects;
+    }
+    
     public static void OpenProject()
     {
-    	FileChooser fileChooser = new FileChooser();
-    	fileChooser.setTitle("Open Resource File");
-    	//fileChooser.showOpenDialog(stage);
+    	JFileChooser fileChooser = new JFileChooser ();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("GameMaker: Studio Project Files", "gmx");
+        fileChooser.setFileFilter(filter);
+        int returnVal = fileChooser.showOpenDialog(null);
+        if(returnVal == JFileChooser.APPROVE_OPTION) {
+            assets = new xml.projectAssets.Assets();
+            projectFolder = fileChooser.getCurrentDirectory().getAbsolutePath() + "\\";
+            projectName = fileChooser.getSelectedFile().getName();
+            
+            System.out.println(projectFolder + projectName);
+            
+            File fXmlFile = new File(projectFolder + projectName);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            try {
+                DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(fXmlFile);
+                NodeList objects = null;
+                
+                objects = xmlScan(doc, "background", "background");
+                for(int i = 0; i < objects.getLength(); i++){
+                    assets.backgrounds.add(new xml.projectAssets.backgrounds.Background());
+                    int num = assets.backgrounds.size() - 1;
+                    assets.backgrounds.get(num).BackgroundRead(objects.item(i).getTextContent());
+                }
+                
+                objects = xmlScan(doc, "room", "rooms");
+                for(int i = 0; i < objects.getLength(); i++){
+                    assets.rooms.add(new xml.projectAssets.rooms.Room());
+                    int num = assets.rooms.size() - 1;
+                    assets.rooms.get(num).RoomRead(objects.item(i).getTextContent());
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     	
-        /*OpenFileDialog projectFile = new OpenFileDialog();
-        projectFile.Filter = "GameMaker: Studio Project Files|*.project.gmx";
-
-        if (projectFile.ShowDialog() == DialogResult.OK)
-        {
-            assets = new ProjectAssets.Assets();
-            projectFolder = Path.GetDirectoryName(projectFile.FileName) + "\\";
-            projectName = Path.GetFileName(projectFile.FileName);
-            String xmlString = File.ReadAllText(projectFolder + projectName).ToString();
-            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
-            {
-                while (reader.ReadToFollowing("background"))
-                {
-                    assets.backgrounds.Add(new ProjectAssets.Backgrounds.Background());
-                    int num = assets.backgrounds.Count - 1;
-                    assets.backgrounds[num].BackgroundRead(reader.ReadElementContentAsString());
-                    assets.backgrounds[num].image = Image.FromFile(projectFolder + "background\\" + assets.backgrounds[num].data);
-                }
-            }
-            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
-            {
-                while (reader.ReadToFollowing("room"))
-                {
-                    assets.rooms.Add(new ProjectAssets.Rooms.Room());
-                    int num = assets.rooms.Count - 1;
-                    assets.rooms[num].RoomRead(reader.ReadElementContentAsString());
-                }
-            }
-
-            List<string> _rooms = new List<string>();
+        /*    List<string> _rooms = new List<string>();
             foreach (ProjectAssets.Rooms.Room room in Project.assets.rooms)
             {
                 _rooms.Add(room.name);

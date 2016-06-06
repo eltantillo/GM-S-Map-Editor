@@ -433,38 +433,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_showGridActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            File fXmlFile = new File("C:\\test.gmx");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
-
-            //objects
-            NodeList nList = doc.getElementsByTagName("objects");            
-            for (int temp = 0; temp < nList.getLength(); temp++) {
-                Node nNode = nList.item(temp);
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    if(eElement.getAttribute("name").equals("objects")){
-                        NodeList objects = eElement.getElementsByTagName("object");
-                        System.out.println("Folder name : " + eElement.getAttribute("name"));
-                        System.out.println("------------------------");
-                        for(int i = 0; i < objects.getLength(); i++){
-                            System.out.println("Object : " + objects.item(i).getTextContent());
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        xml.Project.assets = new xml.projectAssets.Assets();
-        xml.Project.assets.backgrounds.add(0, new xml.projectAssets.backgrounds.Background());
-        xml.Project.assets.rooms.add(0, new xml.projectAssets.rooms.Room());
-        System.out.println(xml.Project.assets.backgrounds.get(0).toString());
-        System.out.println(xml.Project.assets.rooms.get(0).toString());
+        xml.Project.OpenProject();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

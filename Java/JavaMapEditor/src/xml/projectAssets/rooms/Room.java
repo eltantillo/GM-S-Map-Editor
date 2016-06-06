@@ -9,8 +9,18 @@ package xml.projectAssets.rooms;
  *
  * @author eltan
  */
+import java.io.File;
 import java.util.ArrayList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import static xml.Project.assets;
+import static xml.Project.xmlScan;
 
 public class Room {
     public boolean hasChanges = false;
@@ -40,187 +50,143 @@ public class Room {
     public int PhysicsWorldGravityY = 10;
     public double PhysicsWorldPixToMeters = 0.100000001490116;
     public MakerSettings makerSettings = new MakerSettings();
-    public ArrayList<Background> backgrounds = new ArrayList<Background>();
-    public ArrayList<View> views = new ArrayList<View>();
-    public ArrayList<Instance> instances = new ArrayList<Instance>();
-    public ArrayList<Tile> tiles = new ArrayList<Tile>();
+    public ArrayList<Background> backgrounds = new ArrayList<>();
+    public ArrayList<View> views = new ArrayList<>();
+    public ArrayList<Instance> instances = new ArrayList<>();
+    public ArrayList<Tile> tiles = new ArrayList<>();
 
     public void RoomRead(String xmlFile)
     {
-        /*name = xmlFile.Split('\\')[1];
-        xmlFile = MapEditor.Project.projectFolder + xmlFile + ".room.gmx";
-        String xmlString = File.ReadAllText(xmlFile).ToString();
-        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
-        {
-            int num = MapEditor.Project.assets.rooms.Count - 1;
-            reader.ReadToFollowing("caption");
-            MapEditor.Project.assets.rooms[num].caption = reader.ReadElementContentAsString();
-            reader.ReadToFollowing("width");
-            MapEditor.Project.assets.rooms[num].width = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("height");
-            MapEditor.Project.assets.rooms[num].height = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("vsnap");
-            MapEditor.Project.assets.rooms[num].vsnap = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("hsnap");
-            MapEditor.Project.assets.rooms[num].hsnap = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("isometric");
-            MapEditor.Project.assets.rooms[num].isometric = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("speed");
-            MapEditor.Project.assets.rooms[num].speed = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("persistent");
-            MapEditor.Project.assets.rooms[num].persistent = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("colour");
-            MapEditor.Project.assets.rooms[num].colour = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("showcolour");
-            MapEditor.Project.assets.rooms[num].showcolour = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("code");
-            MapEditor.Project.assets.rooms[num].code = reader.ReadElementContentAsString();
-            reader.ReadToFollowing("enableViews");
-            MapEditor.Project.assets.rooms[num].enableViews = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("clearViewBackground");
-            MapEditor.Project.assets.rooms[num].clearViewBackground = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("clearDisplayBuffer");
-            MapEditor.Project.assets.rooms[num].clearDisplayBuffer = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-
-            reader.ReadToFollowing("makerSettings");
-            reader.ReadToFollowing("isSet");
-            MapEditor.Project.assets.rooms[num].makerSettings.isSet = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("w");
-            MapEditor.Project.assets.rooms[num].makerSettings.w = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("h");
-            MapEditor.Project.assets.rooms[num].makerSettings.h = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("showGrid");
-            MapEditor.Project.assets.rooms[num].makerSettings.showGrid = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("showObjects");
-            MapEditor.Project.assets.rooms[num].makerSettings.showObjects = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("showTiles");
-            MapEditor.Project.assets.rooms[num].makerSettings.showTiles = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("showBackgrounds");
-            MapEditor.Project.assets.rooms[num].makerSettings.showBackgrounds = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("showForegrounds");
-            MapEditor.Project.assets.rooms[num].makerSettings.showForegrounds = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("showViews");
-            MapEditor.Project.assets.rooms[num].makerSettings.showViews = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("deleteUnderlyingObj");
-            MapEditor.Project.assets.rooms[num].makerSettings.deleteUnderlyingObj = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("deleteUnderlyingTiles");
-            MapEditor.Project.assets.rooms[num].makerSettings.deleteUnderlyingTiles = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("page");
-            MapEditor.Project.assets.rooms[num].makerSettings.page = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("xoffset");
-            MapEditor.Project.assets.rooms[num].makerSettings.xoffset = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("yoffset");
-            MapEditor.Project.assets.rooms[num].makerSettings.yoffset = reader.ReadElementContentAsInt();
-
-            int i = 0;
-            reader.ReadToFollowing("background");
-            do
-            {
-                MapEditor.Project.assets.rooms[num].backgrounds.Add(new ProjectAssets.Rooms.Background());
-                MapEditor.Project.assets.rooms[num].backgrounds[i].visible = Convert.Tobooleanean(Convert.ToInt32(reader.GetAttribute("visible")));
-                MapEditor.Project.assets.rooms[num].backgrounds[i].foreground = Convert.Tobooleanean(Convert.ToInt32(reader.GetAttribute("foreground")));
-                MapEditor.Project.assets.rooms[num].backgrounds[i].name = reader.GetAttribute("name");
-                MapEditor.Project.assets.rooms[num].backgrounds[i].x = Convert.ToInt32(reader.GetAttribute("x"));
-                MapEditor.Project.assets.rooms[num].backgrounds[i].y = Convert.ToInt32(reader.GetAttribute("y"));
-                MapEditor.Project.assets.rooms[num].backgrounds[i].htiled = Convert.Tobooleanean(Convert.ToInt32(reader.GetAttribute("htiled")));
-                MapEditor.Project.assets.rooms[num].backgrounds[i].vtiled = Convert.Tobooleanean(Convert.ToInt32(reader.GetAttribute("vtiled")));
-                MapEditor.Project.assets.rooms[num].backgrounds[i].hspeed = Convert.ToInt32(reader.GetAttribute("hspeed"));
-                MapEditor.Project.assets.rooms[num].backgrounds[i].vspeed = Convert.ToInt32(reader.GetAttribute("vspeed"));
-                MapEditor.Project.assets.rooms[num].backgrounds[i].stretch = Convert.Tobooleanean(Convert.ToInt32(reader.GetAttribute("stretch")));
-                i++;
-            } while (reader.ReadToNextSibling("background"));
-
-            i = 0;
-            reader.ReadToFollowing("view");
-            do
-            {
-                MapEditor.Project.assets.rooms[num].views.Add(new ProjectAssets.Rooms.View());
-                MapEditor.Project.assets.rooms[num].views[i].visible = Convert.Tobooleanean(Convert.ToInt32(reader.GetAttribute("visible")));
-                MapEditor.Project.assets.rooms[num].views[i].objName = reader.GetAttribute("objName");
-                MapEditor.Project.assets.rooms[num].views[i].xview = Convert.ToInt32(reader.GetAttribute("xview"));
-                MapEditor.Project.assets.rooms[num].views[i].yview = Convert.ToInt32(reader.GetAttribute("yview"));
-                MapEditor.Project.assets.rooms[num].views[i].wview = Convert.ToInt32(reader.GetAttribute("wview"));
-                MapEditor.Project.assets.rooms[num].views[i].hview = Convert.ToInt32(reader.GetAttribute("hview"));
-                MapEditor.Project.assets.rooms[num].views[i].xport = Convert.ToInt32(reader.GetAttribute("xport"));
-                MapEditor.Project.assets.rooms[num].views[i].yport = Convert.ToInt32(reader.GetAttribute("yport"));
-                MapEditor.Project.assets.rooms[num].views[i].wport = Convert.ToInt32(reader.GetAttribute("wport"));
-                MapEditor.Project.assets.rooms[num].views[i].hport = Convert.ToInt32(reader.GetAttribute("hport"));
-                MapEditor.Project.assets.rooms[num].views[i].hborder = Convert.ToInt32(reader.GetAttribute("hborder"));
-                MapEditor.Project.assets.rooms[num].views[i].vborder = Convert.ToInt32(reader.GetAttribute("vborder"));
-                MapEditor.Project.assets.rooms[num].views[i].hspeed = Convert.ToInt32(reader.GetAttribute("hspeed"));
-                MapEditor.Project.assets.rooms[num].views[i].vspeed = Convert.ToInt32(reader.GetAttribute("vspeed"));
-                i++;
-            } while (reader.ReadToNextSibling("view"));
-
-            i = 0;
-            reader.ReadToFollowing("instances");
-            if (!reader.IsEmptyElement)
-            {
-                reader.ReadToFollowing("instance");
-                do
-                {
-                    MapEditor.Project.assets.rooms[num].instances.Add(new ProjectAssets.Rooms.Instance());
-                    MapEditor.Project.assets.rooms[num].instances[i].objName = reader.GetAttribute("objName");
-                    MapEditor.Project.assets.rooms[num].instances[i].x = Convert.ToInt32(reader.GetAttribute("x"));
-                    MapEditor.Project.assets.rooms[num].instances[i].y = Convert.ToInt32(reader.GetAttribute("y"));
-                    MapEditor.Project.assets.rooms[num].instances[i].name = reader.GetAttribute("name");
-                    MapEditor.Project.assets.rooms[num].instances[i].locked = Convert.Tobooleanean(Convert.ToInt32(reader.GetAttribute("locked")));
-                    MapEditor.Project.assets.rooms[num].instances[i].code = reader.GetAttribute("code");
-                    MapEditor.Project.assets.rooms[num].instances[i].scaleX = Convert.ToDouble(reader.GetAttribute("scaleX"));
-                    MapEditor.Project.assets.rooms[num].instances[i].scaleY = Convert.ToDouble(reader.GetAttribute("scaleY"));
-                    MapEditor.Project.assets.rooms[num].instances[i].colour = reader.GetAttribute("colour");
-                    MapEditor.Project.assets.rooms[num].instances[i].rotation = Convert.ToDouble(reader.GetAttribute("rotation"));
-                    i++;
-                } while (reader.ReadToNextSibling("instance"));
+        name = xmlFile.split("\\\\")[1];
+        xmlFile = xml.Project.projectFolder + xmlFile + ".room.gmx";
+        int num = xml.Project.assets.rooms.size() - 1;
+        File fXmlFile = new File(xmlFile);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+            
+            xml.Project.assets.rooms.get(num).caption = doc.getElementsByTagName("caption").item(0).getTextContent();
+            xml.Project.assets.rooms.get(num).width = Integer.valueOf(doc.getElementsByTagName("width").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).height = Integer.valueOf(doc.getElementsByTagName("height").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).vsnap = Integer.valueOf(doc.getElementsByTagName("vsnap").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).hsnap = Integer.valueOf(doc.getElementsByTagName("hsnap").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).isometric = Integer.valueOf(doc.getElementsByTagName("isometric").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).speed = Integer.valueOf(doc.getElementsByTagName("speed").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).persistent = doc.getElementsByTagName("persistent").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).colour = Integer.valueOf(doc.getElementsByTagName("colour").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).showcolour = doc.getElementsByTagName("showcolour").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).code = doc.getElementsByTagName("code").item(0).getTextContent();
+            xml.Project.assets.rooms.get(num).enableViews = doc.getElementsByTagName("enableViews").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).clearViewBackground = doc.getElementsByTagName("clearViewBackground").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).clearDisplayBuffer = doc.getElementsByTagName("clearDisplayBuffer").item(0).getTextContent().equals("-1");
+            
+            //Maker Settings
+            xml.Project.assets.rooms.get(num).makerSettings.isSet = doc.getElementsByTagName("isSet").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.w = Integer.valueOf(doc.getElementsByTagName("w").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).makerSettings.h = Integer.valueOf(doc.getElementsByTagName("h").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).makerSettings.showGrid = doc.getElementsByTagName("showGrid").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.showObjects = doc.getElementsByTagName("showObjects").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.showTiles = doc.getElementsByTagName("showTiles").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.showBackgrounds = doc.getElementsByTagName("showBackgrounds").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.showForegrounds = doc.getElementsByTagName("showForegrounds").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.showViews = doc.getElementsByTagName("showViews").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.deleteUnderlyingObj = doc.getElementsByTagName("deleteUnderlyingObj").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.deleteUnderlyingTiles = doc.getElementsByTagName("deleteUnderlyingTiles").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).makerSettings.page = Integer.valueOf(doc.getElementsByTagName("page").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).makerSettings.xoffset = Integer.valueOf(doc.getElementsByTagName("xoffset").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).makerSettings.yoffset = Integer.valueOf(doc.getElementsByTagName("yoffset").item(0).getTextContent());
+            
+            //Backgrounds
+            NodeList backgrounds = doc.getElementsByTagName("background");
+            for(int i = 0; i < backgrounds.getLength(); i++){
+                Element background = (Element)backgrounds.item(i);
+                xml.Project.assets.rooms.get(num).backgrounds.add(new xml.projectAssets.rooms.Background());
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).visible = background.getAttribute("visible").equals("-1");
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).foreground = background.getAttribute("foreground").equals("-1");
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).name = background.getAttribute("name");
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).x = Integer.valueOf(background.getAttribute("x"));
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).y = Integer.valueOf(background.getAttribute("y"));
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).htiled = background.getAttribute("htiled").equals("-1");
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).vtiled = background.getAttribute("vtiled").equals("-1");
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).hspeed = Integer.valueOf(background.getAttribute("hspeed"));
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).vspeed = Integer.valueOf(background.getAttribute("vspeed"));
+                xml.Project.assets.rooms.get(num).backgrounds.get(i).stretch = background.getAttribute("stretch").equals("-1");
             }
-
-            i = 0;
-            reader.ReadToFollowing("tiles");
-            if (!reader.IsEmptyElement)
-            {
-                reader.ReadToFollowing("tile");
-                do
-                {
-                    //MessageBox.Show(reader.GetAttribute("bgName"));
-                    MapEditor.Project.assets.rooms[num].tiles.Add(new ProjectAssets.Rooms.Tile());
-                    MapEditor.Project.assets.rooms[num].tiles[i].bgName = reader.GetAttribute("bgName");
-                    MapEditor.Project.assets.rooms[num].tiles[i].x = Convert.ToInt32(reader.GetAttribute("x"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].y = Convert.ToInt32(reader.GetAttribute("y"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].w = Convert.ToInt32(reader.GetAttribute("w"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].h = Convert.ToInt32(reader.GetAttribute("h"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].xo = Convert.ToInt32(reader.GetAttribute("xo"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].yo = Convert.ToInt32(reader.GetAttribute("yo"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].id = Convert.ToInt32(reader.GetAttribute("id"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].name = reader.GetAttribute("name");
-                    MapEditor.Project.assets.rooms[num].tiles[i].depth = Convert.ToInt32(reader.GetAttribute("depth"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].locked = Convert.Tobooleanean(Convert.ToInt32(reader.GetAttribute("locked")));
-                    MapEditor.Project.assets.rooms[num].tiles[i].colour = reader.GetAttribute("colour");
-                    MapEditor.Project.assets.rooms[num].tiles[i].scaleX = Convert.ToDouble(reader.GetAttribute("scaleX"));
-                    MapEditor.Project.assets.rooms[num].tiles[i].scaleY = Convert.ToDouble(reader.GetAttribute("scaleY"));
-                    i++;
-                } while (reader.ReadToNextSibling("tile"));
+            
+            //Views
+            NodeList views = doc.getElementsByTagName("view");
+            for(int i = 0; i < backgrounds.getLength(); i++){
+                Element view = (Element)views.item(i);
+                xml.Project.assets.rooms.get(num).views.add(new xml.projectAssets.rooms.View());
+                xml.Project.assets.rooms.get(num).views.get(i).visible = view.getAttribute("visible").equals("-1");
+                xml.Project.assets.rooms.get(num).views.get(i).objName = view.getAttribute("objName");
+                xml.Project.assets.rooms.get(num).views.get(i).xview = Integer.valueOf(view.getAttribute("xview"));
+                xml.Project.assets.rooms.get(num).views.get(i).yview = Integer.valueOf(view.getAttribute("yview"));
+                xml.Project.assets.rooms.get(num).views.get(i).wview = Integer.valueOf(view.getAttribute("wview"));
+                xml.Project.assets.rooms.get(num).views.get(i).hview = Integer.valueOf(view.getAttribute("hview"));
+                xml.Project.assets.rooms.get(num).views.get(i).xport = Integer.valueOf(view.getAttribute("xport"));
+                xml.Project.assets.rooms.get(num).views.get(i).yport = Integer.valueOf(view.getAttribute("yport"));
+                xml.Project.assets.rooms.get(num).views.get(i).wport = Integer.valueOf(view.getAttribute("wport"));
+                xml.Project.assets.rooms.get(num).views.get(i).hport = Integer.valueOf(view.getAttribute("hport"));
+                xml.Project.assets.rooms.get(num).views.get(i).hborder = Integer.valueOf(view.getAttribute("hborder"));
+                xml.Project.assets.rooms.get(num).views.get(i).vborder = Integer.valueOf(view.getAttribute("vborder"));
+                xml.Project.assets.rooms.get(num).views.get(i).hspeed = Integer.valueOf(view.getAttribute("hspeed"));
+                xml.Project.assets.rooms.get(num).views.get(i).vspeed = Integer.valueOf(view.getAttribute("vspeed"));
             }
-
-            reader.ReadToFollowing("PhysicsWorld");
-            MapEditor.Project.assets.rooms[num].PhysicsWorld = Convert.Tobooleanean(reader.ReadElementContentAsInt());
-            reader.ReadToFollowing("PhysicsWorldTop");
-            MapEditor.Project.assets.rooms[num].PhysicsWorldTop = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("PhysicsWorldLeft");
-            MapEditor.Project.assets.rooms[num].PhysicsWorldLeft = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("PhysicsWorldRight");
-            MapEditor.Project.assets.rooms[num].PhysicsWorldRight = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("PhysicsWorldBottom");
-            MapEditor.Project.assets.rooms[num].PhysicsWorldBottom = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("PhysicsWorldGravityX");
-            MapEditor.Project.assets.rooms[num].PhysicsWorldGravityX = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("PhysicsWorldGravityY");
-            MapEditor.Project.assets.rooms[num].PhysicsWorldGravityY = reader.ReadElementContentAsInt();
-            reader.ReadToFollowing("PhysicsWorldPixToMeters");
-            MapEditor.Project.assets.rooms[num].PhysicsWorldPixToMeters = reader.ReadElementContentAsDouble();
-            reader.ReadToFollowing("caption");
-        }*/
+            
+            //Instances
+            NodeList instances = doc.getElementsByTagName("instance");
+            for(int i = 0; i < backgrounds.getLength(); i++){
+                Element instance = (Element)instances.item(i);
+                xml.Project.assets.rooms.get(num).instances.add(new xml.projectAssets.rooms.Instance());
+                xml.Project.assets.rooms.get(num).instances.get(i).objName = instance.getAttribute("objName");
+                xml.Project.assets.rooms.get(num).instances.get(i).x = Integer.valueOf(instance.getAttribute("x"));
+                xml.Project.assets.rooms.get(num).instances.get(i).y = Integer.valueOf(instance.getAttribute("y"));
+                xml.Project.assets.rooms.get(num).instances.get(i).name = instance.getAttribute("name");
+                xml.Project.assets.rooms.get(num).instances.get(i).locked = instance.getAttribute("locked").equals("-1");
+                xml.Project.assets.rooms.get(num).instances.get(i).code = instance.getAttribute("code");
+                xml.Project.assets.rooms.get(num).instances.get(i).scaleX = Integer.valueOf(instance.getAttribute("scaleX"));
+                xml.Project.assets.rooms.get(num).instances.get(i).scaleY = Integer.valueOf(instance.getAttribute("scaleY"));
+                xml.Project.assets.rooms.get(num).instances.get(i).colour = instance.getAttribute("colour");
+                xml.Project.assets.rooms.get(num).instances.get(i).rotation = Integer.valueOf(instance.getAttribute("rotation"));
+            }
+            
+            //Tiles
+            NodeList tiles = doc.getElementsByTagName("tile");
+            for(int i = 0; i < backgrounds.getLength(); i++){
+                Element tile = (Element)tiles.item(i);
+                xml.Project.assets.rooms.get(num).instances.add(new xml.projectAssets.rooms.Instance());
+                xml.Project.assets.rooms.get(num).tiles.get(i).bgName = tile.getAttribute("bgName");
+                xml.Project.assets.rooms.get(num).tiles.get(i).x = Integer.valueOf(tile.getAttribute("x"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).y = Integer.valueOf(tile.getAttribute("y"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).w = Integer.valueOf(tile.getAttribute("w"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).h = Integer.valueOf(tile.getAttribute("h"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).xo = Integer.valueOf(tile.getAttribute("xo"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).yo = Integer.valueOf(tile.getAttribute("yo"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).id = Integer.valueOf(tile.getAttribute("id"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).name = tile.getAttribute("name");
+                xml.Project.assets.rooms.get(num).tiles.get(i).depth = Integer.valueOf(tile.getAttribute("depth"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).locked = tile.getAttribute("locked").equals("-1");
+                xml.Project.assets.rooms.get(num).tiles.get(i).colour = tile.getAttribute("colour");
+                xml.Project.assets.rooms.get(num).tiles.get(i).scaleX = Integer.valueOf(tile.getAttribute("scaleX"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).scaleY = Integer.valueOf(tile.getAttribute("scaleY"));
+            }
+            
+            xml.Project.assets.rooms.get(num).PhysicsWorld = doc.getElementsByTagName("PhysicsWorld").item(0).getTextContent().equals("-1");
+            xml.Project.assets.rooms.get(num).PhysicsWorldTop = Integer.valueOf(doc.getElementsByTagName("PhysicsWorldTop").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).PhysicsWorldLeft = Integer.valueOf(doc.getElementsByTagName("PhysicsWorldLeft").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).PhysicsWorldRight = Integer.valueOf(doc.getElementsByTagName("PhysicsWorldRight").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).PhysicsWorldBottom = Integer.valueOf(doc.getElementsByTagName("PhysicsWorldBottom").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).PhysicsWorldGravityX = Integer.valueOf(doc.getElementsByTagName("PhysicsWorldGravityX").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).PhysicsWorldGravityY = Integer.valueOf(doc.getElementsByTagName("PhysicsWorldGravityY").item(0).getTextContent());
+            xml.Project.assets.rooms.get(num).PhysicsWorldPixToMeters = Double.valueOf(doc.getElementsByTagName("PhysicsWorldPixToMeters").item(0).getTextContent());
+        }
+            catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
+    
     public String toString()
     {
         String backgroundsTag = "";

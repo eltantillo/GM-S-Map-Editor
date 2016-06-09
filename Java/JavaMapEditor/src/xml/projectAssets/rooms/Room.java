@@ -19,9 +19,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 public class Room {
-    public boolean hasChanges = false;
-    public boolean isNew = false;
-    public String name = "";
+    public boolean hasChanges = true;
+    public boolean isNew = true;
+    public String name = "room" + String.valueOf(xml.Project.assets.rooms.size());
     public String caption = "";
     public int width = 1024;
     public int height = 768;
@@ -54,6 +54,8 @@ public class Room {
     public void RoomRead(String xmlFile)
     {
         name = xmlFile.split("\\\\")[1];
+        hasChanges = false;
+        isNew = false;
         xmlFile = xml.Project.projectFolder + xmlFile + ".room.gmx";
         int num = xml.Project.assets.rooms.size() - 1;
         File fXmlFile = new File(xmlFile);

@@ -20,7 +20,7 @@ import org.w3c.dom.Document;
 public class Background {
     public boolean hasChanges = false;
     public boolean isNew = false;
-    public String name = "";
+    public String name = "background" + String.valueOf(xml.Project.assets.rooms.size());
     public boolean istileset;
     public int tilewidth;
     public int tileheight;
@@ -40,6 +40,8 @@ public class Background {
     public void BackgroundRead(String xmlFile)
     {
         name = xmlFile.split("\\\\")[1];
+        hasChanges = false;
+        isNew = false;
         xmlFile = xml.Project.projectFolder + xmlFile + ".background.gmx";
         int num = xml.Project.assets.backgrounds.size() - 1;
         File fXmlFile = new File(xmlFile);

@@ -19,6 +19,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -203,23 +204,61 @@ public final class Project {
     }
 
     public static void saveProject(){
-        File fXmlFile = new File(projectFolder + projectName);
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         try {
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
+            File fXmlFile                    = new File(projectFolder + projectName);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder         = dbFactory.newDocumentBuilder();
+            Document doc                     = dBuilder.parse(fXmlFile);
             
-            NodeList nodes = doc.getElementsByTagName("background");
+            NodeList nodes = doc.getElementsByTagName("backgrounds");
+            for (xml.projectAssets.backgrounds.Background background : assets.backgrounds)
+            {
+                if (background.isNew)
+                {
+                    Text a    = doc.createTextNode("background\\" + background.name); 
+                    Element p = doc.createElement("background"); 
+                    p.appendChild(a);
+                    nodes.item(0).appendChild(p);
+                }
+                if (background.hasChanges)
+                {
+                    File bgFile = new File(projectFolder + "background\\" + background.name + ".background.gmx");
+                    bgFile.delete();
+                    bgFile.createNewFile();
+                    FileWriter fw = new FileWriter(bgFile);
+                    fw.write(background.toString());
+                    fw.flush();
+                    fw.close();
+                }
+            }
             
-            Text a = doc.createTextNode("background\\bg_lvl_measure"); 
-            Element p = doc.createElement("background"); 
-            p.appendChild(a);
-            
-            nodes.item(0).getParentNode().appendChild(p);
+            nodes = doc.getElementsByTagName("rooms");
+            for(xml.projectAssets.rooms.Room room : assets.rooms)
+            {
+                if (room.isNew)
+                {
+                    Text a    = doc.createTextNode("rooms\\" + room.name);
+                    Element p = doc.createElement("room");
+                    p.appendChild(a);
+                    nodes.item(0).appendChild(p);
+                }
+                if (room.hasChanges)
+                {
+                    File bgFile = new File(projectFolder + "rooms\\" + room.name + ".room.gmx");
+                    bgFile.delete();
+                    bgFile.createNewFile();
+                    FileWriter fw = new FileWriter(bgFile);
+                    fw.write(room.toString());
+                    fw.flush();
+                    fw.close();
+                }
+            }
             
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            Result output = new StreamResult(new File("C:\\Users\\eltan\\Desktop\\output.xml"));
-            Source input = new DOMSource(doc);
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+            Source input  = new DOMSource(doc);
+            Result output = new StreamResult(new File(projectFolder + projectName));
 
             transformer.transform(input, output);
             
@@ -228,34 +267,6 @@ public final class Project {
         catch (Exception e) {
             e.printStackTrace();
         }
-            //var doc = XDocument.Parse(File.ReadAllText(projectFolder + projectName));
-
-            for(xml.projectAssets.rooms.Room room : assets.rooms)
-            {
-                if (room.isNew)
-                {
-                    //doc.Descendants("rooms").FirstOrDefault().Add(new XElement("room", "rooms\\" + room.name));
-                    //File.WriteAllText(projectFolder + "rooms\\" + room.name + ".room.gmx", room.ToString());
-                }
-                if (room.hasChanges)
-                {
-                    //File.WriteAllText(projectFolder + "rooms\\" + room.name + ".room.gmx", room.ToString());
-                }
-            }
-
-            for (xml.projectAssets.backgrounds.Background background : assets.backgrounds)
-            {
-                if (background.isNew)
-                {
-                    //doc.Descendants("backgrounds").FirstOrDefault().Add(new XElement("background", "background\\" + background.name));
-                }
-                if (background.hasChanges)
-                {
-                    //File.WriteAllText(projectFolder + "background\\" + background.name + ".background.gmx", background.ToString());
-                }
-            }
-
-            //doc.Save(projectFolder + projectName);
     }
 
     //Save As

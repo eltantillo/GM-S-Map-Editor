@@ -16,11 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import static xml.Project.assets;
-import static xml.Project.xmlScan;
 
 public class Room {
     public boolean hasChanges = false;
@@ -116,7 +112,7 @@ public class Room {
             
             //Views
             NodeList views = doc.getElementsByTagName("view");
-            for(int i = 0; i < backgrounds.getLength(); i++){
+            for(int i = 0; i < views.getLength(); i++){
                 Element view = (Element)views.item(i);
                 xml.Project.assets.rooms.get(num).views.add(new xml.projectAssets.rooms.View());
                 xml.Project.assets.rooms.get(num).views.get(i).visible = view.getAttribute("visible").equals("-1");
@@ -137,7 +133,7 @@ public class Room {
             
             //Instances
             NodeList instances = doc.getElementsByTagName("instance");
-            for(int i = 0; i < backgrounds.getLength(); i++){
+            for(int i = 0; i < instances.getLength(); i++){
                 Element instance = (Element)instances.item(i);
                 xml.Project.assets.rooms.get(num).instances.add(new xml.projectAssets.rooms.Instance());
                 xml.Project.assets.rooms.get(num).instances.get(i).objName = instance.getAttribute("objName");
@@ -154,9 +150,9 @@ public class Room {
             
             //Tiles
             NodeList tiles = doc.getElementsByTagName("tile");
-            for(int i = 0; i < backgrounds.getLength(); i++){
+            for(int i = 0; i < tiles.getLength(); i++){
                 Element tile = (Element)tiles.item(i);
-                xml.Project.assets.rooms.get(num).instances.add(new xml.projectAssets.rooms.Instance());
+                xml.Project.assets.rooms.get(num).tiles.add(new xml.projectAssets.rooms.Tile());
                 xml.Project.assets.rooms.get(num).tiles.get(i).bgName = tile.getAttribute("bgName");
                 xml.Project.assets.rooms.get(num).tiles.get(i).x = Integer.valueOf(tile.getAttribute("x"));
                 xml.Project.assets.rooms.get(num).tiles.get(i).y = Integer.valueOf(tile.getAttribute("y"));

@@ -65,6 +65,8 @@ public class Interfaz extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         showGrid = new javax.swing.JToggleButton();
         tilesCombo = new javax.swing.JComboBox<>();
+        dephs = new javax.swing.JComboBox<>();
+        button1 = new java.awt.Button();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -176,6 +178,22 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(tilesCombo);
+
+        dephs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        dephs.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                dephsItemStateChanged(evt);
+            }
+        });
+        jToolBar2.add(dephs);
+
+        button1.setLabel("Layer");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(button1);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -315,7 +333,14 @@ public class Interfaz extends javax.swing.JFrame {
         
         maps.setListData(i);
         maps.setEnabled(true);
-        System.out.println("Termino el proceso no se porque truena esta shit");
+        
+        dcbm = new DefaultComboBoxModel();
+        
+        for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+        
+        dephs.setModel(dcbm);
+        
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -389,6 +414,24 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.update(map, 0, 0);
     }//GEN-LAST:event_tilesComboItemStateChanged
 
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        try{
+            currentSimpleRoom.changeLayer(Integer.parseInt(tw.getText()));
+        }
+        catch(Exception ex){
+
+        }
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void dephsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_dephsItemStateChanged
+        try{
+            currentSimpleRoom.changeLayer(Integer.parseInt(dephs.getSelectedItem().toString()));
+        }
+        catch(Exception ex){
+            
+        }
+    }//GEN-LAST:event_dephsItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -411,6 +454,8 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button button1;
+    private javax.swing.JComboBox<String> dephs;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;

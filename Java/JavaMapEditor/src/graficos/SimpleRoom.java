@@ -57,6 +57,7 @@ public class SimpleRoom {
         tw = 32;
         th = 32;
         iperma = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
+        //System.out.println("current Layer: " +layerDepth.get(0) );
     }
     /**
      * Este metodo activa o desactiva el grid visual en el Map Area
@@ -83,6 +84,7 @@ public class SimpleRoom {
      * @param youClickedY 
      */
     public void click(JLabel p, int youClickedX, int youClickedY){
+        System.out.println("Click.size(): "+Selection.selection.size());
         youClickedX = toGrid(youClickedX, 1);
         youClickedY = toGrid(youClickedY, 2);
         ArrayList<Tile> selection = Selection.selection;
@@ -111,16 +113,32 @@ public class SimpleRoom {
      * @param x 
      */
     public void changeLayer(int x){
-    	if(x<layerTile.size()){
-            currentLayer = x;
+        for(Integer d : layerDepth){
+            if(d == x){
+                currentLayer = layerDepth.indexOf(d);
+                System.out.println("Current Layer:"+ layerDepth.get(currentLayer));
+                return;
+            }
         }
-        else{
-            layerTile.add(createEmptyTile());
-            changeLayer(x);
-        }
+        // no existe la capa //
+        layerDepth.add(x);
+        // agregamos la capa a la lista de capas //
+        ArrayList<Tile> ts = new ArrayList();
+        Tile t = new Tile();
+        t.depth = x;
+        ts.add(t);
+        layerTile.add(new ArrayList());
+        Collections.sort(layerTile, new Comparator<ArrayList<Tile>>() {
+            @Override
+            public int compare(ArrayList<Tile> t, ArrayList<Tile> t2) {
+                return new Integer(t2.get(0).depth).compareTo(t.get(0).depth);
+            }
+        });
+        Collections.sort(layerDepth);
+        changeLayer(x);
     }
     /**
-     * Actualiza interfaz grafica... No tocar esto puede matar todo...
+     * Actualiza interfaz grafica... 
      * @param p
      * @param x
      * @param y 
@@ -190,7 +208,7 @@ public class SimpleRoom {
         layerTile = new ArrayList<>();
         
         // Agregando 5 capas //
-        layerTile.add(createEmptyTile());
+        layerTile.add(new ArrayList<>());
     }
     /**
      * Este metodo es para agregar la selccion del rectangulo en el mapa
@@ -227,13 +245,14 @@ public class SimpleRoom {
             }
         }
     }
-
-/* Metodos pribados La muerte le espera a quien se oponga a este mensaje*/
-    /* :Final: para funciones especificas del sistema */
-    private ArrayList<Tile> createEmptyTile(){
-        ArrayList<Tile> t = new ArrayList<>();
-        return t;
+    public String[] getDephts(){
+        String [] strs = new String[layerDepth.size()];
+        for(int dep: layerDepth){
+            strs[layerDepth.indexOf(dep)] = dep +"";
+        }
+        return strs;
     }
+/* Metodos pribados La muerte le espera a quien se oponga a este mensaje*/
     private boolean isInside(Rectangle or, Rectangle in) {
         return or.intersects(in) && in.intersects(or);
     }

@@ -113,28 +113,37 @@ public class SimpleRoom {
      * @param x 
      */
     public void changeLayer(int x){
+        System.out.println(layerDepth);
         for(Integer d : layerDepth){
-            if(d == x){
+            if(d.equals(x)){
                 currentLayer = layerDepth.indexOf(d);
-                System.out.println("Current Layer:"+ layerDepth.get(currentLayer));
+                System.out.println("Salir");
                 return;
             }
         }
         // no existe la capa //
+        System.out.println("No existe");
         layerDepth.add(x);
         // agregamos la capa a la lista de capas //
         ArrayList<Tile> ts = new ArrayList();
         Tile t = new Tile();
         t.depth = x;
         ts.add(t);
-        layerTile.add(new ArrayList());
+        layerTile.add(ts);
         Collections.sort(layerTile, new Comparator<ArrayList<Tile>>() {
             @Override
             public int compare(ArrayList<Tile> t, ArrayList<Tile> t2) {
                 return new Integer(t2.get(0).depth).compareTo(t.get(0).depth);
             }
         });
-        Collections.sort(layerDepth);
+        Collections.sort(layerDepth, new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    return o2.compareTo(o1);
+                }
+            }
+        );
+        System.out.println("Recursivo");
         changeLayer(x);
     }
     /**

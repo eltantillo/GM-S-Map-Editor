@@ -296,6 +296,11 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JTextField" name="layerMaster">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="NuevaLayer"/>
+          </Properties>
+        </Component>
         <Component class="java.awt.Button" name="button1">
           <Properties>
             <Property name="label" type="java.lang.String" value="Layer"/>

@@ -64,6 +64,7 @@ public class Interfaz extends javax.swing.JFrame {
         showGrid = new javax.swing.JToggleButton();
         tilesCombo = new javax.swing.JComboBox<>();
         dephs = new javax.swing.JComboBox<>();
+        layerMaster = new javax.swing.JTextField();
         button1 = new java.awt.Button();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -184,6 +185,9 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(dephs);
+
+        layerMaster.setText("NuevaLayer");
+        jToolBar2.add(layerMaster);
 
         button1.setLabel("Layer");
         button1.addActionListener(new java.awt.event.ActionListener() {
@@ -401,6 +405,13 @@ public class Interfaz extends javax.swing.JFrame {
             currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(maps.getSelectedIndex()));
             currentSimpleRoom.update(map, 0, 0);
             currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
+            
+            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        
+            for(String s : currentSimpleRoom.getDephts())
+                dcbm.addElement(s);
+
+            dephs.setModel(dcbm);
         }
     }//GEN-LAST:event_mapsMouseClicked
 
@@ -414,7 +425,13 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         try{
-            currentSimpleRoom.changeLayer(Integer.parseInt(tw.getText()));
+            currentSimpleRoom.changeLayer(Integer.parseInt(layerMaster.getText()));
+            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        
+            for(String s : currentSimpleRoom.getDephts())
+                dcbm.addElement(s);
+
+            dephs.setModel(dcbm);
         }
         catch(Exception ex){
 
@@ -486,6 +503,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JSplitPane jSplitPane4;
     private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JTextField layerMaster;
     private javax.swing.JLabel map;
     private javax.swing.JList<String> maps;
     private javax.swing.JToggleButton showGrid;

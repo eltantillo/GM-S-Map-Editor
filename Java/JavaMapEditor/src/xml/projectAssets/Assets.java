@@ -15,5 +15,6 @@ import java.util.List;
 public class Assets {
     public List<xml.projectAssets.backgrounds.Background> backgrounds = new ArrayList<>();
     public List<xml.projectAssets.rooms.Room> rooms = new ArrayList<>();
+    public List<graficos.BackgroundTile> backgroundT = new ArrayList<>();
 }
 

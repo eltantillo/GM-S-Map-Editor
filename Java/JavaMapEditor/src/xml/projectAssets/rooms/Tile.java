@@ -31,4 +31,24 @@ public class Tile {
     {
         this.name = "inst_" + Integer.toHexString(ThreadLocalRandom.current().nextInt(0, 999999999 + 1));
     }
+    
+    @Override
+    public Tile clone(){
+        Tile t = new Tile();
+        t.bgName = bgName;
+        t.name = name;
+        t.colour = colour;
+        t.scaleX = scaleX;
+        t.scaleY = scaleY;
+        t.locked = locked;
+        t.x = x;//room
+        t.y = y;//room
+        t.w = w;
+        t.h = h;
+        t.xo = xo;//tileset
+        t.yo = yo;//tileset
+        t.id = id;
+        return t;
+    }
+    
 }

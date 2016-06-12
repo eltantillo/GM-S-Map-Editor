@@ -146,10 +146,14 @@ public class Interfaz extends javax.swing.JFrame {
         jToolBar2.setRollover(true);
 
         tw.setText("width");
+        tw.setMaximumSize(new java.awt.Dimension(10, 20));
+        tw.setMinimumSize(new java.awt.Dimension(10, 20));
         jToolBar2.add(tw);
         jToolBar2.add(jSeparator2);
 
         th.setText("height");
+        th.setMaximumSize(new java.awt.Dimension(10, 20));
+        th.setMinimumSize(new java.awt.Dimension(10, 20));
         jToolBar2.add(th);
         jToolBar2.add(jSeparator1);
 

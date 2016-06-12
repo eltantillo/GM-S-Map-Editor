@@ -68,11 +68,11 @@ public class Interfaz extends javax.swing.JFrame {
         dephs = new javax.swing.JComboBox<>();
         button1 = new java.awt.Button();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        fileMenu = new javax.swing.JMenu();
+        newProjectMenu = new javax.swing.JMenuItem();
+        openMenu = new javax.swing.JMenuItem();
+        saveMenu = new javax.swing.JMenuItem();
+        saveAsMenu = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         tileset1 = new javax.swing.JMenuItem();
         tileset2 = new javax.swing.JMenuItem();
@@ -81,7 +81,12 @@ public class Interfaz extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jSplitPane3.setDividerLocation(250);
+        jSplitPane3.setDividerSize(4);
         jSplitPane3.setToolTipText("");
+
+        jSplitPane4.setDividerLocation(200);
+        jSplitPane4.setDividerSize(4);
 
         tiles.setText("tiles");
         tiles.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -199,41 +204,41 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jMenuBar1.setDoubleBuffered(true);
 
-        jMenu1.setText("File");
+        fileMenu.setText("File");
 
-        jMenuItem9.setText("New Project...");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        newProjectMenu.setText("New Project...");
+        newProjectMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                newProjectMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem9);
+        fileMenu.add(newProjectMenu);
 
-        jMenuItem8.setText("Open...");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        openMenu.setText("Open...");
+        openMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                openMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem8);
+        fileMenu.add(openMenu);
 
-        jMenuItem7.setText("Save");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        saveMenu.setText("Save");
+        saveMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                saveMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem7);
+        fileMenu.add(saveMenu);
 
-        jMenuItem6.setText("Save As...");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        saveAsMenu.setText("Save As...");
+        saveAsMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                saveAsMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem6);
+        fileMenu.add(saveAsMenu);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(fileMenu);
 
         jMenu3.setText("TileSet");
 
@@ -261,7 +266,7 @@ public class Interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+            .addComponent(jSplitPane3)
             .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -269,7 +274,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE))
+                .addComponent(jSplitPane3))
         );
 
         pack();
@@ -296,15 +301,15 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.grid();
     }//GEN-LAST:event_showGridActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void saveAsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuActionPerformed
         xml.Project.saveProjectAs();
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_saveAsMenuActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void saveMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuActionPerformed
         xml.Project.saveProject();
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_saveMenuActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void openMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuActionPerformed
         xml.Project.openProject();
         currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(0));
         currentBackground.drawBackgroundTile(tiles);
@@ -341,11 +346,11 @@ public class Interfaz extends javax.swing.JFrame {
         
         dephs.setModel(dcbm);
         
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_openMenuActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void newProjectMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectMenuActionPerformed
         xml.Project.newProject();
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_newProjectMenuActionPerformed
 
     private void tilesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseReleased
         mousePosFinX = evt.getX();
@@ -456,15 +461,11 @@ public class Interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button button1;
     private javax.swing.JComboBox<String> dephs;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -476,6 +477,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLabel map;
     private javax.swing.JList<String> maps;
+    private javax.swing.JMenuItem newProjectMenu;
+    private javax.swing.JMenuItem openMenu;
+    private javax.swing.JMenuItem saveAsMenu;
+    private javax.swing.JMenuItem saveMenu;
     private javax.swing.JToggleButton showGrid;
     private javax.swing.JTextField th;
     private javax.swing.JLabel tiles;

@@ -68,6 +68,7 @@ public class Interfaz extends javax.swing.JFrame {
         dephs = new javax.swing.JComboBox<>();
         layerMaster = new javax.swing.JTextField();
         button1 = new java.awt.Button();
+        topLayer = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newProjectMenu = new javax.swing.JMenuItem();
@@ -170,7 +171,7 @@ public class Interfaz extends javax.swing.JFrame {
         jToolBar2.add(jButton1);
         jToolBar2.add(jSeparator3);
 
-        showGrid.setText("Grid: ON");
+        showGrid.setText("Grid");
         showGrid.setFocusable(false);
         showGrid.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         showGrid.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -207,6 +208,17 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(button1);
+
+        topLayer.setText("TopLayer");
+        topLayer.setFocusable(false);
+        topLayer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        topLayer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        topLayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                topLayerActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(topLayer);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -299,6 +311,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
             currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
+            currentSimpleRoom.update(map, 0, 0);
         }
         catch(Exception ex){
         
@@ -307,6 +320,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void showGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGridActionPerformed
         currentSimpleRoom.grid();
+        currentSimpleRoom.update(map, 0, 0);
     }//GEN-LAST:event_showGridActionPerformed
 
     private void saveAsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuActionPerformed
@@ -423,6 +437,8 @@ public class Interfaz extends javax.swing.JFrame {
                 dcbm.addElement(s);
 
             dephs.setModel(dcbm);
+            showGrid.setSelected(false);
+            topLayer.setSelected(false);
         }
     }//GEN-LAST:event_mapsMouseClicked
 
@@ -457,6 +473,11 @@ public class Interfaz extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_dephsItemStateChanged
+
+    private void topLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topLayerActionPerformed
+        currentSimpleRoom.topLayer();
+        currentSimpleRoom.update(map, 0, 0);
+    }//GEN-LAST:event_topLayerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -509,6 +530,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> tilesCombo;
     private javax.swing.JMenuItem tileset1;
     private javax.swing.JMenuItem tileset2;
+    private javax.swing.JToggleButton topLayer;
     private javax.swing.JTextField tw;
     // End of variables declaration//GEN-END:variables
 }

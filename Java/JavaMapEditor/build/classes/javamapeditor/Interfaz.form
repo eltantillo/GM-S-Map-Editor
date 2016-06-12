@@ -273,7 +273,7 @@
         </Component>
         <Component class="javax.swing.JToggleButton" name="showGrid">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Grid: ON"/>
+            <Property name="text" type="java.lang.String" value="Grid"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -325,6 +325,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToggleButton" name="topLayer">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="TopLayer"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topLayerActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

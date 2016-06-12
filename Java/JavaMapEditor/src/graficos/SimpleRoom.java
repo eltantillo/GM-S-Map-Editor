@@ -25,7 +25,7 @@ public class SimpleRoom {
     private int currentLayer;
     private ArrayList<ArrayList<Tile>> layerTile;
     private ArrayList<Integer> layerDepth;
-    private boolean grid;
+    private boolean grid,topLayers;
   
 // Constantes //
     private static final String NO_BACKGROUND = "NONE_BACKGROUND_FOUND";
@@ -65,6 +65,13 @@ public class SimpleRoom {
      */
     public void grid(){
         grid =! grid;
+    }
+    /**
+     * Este metodo activa o desactiva las capas superiores
+     * @param 
+     */
+    public void topLayer(){
+        topLayers =! topLayers;
     }
     
     /**
@@ -160,7 +167,12 @@ public class SimpleRoom {
         BufferedImage blank = ImageTools.clone(iperma);
         // por cada capa dibuja tus tiles //
         for(int tempX = 0; tempX<layerTile.size(); tempX++){
-            blank = ImageTools.copyPaste(drawLayer(tempX), 0, 0, blank);
+            if(tempX<=currentLayer || topLayers){
+                blank = ImageTools.copyPaste(drawLayer(tempX), 0, 0, blank);
+            }
+            if(tempX == currentLayer){
+                blank = ImageTools.copyPaste(Selection.selectGraphic, x, y, blank);
+            }
         }
         
         // Dibujando Grid //
@@ -175,9 +187,6 @@ public class SimpleRoom {
         }
         
         // dibuja seleccion //
-        blank = ImageTools.copyPaste(Selection.selectGraphic, x, y, blank);
-        
-        // dibuja grid //
         if(!Selection.isTileSet){
             Graphics g = blank.getGraphics();
             int difx = Selection.fin.x - Selection.ini.x;

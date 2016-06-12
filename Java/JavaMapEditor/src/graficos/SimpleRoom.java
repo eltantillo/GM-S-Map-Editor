@@ -8,12 +8,15 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import javafx.scene.shape.Line;
+import java.util.Collections;
+import java.util.Comparator;
+import xml.projectAssets.rooms.Room;
+import xml.projectAssets.backgrounds.Background;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import xml.*;
+import xml.projectAssets.rooms.Tile;
 
 
 public class SimpleRoom {
@@ -21,34 +24,73 @@ public class SimpleRoom {
     private BufferedImage iperma;
     private int currentLayer;
     private ArrayList<ArrayList<Tile>> layerTile;
+    private ArrayList<Integer> layerDepth;
     private boolean grid;
   
 // Constantes //
     private static final String NO_BACKGROUND = "NONE_BACKGROUND_FOUND";
     
+    /**
+     * Este es el constructor que inicializa a partir de un room
+     * @param Room R
+     */
+    public SimpleRoom(Room r){
+        layerDepth = new ArrayList<>();
+        // Cargando los Tiles //
+        layerTile = new ArrayList<>();
+        
+        Collections.sort(r.tiles, new Comparator<Tile>() {
+            @Override
+            public int compare(Tile o1, Tile o2) {
+                return new Integer(o2.depth).compareTo(new Integer(o1.depth));
+            }
+        });
+        
+        for(Tile t : r.tiles){
+            setTile(t);
+        }
+        
+        currentLayer = 0;
+        w = r.width;
+        h = r.height;
+        System.out.println("w,h: "+ r.width +","+r.height);
+        tw = 32;
+        th = 32;
+        iperma = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
+    }
+    /**
+     * Este metodo activa o desactiva el grid visual en el Map Area
+     * @param 
+     */
     public void grid(){
         grid =! grid;
     }
     
-    public int toGrid(int mouse, int type){
-        return ((int)Math.floor(mouse / (type == 1 ? tw : th)) * (type == 1 ? tw : th));
-    }
-    
+    /**
+     * cambia la grid por la nueva. Requiere width y height del cuadro nuevo en
+     * el grid
+     * @param tw
+     * @param th 
+     */
     public void changeGrid(int tw, int th){
         this.tw = tw;
         this.th = th;
     }
-    /* :Final: Dibuja la seleccion en el mapa tras un click */
+    /**
+     * Metodo que guarda los cambios al dar click en el mapa.
+     * @param p Jlabel
+     * @param youClickedX
+     * @param youClickedY 
+     */
     public void click(JLabel p, int youClickedX, int youClickedY){
-        System.out.println("You click Position: "+youClickedX+" " +youClickedY);
+        youClickedX = toGrid(youClickedX, 1);
+        youClickedY = toGrid(youClickedY, 2);
         ArrayList<Tile> selection = Selection.selection;
         if(Selection.isTileSet){
-            int defaultX = selection.get(0).xo;
-            int defaultY = selection.get(0).yo;
             for(Tile tile : selection){
                 Tile temp = tile.clone();
-                temp.x = youClickedX + (tile.xo-defaultX);
-                temp.y = youClickedY + (tile.yo-defaultY);
+                temp.x = youClickedX + tile.x*tile.w;
+                temp.y = youClickedY + tile.y*tile.h;
                 checkForTile(temp);
             }
         }
@@ -64,7 +106,10 @@ public class SimpleRoom {
         }
         update(p,youClickedX,youClickedY);
     }
-    /* :Final: Permite cambiar de capa, Si la capa no existe crea capas hasta llegar a la capa */
+    /**
+     * Permite cambiar de capa, Si la capa no existe crea la capa nueva
+     * @param x 
+     */
     public void changeLayer(int x){
     	if(x<layerTile.size()){
             currentLayer = x;
@@ -74,8 +119,16 @@ public class SimpleRoom {
             changeLayer(x);
         }
     }
-    /* :Final: Actualiza el grafico */
+    /**
+     * Actualiza interfaz grafica... No tocar esto puede matar todo...
+     * @param p
+     * @param x
+     * @param y 
+     */
     public void update(JLabel p, int x, int y){
+        x = toGrid(x, 1);
+        y = toGrid(y, 2);
+        
         // Dibuja los tiles existentes //
         BufferedImage blank = ImageTools.clone(iperma);
         // por cada capa dibuja tus tiles //
@@ -97,7 +150,7 @@ public class SimpleRoom {
         // dibuja seleccion //
         blank = ImageTools.copyPaste(Selection.selectGraphic, x, y, blank);
         
-        // dibuja cuadro de seleccion si esta seleccionado en mapa //
+        // dibuja grid //
         if(!Selection.isTileSet){
             Graphics g = blank.getGraphics();
             int difx = Selection.fin.x - Selection.ini.x;
@@ -118,7 +171,14 @@ public class SimpleRoom {
     	p.setMaximumSize(new Dimension(blank.getWidth(), blank.getHeight()));
         p.setIcon(new ImageIcon(blank));
     }
-    /* :Final: Crear un Room con sus multicapas. */
+    /**
+     * Constructor basico para crear nuevo SimpleRoom a partir de datos nuevos.
+     * Este metodo seria util a la hora de crear otro SimpleRoom nuevo.
+     * @param _w
+     * @param _h
+     * @param _tw
+     * @param _th 
+     */
     public SimpleRoom(int _w,int _h, int _tw, int _th){
         w = _w* _tw;
         h = _h* _th;
@@ -131,13 +191,19 @@ public class SimpleRoom {
         
         // Agregando 5 capas //
         layerTile.add(createEmptyTile());
-        layerTile.add(createEmptyTile());
-        layerTile.add(createEmptyTile());
-        layerTile.add(createEmptyTile());
-        layerTile.add(createEmptyTile());
     }
-    /* :Final: Este metodo es para agregar la selccion del rectangulo */
+    /**
+     * Este metodo es para agregar la selccion del rectangulo en el mapa
+     * @param inicio
+     * @param fin 
+     */
     public void setSelection(Point inicio,Point fin) {
+        inicio.x = toGrid(inicio.x, 1);
+        inicio.y = toGrid(inicio.y, 2);
+        
+        fin.x = toGrid(fin.x, 1);
+        fin.y = toGrid(fin.y, 2);
+        
         Selection.ini = new Point(
             (inicio.x > fin.x ? fin.x : inicio.x),
             (inicio.y > fin.y ? fin.y : inicio.y)
@@ -160,37 +226,36 @@ public class SimpleRoom {
                 }
             }
         }
-        
     }
-/* Metodos pribados */
+
+/* Metodos pribados La muerte le espera a quien se oponga a este mensaje*/
     /* :Final: para funciones especificas del sistema */
     private ArrayList<Tile> createEmptyTile(){
         ArrayList<Tile> t = new ArrayList<>();
         return t;
     }
-    
     private boolean isInside(Rectangle or, Rectangle in) {
         return or.intersects(in) && in.intersects(or);
     }
-    
     /* :Final: Busca si existe tile en la posion vista */
     private void checkForTile(Tile t){
-        System.out.println("T: "+t.x+","+t.y+" "+t.w+","+t.h);
         ArrayList<Tile> tt = new ArrayList<>();
         boolean checked = false;
-        for(Tile c: layerTile.get(currentLayer)){
-            System.out.print("C: "+c.x+","+c.y+" "+c.w+","+c.h);
-            if(isInside(new Rectangle(c.x,c.y,c.w,c.h), new Rectangle(t.x,t.y,t.w,t.h))){
-                System.out.println(" Pertenece:");
-                if(!checked){
-                    tt.add(t);
-                    checked = true;
+        try{
+            for(Tile c: layerTile.get(currentLayer)){
+                if(isInside(new Rectangle(c.x,c.y,c.w,c.h), new Rectangle(t.x,t.y,t.w,t.h))){
+                    if(!checked){
+                        tt.add(t);
+                        checked = true;
+                    }
+                }
+                else{
+                    tt.add(c);
                 }
             }
-            else{
-                System.out.println(" No pertenece:");
-                tt.add(c);
-            }
+        }
+        catch(IndexOutOfBoundsException ex){
+            layerTile.add(new ArrayList());
         }
         if(layerTile.get(currentLayer).isEmpty() || !checked){
             tt.add(t);
@@ -201,8 +266,8 @@ public class SimpleRoom {
     /* Busca que tileset es el utilizado */
     private int checkForTileSet(String btString){
         int where = 0;
-        for( BackgroundTile bt : container.Container.bts){
-            if (bt.sameMap(btString)){
+        for(Background bt: xml.Project.assets.backgrounds){
+            if (btString.equals(bt.name)){
                 return where;
             }
             where++;
@@ -223,10 +288,30 @@ public class SimpleRoom {
         BufferedImage blank = ImageTools.clone(iperma);
         for(Tile t : layerTile.get(layer)){
             if(!t.bgName.equals(NO_BACKGROUND)){
-                ImageTools.copyPaste(container.Container.bts.get(checkForTileSet(t.bgName)).getImageInPoint(new Point(t.xo,t.yo)), t.x, t.y, blank);
+                ImageTools.copyPaste(xml.Project.assets.backgroundT.get(checkForTileSet(t.bgName)).getImageInPoint(new Point(t.xo,t.yo)), t.x, t.y, blank);
             }
         }
         return blank;
     }
-    
+    private int toGrid(int mouse, int type){
+        return ((int)Math.floor(mouse / (type == 1 ? tw : th)) * (type == 1 ? tw : th));
+    }
+    private void setTile(Tile t){
+        System.out.println(t.depth);
+        for(ArrayList<Tile> layer : layerTile){
+            for(Tile tt: layer){
+                if(tt.depth == t.depth){
+                    layer.add(t);
+                    System.out.println("Agregado" + layer.size());
+                    return;
+                }
+            }
+        }
+        ArrayList<Tile> tiles = new ArrayList();
+        layerDepth.add(t.depth);
+        tiles.add(t);
+        layerTile.add(tiles);
+        System.out.println("No existe");
+    }
+ 
 }

@@ -3,7 +3,7 @@ package graficos;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import xml.Tile;
+import xml.projectAssets.rooms.Tile;
 
 public class Selection {
     public static Point ini = new Point(0,0), fin = new Point(0,0);

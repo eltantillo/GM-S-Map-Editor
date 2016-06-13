@@ -27,20 +27,14 @@ public class ImageTools {
         gr.dispose();
         return paste;
     }
-    public static BufferedImage copyPasteAlfa(BufferedImage copy,int x,int y, BufferedImage paste){
-        Graphics2D gr = paste.createGraphics();
-        gr.drawImage(copy, x, y, copy.getWidth(), copy.getHeight(), null);
-        gr.dispose();
-        setAlpha((byte)125,paste);
-        return paste;
-    } 
     static BufferedImage clone(BufferedImage bi) {
         ColorModel cm = bi.getColorModel();
         boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
         WritableRaster raster = bi.copyData(null);
         return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
     }
-    public static void setAlpha(byte alpha, BufferedImage obj_img) {       
+    public static void setAlpha(BufferedImage obj_img) {
+        byte alpha = (byte)128;
         alpha %= 0xff; 
         for (int cx=0;cx<obj_img.getWidth();cx++) {          
             for (int cy=0;cy<obj_img.getHeight();cy++) {

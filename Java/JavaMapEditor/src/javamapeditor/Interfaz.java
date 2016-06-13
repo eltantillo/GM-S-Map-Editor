@@ -24,13 +24,8 @@ public class Interfaz extends javax.swing.JFrame {
     private int mouseMapPosX,mouseMapPosFinX;
     private int mouseMapPosY,mouseMapPosFinY;
     
-    private boolean dragClick;
-    private boolean rectangle;
-    
     private SimpleRoom currentSimpleRoom;
     private BackgroundTile currentBackground;
-    
-    private boolean mouseEnter;
     
     //private JLabel seleccion;
     
@@ -78,6 +73,9 @@ public class Interfaz extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         tileset1 = new javax.swing.JMenuItem();
         tileset2 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        undoSubMenu = new javax.swing.JMenuItem();
+        redoSubMenu = new javax.swing.JMenuItem();
 
         jMenu4.setText("jMenu4");
 
@@ -123,6 +121,12 @@ public class Interfaz extends javax.swing.JFrame {
         map.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mapMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                mapMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                mapMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mapMousePressed(evt);
@@ -279,6 +283,28 @@ public class Interfaz extends javax.swing.JFrame {
         jMenu3.add(tileset2);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu1.setText("Edit");
+
+        undoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
+        undoSubMenu.setText("undo");
+        undoSubMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoSubMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(undoSubMenu);
+
+        redoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
+        redoSubMenu.setText("redo");
+        redoSubMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                redoSubMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(redoSubMenu);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -479,6 +505,26 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.update(map, 0, 0);
     }//GEN-LAST:event_topLayerActionPerformed
 
+    private void undoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoSubMenuActionPerformed
+        currentSimpleRoom.undo();
+        currentSimpleRoom.update(map, 0, 0);
+    }//GEN-LAST:event_undoSubMenuActionPerformed
+
+    private void redoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redoSubMenuActionPerformed
+        currentSimpleRoom.redo();
+        currentSimpleRoom.update(map, 0, 0);
+    }//GEN-LAST:event_redoSubMenuActionPerformed
+
+    private void mapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMouseEntered
+        if(currentSimpleRoom !=null)
+            currentSimpleRoom.showSelection(true);
+    }//GEN-LAST:event_mapMouseEntered
+
+    private void mapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMouseExited
+        if(currentSimpleRoom !=null)
+            currentSimpleRoom.showSelection(false);
+    }//GEN-LAST:event_mapMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -505,6 +551,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> dephs;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -522,6 +569,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JList<String> maps;
     private javax.swing.JMenuItem newProjectMenu;
     private javax.swing.JMenuItem openMenu;
+    private javax.swing.JMenuItem redoSubMenu;
     private javax.swing.JMenuItem saveAsMenu;
     private javax.swing.JMenuItem saveMenu;
     private javax.swing.JToggleButton showGrid;
@@ -532,5 +580,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem tileset2;
     private javax.swing.JToggleButton topLayer;
     private javax.swing.JTextField tw;
+    private javax.swing.JMenuItem undoSubMenu;
     // End of variables declaration//GEN-END:variables
 }

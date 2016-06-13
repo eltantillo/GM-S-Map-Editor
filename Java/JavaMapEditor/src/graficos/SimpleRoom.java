@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Stack;
 import xml.projectAssets.rooms.Room;
 import xml.projectAssets.backgrounds.Background;
 
@@ -21,18 +22,23 @@ import xml.projectAssets.rooms.Tile;
 
 public class SimpleRoom {
     private int w, h,tw,th;
-    private BufferedImage iperma;
     private int currentLayer;
     private ArrayList<ArrayList<Tile>> layerTile;
+    
+    private Stack<ArrayList<ArrayList<Tile>>> undo;
+    private Stack<ArrayList<ArrayList<Tile>>> redo;
+    
     private ArrayList<Integer> layerDepth;
-    private boolean grid,topLayers;
+    private boolean grid,topLayers,inMap;
+    int prevX,prevY;
+    
   
 // Constantes //
     private static final String NO_BACKGROUND = "NONE_BACKGROUND_FOUND";
     
     /**
      * Este es el constructor que inicializa a partir de un room
-     * @param Room R
+     * @param r
      */
     public SimpleRoom(Room r){
         layerDepth = new ArrayList<>();
@@ -53,11 +59,11 @@ public class SimpleRoom {
         currentLayer = 0;
         w = r.width;
         h = r.height;
-        System.out.println("w,h: "+ r.width +","+r.height);
+        
         tw = 32;
         th = 32;
-        iperma = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
-        //System.out.println("current Layer: " +layerDepth.get(0) );
+        undo = new Stack();
+        redo = new Stack();
     }
     /**
      * Este metodo activa o desactiva el grid visual en el Map Area
@@ -86,50 +92,52 @@ public class SimpleRoom {
     }
     /**
      * Metodo que guarda los cambios al dar click en el mapa.
-     * @param p Jlabel
+     * @param p 
      * @param youClickedX
      * @param youClickedY 
      */
     public void click(JLabel p, int youClickedX, int youClickedY){
-        System.out.println("Click.size(): "+Selection.selection.size());
         youClickedX = toGrid(youClickedX, 1);
         youClickedY = toGrid(youClickedY, 2);
-        ArrayList<Tile> selection = Selection.selection;
-        if(Selection.isTileSet){
-            for(Tile tile : selection){
-                Tile temp = tile.clone();
-                temp.x = youClickedX + tile.x*tile.w;
-                temp.y = youClickedY + tile.y*tile.h;
-                checkForTile(temp);
+        if(prevX != youClickedX || prevY !=youClickedY){
+            undo.add((ArrayList)layerTile.clone());
+            System.out.println("Click.size(): "+Selection.selection.size());
+            ArrayList<Tile> selection = Selection.selection;
+            if(Selection.isTileSet){
+                for(Tile tile : selection){
+                    Tile temp = tile.clone();
+                    temp.x = youClickedX + tile.x*tile.w;
+                    temp.y = youClickedY + tile.y*tile.h;
+                    checkForTile(temp);
+                }
             }
-        }
-        else{
-            int defaultX = selection.get(0).x;
-            int defaultY = selection.get(0).y;
-            for(Tile tile : selection){
-                Tile temp = tile.clone();
-                temp.x = youClickedX + (temp.x-defaultX);
-                temp.y = youClickedY + (temp.y-defaultY);
-                checkForTile(temp);
+            else{
+                int defaultX = selection.get(0).x;
+                int defaultY = selection.get(0).y;
+                for(Tile tile : selection){
+                    Tile temp = tile.clone();
+                    temp.x = youClickedX + (temp.x-defaultX);
+                    temp.y = youClickedY + (temp.y-defaultY);
+                    checkForTile(temp);
+                }
             }
+            update(p,youClickedX,youClickedY);
+            prevX = youClickedX;
+            prevY = youClickedY;
         }
-        update(p,youClickedX,youClickedY);
     }
     /**
      * Permite cambiar de capa, Si la capa no existe crea la capa nueva
      * @param x 
      */
     public void changeLayer(int x){
-        System.out.println(layerDepth);
         for(Integer d : layerDepth){
             if(d.equals(x)){
                 currentLayer = layerDepth.indexOf(d);
-                System.out.println("Salir");
                 return;
             }
         }
         // no existe la capa //
-        System.out.println("No existe");
         layerDepth.add(x);
         // agregamos la capa a la lista de capas //
         ArrayList<Tile> ts = new ArrayList();
@@ -143,6 +151,7 @@ public class SimpleRoom {
                 return new Integer(t2.get(0).depth).compareTo(t.get(0).depth);
             }
         });
+        layerTile.get(layerTile.indexOf(ts)).remove(t);
         Collections.sort(layerDepth, new Comparator<Integer>() {
                 @Override
                 public int compare(Integer o1, Integer o2) {
@@ -150,7 +159,6 @@ public class SimpleRoom {
                 }
             }
         );
-        System.out.println("Recursivo");
         changeLayer(x);
     }
     /**
@@ -164,13 +172,17 @@ public class SimpleRoom {
         y = toGrid(y, 2);
         
         // Dibuja los tiles existentes //
-        BufferedImage blank = ImageTools.clone(iperma);
+        BufferedImage blank = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
         // por cada capa dibuja tus tiles //
         for(int tempX = 0; tempX<layerTile.size(); tempX++){
-            if(tempX<=currentLayer || topLayers){
+            if(tempX<currentLayer || topLayers){
                 blank = ImageTools.copyPaste(drawLayer(tempX), 0, 0, blank);
             }
-            if(tempX == currentLayer){
+            if(tempX==currentLayer){
+                ImageTools.setAlpha(blank);
+                blank = ImageTools.copyPaste(drawLayer(tempX), 0, 0, blank);
+            }
+            if(tempX == currentLayer && inMap){
                 blank = ImageTools.copyPaste(Selection.selectGraphic, x, y, blank);
             }
         }
@@ -220,13 +232,15 @@ public class SimpleRoom {
         h = _h* _th;
         tw = _tw;
         th = _th;
-        iperma = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
         currentLayer = 0;
         
         layerTile = new ArrayList<>();
         
         // Agregando 5 capas //
         layerTile.add(new ArrayList<>());
+        
+        undo = new Stack();
+        redo = new Stack();
     }
     /**
      * Este metodo es para agregar la selccion del rectangulo en el mapa
@@ -258,7 +272,7 @@ public class SimpleRoom {
                     Selection.selection.add(layerTile.get(currentLayer).get(searchTile(new Point(x,y))).clone());
                 }
                 catch(Exception ex){
-                    System.out.println("FileNotfound");
+                    System.out.println("FileNotfound"+ex);
                 }
             }
         }
@@ -322,7 +336,7 @@ public class SimpleRoom {
         throw new FileNotFoundException();
     }
     private BufferedImage drawLayer(int layer){
-        BufferedImage blank = ImageTools.clone(iperma);
+        BufferedImage blank = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
         for(Tile t : layerTile.get(layer)){
             if(!t.bgName.equals(NO_BACKGROUND)){
                 ImageTools.copyPaste(xml.Project.assets.backgroundT.get(checkForTileSet(t.bgName)).getImageInPoint(new Point(t.xo,t.yo)), t.x, t.y, blank);
@@ -334,12 +348,10 @@ public class SimpleRoom {
         return ((int)Math.floor(mouse / (type == 1 ? tw : th)) * (type == 1 ? tw : th));
     }
     private void setTile(Tile t){
-        System.out.println(t.depth);
         for(ArrayList<Tile> layer : layerTile){
             for(Tile tt: layer){
                 if(tt.depth == t.depth){
                     layer.add(t);
-                    System.out.println("Agregado" + layer.size());
                     return;
                 }
             }
@@ -348,7 +360,24 @@ public class SimpleRoom {
         layerDepth.add(t.depth);
         tiles.add(t);
         layerTile.add(tiles);
-        System.out.println("No existe");
     }
- 
+    public void undo(){
+        System.out.println(undo.size());
+        if(!undo.isEmpty()){
+            ArrayList l = undo.pop();
+            redo.push((ArrayList)l.clone());
+            layerTile = l;
+        }
+    }
+    public void redo(){
+        System.out.println(redo.size());
+        if(!redo.isEmpty()){
+            ArrayList l = redo.pop();
+            undo.push((ArrayList)l.clone());
+            layerTile = l;
+        }
+    }
+    public void showSelection(boolean show){
+        inMap = show;
+    }
 }

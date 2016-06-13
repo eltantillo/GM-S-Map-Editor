@@ -167,25 +167,37 @@ public class SimpleRoom {
      * @param x
      * @param y 
      */
-    public void update(JLabel p, int x, int y){
-        x = toGrid(x, 1);
-        y = toGrid(y, 2);
-        
+    public void update(JLabel inf, JLabel sup){
         // Dibuja los tiles existentes //
         BufferedImage blank = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
+        
+        // Actualiza grafico //
+        inf.setMinimumSize(new Dimension(blank.getWidth(), blank.getHeight()));
+    	inf.setPreferredSize(new Dimension(blank.getWidth(), blank.getHeight()));
+    	inf.setMaximumSize(new Dimension(blank.getWidth(), blank.getHeight()));
+        inf.setIcon(new ImageIcon(blank));
+        
         // por cada capa dibuja tus tiles //
         for(int tempX = 0; tempX<layerTile.size(); tempX++){
-            if(tempX<currentLayer || topLayers){
+            if(tempX<currentLayer){
                 blank = ImageTools.copyPaste(drawLayer(tempX), 0, 0, blank);
             }
-            if(tempX==currentLayer){
+            else if(tempX==currentLayer){
                 ImageTools.setAlpha(blank);
                 blank = ImageTools.copyPaste(drawLayer(tempX), 0, 0, blank);
+                
             }
-            if(tempX == currentLayer && inMap){
-                blank = ImageTools.copyPaste(Selection.selectGraphic, x, y, blank);
+            else{
+                
             }
         }
+        if(topLayers){
+            sup.setMinimumSize(new Dimension(blank.getWidth(), blank.getHeight()));
+            sup.setPreferredSize(new Dimension(blank.getWidth(), blank.getHeight()));
+            sup.setMaximumSize(new Dimension(blank.getWidth(), blank.getHeight()));
+            sup.setIcon(new ImageIcon(blank));
+        }
+        
         
         // Dibujando Grid //
         if(grid){
@@ -213,11 +225,7 @@ public class SimpleRoom {
             }
         }
         
-        // Actualiza grafico //
-        p.setMinimumSize(new Dimension(blank.getWidth(), blank.getHeight()));
-    	p.setPreferredSize(new Dimension(blank.getWidth(), blank.getHeight()));
-    	p.setMaximumSize(new Dimension(blank.getWidth(), blank.getHeight()));
-        p.setIcon(new ImageIcon(blank));
+        
     }
     /**
      * Constructor basico para crear nuevo SimpleRoom a partir de datos nuevos.

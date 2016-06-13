@@ -49,7 +49,9 @@ public class Interfaz extends javax.swing.JFrame {
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
         mapScrollPane = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         map = new javax.swing.JLabel();
+        selection = new javax.swing.JLabel();
         leftTabs = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         tilesCombo = new javax.swing.JComboBox<>();
@@ -118,17 +120,45 @@ public class Interfaz extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mapMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                mapMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                mapMouseExited(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mapMousePressed(evt);
             }
         });
-        mapScrollPane.setViewportView(map);
+
+        selection.setText("jLabel4");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 34, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(selection)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(map)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 223, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(selection)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(map, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        mapScrollPane.setViewportView(jPanel1);
 
         jSplitPane4.setRightComponent(mapScrollPane);
 
@@ -165,7 +195,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tilesCombo, 0, 238, Short.MAX_VALUE)
+            .addComponent(tilesCombo, 0, 48, Short.MAX_VALUE)
             .addComponent(tilesScrollPane)
         );
         jPanel2Layout.setVerticalGroup(
@@ -173,7 +203,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(tilesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
         );
 
         leftTabs.addTab("Tiles", jPanel2);
@@ -696,14 +726,14 @@ public class Interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
@@ -728,6 +758,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem redoSubMenu;
     private javax.swing.JMenuItem saveAsMenu;
     private javax.swing.JMenuItem saveMenu;
+    private javax.swing.JLabel selection;
     private javax.swing.JToggleButton showGrid;
     private javax.swing.JTextField th;
     private javax.swing.JLabel tiles;

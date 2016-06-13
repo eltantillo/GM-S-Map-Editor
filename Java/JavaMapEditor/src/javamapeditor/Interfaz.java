@@ -417,7 +417,6 @@ public class Interfaz extends javax.swing.JFrame {
 
         menuBar.add(jMenu3);
 
-<<<<<<< HEAD
         jMenu1.setText("Edit");
 
         undoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
@@ -438,12 +437,9 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jMenu1.add(redoSubMenu);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(jMenu1);
 
-        setJMenuBar(jMenuBar1);
-=======
         setJMenuBar(menuBar);
->>>>>>> 93a0c50f2aba2ca9088382ec28baf817602f34f9
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -653,7 +649,6 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_layerDeleteActionPerformed
 
-<<<<<<< HEAD
     private void undoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoSubMenuActionPerformed
         currentSimpleRoom.undo();
         currentSimpleRoom.update(map, 0, 0);
@@ -674,12 +669,10 @@ public class Interfaz extends javax.swing.JFrame {
             currentSimpleRoom.showSelection(false);
     }//GEN-LAST:event_mapMouseExited
 
-=======
     private void layerChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerChangeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_layerChangeActionPerformed
  
->>>>>>> 93a0c50f2aba2ca9088382ec28baf817602f34f9
     /**
      * @param args the command line arguments
      */
@@ -703,16 +696,13 @@ public class Interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu fileMenu;
-<<<<<<< HEAD
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
-=======
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
->>>>>>> 93a0c50f2aba2ca9088382ec28baf817602f34f9
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;

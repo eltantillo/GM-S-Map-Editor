@@ -194,7 +194,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="190" max="32767" attributes="0"/>
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -205,7 +205,14 @@
                           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="map" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bottomLayers" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="topLayers" min="-2" pref="190" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -224,7 +231,14 @@
                           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="map" min="-2" pref="223" max="-2" attributes="0"/>
+                                  <Component id="bottomLayers" min="-2" pref="223" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="topLayers" min="-2" pref="223" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -232,7 +246,7 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="map">
+                    <Component class="javax.swing.JLabel" name="bottomLayers">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
@@ -241,15 +255,20 @@
                         <Property name="verticalAlignment" type="int" value="1"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="mapMouseDragged"/>
-                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="mapMouseMoved"/>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mapMouseClicked"/>
-                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mapMousePressed"/>
+                        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bottomLayersMouseDragged"/>
+                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="bottomLayersMouseMoved"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bottomLayersMouseClicked"/>
+                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bottomLayersMousePressed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="selection">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel4"/>
+                        <Property name="text" type="java.lang.String" value="Selection"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="topLayers">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Top Layers"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -441,7 +460,7 @@
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="twFocusGained"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tw.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!tw.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(tw.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(map, 0, 0);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tw.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!tw.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(tw.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(bottomLayers, 0, 0);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler1">
@@ -482,7 +501,7 @@
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="thFocusGained"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="th.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!th.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(th.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(map, 0, 0);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="th.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!th.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(th.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(bottomLayers, 0, 0);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">

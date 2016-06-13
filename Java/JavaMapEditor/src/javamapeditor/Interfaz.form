@@ -439,7 +439,7 @@
             <Property name="text" type="java.lang.String" value="Layer:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="depthComboBox">
+        <Component class="javax.swing.JComboBox" name="layersComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
@@ -449,7 +449,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="depthComboBoxItemStateChanged"/>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="layersComboBoxItemStateChanged"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -462,6 +462,9 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="layerChangeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="layerDelete">
           <Properties>
@@ -470,14 +473,16 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="layerDeleteActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="java.awt.Button" name="newLayer">
+        <Component class="javax.swing.JButton" name="newLayer">
           <Properties>
-            <Property name="actionCommand" type="java.lang.String" value="New Layer"/>
-            <Property name="label" type="java.lang.String" value="New Layer"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[74, 24]"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="New Layer"/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newLayerActionPerformed"/>

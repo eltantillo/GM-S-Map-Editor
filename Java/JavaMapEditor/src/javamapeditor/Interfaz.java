@@ -39,6 +39,7 @@ public class Interfaz extends javax.swing.JFrame {
     
     public Interfaz() {
         initComponents();
+        layersComboBox.requestFocusInWindow();
     }
 
     /**
@@ -76,10 +77,10 @@ public class Interfaz extends javax.swing.JFrame {
         topLayer = new javax.swing.JToggleButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jLabel3 = new javax.swing.JLabel();
-        depthComboBox = new javax.swing.JComboBox<>();
+        layersComboBox = new javax.swing.JComboBox<>();
         layerChange = new javax.swing.JButton();
         layerDelete = new javax.swing.JButton();
-        newLayer = new java.awt.Button();
+        newLayer = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -310,29 +311,40 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel3.setText("Layer:");
         toolBar.add(jLabel3);
 
-        depthComboBox.setMaximumSize(new java.awt.Dimension(56, 20));
-        depthComboBox.addItemListener(new java.awt.event.ItemListener() {
+        layersComboBox.setMaximumSize(new java.awt.Dimension(56, 20));
+        layersComboBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                depthComboBoxItemStateChanged(evt);
+                layersComboBoxItemStateChanged(evt);
             }
         });
-        toolBar.add(depthComboBox);
+        toolBar.add(layersComboBox);
 
         layerChange.setText(" Change");
         layerChange.setFocusable(false);
         layerChange.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         layerChange.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        layerChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                layerChangeActionPerformed(evt);
+            }
+        });
         toolBar.add(layerChange);
 
         layerDelete.setText("Delete");
         layerDelete.setFocusable(false);
         layerDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         layerDelete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        layerDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                layerDeleteActionPerformed(evt);
+            }
+        });
         toolBar.add(layerDelete);
 
-        newLayer.setActionCommand("New Layer");
-        newLayer.setLabel("New Layer");
-        newLayer.setMaximumSize(new java.awt.Dimension(74, 24));
+        newLayer.setText("New Layer");
+        newLayer.setFocusable(false);
+        newLayer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newLayer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         newLayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newLayerActionPerformed(evt);
@@ -448,8 +460,8 @@ public class Interfaz extends javax.swing.JFrame {
         for(xml.projectAssets.backgrounds.Background bb :xml.Project.assets.backgrounds){
             dcbm.addElement(bb.name);
         }
-        tilesCombo.setModel(dcbm);
         
+        tilesCombo.setModel(dcbm);
         tilesCombo.setEnabled(true);
         
         for(xml.projectAssets.backgrounds.Background bb : xml.Project.assets.backgrounds){
@@ -472,8 +484,10 @@ public class Interfaz extends javax.swing.JFrame {
         for(String s : currentSimpleRoom.getDephts())
             dcbm.addElement(s);
         
-        depthComboBox.setModel(dcbm);
+        layersComboBox.setModel(dcbm);
         
+        tw.setText(String.valueOf(currentBackground.getTW()));
+        th.setText(String.valueOf(currentBackground.getTH()));
     }//GEN-LAST:event_openMenuActionPerformed
 
     private void newProjectMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectMenuActionPerformed
@@ -522,7 +536,7 @@ public class Interfaz extends javax.swing.JFrame {
             for(String s : currentSimpleRoom.getDephts())
                 dcbm.addElement(s);
 
-            depthComboBox.setModel(dcbm);
+            layersComboBox.setModel(dcbm);
             showGrid.setSelected(false);
             topLayer.setSelected(false);
         }
@@ -564,36 +578,19 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.update(map, 0, 0);
     }//GEN-LAST:event_topLayerActionPerformed
 
-    private void depthComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_depthComboBoxItemStateChanged
+    private void layersComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_layersComboBoxItemStateChanged
         try{
-            currentSimpleRoom.changeLayer(Integer.parseInt(depthComboBox.getSelectedItem().toString()));
+            currentSimpleRoom.changeLayer(Integer.parseInt(layersComboBox.getSelectedItem().toString()));
         }
         catch(Exception ex){
 
         }
-    }//GEN-LAST:event_depthComboBoxItemStateChanged
+    }//GEN-LAST:event_layersComboBoxItemStateChanged
 
     private void showGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGridActionPerformed
         currentSimpleRoom.grid();
         currentSimpleRoom.update(map, 0, 0);
     }//GEN-LAST:event_showGridActionPerformed
-
-    private void newLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLayerActionPerformed
-        try{
-            Integer depth = Integer.valueOf(JOptionPane.showInputDialog("Enter a depth value for the new layer: "));
-            currentSimpleRoom.changeLayer(depth);
-            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-
-            for(String s : currentSimpleRoom.getDephts())
-            dcbm.addElement(s);
-
-            depthComboBox.setModel(dcbm);
-            depthComboBox.setSelectedItem(depth.toString());
-        }
-        catch(Exception ex){
-
-        }
-    }//GEN-LAST:event_newLayerActionPerformed
 
     private void twFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_twFocusGained
         // TODO add your handling code here:
@@ -604,6 +601,31 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
         th.setText("");
     }//GEN-LAST:event_thFocusGained
+
+    private void newLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLayerActionPerformed
+        try{
+            Integer depth = Integer.valueOf(JOptionPane.showInputDialog("Enter a depth value for the new layer: "));
+            currentSimpleRoom.changeLayer(depth);
+            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+
+            for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+
+            layersComboBox.setModel(dcbm);
+            layersComboBox.setSelectedItem(depth.toString());
+        }
+        catch(Exception ex){
+
+        }
+    }//GEN-LAST:event_newLayerActionPerformed
+
+    private void layerDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_layerDeleteActionPerformed
+
+    private void layerChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerChangeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_layerChangeActionPerformed
  
     /**
      * @param args the command line arguments
@@ -627,7 +649,6 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> depthComboBox;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
@@ -644,13 +665,14 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane4;
     private javax.swing.JButton layerChange;
     private javax.swing.JButton layerDelete;
+    private javax.swing.JComboBox<String> layersComboBox;
     private javax.swing.JTabbedPane leftTabs;
     private javax.swing.JLabel map;
     private javax.swing.JList<String> mapList;
     private javax.swing.JScrollPane mapListScrollPane;
     private javax.swing.JScrollPane mapScrollPane;
     private javax.swing.JMenuBar menuBar;
-    private java.awt.Button newLayer;
+    private javax.swing.JButton newLayer;
     private javax.swing.JMenuItem newProjectMenu;
     private javax.swing.JList<String> objectsList;
     private javax.swing.JScrollPane objectsScrollPane;

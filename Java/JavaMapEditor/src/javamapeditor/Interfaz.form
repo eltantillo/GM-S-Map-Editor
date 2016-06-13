@@ -143,7 +143,7 @@
   <SubComponents>
     <Container class="javax.swing.JSplitPane" name="jSplitPane3">
       <Properties>
-        <Property name="dividerLocation" type="int" value="250"/>
+        <Property name="dividerLocation" type="int" value="700"/>
         <Property name="dividerSize" type="int" value="4"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
@@ -191,12 +191,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="bottomLayers" alignment="0" pref="226" max="32767" attributes="0"/>
+                          <Component id="bottomLayers" alignment="0" pref="533" max="32767" attributes="0"/>
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                              <Component id="selection" alignment="0" pref="226" max="32767" attributes="0"/>
+                              <Component id="selection" alignment="0" pref="533" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-                              <Component id="topLayers" alignment="0" pref="226" max="32767" attributes="0"/>
+                              <Component id="topLayers" alignment="0" pref="533" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

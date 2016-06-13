@@ -96,7 +96,7 @@ public class SimpleRoom {
      * @param youClickedX
      * @param youClickedY 
      */
-    public void click(JLabel p, int youClickedX, int youClickedY){
+    public void click(JLabel inf,JLabel top,int youClickedX, int youClickedY){
         youClickedX = toGrid(youClickedX, 1);
         youClickedY = toGrid(youClickedY, 2);
         if(prevX != youClickedX || prevY !=youClickedY){
@@ -121,7 +121,7 @@ public class SimpleRoom {
                     checkForTile(temp);
                 }
             }
-            update(p,youClickedX,youClickedY);
+            update(inf,top);
             prevX = youClickedX;
             prevY = youClickedY;
         }
@@ -169,33 +169,36 @@ public class SimpleRoom {
      */
     public void update(JLabel inf, JLabel sup){
         // Dibuja los tiles existentes //
-        BufferedImage blank = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
+        BufferedImage infBI = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
+        BufferedImage topBI = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
         
         // Actualiza grafico //
-        inf.setMinimumSize(new Dimension(blank.getWidth(), blank.getHeight()));
-    	inf.setPreferredSize(new Dimension(blank.getWidth(), blank.getHeight()));
-    	inf.setMaximumSize(new Dimension(blank.getWidth(), blank.getHeight()));
-        inf.setIcon(new ImageIcon(blank));
+        inf.setLocation(new Point(0,0));
+        inf.setMinimumSize(new Dimension(infBI.getWidth(), infBI.getHeight()));
+    	inf.setPreferredSize(new Dimension(infBI.getWidth(), infBI.getHeight()));
+    	inf.setMaximumSize(new Dimension(infBI.getWidth(), infBI.getHeight()));
+        inf.setIcon(new ImageIcon(infBI));
         
         // por cada capa dibuja tus tiles //
         for(int tempX = 0; tempX<layerTile.size(); tempX++){
+            infBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, infBI);
+            /*
             if(tempX<currentLayer){
-                blank = ImageTools.copyPaste(drawLayer(tempX), 0, 0, blank);
+                infBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, infBI);
             }
             else if(tempX==currentLayer){
-                ImageTools.setAlpha(blank);
-                blank = ImageTools.copyPaste(drawLayer(tempX), 0, 0, blank);
-                
+                ImageTools.setAlpha(infBI);
+                infBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, infBI);
             }
-            else{
-                
-            }
+            else if(topLayers){
+                topBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, topBI);
+            }*/
         }
         if(topLayers){
-            sup.setMinimumSize(new Dimension(blank.getWidth(), blank.getHeight()));
-            sup.setPreferredSize(new Dimension(blank.getWidth(), blank.getHeight()));
-            sup.setMaximumSize(new Dimension(blank.getWidth(), blank.getHeight()));
-            sup.setIcon(new ImageIcon(blank));
+            sup.setMinimumSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
+            sup.setPreferredSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
+            sup.setMaximumSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
+            sup.setIcon(new ImageIcon(topBI));
         }
         
         
@@ -203,7 +206,7 @@ public class SimpleRoom {
         if(grid){
             for(int tempX = 0; tempX<w; tempX+=tw){
                 for(int tempY =0; tempY<h; tempY+=th ){
-                    Graphics g = blank.getGraphics();
+                    Graphics g = infBI.getGraphics();
                     g.setColor(Color.WHITE);
                     g.drawRect(tempX,tempY,tw,th);
                 }
@@ -212,7 +215,7 @@ public class SimpleRoom {
         
         // dibuja seleccion //
         if(!Selection.isTileSet){
-            Graphics g = blank.getGraphics();
+            Graphics g = infBI.getGraphics();
             int difx = Selection.fin.x - Selection.ini.x;
             int dify = Selection.fin.y - Selection.ini.y;
             if(difx != 0 && dify != 0){
@@ -280,7 +283,7 @@ public class SimpleRoom {
                     Selection.selection.add(layerTile.get(currentLayer).get(searchTile(new Point(x,y))).clone());
                 }
                 catch(Exception ex){
-                    System.out.println("FileNotfound"+ex);
+                    System.out.println("SimpleRoom.setSelection.exeption: "+ex);
                 }
             }
         }
@@ -315,6 +318,7 @@ public class SimpleRoom {
         }
         catch(IndexOutOfBoundsException ex){
             layerTile.add(new ArrayList());
+            System.out.println("SimpleRoom.checkForTile: "+ex);
         }
         if(layerTile.get(currentLayer).isEmpty() || !checked){
             tt.add(t);
@@ -387,5 +391,23 @@ public class SimpleRoom {
     }
     public void showSelection(boolean show){
         inMap = show;
+    }
+    
+    public void updateSelection(JLabel sel,int x,int y){
+        if(Selection.selectGraphic!=null){
+            BufferedImage blank = new BufferedImage(w+1, h+1, BufferedImage.TYPE_4BYTE_ABGR);
+            x = toGrid(x, 1);
+            y = toGrid(y, 0);
+            sel.setMinimumSize(new Dimension(Selection.selectGraphic.getWidth(), Selection.selectGraphic.getHeight()));
+            sel.setPreferredSize(new Dimension(Selection.selectGraphic.getWidth(), Selection.selectGraphic.getHeight()));
+            sel.setMaximumSize(new Dimension(Selection.selectGraphic.getWidth(), Selection.selectGraphic.getHeight()));
+            
+            blank = ImageTools.copyPaste(Selection.selectGraphic, x, y, blank);
+            
+            sel.setIcon(new ImageIcon(blank));
+            sel.setLocation(new Point(x,y));
+            sel.setVisible(inMap);
+        }
+        
     }
 }

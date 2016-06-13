@@ -49,7 +49,10 @@ public class Interfaz extends javax.swing.JFrame {
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
         mapScrollPane = new javax.swing.JScrollPane();
-        map = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        bottomLayers = new javax.swing.JLabel();
+        selection = new javax.swing.JLabel();
+        topLayers = new javax.swing.JLabel();
         leftTabs = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         tilesCombo = new javax.swing.JComboBox<>();
@@ -103,32 +106,90 @@ public class Interfaz extends javax.swing.JFrame {
         mapScrollPane.setBackground(new java.awt.Color(0, 0, 0));
         mapScrollPane.setBorder(null);
 
-        map.setBackground(new java.awt.Color(0, 0, 0));
-        map.setToolTipText("");
-        map.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        map.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel1MouseMoved(evt);
+            }
+        });
+
+        bottomLayers.setBackground(new java.awt.Color(0, 0, 0));
+        bottomLayers.setText("Hola");
+        bottomLayers.setToolTipText("");
+        bottomLayers.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        bottomLayers.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        bottomLayers.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                mapMouseDragged(evt);
+                bottomLayersMouseDragged(evt);
             }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                mapMouseMoved(evt);
+                bottomLayersMouseMoved(evt);
             }
         });
-        map.addMouseListener(new java.awt.event.MouseAdapter() {
+        bottomLayers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mapMouseClicked(evt);
+                bottomLayersMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                mapMouseEntered(evt);
+                bottomLayersMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                mapMouseExited(evt);
+                bottomLayersMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                mapMousePressed(evt);
+                bottomLayersMousePressed(evt);
             }
         });
-        mapScrollPane.setViewportView(map);
+
+        selection.setText("Selection");
+        selection.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        selection.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        topLayers.setText("Top Layers");
+        topLayers.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        topLayers.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(selection)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bottomLayers)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(topLayers, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 223, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(selection)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bottomLayers, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(topLayers, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        mapScrollPane.setViewportView(jPanel1);
 
         jSplitPane4.setRightComponent(mapScrollPane);
 
@@ -165,7 +226,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tilesCombo, 0, 238, Short.MAX_VALUE)
+            .addComponent(tilesCombo, 0, 48, Short.MAX_VALUE)
             .addComponent(tilesScrollPane)
         );
         jPanel2Layout.setVerticalGroup(
@@ -173,7 +234,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(tilesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
         );
 
         leftTabs.addTab("Tiles", jPanel2);
@@ -235,7 +296,7 @@ public class Interfaz extends javax.swing.JFrame {
                 else{
                     try{
                         currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
-                        currentSimpleRoom.update(map, 0, 0);
+                        currentSimpleRoom.update(bottomLayers, topLayers);
                     }
                     catch(Exception ex){
 
@@ -278,7 +339,7 @@ public class Interfaz extends javax.swing.JFrame {
                 else{
                     try{
                         currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
-                        currentSimpleRoom.update(map, 0, 0);
+                        currentSimpleRoom.update(bottomLayers, topLayers);
                     }
                     catch(Exception ex){
 
@@ -327,11 +388,6 @@ public class Interfaz extends javax.swing.JFrame {
         layerChange.setFocusable(false);
         layerChange.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         layerChange.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        layerChange.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                layerChangeActionPerformed(evt);
-            }
-        });
         toolBar.add(layerChange);
 
         layerDelete.setText("Delete");
@@ -400,19 +456,9 @@ public class Interfaz extends javax.swing.JFrame {
         jMenu3.setText("TileSet");
 
         tileset1.setText("TileSet1");
-        tileset1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tileset1ActionPerformed(evt);
-            }
-        });
         jMenu3.add(tileset1);
 
         tileset2.setText("TileSet2");
-        tileset2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tileset2ActionPerformed(evt);
-            }
-        });
         jMenu3.add(tileset2);
 
         menuBar.add(jMenu3);
@@ -459,14 +505,6 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tileset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tileset1ActionPerformed
-        // nada xD
-    }//GEN-LAST:event_tileset1ActionPerformed
-
-    private void tileset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tileset2ActionPerformed
-        // nada xD
-    }//GEN-LAST:event_tileset2ActionPerformed
-
     private void saveAsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuActionPerformed
         xml.Project.saveProjectAs();
     }//GEN-LAST:event_saveAsMenuActionPerformed
@@ -495,7 +533,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         
         currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(0));
-        currentSimpleRoom.update(map, 0, 0);
+        currentSimpleRoom.update(bottomLayers,topLayers);
         
         String[] i = new String[xml.Project.assets.rooms.size()];
         for(xml.projectAssets.rooms.Room r : xml.Project.assets.rooms){
@@ -520,41 +558,40 @@ public class Interfaz extends javax.swing.JFrame {
         xml.Project.newProject();
     }//GEN-LAST:event_newProjectMenuActionPerformed
 
-    private void mapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMousePressed
+    private void bottomLayersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMousePressed
         mouseMapPosX = evt.getX();
         mouseMapPosY = evt.getY();
-    }//GEN-LAST:event_mapMousePressed
+    }//GEN-LAST:event_bottomLayersMousePressed
 
-    private void mapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMouseClicked
+    private void bottomLayersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseClicked
         if(evt.getButton() == 3){
             currentSimpleRoom.setSelection(new Point(evt.getX(),evt.getY()), new Point(evt.getX(),evt.getY()));
-            currentSimpleRoom.update(map, evt.getX(), evt.getY());
+            currentSimpleRoom.update(bottomLayers,topLayers);
         }
         else
-        currentSimpleRoom.click(map, evt.getX(), evt.getY());
-    }//GEN-LAST:event_mapMouseClicked
+        currentSimpleRoom.click(bottomLayers, topLayers, evt.getX(), evt.getY());
+    }//GEN-LAST:event_bottomLayersMouseClicked
 
-    private void mapMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMouseMoved
-        if(currentSimpleRoom !=null)
-            currentSimpleRoom.update(map, evt.getX(), evt.getY());
-    }//GEN-LAST:event_mapMouseMoved
+    private void bottomLayersMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseMoved
+        
+    }//GEN-LAST:event_bottomLayersMouseMoved
 
-    private void mapMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMouseDragged
+    private void bottomLayersMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseDragged
         if(SwingUtilities.isRightMouseButton(evt)){
             mouseMapPosFinX = evt.getX();
             mouseMapPosFinY = evt.getY();
             currentSimpleRoom.setSelection(new Point(mouseMapPosX,mouseMapPosY), new Point(mouseMapPosFinX,mouseMapPosFinY));
-            currentSimpleRoom.update(map, evt.getX(), evt.getY());
+            currentSimpleRoom.update(bottomLayers,topLayers);
         }
         else{
-            currentSimpleRoom.click(map, evt.getX(),evt.getY());
+            currentSimpleRoom.click(bottomLayers, topLayers, evt.getX(),evt.getY());
         }
-    }//GEN-LAST:event_mapMouseDragged
+    }//GEN-LAST:event_bottomLayersMouseDragged
 
     private void mapListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapListMouseClicked
         if(evt.getClickCount()==2){
             currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(mapList.getSelectedIndex()));
-            currentSimpleRoom.update(map, 0, 0);
+            currentSimpleRoom.update(bottomLayers, topLayers);
             currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
             
             DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
@@ -573,7 +610,7 @@ public class Interfaz extends javax.swing.JFrame {
         currentBackground.setSelection(new Point(0,0), new Point(0,0));
         currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
         currentBackground.drawBackgroundTile(tiles);
-        currentSimpleRoom.update(map, 0, 0);
+        currentSimpleRoom.update(bottomLayers, topLayers);
         
         tw.setText(String.valueOf(currentBackground.getTW()));
         th.setText(String.valueOf(currentBackground.getTH()));
@@ -596,12 +633,12 @@ public class Interfaz extends javax.swing.JFrame {
         mousePosFinY = evt.getY();
         currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
         currentBackground.drawBackgroundTile(tiles);
-        currentSimpleRoom.update(map, 0, 0);
+        currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_tilesMouseDragged
 
     private void topLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topLayerActionPerformed
         currentSimpleRoom.topLayer();
-        currentSimpleRoom.update(map, 0, 0);
+        currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_topLayerActionPerformed
 
     private void layersComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_layersComboBoxItemStateChanged
@@ -609,13 +646,13 @@ public class Interfaz extends javax.swing.JFrame {
             currentSimpleRoom.changeLayer(Integer.parseInt(layersComboBox.getSelectedItem().toString()));
         }
         catch(Exception ex){
-
+            System.out.println("layersComboBoxStarteChanged.exeption: "+ex);
         }
     }//GEN-LAST:event_layersComboBoxItemStateChanged
 
     private void showGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGridActionPerformed
         currentSimpleRoom.grid();
-        currentSimpleRoom.update(map, 0, 0);
+        currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_showGridActionPerformed
 
     private void twFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_twFocusGained
@@ -641,7 +678,7 @@ public class Interfaz extends javax.swing.JFrame {
             layersComboBox.setSelectedItem(depth.toString());
         }
         catch(Exception ex){
-
+            System.out.println("newLayerActionPerformed.exeption: "+ex);
         }
     }//GEN-LAST:event_newLayerActionPerformed
 
@@ -651,27 +688,31 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void undoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoSubMenuActionPerformed
         currentSimpleRoom.undo();
-        currentSimpleRoom.update(map, 0, 0);
+        currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_undoSubMenuActionPerformed
 
     private void redoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redoSubMenuActionPerformed
         currentSimpleRoom.redo();
-        currentSimpleRoom.update(map, 0, 0);
+        currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_redoSubMenuActionPerformed
 
-    private void mapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMouseEntered
+    private void bottomLayersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseEntered
         if(currentSimpleRoom !=null)
             currentSimpleRoom.showSelection(true);
-    }//GEN-LAST:event_mapMouseEntered
+        System.out.println("Se metio");
+    }//GEN-LAST:event_bottomLayersMouseEntered
 
-    private void mapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMouseExited
+    private void bottomLayersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseExited
         if(currentSimpleRoom !=null)
             currentSimpleRoom.showSelection(false);
-    }//GEN-LAST:event_mapMouseExited
+        System.out.println("Se salio");
+    }//GEN-LAST:event_bottomLayersMouseExited
 
-    private void layerChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerChangeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_layerChangeActionPerformed
+    private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
+        System.out.println("El mouse se movio OMG"+evt.getX()+","+evt.getY());
+        if(currentSimpleRoom != null)
+            currentSimpleRoom.updateSelection(selection,evt.getX(),evt.getY());
+    }//GEN-LAST:event_jPanel1MouseMoved
  
     /**
      * @param args the command line arguments
@@ -695,15 +736,16 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel bottomLayers;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
@@ -715,7 +757,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton layerDelete;
     private javax.swing.JComboBox<String> layersComboBox;
     private javax.swing.JTabbedPane leftTabs;
-    private javax.swing.JLabel map;
     private javax.swing.JList<String> mapList;
     private javax.swing.JScrollPane mapListScrollPane;
     private javax.swing.JScrollPane mapScrollPane;
@@ -728,6 +769,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem redoSubMenu;
     private javax.swing.JMenuItem saveAsMenu;
     private javax.swing.JMenuItem saveMenu;
+    private javax.swing.JLabel selection;
     private javax.swing.JToggleButton showGrid;
     private javax.swing.JTextField th;
     private javax.swing.JLabel tiles;
@@ -737,6 +779,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem tileset2;
     private javax.swing.JToolBar toolBar;
     private javax.swing.JToggleButton topLayer;
+    private javax.swing.JLabel topLayers;
     private javax.swing.JTextField tw;
     private javax.swing.JMenuItem undoSubMenu;
     // End of variables declaration//GEN-END:variables

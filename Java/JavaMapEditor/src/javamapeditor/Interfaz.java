@@ -10,8 +10,11 @@ import graficos.*;
 import java.awt.Point;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -31,6 +34,7 @@ public class Interfaz extends javax.swing.JFrame {
     
     public Interfaz() {
         initComponents();
+        layersComboBox.requestFocusInWindow();
     }
 
     /**
@@ -42,29 +46,38 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu4 = new javax.swing.JMenu();
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tiles = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        mapScrollPane = new javax.swing.JScrollPane();
         map = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        maps = new javax.swing.JList<>();
-        jToolBar2 = new javax.swing.JToolBar();
+        leftTabs = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        tilesCombo = new javax.swing.JComboBox<>();
+        tilesScrollPane = new javax.swing.JScrollPane();
+        tiles = new javax.swing.JLabel();
+        objectsScrollPane = new javax.swing.JScrollPane();
+        objectsList = new javax.swing.JList<>();
+        mapListScrollPane = new javax.swing.JScrollPane();
+        mapList = new javax.swing.JList<>();
+        toolBar = new javax.swing.JToolBar();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        jLabel1 = new javax.swing.JLabel();
         tw = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        jLabel2 = new javax.swing.JLabel();
         th = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton1 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         showGrid = new javax.swing.JToggleButton();
-        tilesCombo = new javax.swing.JComboBox<>();
-        dephs = new javax.swing.JComboBox<>();
-        layerMaster = new javax.swing.JTextField();
-        button1 = new java.awt.Button();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         topLayer = new javax.swing.JToggleButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jLabel3 = new javax.swing.JLabel();
+        layersComboBox = new javax.swing.JComboBox<>();
+        layerChange = new javax.swing.JButton();
+        layerDelete = new javax.swing.JButton();
+        newLayer = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
+        menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newProjectMenu = new javax.swing.JMenuItem();
         openMenu = new javax.swing.JMenuItem();
@@ -77,37 +90,20 @@ public class Interfaz extends javax.swing.JFrame {
         undoSubMenu = new javax.swing.JMenuItem();
         redoSubMenu = new javax.swing.JMenuItem();
 
-        jMenu4.setText("jMenu4");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jSplitPane3.setDividerLocation(250);
         jSplitPane3.setDividerSize(4);
         jSplitPane3.setToolTipText("");
+        jSplitPane3.setResizeWeight(1.0f);
 
-        jSplitPane4.setDividerLocation(200);
+        jSplitPane4.setDividerLocation(260);
         jSplitPane4.setDividerSize(4);
 
-        tiles.setText("tiles");
-        tiles.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        tiles.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                tilesMouseDragged(evt);
-            }
-        });
-        tiles.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tilesMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tilesMouseReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tiles);
+        mapScrollPane.setBackground(new java.awt.Color(0, 0, 0));
+        mapScrollPane.setBorder(null);
 
-        jSplitPane4.setLeftComponent(jScrollPane1);
-
-        map.setText("map");
+        map.setBackground(new java.awt.Color(0, 0, 0));
         map.setToolTipText("");
         map.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         map.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -132,50 +128,167 @@ public class Interfaz extends javax.swing.JFrame {
                 mapMousePressed(evt);
             }
         });
-        jScrollPane2.setViewportView(map);
+        mapScrollPane.setViewportView(map);
 
-        jSplitPane4.setRightComponent(jScrollPane2);
+        jSplitPane4.setRightComponent(mapScrollPane);
+
+        leftTabs.setBackground(new java.awt.Color(255, 255, 255));
+
+        tilesCombo.setMaximumRowCount(32);
+        tilesCombo.setEnabled(false);
+        tilesCombo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tilesComboItemStateChanged(evt);
+            }
+        });
+
+        tilesScrollPane.setBorder(null);
+
+        tiles.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        tiles.setAlignmentY(0.0F);
+        tiles.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                tilesMouseDragged(evt);
+            }
+        });
+        tiles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tilesMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tilesMouseReleased(evt);
+            }
+        });
+        tilesScrollPane.setViewportView(tiles);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tilesCombo, 0, 238, Short.MAX_VALUE)
+            .addComponent(tilesScrollPane)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(tilesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+        );
+
+        leftTabs.addTab("Tiles", jPanel2);
+
+        objectsScrollPane.setBorder(null);
+
+        objectsScrollPane.setViewportView(objectsList);
+
+        leftTabs.addTab("Objects", objectsScrollPane);
+
+        jSplitPane4.setLeftComponent(leftTabs);
 
         jSplitPane3.setLeftComponent(jSplitPane4);
 
-        maps.setEnabled(false);
-        maps.addMouseListener(new java.awt.event.MouseAdapter() {
+        mapList.setEnabled(false);
+        mapList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mapsMouseClicked(evt);
+                mapListMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(maps);
+        mapListScrollPane.setViewportView(mapList);
 
-        jSplitPane3.setRightComponent(jScrollPane3);
+        jSplitPane3.setRightComponent(mapListScrollPane);
 
-        jToolBar2.setFloatable(false);
-        jToolBar2.setRollover(true);
+        toolBar.setFloatable(false);
+        toolBar.setRollover(true);
+        toolBar.add(filler2);
 
-        tw.setText("width");
-        tw.setMaximumSize(new java.awt.Dimension(10, 20));
-        tw.setMinimumSize(new java.awt.Dimension(10, 20));
-        jToolBar2.add(tw);
-        jToolBar2.add(jSeparator2);
+        jLabel1.setText("Width:");
+        toolBar.add(jLabel1);
 
-        th.setText("height");
-        th.setMaximumSize(new java.awt.Dimension(10, 20));
-        th.setMinimumSize(new java.awt.Dimension(10, 20));
-        jToolBar2.add(th);
-        jToolBar2.add(jSeparator1);
-
-        jButton1.setText("Go");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        tw.setMaximumSize(new java.awt.Dimension(25, 20));
+        tw.setMinimumSize(new java.awt.Dimension(25, 20));
+        tw.setPreferredSize(new java.awt.Dimension(25, 20));
+        tw.setRequestFocusEnabled(false);
+        tw.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                twFocusGained(evt);
             }
         });
-        jToolBar2.add(jButton1);
-        jToolBar2.add(jSeparator3);
+        toolBar.add(tw);
+        tw.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void insertUpdate(DocumentEvent e) {
+                warn();
+            }
 
-        showGrid.setText("Grid");
+            public void warn() {
+                if (!tw.getText().equals("") && Integer.parseInt(tw.getText())<=0){
+                    JOptionPane.showMessageDialog(null,
+                        "Error: Please enter number bigger than 0", "Error Massage",
+                        JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    try{
+                        currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
+                        currentSimpleRoom.update(map, 0, 0);
+                    }
+                    catch(Exception ex){
+
+                    }
+                }
+            }
+        });
+        toolBar.add(filler1);
+
+        jLabel2.setText("Height:");
+        toolBar.add(jLabel2);
+
+        th.setMaximumSize(new java.awt.Dimension(25, 20));
+        th.setMinimumSize(new java.awt.Dimension(25, 20));
+        th.setPreferredSize(new java.awt.Dimension(25, 20));
+        th.setRequestFocusEnabled(false);
+        th.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                thFocusGained(evt);
+            }
+        });
+        toolBar.add(th);
+        th.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void removeUpdate(DocumentEvent e) {
+                warn();
+            }
+            public void insertUpdate(DocumentEvent e) {
+                warn();
+            }
+
+            public void warn() {
+                if (!th.getText().equals("") && Integer.parseInt(th.getText())<=0){
+                    JOptionPane.showMessageDialog(null,
+                        "Error: Please enter number bigger than 0", "Error Massage",
+                        JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    try{
+                        currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
+                        currentSimpleRoom.update(map, 0, 0);
+                    }
+                    catch(Exception ex){
+
+                    }
+                }
+            }
+        });
+        toolBar.add(jSeparator3);
+
+        showGrid.setText("Show Grid");
         showGrid.setFocusable(false);
         showGrid.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         showGrid.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -184,36 +297,10 @@ public class Interfaz extends javax.swing.JFrame {
                 showGridActionPerformed(evt);
             }
         });
-        jToolBar2.add(showGrid);
+        toolBar.add(showGrid);
+        toolBar.add(jSeparator1);
 
-        tilesCombo.setEnabled(false);
-        tilesCombo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tilesComboItemStateChanged(evt);
-            }
-        });
-        jToolBar2.add(tilesCombo);
-
-        dephs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        dephs.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                dephsItemStateChanged(evt);
-            }
-        });
-        jToolBar2.add(dephs);
-
-        layerMaster.setText("NuevaLayer");
-        jToolBar2.add(layerMaster);
-
-        button1.setLabel("Layer");
-        button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(button1);
-
-        topLayer.setText("TopLayer");
+        topLayer.setText("Show Top Layers");
         topLayer.setFocusable(false);
         topLayer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         topLayer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -222,11 +309,57 @@ public class Interfaz extends javax.swing.JFrame {
                 topLayerActionPerformed(evt);
             }
         });
-        jToolBar2.add(topLayer);
+        toolBar.add(topLayer);
+        toolBar.add(jSeparator2);
 
-        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
-        jMenuBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jMenuBar1.setDoubleBuffered(true);
+        jLabel3.setText("Layer:");
+        toolBar.add(jLabel3);
+
+        layersComboBox.setMaximumSize(new java.awt.Dimension(56, 20));
+        layersComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                layersComboBoxItemStateChanged(evt);
+            }
+        });
+        toolBar.add(layersComboBox);
+
+        layerChange.setText(" Change");
+        layerChange.setFocusable(false);
+        layerChange.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        layerChange.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        layerChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                layerChangeActionPerformed(evt);
+            }
+        });
+        toolBar.add(layerChange);
+
+        layerDelete.setText("Delete");
+        layerDelete.setFocusable(false);
+        layerDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        layerDelete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        layerDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                layerDeleteActionPerformed(evt);
+            }
+        });
+        toolBar.add(layerDelete);
+
+        newLayer.setText("New Layer");
+        newLayer.setFocusable(false);
+        newLayer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newLayer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        newLayer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newLayerActionPerformed(evt);
+            }
+        });
+        toolBar.add(newLayer);
+        toolBar.add(jSeparator5);
+
+        menuBar.setBackground(new java.awt.Color(255, 255, 255));
+        menuBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        menuBar.setDoubleBuffered(true);
 
         fileMenu.setText("File");
 
@@ -262,7 +395,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         fileMenu.add(saveAsMenu);
 
-        jMenuBar1.add(fileMenu);
+        menuBar.add(fileMenu);
 
         jMenu3.setText("TileSet");
 
@@ -282,8 +415,9 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jMenu3.add(tileset2);
 
-        jMenuBar1.add(jMenu3);
+        menuBar.add(jMenu3);
 
+<<<<<<< HEAD
         jMenu1.setText("Edit");
 
         undoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
@@ -307,18 +441,21 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
+=======
+        setJMenuBar(menuBar);
+>>>>>>> 93a0c50f2aba2ca9088382ec28baf817602f34f9
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane3)
-            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSplitPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(toolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSplitPane3))
         );
@@ -333,21 +470,6 @@ public class Interfaz extends javax.swing.JFrame {
     private void tileset2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tileset2ActionPerformed
         // nada xD
     }//GEN-LAST:event_tileset2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
-            currentSimpleRoom.update(map, 0, 0);
-        }
-        catch(Exception ex){
-        
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void showGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGridActionPerformed
-        currentSimpleRoom.grid();
-        currentSimpleRoom.update(map, 0, 0);
-    }//GEN-LAST:event_showGridActionPerformed
 
     private void saveAsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuActionPerformed
         xml.Project.saveProjectAs();
@@ -368,8 +490,8 @@ public class Interfaz extends javax.swing.JFrame {
         for(xml.projectAssets.backgrounds.Background bb :xml.Project.assets.backgrounds){
             dcbm.addElement(bb.name);
         }
-        tilesCombo.setModel(dcbm);
         
+        tilesCombo.setModel(dcbm);
         tilesCombo.setEnabled(true);
         
         for(xml.projectAssets.backgrounds.Background bb : xml.Project.assets.backgrounds){
@@ -384,41 +506,23 @@ public class Interfaz extends javax.swing.JFrame {
             i[xml.Project.assets.rooms.indexOf(r)] = r.name;
         }
         
-        maps.setListData(i);
-        maps.setEnabled(true);
+        mapList.setListData(i);
+        mapList.setEnabled(true);
         
         dcbm = new DefaultComboBoxModel();
         
         for(String s : currentSimpleRoom.getDephts())
             dcbm.addElement(s);
         
-        dephs.setModel(dcbm);
+        layersComboBox.setModel(dcbm);
         
+        tw.setText(String.valueOf(currentBackground.getTW()));
+        th.setText(String.valueOf(currentBackground.getTH()));
     }//GEN-LAST:event_openMenuActionPerformed
 
     private void newProjectMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectMenuActionPerformed
         xml.Project.newProject();
     }//GEN-LAST:event_newProjectMenuActionPerformed
-
-    private void tilesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseReleased
-        mousePosFinX = evt.getX();
-        mousePosFinY = evt.getY();
-        currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
-        currentBackground.drawBackgroundTile(tiles);
-    }//GEN-LAST:event_tilesMouseReleased
-
-    private void tilesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMousePressed
-        mousePosX = evt.getX();
-        mousePosY = evt.getY();
-    }//GEN-LAST:event_tilesMousePressed
-
-    private void tilesMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseDragged
-        mousePosFinX = evt.getX();
-        mousePosFinY = evt.getY();
-        currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
-        currentBackground.drawBackgroundTile(tiles);
-        currentSimpleRoom.update(map, 0, 0);
-    }//GEN-LAST:event_tilesMouseDragged
 
     private void mapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapMousePressed
         mouseMapPosX = evt.getX();
@@ -451,9 +555,9 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mapMouseDragged
 
-    private void mapsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapsMouseClicked
+    private void mapListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapListMouseClicked
         if(evt.getClickCount()==2){
-            currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(maps.getSelectedIndex()));
+            currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(mapList.getSelectedIndex()));
             currentSimpleRoom.update(map, 0, 0);
             currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
             
@@ -462,11 +566,11 @@ public class Interfaz extends javax.swing.JFrame {
             for(String s : currentSimpleRoom.getDephts())
                 dcbm.addElement(s);
 
-            dephs.setModel(dcbm);
+            layersComboBox.setModel(dcbm);
             showGrid.setSelected(false);
             topLayer.setSelected(false);
         }
-    }//GEN-LAST:event_mapsMouseClicked
+    }//GEN-LAST:event_mapListMouseClicked
 
     private void tilesComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tilesComboItemStateChanged
         currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(tilesCombo.getSelectedIndex()));
@@ -474,37 +578,82 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
         currentBackground.drawBackgroundTile(tiles);
         currentSimpleRoom.update(map, 0, 0);
+        
+        tw.setText(String.valueOf(currentBackground.getTW()));
+        th.setText(String.valueOf(currentBackground.getTH()));
     }//GEN-LAST:event_tilesComboItemStateChanged
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        try{
-            currentSimpleRoom.changeLayer(Integer.parseInt(layerMaster.getText()));
-            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        
-            for(String s : currentSimpleRoom.getDephts())
-                dcbm.addElement(s);
+    private void tilesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseReleased
+        mousePosFinX = evt.getX();
+        mousePosFinY = evt.getY();
+        currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
+        currentBackground.drawBackgroundTile(tiles);
+    }//GEN-LAST:event_tilesMouseReleased
 
-            dephs.setModel(dcbm);
-        }
-        catch(Exception ex){
+    private void tilesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMousePressed
+        mousePosX = evt.getX();
+        mousePosY = evt.getY();
+    }//GEN-LAST:event_tilesMousePressed
 
-        }
-    }//GEN-LAST:event_button1ActionPerformed
-
-    private void dephsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_dephsItemStateChanged
-        try{
-            currentSimpleRoom.changeLayer(Integer.parseInt(dephs.getSelectedItem().toString()));
-        }
-        catch(Exception ex){
-            
-        }
-    }//GEN-LAST:event_dephsItemStateChanged
+    private void tilesMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseDragged
+        mousePosFinX = evt.getX();
+        mousePosFinY = evt.getY();
+        currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
+        currentBackground.drawBackgroundTile(tiles);
+        currentSimpleRoom.update(map, 0, 0);
+    }//GEN-LAST:event_tilesMouseDragged
 
     private void topLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topLayerActionPerformed
         currentSimpleRoom.topLayer();
         currentSimpleRoom.update(map, 0, 0);
     }//GEN-LAST:event_topLayerActionPerformed
 
+    private void layersComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_layersComboBoxItemStateChanged
+        try{
+            currentSimpleRoom.changeLayer(Integer.parseInt(layersComboBox.getSelectedItem().toString()));
+        }
+        catch(Exception ex){
+
+        }
+    }//GEN-LAST:event_layersComboBoxItemStateChanged
+
+    private void showGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGridActionPerformed
+        currentSimpleRoom.grid();
+        currentSimpleRoom.update(map, 0, 0);
+    }//GEN-LAST:event_showGridActionPerformed
+
+    private void twFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_twFocusGained
+        // TODO add your handling code here:
+        tw.setText("");
+    }//GEN-LAST:event_twFocusGained
+
+    private void thFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_thFocusGained
+        // TODO add your handling code here:
+        th.setText("");
+    }//GEN-LAST:event_thFocusGained
+
+    private void newLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLayerActionPerformed
+        try{
+            Integer depth = Integer.valueOf(JOptionPane.showInputDialog("Enter a depth value for the new layer: "));
+            currentSimpleRoom.changeLayer(depth);
+            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+
+            for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+
+            layersComboBox.setModel(dcbm);
+            layersComboBox.setSelectedItem(depth.toString());
+        }
+        catch(Exception ex){
+
+        }
+    }//GEN-LAST:event_newLayerActionPerformed
+
+    private void layerDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_layerDeleteActionPerformed
+
+<<<<<<< HEAD
     private void undoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoSubMenuActionPerformed
         currentSimpleRoom.undo();
         currentSimpleRoom.update(map, 0, 0);
@@ -525,6 +674,12 @@ public class Interfaz extends javax.swing.JFrame {
             currentSimpleRoom.showSelection(false);
     }//GEN-LAST:event_mapMouseExited
 
+=======
+    private void layerChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerChangeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_layerChangeActionPerformed
+ 
+>>>>>>> 93a0c50f2aba2ca9088382ec28baf817602f34f9
     /**
      * @param args the command line arguments
      */
@@ -547,27 +702,38 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Button button1;
-    private javax.swing.JComboBox<String> dephs;
     private javax.swing.JMenu fileMenu;
+<<<<<<< HEAD
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
+=======
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+>>>>>>> 93a0c50f2aba2ca9088382ec28baf817602f34f9
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JSplitPane jSplitPane4;
-    private javax.swing.JToolBar jToolBar2;
-    private javax.swing.JTextField layerMaster;
+    private javax.swing.JButton layerChange;
+    private javax.swing.JButton layerDelete;
+    private javax.swing.JComboBox<String> layersComboBox;
+    private javax.swing.JTabbedPane leftTabs;
     private javax.swing.JLabel map;
-    private javax.swing.JList<String> maps;
+    private javax.swing.JList<String> mapList;
+    private javax.swing.JScrollPane mapListScrollPane;
+    private javax.swing.JScrollPane mapScrollPane;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JButton newLayer;
     private javax.swing.JMenuItem newProjectMenu;
+    private javax.swing.JList<String> objectsList;
+    private javax.swing.JScrollPane objectsScrollPane;
     private javax.swing.JMenuItem openMenu;
     private javax.swing.JMenuItem redoSubMenu;
     private javax.swing.JMenuItem saveAsMenu;
@@ -576,8 +742,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField th;
     private javax.swing.JLabel tiles;
     private javax.swing.JComboBox<String> tilesCombo;
+    private javax.swing.JScrollPane tilesScrollPane;
     private javax.swing.JMenuItem tileset1;
     private javax.swing.JMenuItem tileset2;
+    private javax.swing.JToolBar toolBar;
     private javax.swing.JToggleButton topLayer;
     private javax.swing.JTextField tw;
     private javax.swing.JMenuItem undoSubMenu;

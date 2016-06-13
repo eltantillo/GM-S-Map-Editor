@@ -178,11 +178,13 @@ public class SimpleRoom {
     	inf.setPreferredSize(new Dimension(infBI.getWidth(), infBI.getHeight()));
     	inf.setMaximumSize(new Dimension(infBI.getWidth(), infBI.getHeight()));
         inf.setIcon(new ImageIcon(infBI));
+        sup.setMinimumSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
+        sup.setPreferredSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
+        sup.setMaximumSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
+        sup.setIcon(new ImageIcon(topBI));
         
         // por cada capa dibuja tus tiles //
         for(int tempX = 0; tempX<layerTile.size(); tempX++){
-            infBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, infBI);
-            /*
             if(tempX<currentLayer){
                 infBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, infBI);
             }
@@ -192,15 +194,11 @@ public class SimpleRoom {
             }
             else if(topLayers){
                 topBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, topBI);
-            }*/
+            }
+            else{
+                topBI = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
+            }
         }
-        if(topLayers){
-            sup.setMinimumSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
-            sup.setPreferredSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
-            sup.setMaximumSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
-            sup.setIcon(new ImageIcon(topBI));
-        }
-        
         
         // Dibujando Grid //
         if(grid){
@@ -395,19 +393,19 @@ public class SimpleRoom {
     
     public void updateSelection(JLabel sel,int x,int y){
         if(Selection.selectGraphic!=null){
+            System.out.println("Not null yeaa baby");
             BufferedImage blank = new BufferedImage(w+1, h+1, BufferedImage.TYPE_4BYTE_ABGR);
             x = toGrid(x, 1);
             y = toGrid(y, 0);
             sel.setMinimumSize(new Dimension(Selection.selectGraphic.getWidth(), Selection.selectGraphic.getHeight()));
             sel.setPreferredSize(new Dimension(Selection.selectGraphic.getWidth(), Selection.selectGraphic.getHeight()));
             sel.setMaximumSize(new Dimension(Selection.selectGraphic.getWidth(), Selection.selectGraphic.getHeight()));
-            
             blank = ImageTools.copyPaste(Selection.selectGraphic, x, y, blank);
             
             sel.setIcon(new ImageIcon(blank));
-            sel.setLocation(new Point(x,y));
             sel.setVisible(inMap);
         }
-        
+        else
+            System.out.println("Shit esta madre esta null aborta moterfucker");
     }
 }

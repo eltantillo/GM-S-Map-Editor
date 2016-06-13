@@ -7,6 +7,7 @@ package javamapeditor;
 
 
 import graficos.*;
+import java.awt.ComponentOrientation;
 import java.awt.Point;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
@@ -534,6 +535,18 @@ public class Interfaz extends javax.swing.JFrame {
         
         tw.setText(String.valueOf(currentBackground.getTW()));
         th.setText(String.valueOf(currentBackground.getTH()));
+        
+        System.out.println(jPanel1.getComponentZOrder(bottomLayers));
+        System.out.println(jPanel1.getComponentZOrder(selection));
+        System.out.println(jPanel1.getComponentZOrder(topLayer));
+        
+        jPanel1.setComponentZOrder(bottomLayers, 0);
+        jPanel1.setComponentZOrder(selection, 1);
+        jPanel1.setComponentZOrder(topLayer, 2);
+                
+        System.out.println(jPanel1.getComponentZOrder(bottomLayers));
+        System.out.println(jPanel1.getComponentZOrder(selection));
+        System.out.println(jPanel1.getComponentZOrder(topLayer));
     }//GEN-LAST:event_openMenuActionPerformed
 
     private void newProjectMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectMenuActionPerformed
@@ -555,7 +568,8 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_bottomLayersMouseClicked
 
     private void bottomLayersMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseMoved
-        
+        if(currentSimpleRoom != null)
+            currentSimpleRoom.updateSelection(selection,evt.getX(),evt.getY());
     }//GEN-LAST:event_bottomLayersMouseMoved
 
     private void bottomLayersMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseDragged
@@ -626,6 +640,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void layersComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_layersComboBoxItemStateChanged
         try{
             currentSimpleRoom.changeLayer(Integer.parseInt(layersComboBox.getSelectedItem().toString()));
+            currentSimpleRoom.update(bottomLayers, topLayers);
         }
         catch(Exception ex){
             System.out.println("layersComboBoxStarteChanged.exeption: "+ex);
@@ -681,19 +696,15 @@ public class Interfaz extends javax.swing.JFrame {
     private void bottomLayersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseEntered
         if(currentSimpleRoom !=null)
             currentSimpleRoom.showSelection(true);
-        System.out.println("Se metio");
     }//GEN-LAST:event_bottomLayersMouseEntered
 
     private void bottomLayersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseExited
         if(currentSimpleRoom !=null)
             currentSimpleRoom.showSelection(false);
-        System.out.println("Se salio");
     }//GEN-LAST:event_bottomLayersMouseExited
 
     private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
-        System.out.println("El mouse se movio OMG"+evt.getX()+","+evt.getY());
-        if(currentSimpleRoom != null)
-            currentSimpleRoom.updateSelection(selection,evt.getX(),evt.getY());
+
     }//GEN-LAST:event_jPanel1MouseMoved
  
     /**

@@ -251,7 +251,6 @@ public class Interfaz extends javax.swing.JFrame {
         tw.setMaximumSize(new java.awt.Dimension(25, 20));
         tw.setMinimumSize(new java.awt.Dimension(25, 20));
         tw.setPreferredSize(new java.awt.Dimension(25, 20));
-        tw.setRequestFocusEnabled(false);
         tw.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 twFocusGained(evt);
@@ -294,7 +293,6 @@ public class Interfaz extends javax.swing.JFrame {
         th.setMaximumSize(new java.awt.Dimension(25, 20));
         th.setMinimumSize(new java.awt.Dimension(25, 20));
         th.setPreferredSize(new java.awt.Dimension(25, 20));
-        th.setRequestFocusEnabled(false);
         th.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 thFocusGained(evt);

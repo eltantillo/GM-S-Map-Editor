@@ -73,7 +73,7 @@ public class Interfaz extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         showGridButton = new javax.swing.JToggleButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        topLayerButton = new javax.swing.JToggleButton();
+        previewButton = new javax.swing.JToggleButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jLabel3 = new javax.swing.JLabel();
         layersComboBox = new javax.swing.JComboBox<>();
@@ -344,16 +344,16 @@ public class Interfaz extends javax.swing.JFrame {
         toolBar.add(showGridButton);
         toolBar.add(jSeparator1);
 
-        topLayerButton.setText("Show Top Layers");
-        topLayerButton.setFocusable(false);
-        topLayerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        topLayerButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        topLayerButton.addActionListener(new java.awt.event.ActionListener() {
+        previewButton.setText("Preview");
+        previewButton.setFocusable(false);
+        previewButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        previewButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        previewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topLayerButtonActionPerformed(evt);
+                previewButtonActionPerformed(evt);
             }
         });
-        toolBar.add(topLayerButton);
+        toolBar.add(previewButton);
         toolBar.add(jSeparator2);
 
         jLabel3.setText("Layer:");
@@ -590,7 +590,7 @@ public class Interfaz extends javax.swing.JFrame {
 
             layersComboBox.setModel(dcbm);
             showGridButton.setSelected(false);
-            topLayerButton.setSelected(false);
+            previewButton.setSelected(false);
         }
     }//GEN-LAST:event_mapListMouseClicked
 
@@ -625,10 +625,10 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_tilesMouseDragged
 
-    private void topLayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topLayerButtonActionPerformed
+    private void previewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewButtonActionPerformed
         currentSimpleRoom.topLayer();
         currentSimpleRoom.update(bottomLayers, topLayers);
-    }//GEN-LAST:event_topLayerButtonActionPerformed
+    }//GEN-LAST:event_previewButtonActionPerformed
 
     private void layersComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_layersComboBoxItemStateChanged
         try{
@@ -752,6 +752,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JList<String> objectsList;
     private javax.swing.JScrollPane objectsScrollPane;
     private javax.swing.JMenuItem openMenu;
+    private javax.swing.JToggleButton previewButton;
     private javax.swing.JMenuItem redoSubMenu;
     private javax.swing.JMenuItem saveAsMenu;
     private javax.swing.JMenuItem saveMenu;
@@ -764,7 +765,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem tileset1;
     private javax.swing.JMenuItem tileset2;
     private javax.swing.JToolBar toolBar;
-    private javax.swing.JToggleButton topLayerButton;
     private javax.swing.JLabel topLayers;
     private javax.swing.JTextField tw;
     private javax.swing.JMenuItem undoSubMenu;

@@ -29,7 +29,7 @@ public class SimpleRoom {
     private Stack<ArrayList<ArrayList<Tile>>> redo;
     
     private ArrayList<Integer> layerDepth;
-    private boolean grid,topLayers,inMap;
+    private boolean grid,preview,inMap;
     int prevX,prevY;
     
   
@@ -77,7 +77,7 @@ public class SimpleRoom {
      * @param 
      */
     public void topLayer(){
-        topLayers =! topLayers;
+        preview =! preview;
     }
     
     /**
@@ -101,7 +101,6 @@ public class SimpleRoom {
         youClickedY = toGrid(youClickedY, 2);
         if(prevX != youClickedX || prevY !=youClickedY){
             undo.add((ArrayList)layerTile.clone());
-            System.out.println("Click.size(): "+Selection.selection.size());
             ArrayList<Tile> selection = Selection.selection;
             if(Selection.isTileSet){
                 for(Tile tile : selection){
@@ -189,10 +188,11 @@ public class SimpleRoom {
                 infBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, infBI);
             }
             else if(tempX==currentLayer){
-                ImageTools.setAlpha(infBI);
+                if(!preview)
+                    ImageTools.setAlpha(infBI);
                 infBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, infBI);
             }
-            else if(topLayers){
+            else if(preview){
                 topBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, topBI);
             }
             else{
@@ -372,7 +372,6 @@ public class SimpleRoom {
         layerTile.add(tiles);
     }
     public void undo(){
-        System.out.println(undo.size());
         if(!undo.isEmpty()){
             ArrayList l = undo.pop();
             redo.push((ArrayList)l.clone());
@@ -380,7 +379,6 @@ public class SimpleRoom {
         }
     }
     public void redo(){
-        System.out.println(redo.size());
         if(!redo.isEmpty()){
             ArrayList l = redo.pop();
             undo.push((ArrayList)l.clone());
@@ -390,10 +388,8 @@ public class SimpleRoom {
     public void showSelection(boolean show){
         inMap = show;
     }
-    
     public void updateSelection(JLabel sel,int x,int y){
         if(Selection.selectGraphic!=null){
-            System.out.println("Not null yeaa baby");
             BufferedImage blank = new BufferedImage(w+1, h+1, BufferedImage.TYPE_4BYTE_ABGR);
             x = toGrid(x, 1);
             y = toGrid(y, 0);
@@ -405,7 +401,59 @@ public class SimpleRoom {
             sel.setIcon(new ImageIcon(blank));
             sel.setVisible(inMap);
         }
-        else
-            System.out.println("Shit esta madre esta null aborta moterfucker");
+    }
+    /**
+     * Este metodo permite mover una capa entre depths, what: que capa quieres
+     * to: a donde quieres mover la nueva capa.
+     * Si "to" existe lo combina con la capa a mover.
+     * Esta accion permite ctrl+z
+     * @param what
+     * @param to 
+     */
+    public void changeLayer(int what, int to){
+        undo.push(layerTile);
+        int existe = layerDepth.indexOf(to);
+        if(existe>=0){ //fusiona capas //
+            currentLayer = to;
+            for(Tile t : layerTile.get(existe)){ // por cada tile en la capa
+                t.depth = to; //cambia de depth//
+                checkForTile(t); //fusionalo//
+            }    
+        }
+        else{
+            currentLayer = to;
+            layerDepth.add(to); //agregamos capa//
+            layerDepth.remove(what); //borramos capa anterior//
+            
+            for(Tile t: layerTile.get(what)){ //movemos la capa//
+                t.depth = to;
+            }
+            Collections.sort(layerTile, new Comparator<ArrayList<Tile>>() { //reordenamos//
+                @Override
+                public int compare(ArrayList<Tile> t, ArrayList<Tile> t2) {
+                    return new Integer(t2.get(0).depth).compareTo(t.get(0).depth);
+                }
+            });
+            Collections.sort(layerDepth, new Comparator<Integer>() {//reordenamos//
+                    @Override
+                    public int compare(Integer o1, Integer o2) {
+                        return o2.compareTo(o1);
+                    }
+                }
+            );
+        }
+    }
+    /**
+     * Este metodo permite borrar la capa seleccionada. what es el depth de la
+     * capa seleccionada.
+     * Esta accion permite ctrl+z
+     * @param what 
+     */
+    public void removeLayer(int what){
+        if(layerDepth.indexOf(what)>=0){
+            undo.push(layerTile);
+            layerTile.remove(layerDepth.indexOf(what));
+            layerDepth.remove(what);
+        }
     }
 }

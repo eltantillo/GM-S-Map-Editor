@@ -674,6 +674,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void layerDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerDeleteButtonActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_layerDeleteButtonActionPerformed
 
     private void undoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoSubMenuActionPerformed

@@ -542,6 +542,9 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="layerChangeButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="layerDeleteButton">
           <Properties>

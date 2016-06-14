@@ -371,6 +371,11 @@ public class Interfaz extends javax.swing.JFrame {
         layerChangeButton.setFocusable(false);
         layerChangeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         layerChangeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        layerChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                layerChangeButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(layerChangeButton);
 
         layerDeleteButton.setText("Delete");
@@ -674,7 +679,13 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void layerDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerDeleteButtonActionPerformed
         // TODO add your handling code here:
+        currentSimpleRoom.removeLayer(Integer.valueOf((String)layersComboBox.getSelectedItem()));
         
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+        
+        layersComboBox.setModel(dcbm);
     }//GEN-LAST:event_layerDeleteButtonActionPerformed
 
     private void undoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoSubMenuActionPerformed
@@ -700,6 +711,28 @@ public class Interfaz extends javax.swing.JFrame {
     private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
 
     }//GEN-LAST:event_jPanel1MouseMoved
+
+    private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerChangeButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+            Integer newDepth = Integer.valueOf(JOptionPane.showInputDialog("Enter a depth value to move the layer to: "));
+            Integer curDepth = Integer.valueOf((String)layersComboBox.getSelectedItem());
+            
+            System.out.println(curDepth + " " + newDepth);
+            
+            currentSimpleRoom.changeLayer(curDepth, newDepth);
+            currentSimpleRoom.removeLayer(curDepth);
+
+            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+            for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+
+            layersComboBox.setModel(dcbm);
+            layersComboBox.setSelectedItem(newDepth.toString());
+        }
+        catch(Exception e){
+        }
+    }//GEN-LAST:event_layerChangeButtonActionPerformed
  
     /**
      * @param args the command line arguments

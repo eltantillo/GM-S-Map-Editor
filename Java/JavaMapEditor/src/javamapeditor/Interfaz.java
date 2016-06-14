@@ -87,9 +87,6 @@ public class Interfaz extends javax.swing.JFrame {
         openMenu = new javax.swing.JMenuItem();
         saveMenu = new javax.swing.JMenuItem();
         saveAsMenu = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        tileset1 = new javax.swing.JMenuItem();
-        tileset2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         undoSubMenu = new javax.swing.JMenuItem();
         redoSubMenu = new javax.swing.JMenuItem();
@@ -371,6 +368,11 @@ public class Interfaz extends javax.swing.JFrame {
         layerChangeButton.setFocusable(false);
         layerChangeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         layerChangeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        layerChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                layerChangeButtonActionPerformed(evt);
+            }
+        });
         toolBar.add(layerChangeButton);
 
         layerDeleteButton.setText("Delete");
@@ -402,6 +404,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         fileMenu.setText("File");
 
+        newProjectMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         newProjectMenu.setText("New Project...");
         newProjectMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,6 +413,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         fileMenu.add(newProjectMenu);
 
+        openMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openMenu.setText("Open...");
         openMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -418,6 +422,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         fileMenu.add(openMenu);
 
+        saveMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         saveMenu.setText("Save");
         saveMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,6 +431,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         fileMenu.add(saveMenu);
 
+        saveAsMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         saveAsMenu.setText("Save As...");
         saveAsMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,16 +441,6 @@ public class Interfaz extends javax.swing.JFrame {
         fileMenu.add(saveAsMenu);
 
         menuBar.add(fileMenu);
-
-        jMenu3.setText("TileSet");
-
-        tileset1.setText("TileSet1");
-        jMenu3.add(tileset1);
-
-        tileset2.setText("TileSet2");
-        jMenu3.add(tileset2);
-
-        menuBar.add(jMenu3);
 
         jMenu1.setText("Edit");
 
@@ -493,6 +489,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_saveAsMenuActionPerformed
 
     private void saveMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuActionPerformed
+        currentSimpleRoom.save();
         xml.Project.saveProject();
     }//GEN-LAST:event_saveMenuActionPerformed
 
@@ -666,6 +663,7 @@ public class Interfaz extends javax.swing.JFrame {
 
             layersComboBox.setModel(dcbm);
             layersComboBox.setSelectedItem(depth.toString());
+            currentSimpleRoom.update(bottomLayers,topLayers);
         }
         catch(Exception ex){
             System.out.println("newLayerActionPerformed.exeption: "+ex);
@@ -674,15 +672,33 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void layerDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerDeleteButtonActionPerformed
         // TODO add your handling code here:
+        currentSimpleRoom.removeLayer(Integer.valueOf((String)layersComboBox.getSelectedItem()));
+        
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+        
+        layersComboBox.setModel(dcbm);
+        currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_layerDeleteButtonActionPerformed
 
     private void undoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoSubMenuActionPerformed
         currentSimpleRoom.undo();
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+        
+        layersComboBox.setModel(dcbm);
         currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_undoSubMenuActionPerformed
 
     private void redoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redoSubMenuActionPerformed
         currentSimpleRoom.redo();
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+        
+        layersComboBox.setModel(dcbm);
         currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_redoSubMenuActionPerformed
 
@@ -699,6 +715,30 @@ public class Interfaz extends javax.swing.JFrame {
     private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
 
     }//GEN-LAST:event_jPanel1MouseMoved
+
+    private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerChangeButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+            Integer newDepth = Integer.valueOf(JOptionPane.showInputDialog("Enter a depth value to move the layer to: "));
+            Integer curDepth = Integer.valueOf((String)layersComboBox.getSelectedItem());
+            
+            System.out.println(curDepth + " " + newDepth);
+            
+            currentSimpleRoom.changeLayer(curDepth, newDepth);
+            //currentSimpleRoom.removeLayer(curDepth);
+
+            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+            for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+
+            layersComboBox.setModel(dcbm);
+            layersComboBox.setSelectedItem(newDepth.toString());
+            currentSimpleRoom.update(bottomLayers, topLayers);
+        }
+        catch(Exception e){
+            System.out.println("Exception: "+e);
+        }
+    }//GEN-LAST:event_layerChangeButtonActionPerformed
  
     /**
      * @param args the command line arguments
@@ -730,7 +770,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -762,8 +801,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel tiles;
     private javax.swing.JComboBox<String> tilesCombo;
     private javax.swing.JScrollPane tilesScrollPane;
-    private javax.swing.JMenuItem tileset1;
-    private javax.swing.JMenuItem tileset2;
     private javax.swing.JToolBar toolBar;
     private javax.swing.JLabel topLayers;
     private javax.swing.JTextField tw;

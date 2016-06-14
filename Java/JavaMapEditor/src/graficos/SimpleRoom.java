@@ -32,6 +32,8 @@ public class SimpleRoom {
     private boolean grid,preview,inMap;
     int prevX,prevY;
     
+    private Room room;
+    
   
 // Constantes //
     private static final String NO_BACKGROUND = "NONE_BACKGROUND_FOUND";
@@ -64,6 +66,7 @@ public class SimpleRoom {
         th = 32;
         undo = new Stack();
         redo = new Stack();
+        room = r;
     }
     /**
      * Este metodo activa o desactiva el grid visual en el Map Area
@@ -103,8 +106,9 @@ public class SimpleRoom {
             undo.add((ArrayList)layerTile.clone());
             ArrayList<Tile> selection = Selection.selection;
             if(Selection.isTileSet){
-                for(Tile tile : selection){
+                for(Tile tile: selection){
                     Tile temp = tile.clone();
+                    temp.depth = layerDepth.get(currentLayer);
                     temp.x = youClickedX + tile.x*tile.w;
                     temp.y = youClickedY + tile.y*tile.h;
                     checkForTile(temp);
@@ -115,6 +119,7 @@ public class SimpleRoom {
                 int defaultY = selection.get(0).y;
                 for(Tile tile : selection){
                     Tile temp = tile.clone();
+                    temp.depth = layerDepth.get(currentLayer);
                     temp.x = youClickedX + (temp.x-defaultX);
                     temp.y = youClickedY + (temp.y-defaultY);
                     checkForTile(temp);
@@ -305,6 +310,7 @@ public class SimpleRoom {
             for(Tile c: layerTile.get(currentLayer)){
                 if(isInside(new Rectangle(c.x,c.y,c.w,c.h), new Rectangle(t.x,t.y,t.w,t.h))){
                     if(!checked){
+                        System.out.println("Agregado");
                         tt.add(t);
                         checked = true;
                     }
@@ -411,29 +417,32 @@ public class SimpleRoom {
      * @param to 
      */
     public void changeLayer(int what, int to){
-        undo.push(layerTile);
         int existe = layerDepth.indexOf(to);
         if(existe>=0){ //fusiona capas //
-            currentLayer = to;
-            for(Tile t : layerTile.get(existe)){ // por cada tile en la capa
+            currentLayer = existe;
+            ArrayList<Tile> temp = (ArrayList)layerTile.get(existe).clone();
+            layerTile.remove(existe);
+            layerDepth.remove(existe);
+            for(Tile t : temp){ // por cada tile en la capa
                 t.depth = to; //cambia de depth//
+                System.out.println("TO: "+t.depth);
                 checkForTile(t); //fusionalo//
-            }    
+            }
+            //layerTile.remove(existe);
         }
         else{
-            currentLayer = to;
-            layerDepth.add(to); //agregamos capa//
-            layerDepth.remove(what); //borramos capa anterior//
-            
-            for(Tile t: layerTile.get(what)){ //movemos la capa//
+            for(Tile t: layerTile.get(layerDepth.indexOf(what))){ //movemos la capa//
                 t.depth = to;
             }
+            
             Collections.sort(layerTile, new Comparator<ArrayList<Tile>>() { //reordenamos//
                 @Override
                 public int compare(ArrayList<Tile> t, ArrayList<Tile> t2) {
                     return new Integer(t2.get(0).depth).compareTo(t.get(0).depth);
                 }
             });
+            layerDepth.add(to); //agregamos capa//
+            layerDepth.remove(layerDepth.indexOf(what)); //borramos capa anterior//
             Collections.sort(layerDepth, new Comparator<Integer>() {//reordenamos//
                     @Override
                     public int compare(Integer o1, Integer o2) {
@@ -441,6 +450,7 @@ public class SimpleRoom {
                     }
                 }
             );
+            currentLayer = layerDepth.indexOf(to);
         }
     }
     /**
@@ -451,9 +461,18 @@ public class SimpleRoom {
      */
     public void removeLayer(int what){
         if(layerDepth.indexOf(what)>=0){
-            undo.push(layerTile);
             layerTile.remove(layerDepth.indexOf(what));
             layerDepth.remove(what);
         }
+    }
+    
+    public void save(){
+        ArrayList<Tile> tiles = new ArrayList<>();
+        for(ArrayList<Tile> ts:layerTile){
+            for(Tile t: ts){
+                tiles.add(t);
+            }
+        }
+        room.tiles = tiles;
     }
 }

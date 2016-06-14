@@ -52,8 +52,8 @@ public class Interfaz extends javax.swing.JFrame {
         mapScrollPane = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         bottomLayers = new javax.swing.JLabel();
-        selection = new javax.swing.JLabel();
         topLayers = new javax.swing.JLabel();
+        selection = new javax.swing.JLabel();
         leftTabs = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         tilesCombo = new javax.swing.JComboBox<>();
@@ -71,15 +71,15 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         th = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        showGrid = new javax.swing.JToggleButton();
+        showGridButton = new javax.swing.JToggleButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        topLayer = new javax.swing.JToggleButton();
+        topLayerButton = new javax.swing.JToggleButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jLabel3 = new javax.swing.JLabel();
         layersComboBox = new javax.swing.JComboBox<>();
-        layerChange = new javax.swing.JButton();
-        layerDelete = new javax.swing.JButton();
-        newLayer = new javax.swing.JButton();
+        layerChangeButton = new javax.swing.JButton();
+        layerDeleteButton = new javax.swing.JButton();
+        newLayerButton = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
@@ -141,13 +141,13 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        selection.setText("Selection");
-        selection.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        selection.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
         topLayers.setText("Top Layers");
         topLayers.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         topLayers.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        selection.setText("Selection");
+        selection.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        selection.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -332,28 +332,28 @@ public class Interfaz extends javax.swing.JFrame {
         });
         toolBar.add(jSeparator3);
 
-        showGrid.setText("Show Grid");
-        showGrid.setFocusable(false);
-        showGrid.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        showGrid.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        showGrid.addActionListener(new java.awt.event.ActionListener() {
+        showGridButton.setText("Show Grid");
+        showGridButton.setFocusable(false);
+        showGridButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        showGridButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        showGridButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showGridActionPerformed(evt);
+                showGridButtonActionPerformed(evt);
             }
         });
-        toolBar.add(showGrid);
+        toolBar.add(showGridButton);
         toolBar.add(jSeparator1);
 
-        topLayer.setText("Show Top Layers");
-        topLayer.setFocusable(false);
-        topLayer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        topLayer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        topLayer.addActionListener(new java.awt.event.ActionListener() {
+        topLayerButton.setText("Show Top Layers");
+        topLayerButton.setFocusable(false);
+        topLayerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        topLayerButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        topLayerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topLayerActionPerformed(evt);
+                topLayerButtonActionPerformed(evt);
             }
         });
-        toolBar.add(topLayer);
+        toolBar.add(topLayerButton);
         toolBar.add(jSeparator2);
 
         jLabel3.setText("Layer:");
@@ -367,33 +367,33 @@ public class Interfaz extends javax.swing.JFrame {
         });
         toolBar.add(layersComboBox);
 
-        layerChange.setText(" Change");
-        layerChange.setFocusable(false);
-        layerChange.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        layerChange.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        toolBar.add(layerChange);
+        layerChangeButton.setText(" Change");
+        layerChangeButton.setFocusable(false);
+        layerChangeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        layerChangeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolBar.add(layerChangeButton);
 
-        layerDelete.setText("Delete");
-        layerDelete.setFocusable(false);
-        layerDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        layerDelete.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        layerDelete.addActionListener(new java.awt.event.ActionListener() {
+        layerDeleteButton.setText("Delete");
+        layerDeleteButton.setFocusable(false);
+        layerDeleteButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        layerDeleteButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        layerDeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                layerDeleteActionPerformed(evt);
+                layerDeleteButtonActionPerformed(evt);
             }
         });
-        toolBar.add(layerDelete);
+        toolBar.add(layerDeleteButton);
 
-        newLayer.setText("New Layer");
-        newLayer.setFocusable(false);
-        newLayer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        newLayer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        newLayer.addActionListener(new java.awt.event.ActionListener() {
+        newLayerButton.setText("New Layer");
+        newLayerButton.setFocusable(false);
+        newLayerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newLayerButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        newLayerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newLayerActionPerformed(evt);
+                newLayerButtonActionPerformed(evt);
             }
         });
-        toolBar.add(newLayer);
+        toolBar.add(newLayerButton);
         toolBar.add(jSeparator5);
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
@@ -536,17 +536,10 @@ public class Interfaz extends javax.swing.JFrame {
         tw.setText(String.valueOf(currentBackground.getTW()));
         th.setText(String.valueOf(currentBackground.getTH()));
         
-        System.out.println(jPanel1.getComponentZOrder(bottomLayers));
-        System.out.println(jPanel1.getComponentZOrder(selection));
-        System.out.println(jPanel1.getComponentZOrder(topLayer));
-        
-        jPanel1.setComponentZOrder(bottomLayers, 0);
+        jPanel1.setComponentZOrder(bottomLayers, 2);
         jPanel1.setComponentZOrder(selection, 1);
-        jPanel1.setComponentZOrder(topLayer, 2);
-                
-        System.out.println(jPanel1.getComponentZOrder(bottomLayers));
-        System.out.println(jPanel1.getComponentZOrder(selection));
-        System.out.println(jPanel1.getComponentZOrder(topLayer));
+        jPanel1.setComponentZOrder(topLayers, 0);
+        
     }//GEN-LAST:event_openMenuActionPerformed
 
     private void newProjectMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectMenuActionPerformed
@@ -596,8 +589,8 @@ public class Interfaz extends javax.swing.JFrame {
                 dcbm.addElement(s);
 
             layersComboBox.setModel(dcbm);
-            showGrid.setSelected(false);
-            topLayer.setSelected(false);
+            showGridButton.setSelected(false);
+            topLayerButton.setSelected(false);
         }
     }//GEN-LAST:event_mapListMouseClicked
 
@@ -632,10 +625,10 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.update(bottomLayers, topLayers);
     }//GEN-LAST:event_tilesMouseDragged
 
-    private void topLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topLayerActionPerformed
+    private void topLayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topLayerButtonActionPerformed
         currentSimpleRoom.topLayer();
         currentSimpleRoom.update(bottomLayers, topLayers);
-    }//GEN-LAST:event_topLayerActionPerformed
+    }//GEN-LAST:event_topLayerButtonActionPerformed
 
     private void layersComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_layersComboBoxItemStateChanged
         try{
@@ -647,10 +640,10 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_layersComboBoxItemStateChanged
 
-    private void showGridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGridActionPerformed
+    private void showGridButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showGridButtonActionPerformed
         currentSimpleRoom.grid();
         currentSimpleRoom.update(bottomLayers, topLayers);
-    }//GEN-LAST:event_showGridActionPerformed
+    }//GEN-LAST:event_showGridButtonActionPerformed
 
     private void twFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_twFocusGained
         // TODO add your handling code here:
@@ -662,7 +655,7 @@ public class Interfaz extends javax.swing.JFrame {
         th.setText("");
     }//GEN-LAST:event_thFocusGained
 
-    private void newLayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLayerActionPerformed
+    private void newLayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newLayerButtonActionPerformed
         try{
             Integer depth = Integer.valueOf(JOptionPane.showInputDialog("Enter a depth value for the new layer: "));
             currentSimpleRoom.changeLayer(depth);
@@ -677,11 +670,11 @@ public class Interfaz extends javax.swing.JFrame {
         catch(Exception ex){
             System.out.println("newLayerActionPerformed.exeption: "+ex);
         }
-    }//GEN-LAST:event_newLayerActionPerformed
+    }//GEN-LAST:event_newLayerButtonActionPerformed
 
-    private void layerDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerDeleteActionPerformed
+    private void layerDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerDeleteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_layerDeleteActionPerformed
+    }//GEN-LAST:event_layerDeleteButtonActionPerformed
 
     private void undoSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoSubMenuActionPerformed
         currentSimpleRoom.undo();
@@ -746,15 +739,15 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JSplitPane jSplitPane4;
-    private javax.swing.JButton layerChange;
-    private javax.swing.JButton layerDelete;
+    private javax.swing.JButton layerChangeButton;
+    private javax.swing.JButton layerDeleteButton;
     private javax.swing.JComboBox<String> layersComboBox;
     private javax.swing.JTabbedPane leftTabs;
     private javax.swing.JList<String> mapList;
     private javax.swing.JScrollPane mapListScrollPane;
     private javax.swing.JScrollPane mapScrollPane;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JButton newLayer;
+    private javax.swing.JButton newLayerButton;
     private javax.swing.JMenuItem newProjectMenu;
     private javax.swing.JList<String> objectsList;
     private javax.swing.JScrollPane objectsScrollPane;
@@ -763,7 +756,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveAsMenu;
     private javax.swing.JMenuItem saveMenu;
     private javax.swing.JLabel selection;
-    private javax.swing.JToggleButton showGrid;
+    private javax.swing.JToggleButton showGridButton;
     private javax.swing.JTextField th;
     private javax.swing.JLabel tiles;
     private javax.swing.JComboBox<String> tilesCombo;
@@ -771,7 +764,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem tileset1;
     private javax.swing.JMenuItem tileset2;
     private javax.swing.JToolBar toolBar;
-    private javax.swing.JToggleButton topLayer;
+    private javax.swing.JToggleButton topLayerButton;
     private javax.swing.JLabel topLayers;
     private javax.swing.JTextField tw;
     private javax.swing.JMenuItem undoSubMenu;

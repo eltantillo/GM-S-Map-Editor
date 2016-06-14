@@ -241,16 +241,16 @@
                         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bottomLayersMousePressed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="selection">
+                    <Component class="javax.swing.JLabel" name="topLayers">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Selection"/>
+                        <Property name="text" type="java.lang.String" value="Top Layers"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="topLayers">
+                    <Component class="javax.swing.JLabel" name="selection">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Top Layers"/>
+                        <Property name="text" type="java.lang.String" value="Selection"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>
@@ -488,7 +488,7 @@
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
         </Component>
-        <Component class="javax.swing.JToggleButton" name="showGrid">
+        <Component class="javax.swing.JToggleButton" name="showGridButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Show Grid"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -496,12 +496,12 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showGridActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showGridButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator1">
         </Component>
-        <Component class="javax.swing.JToggleButton" name="topLayer">
+        <Component class="javax.swing.JToggleButton" name="topLayerButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Show Top Layers"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -509,7 +509,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topLayerActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topLayerButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator2">
@@ -535,7 +535,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="layerChange">
+        <Component class="javax.swing.JButton" name="layerChangeButton">
           <Properties>
             <Property name="text" type="java.lang.String" value=" Change"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -543,7 +543,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="layerDelete">
+        <Component class="javax.swing.JButton" name="layerDeleteButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -551,10 +551,10 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="layerDeleteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="layerDeleteButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="newLayer">
+        <Component class="javax.swing.JButton" name="newLayerButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="New Layer"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -562,7 +562,7 @@
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newLayerActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newLayerButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator5">

@@ -242,7 +242,6 @@
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Hola"/>
                         <Property name="toolTipText" type="java.lang.String" value=""/>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
@@ -258,14 +257,12 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="topLayers">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Top Layers"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="selection">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Selection"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>

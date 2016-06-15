@@ -8,6 +8,7 @@ package javamapeditor;
 
 import graficos.*;
 import java.awt.Point;
+import java.awt.event.InputEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,8 +30,6 @@ public class Interfaz extends javax.swing.JFrame {
     
     private SimpleRoom currentSimpleRoom;
     private BackgroundTile currentBackground;
-    
-    private boolean temp;
     
     //private JLabel seleccion;
     
@@ -117,7 +116,6 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         bottomLayers.setBackground(new java.awt.Color(0, 0, 0));
-        bottomLayers.setText("Hola");
         bottomLayers.setToolTipText("");
         bottomLayers.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         bottomLayers.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -144,11 +142,9 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        topLayers.setText("Top Layers");
         topLayers.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         topLayers.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        selection.setText("Selection");
         selection.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         selection.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -564,10 +560,10 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void bottomLayersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseClicked
         if(evt.getButton() == 3){
-            if(!temp)
-                currentSimpleRoom.setSelection(new Point(evt.getX(),evt.getY()), new Point(evt.getX(),evt.getY()));
-            else
+            if((evt.getModifiers() & InputEvent.CTRL_MASK) == InputEvent.CTRL_MASK)
                 currentSimpleRoom.eraseTile(evt.getX(), evt.getY());
+            else
+                currentSimpleRoom.setSelection(new Point(evt.getX(),evt.getY()), new Point(evt.getX(),evt.getY()));
             currentSimpleRoom.update(bottomLayers,topLayers);
         }
         else
@@ -581,13 +577,13 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void bottomLayersMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseDragged
         if(SwingUtilities.isRightMouseButton(evt)){
-            if(!temp){
+            if((evt.getModifiers() & InputEvent.CTRL_MASK) == InputEvent.CTRL_MASK){
+                currentSimpleRoom.eraseTile(evt.getX(), evt.getY());
+            }
+            else{
                 mouseMapPosFinX = evt.getX();
                 mouseMapPosFinY = evt.getY();
                 currentSimpleRoom.setSelection(new Point(mouseMapPosX,mouseMapPosY), new Point(mouseMapPosFinX,mouseMapPosFinY));
-            }
-            else{
-                currentSimpleRoom.eraseTile(evt.getX(), evt.getY());
             }
             currentSimpleRoom.update(bottomLayers,topLayers);
         }

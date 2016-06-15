@@ -17,7 +17,7 @@ public class BackgroundTile {
     private BufferedImage buffer;
     private final BufferedImage backgroundTile;
     private final String backgroundName;
-    private final int tileWidth, tileHeight, offsetX, offsetY;
+    private final int tileWidth, tileHeight, offsetX, offsetY,sepX,sepY;
     
     public BackgroundTile(Background b){
         tileWidth = b.tilewidth;
@@ -26,6 +26,8 @@ public class BackgroundTile {
         backgroundName = b.name;
         offsetX = b.tilexoff;
         offsetY = b.tileyoff;
+        sepX = b.tilevsep;
+        sepY = b.tilehsep;
     }
     public int getTW(){
         return tileWidth;
@@ -33,13 +35,15 @@ public class BackgroundTile {
     public int getTH(){
         return tileHeight;
     }
-    public BackgroundTile(BufferedImage source, String name, int tw, int th, int offX, int offY){
+    public BackgroundTile(BufferedImage source, String name, int tw, int th, int offX, int offY,int sepv,int seph){
         tileWidth = tw;
         tileHeight = th;
         backgroundTile = source;
         backgroundName = name;
         offsetX = offX;
         offsetY = offY;
+        sepX = sepv;
+        sepY = seph;
     }
     public BufferedImage getImageInPoint(Point punto){
         try{
@@ -59,23 +63,27 @@ public class BackgroundTile {
             (inicio.y > fin.y ? fin.y : inicio.y)
         );
         Selection.fin = new Point(
-            (inicio.x < fin.x ? fin.x : inicio.x) + tileWidth+(offsetX*2),
-            (inicio.y < fin.y ? fin.y : inicio.y) + tileHeight+(offsetY*2)
+            (inicio.x < fin.x ? fin.x : inicio.x) + tileWidth,
+            (inicio.y < fin.y ? fin.y : inicio.y) + tileHeight
         );
         Selection.isTileSet = true;
+        // creando grafico //
         int difx = Selection.fin.x - Selection.ini.x;
     	int dify = Selection.fin.y - Selection.ini.y;
-        BufferedImage b = new BufferedImage(difx+(offsetX*2), dify+(offsetY*2), BufferedImage.TYPE_4BYTE_ABGR);
+        BufferedImage b = new BufferedImage(difx, dify, BufferedImage.TYPE_4BYTE_ABGR);
         
-        int avanceY = offsetY+tileHeight+offsetY;
-        int avanceX = offsetX+tileWidth+offsetX;
-        
+        // creando graficos de los tiles //
+        int avanceX = tileWidth+sepX;
+        int avanceY = tileHeight+sepY;
         for(int y = Selection.ini.y; y<Selection.fin.y; y+=avanceY){
+            System.out.println("y"+y);
             for(int x = Selection.ini.x; x<Selection.fin.x; x+=avanceX){
-                BufferedImage cut = backgroundTile.getSubimage(x+offsetX, y+offsetY, tileWidth, tileHeight);
-                int tx = (x/avanceX) - Selection.ini.x/avanceX;
-                int ty = (y/avanceY) - Selection.ini.y/avanceY;
-                b = ImageTools.copyPaste(cut, tx*tileWidth, ty*tileHeight, b);
+                System.out.println("x"+x);
+                System.out.println(x+","+ y+","+tileWidth+","+tileHeight);
+                BufferedImage cut = backgroundTile.getSubimage(x, y, tileWidth, tileHeight);
+                int cutX = (x/avanceX) - Selection.ini.x/avanceX;
+                int cutY = (y/avanceY) - Selection.ini.y/avanceY;
+                b = ImageTools.copyPaste(cut, cutX*tileWidth, cutY*tileHeight, b);
             }
         }
         Selection.selectGraphic = b;
@@ -116,8 +124,8 @@ public class BackgroundTile {
     }
     private ArrayList<Tile> createSelectionTiles(Point i, Point f){
         ArrayList<Tile> tiles = new ArrayList();
-        int avanceY = offsetY+tileHeight+offsetY;
-        int avanceX = offsetX+tileWidth+offsetX;
+        int avanceY = tileHeight+sepY;
+        int avanceX = tileWidth+sepX;
         
         for(int y = i.y; y<f.y; y+=avanceY){
             for(int x = i.x; x<f.x; x+=avanceX){
@@ -125,16 +133,19 @@ public class BackgroundTile {
                 t.bgName = this.backgroundName;
                 t.w = this.tileWidth;
                 t.h = this.tileHeight;
-                t.xo = x+offsetX;
-                t.yo = y+offsetY;
+                t.xo = x;
+                t.yo = y;
                 t.x = (x/avanceX) - i.x/avanceX;
                 t.y = (y/avanceY) - i.y/avanceY;
+                System.out.println("w:"+t.w+"h:"+t.h+"xo:"+t.xo+"yo:"+t.yo+"x:"+t.x+"y:"+t.y);
                 tiles.add(t);
             }
         }
         return tiles;
     }
     private int toGrid(int mouse, int opc){
-        return ((int)Math.floor(mouse / (opc == 1 ? tileWidth+(offsetX*2) : tileHeight+(offsetY*2))) * (opc == 1 ? tileWidth+(offsetX*2) : tileHeight+(offsetY*2)));
+        if(opc==1)
+            return (int) Math.floor(mouse / (tileWidth+sepX)) * (tileWidth+sepX) + offsetX;
+        return (int) Math.floor(mouse / (tileHeight+sepY)) * (tileHeight+sepY)+offsetY;
     }
 }

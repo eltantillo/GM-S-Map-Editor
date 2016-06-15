@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Stack;
+import java.util.concurrent.ThreadLocalRandom;
 import xml.projectAssets.rooms.Room;
 import xml.projectAssets.backgrounds.Background;
 
@@ -412,22 +413,27 @@ public class SimpleRoom {
      * Este metodo permite mover una capa entre depths, what: que capa quieres
      * to: a donde quieres mover la nueva capa.
      * Si "to" existe lo combina con la capa a mover.
-     * Esta accion permite ctrl+z
+     * Esta accion no permite ctrl+z
      * @param what
      * @param to 
      */
     public void changeLayer(int what, int to){
+        undo.removeAllElements();
+        redo.removeAllElements();
         int existe = layerDepth.indexOf(to);
-        if(existe>=0){ //fusiona capas //
+        if(existe>=0){
+            // situarnos en la capa actual //
             currentLayer = existe;
-            ArrayList<Tile> temp = (ArrayList)layerTile.get(existe).clone();
-            layerTile.remove(existe);
-            layerDepth.remove(existe);
-            for(Tile t : temp){ // por cada tile en la capa
-                t.depth = to; //cambia de depth//
-                System.out.println("TO: "+t.depth);
-                checkForTile(t); //fusionalo//
+            // clonar la capa a fusionar con...//
+            ArrayList<Tile> temp = (ArrayList)layerTile.get(layerDepth.indexOf(what)).clone(); 
+            
+            for(Tile t : temp){ // por cada tile en la capa clonada
+                t.depth = to; // cambia de depth al objetivo//
+                checkForTile(t); // evento normal de click //
             }
+            
+            layerTile.remove(layerDepth.indexOf(what));
+            layerDepth.remove(layerDepth.indexOf(what));
             //layerTile.remove(existe);
         }
         else{
@@ -456,10 +462,12 @@ public class SimpleRoom {
     /**
      * Este metodo permite borrar la capa seleccionada. what es el depth de la
      * capa seleccionada.
-     * Esta accion permite ctrl+z
+     * Esta accion no permite ctrl+z
      * @param what 
      */
     public void removeLayer(int what){
+        undo.removeAllElements();
+        redo.removeAllElements();
         if(layerDepth.indexOf(what)>=0){
             layerTile.remove(layerDepth.indexOf(what));
             layerDepth.remove(what);
@@ -468,9 +476,13 @@ public class SimpleRoom {
     
     public void save(){
         ArrayList<Tile> tiles = new ArrayList<>();
+        int i = 0;
         for(ArrayList<Tile> ts:layerTile){
             for(Tile t: ts){
+                t.id = 10000000 + i;
+                t.name = "inst_" + Integer.toHexString(ThreadLocalRandom.current().nextInt(0, 999999999 + 1));
                 tiles.add(t);
+                i++;
             }
         }
         room.tiles = tiles;

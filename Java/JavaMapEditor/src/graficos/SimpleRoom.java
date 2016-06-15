@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Stack;
+import java.util.concurrent.ThreadLocalRandom;
 import xml.projectAssets.rooms.Room;
 import xml.projectAssets.backgrounds.Background;
 
@@ -475,9 +476,13 @@ public class SimpleRoom {
     
     public void save(){
         ArrayList<Tile> tiles = new ArrayList<>();
+        int i = 0;
         for(ArrayList<Tile> ts:layerTile){
             for(Tile t: ts){
+                t.id = 10000000 + i;
+                t.name = "inst_" + Integer.toHexString(ThreadLocalRandom.current().nextInt(0, 999999999 + 1));
                 tiles.add(t);
+                i++;
             }
         }
         room.tiles = tiles;

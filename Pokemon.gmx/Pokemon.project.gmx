@@ -7,13 +7,11 @@
   <sounds name="sound"/>
   <sprites name="sprites"/>
   <backgrounds name="background">
-    <background>background\background2</background>
+    <background>background\background0</background>
   </backgrounds>
   <paths name="paths"/>
   <rooms name="rooms">
-    <room>rooms\Ciudad_basica</room>
-    <room>rooms\cueva_basica</room>
-    <room>rooms\Cuartolimpio</room>
+    <room>rooms\room0</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

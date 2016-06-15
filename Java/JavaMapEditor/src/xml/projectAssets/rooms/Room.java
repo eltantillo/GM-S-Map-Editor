@@ -167,8 +167,8 @@ public class Room {
                 xml.Project.assets.rooms.get(num).tiles.get(i).depth = Integer.valueOf(tile.getAttribute("depth"));
                 xml.Project.assets.rooms.get(num).tiles.get(i).locked = tile.getAttribute("locked").equals("-1");
                 xml.Project.assets.rooms.get(num).tiles.get(i).colour = tile.getAttribute("colour");
-                xml.Project.assets.rooms.get(num).tiles.get(i).scaleX = Integer.valueOf(tile.getAttribute("scaleX"));
-                xml.Project.assets.rooms.get(num).tiles.get(i).scaleY = Integer.valueOf(tile.getAttribute("scaleY"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).scaleX = Double.valueOf(tile.getAttribute("scaleX"));
+                xml.Project.assets.rooms.get(num).tiles.get(i).scaleY = Double.valueOf(tile.getAttribute("scaleY"));
             }
             
             xml.Project.assets.rooms.get(num).PhysicsWorld = doc.getElementsByTagName("PhysicsWorld").item(0).getTextContent().equals("-1");

@@ -17,6 +17,7 @@ import xml.projectAssets.backgrounds.Background;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 
 import xml.projectAssets.rooms.Tile;
 
@@ -528,5 +529,21 @@ public class SimpleRoom {
         state.tw = tw;
         state.w = w;
         return state;
+    }
+    
+    public void eraseTile(int x,int y){
+        undo.push(getState());
+        x = toGrid(x, 1);
+        y = toGrid(y, 3);
+        if(x!=prevX || y!=prevY){
+            ArrayList lk = (ArrayList)layerTile.get(currentLayer).clone();
+            for(Object o: lk){
+                Tile t = (Tile)o;
+                if(isInside(new Rectangle(t.x, t.y, t.w, t.h), new Rectangle(x, y, tw, th))){
+                    layerTile.get(currentLayer).remove(t);
+                }
+            }
+            prevX = x; prevY = y;
+        }
     }
 }

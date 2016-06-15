@@ -7,7 +7,6 @@ package javamapeditor;
 
 
 import graficos.*;
-import java.awt.ComponentOrientation;
 import java.awt.Point;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
@@ -31,6 +30,8 @@ public class Interfaz extends javax.swing.JFrame {
     private SimpleRoom currentSimpleRoom;
     private BackgroundTile currentBackground;
     
+    private boolean temp;
+    
     //private JLabel seleccion;
     
     public Interfaz() {
@@ -47,6 +48,7 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
         mapScrollPane = new javax.swing.JScrollPane();
@@ -90,6 +92,10 @@ public class Interfaz extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         undoSubMenu = new javax.swing.JMenuItem();
         redoSubMenu = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,7 +222,7 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(tilesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
         );
 
         leftTabs.addTab("Tiles", jPanel2);
@@ -464,6 +470,14 @@ public class Interfaz extends javax.swing.JFrame {
 
         menuBar.add(jMenu1);
 
+        jMenu2.setText("Temp");
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("tempBorrar");
+        jMenu2.add(jMenuItem2);
+
+        menuBar.add(jMenu2);
+
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -550,11 +564,14 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void bottomLayersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseClicked
         if(evt.getButton() == 3){
-            currentSimpleRoom.setSelection(new Point(evt.getX(),evt.getY()), new Point(evt.getX(),evt.getY()));
+            if(!temp)
+                currentSimpleRoom.setSelection(new Point(evt.getX(),evt.getY()), new Point(evt.getX(),evt.getY()));
+            else
+                currentSimpleRoom.eraseTile(evt.getX(), evt.getY());
             currentSimpleRoom.update(bottomLayers,topLayers);
         }
         else
-        currentSimpleRoom.click(bottomLayers, topLayers, evt.getX(), evt.getY());
+            currentSimpleRoom.click(bottomLayers, topLayers, evt.getX(), evt.getY());
     }//GEN-LAST:event_bottomLayersMouseClicked
 
     private void bottomLayersMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseMoved
@@ -564,9 +581,14 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void bottomLayersMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseDragged
         if(SwingUtilities.isRightMouseButton(evt)){
-            mouseMapPosFinX = evt.getX();
-            mouseMapPosFinY = evt.getY();
-            currentSimpleRoom.setSelection(new Point(mouseMapPosX,mouseMapPosY), new Point(mouseMapPosFinX,mouseMapPosFinY));
+            if(!temp){
+                mouseMapPosFinX = evt.getX();
+                mouseMapPosFinY = evt.getY();
+                currentSimpleRoom.setSelection(new Point(mouseMapPosX,mouseMapPosY), new Point(mouseMapPosFinX,mouseMapPosFinY));
+            }
+            else{
+                currentSimpleRoom.eraseTile(evt.getX(), evt.getY());
+            }
             currentSimpleRoom.update(bottomLayers,topLayers);
         }
         else{
@@ -769,6 +791,9 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;

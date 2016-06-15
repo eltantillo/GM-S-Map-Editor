@@ -26,8 +26,8 @@ public class SimpleRoom {
     private int currentLayer;
     private ArrayList<ArrayList<Tile>> layerTile;
     
-    private Stack<ArrayList<ArrayList<Tile>>> undo;
-    private Stack<ArrayList<ArrayList<Tile>>> redo;
+    private Stack<Compressor> undo;
+    private Stack<Compressor> redo;
     
     private ArrayList<Integer> layerDepth;
     private boolean grid,preview,inMap;
@@ -74,6 +74,7 @@ public class SimpleRoom {
      * @param 
      */
     public void grid(){
+        undo.push(getState());
         grid =! grid;
     }
     /**
@@ -81,6 +82,7 @@ public class SimpleRoom {
      * @param 
      */
     public void topLayer(){
+        undo.push(getState());
         preview =! preview;
     }
     
@@ -91,6 +93,7 @@ public class SimpleRoom {
      * @param th 
      */
     public void changeGrid(int tw, int th){
+        undo.push(getState());
         this.tw = tw;
         this.th = th;
     }
@@ -104,7 +107,7 @@ public class SimpleRoom {
         youClickedX = toGrid(youClickedX, 1);
         youClickedY = toGrid(youClickedY, 2);
         if(prevX != youClickedX || prevY !=youClickedY){
-            undo.add((ArrayList)layerTile.clone());
+            undo.add(getState());
             ArrayList<Tile> selection = Selection.selection;
             if(Selection.isTileSet){
                 for(Tile tile: selection){
@@ -133,9 +136,11 @@ public class SimpleRoom {
     }
     /**
      * Permite cambiar de capa, Si la capa no existe crea la capa nueva
+     * Esta accion permite ctrl+z
      * @param x 
      */
     public void changeLayer(int x){
+        undo.push(getState());
         for(Integer d : layerDepth){
             if(d.equals(x)){
                 currentLayer = layerDepth.indexOf(d);
@@ -380,16 +385,38 @@ public class SimpleRoom {
     }
     public void undo(){
         if(!undo.isEmpty()){
-            ArrayList l = undo.pop();
-            redo.push((ArrayList)l.clone());
-            layerTile = l;
+            Compressor l = undo.pop();
+            redo.push(l.clone());
+            currentLayer = l.currentLayer;
+            grid = l.grid;
+            h = l.h;
+            inMap = l.inMap;
+            layerDepth = l.layerDepth;
+            layerTile = l.layerTile;
+            prevX = l.prevX;
+            prevY = l.prevY;
+            preview = l.preview;
+            th = l.th;
+            tw = l.tw;
+            w = l.w;
         }
     }
     public void redo(){
         if(!redo.isEmpty()){
-            ArrayList l = redo.pop();
-            undo.push((ArrayList)l.clone());
-            layerTile = l;
+            Compressor l = redo.pop();
+            undo.push(l.clone());
+            currentLayer = l.currentLayer;
+            grid = l.grid;
+            h = l.h;
+            inMap = l.inMap;
+            layerDepth = l.layerDepth;
+            layerTile = l.layerTile;
+            prevX = l.prevX;
+            prevY = l.prevY;
+            preview = l.preview;
+            th = l.th;
+            tw = l.tw;
+            w = l.w;
         }
     }
     public void showSelection(boolean show){
@@ -413,15 +440,14 @@ public class SimpleRoom {
      * Este metodo permite mover una capa entre depths, what: que capa quieres
      * to: a donde quieres mover la nueva capa.
      * Si "to" existe lo combina con la capa a mover.
-     * Esta accion no permite ctrl+z
+     * Ahora esta opcion permite ctrl+z
      * @param what
      * @param to 
      */
     public void changeLayer(int what, int to){
-        undo.removeAllElements();
-        redo.removeAllElements();
         int existe = layerDepth.indexOf(to);
         if(existe>=0){
+            undo.push(getState());
             // situarnos en la capa actual //
             currentLayer = existe;
             // clonar la capa a fusionar con...//
@@ -462,13 +488,12 @@ public class SimpleRoom {
     /**
      * Este metodo permite borrar la capa seleccionada. what es el depth de la
      * capa seleccionada.
-     * Esta accion no permite ctrl+z
+     * Ahora esta accion permite ctrl+z
      * @param what 
      */
     public void removeLayer(int what){
-        undo.removeAllElements();
-        redo.removeAllElements();
         if(layerDepth.indexOf(what)>=0){
+            undo.push(getState());
             layerTile.remove(layerDepth.indexOf(what));
             layerDepth.remove(what);
         }
@@ -487,5 +512,21 @@ public class SimpleRoom {
         }
         room.tiles = tiles;
         room.hasChanges = true;
+    }
+    private Compressor getState(){
+        Compressor state = new Compressor();
+        state.currentLayer = currentLayer;
+        state.grid = grid;
+        state.h = h;
+        state.inMap = inMap;
+        state.layerDepth = (ArrayList)layerDepth.clone();
+        state.layerTile = (ArrayList)layerTile.clone();
+        state.prevX = prevX;
+        state.prevY = prevY;
+        state.preview = preview;
+        state.th = th;
+        state.tw = tw;
+        state.w = w;
+        return state;
     }
 }

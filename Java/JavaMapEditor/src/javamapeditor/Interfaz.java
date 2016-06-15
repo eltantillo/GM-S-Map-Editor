@@ -725,7 +725,6 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println(curDepth + " " + newDepth);
             
             currentSimpleRoom.changeLayer(curDepth, newDepth);
-            //currentSimpleRoom.removeLayer(curDepth);
 
             DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
             for(String s : currentSimpleRoom.getDephts())

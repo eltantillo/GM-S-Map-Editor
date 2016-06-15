@@ -474,5 +474,6 @@ public class SimpleRoom {
             }
         }
         room.tiles = tiles;
+        room.hasChanges = true;
     }
 }

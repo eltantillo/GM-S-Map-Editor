@@ -1,11 +1,13 @@
 package graficos;
 
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import javax.imageio.ImageIO;
+import sun.awt.image.ToolkitImage;
 
 public class ImageTools {
     public static BufferedImage getFoto(File fileEntry){
@@ -51,6 +53,25 @@ public class ImageTools {
     public static void erase(int x,int y,int width, int height, BufferedImage toErase){
         Graphics2D g = toErase.createGraphics();
         g.clearRect(x, y, width, height);
+    }
+    public static BufferedImage stretch(BufferedImage src, int w, int h){
+//        int finalw = w;
+//        int finalh = h;
+//        double factor = 1.0d;
+//        if(src.getWidth() > src.getHeight()){
+//            factor = ((double)src.getHeight()/(double)src.getWidth());
+//            finalh = (int)(finalw * factor);                
+//        }else{
+//            factor = ((double)src.getWidth()/(double)src.getHeight());
+//            finalw = (int)(finalh * factor);
+//        }   
+
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TRANSLUCENT);
+        Graphics2D g2 = resizedImg.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(src, 0, 0, w, h, null);
+        g2.dispose();
+        return resizedImg;
     }
     
 }

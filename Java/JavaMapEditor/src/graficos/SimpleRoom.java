@@ -3,6 +3,7 @@ package graficos;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -17,7 +18,7 @@ import xml.projectAssets.backgrounds.Background;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+import sun.awt.image.ToolkitImage;
 
 import xml.projectAssets.rooms.Tile;
 
@@ -69,6 +70,9 @@ public class SimpleRoom {
         undo = new Stack();
         redo = new Stack();
         room = r;
+        System.out.println("Layers: "+layerDepth.size());
+        System.out.println("Room-tiles: "+r.tiles.size());
+        System.out.println("Bakcgrounds: "+r.backgrounds.size());
     }
     /**
      * Este metodo activa o desactiva el grid visual en el Map Area
@@ -86,7 +90,6 @@ public class SimpleRoom {
         undo.push(getState());
         preview =! preview;
     }
-    
     /**
      * cambia la grid por la nueva. Requiere width y height del cuadro nuevo en
      * el grid
@@ -100,7 +103,8 @@ public class SimpleRoom {
     }
     /**
      * Metodo que guarda los cambios al dar click en el mapa.
-     * @param p 
+     * @param inf
+     * @param top
      * @param youClickedX
      * @param youClickedY 
      */
@@ -174,7 +178,8 @@ public class SimpleRoom {
     }
     /**
      * Actualiza interfaz grafica... 
-     * @param p
+     * @param inf
+     * @param sup
      * @param x
      * @param y 
      */
@@ -499,7 +504,6 @@ public class SimpleRoom {
             layerDepth.remove(what);
         }
     }
-    
     public void save(){
         ArrayList<Tile> tiles = new ArrayList<>();
         int i = 0;
@@ -530,7 +534,6 @@ public class SimpleRoom {
         state.w = w;
         return state;
     }
-    
     public void eraseTile(int x,int y){
         undo.push(getState());
         x = toGrid(x, 1);
@@ -544,6 +547,36 @@ public class SimpleRoom {
                 }
             }
             prevX = x; prevY = y;
+        }
+    }
+    public void drawBackground(JLabel jl){
+        jl.setLocation(new Point(0,0));
+        BufferedImage i = new BufferedImage(w,h,BufferedImage.TYPE_4BYTE_ABGR);
+        jl.setMinimumSize(new Dimension(i.getWidth(), i.getHeight()));
+    	jl.setPreferredSize(new Dimension(i.getWidth(), i.getHeight()));
+    	jl.setMaximumSize(new Dimension(i.getWidth(), i.getHeight()));
+        jl.setIcon(new ImageIcon(i));
+        for(xml.projectAssets.rooms.Background b :room.backgrounds){
+            for(Background bt : xml.Project.assets.backgrounds){
+                if(bt.name.equals(b.name)){
+                    if(!b.htiled && b.vtiled){
+                        for(int x = b.y - bt.height; x<i.getHeight(); x+=bt.height)
+                            i = ImageTools.copyPaste(bt.image, b.x, b.y+x, i);
+                    }
+                    else if(!b.vtiled &&b.htiled){
+                        for(int x = b.x-bt.width; x<i.getWidth(); x+=bt.width)
+                            i = ImageTools.copyPaste(bt.image, b.x+x, b.y, i);
+                    }
+                    else if(b.vtiled && b.vtiled){
+                        for(int y = b.y-bt.height; y<i.getHeight(); y+=bt.height)
+                            for(int x = b.x-bt.width; x<i.getWidth(); x+=bt.width)                        
+                                i = ImageTools.copyPaste(bt.image, b.x + x, b.y + y, i);
+                    }
+                    else if(b.stretch){
+                        i = ImageTools.copyPaste(ImageTools.stretch(bt.image,i.getWidth(),i.getHeight()), 0, 0, i);
+                    }
+                }
+            }
         }
     }
 }

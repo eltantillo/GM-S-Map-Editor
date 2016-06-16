@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/C:/Users/MarcoM/gitsave/GM-S-Map-Editor/Java/JavaMapEditor/src/graficos/ImageTools.java</file>
+            <file>file:/C:/Users/MarcoM/gitsave/GM-S-Map-Editor/Java/JavaMapEditor/src/javamapeditor/Interfaz.java</file>
+            <file>file:/C:/Users/MarcoM/gitsave/GM-S-Map-Editor/Java/JavaMapEditor/src/graficos/SimpleRoom.java</file>
+=======
             <file>file:/D:/Projects/GM-S-Map-Editor/Java/JavaMapEditor/src/javamapeditor/Interfaz.java</file>
             <file>file:/D:/Projects/GM-S-Map-Editor/Java/JavaMapEditor/src/xml/projectAssets/rooms/Background.java</file>
+>>>>>>> b9510637782df12b60505aa03dafb207a36b8d9a
         </group>
     </open-files>
 </project-private>

@@ -56,6 +56,7 @@ public class Interfaz extends javax.swing.JFrame {
         bottomLayers = new javax.swing.JLabel();
         topLayers = new javax.swing.JLabel();
         selection = new javax.swing.JLabel();
+        backgroundLayer = new javax.swing.JLabel();
         leftTabs = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         tilesCombo = new javax.swing.JComboBox<>();
@@ -179,6 +180,24 @@ public class Interfaz extends javax.swing.JFrame {
         selection.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         selection.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
+<<<<<<< HEAD
+        backgroundLayer.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        backgroundLayer.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(backgroundLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                    .addContainerGap()))
+=======
         javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
@@ -189,6 +208,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
             .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+>>>>>>> b9510637782df12b60505aa03dafb207a36b8d9a
         );
         mapPanelLayout.setVerticalGroup(
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,6 +225,8 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(mapPanelLayout.createSequentialGroup()
                     .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                     .addContainerGap()))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(backgroundLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
         );
 
         mapScrollPane.setViewportView(mapPanel);
@@ -598,10 +620,18 @@ public class Interfaz extends javax.swing.JFrame {
         tw.setText(String.valueOf(currentBackground.getTW()));
         th.setText(String.valueOf(currentBackground.getTH()));
         
+<<<<<<< HEAD
+        jPanel1.setComponentZOrder(backgroundLayer, 3);
+        jPanel1.setComponentZOrder(bottomLayers, 2);
+        jPanel1.setComponentZOrder(selection, 1);
+        jPanel1.setComponentZOrder(topLayers, 0);
+=======
         mapPanel.setComponentZOrder(bottomLayers, 2);
         mapPanel.setComponentZOrder(selection, 1);
         mapPanel.setComponentZOrder(topLayers, 0);
+>>>>>>> b9510637782df12b60505aa03dafb207a36b8d9a
         
+        currentSimpleRoom.drawBackground(backgroundLayer);
     }//GEN-LAST:event_openMenuActionPerformed
 
     private void newProjectMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectMenuActionPerformed
@@ -661,6 +691,7 @@ public class Interfaz extends javax.swing.JFrame {
             layersComboBox.setModel(dcbm);
             showGridButton.setSelected(false);
             previewButton.setSelected(false);
+            currentSimpleRoom.drawBackground(backgroundLayer);
         }
     }//GEN-LAST:event_mapListMouseClicked
 
@@ -866,7 +897,11 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JLabel backgroundsLayer;
+=======
+    private javax.swing.JLabel backgroundLayer;
+>>>>>>> 2bff4a17ad3589390561c8fe6bed85dd16fe02d2
     private javax.swing.JLabel bottomLayers;
     private javax.swing.JMenuItem createBackgroundSubMenu;
     private javax.swing.JMenuItem createRoomSubMenu;

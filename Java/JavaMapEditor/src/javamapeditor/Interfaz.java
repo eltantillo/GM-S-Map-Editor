@@ -55,6 +55,7 @@ public class Interfaz extends javax.swing.JFrame {
         bottomLayers = new javax.swing.JLabel();
         topLayers = new javax.swing.JLabel();
         selection = new javax.swing.JLabel();
+        backgroundLayer = new javax.swing.JLabel();
         leftTabs = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         tilesCombo = new javax.swing.JComboBox<>();
@@ -148,15 +149,22 @@ public class Interfaz extends javax.swing.JFrame {
         selection.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         selection.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
+        backgroundLayer.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        backgroundLayer.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+            .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(backgroundLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,6 +179,8 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addContainerGap()))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(backgroundLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
         );
 
         mapScrollPane.setViewportView(jPanel1);
@@ -543,10 +553,12 @@ public class Interfaz extends javax.swing.JFrame {
         tw.setText(String.valueOf(currentBackground.getTW()));
         th.setText(String.valueOf(currentBackground.getTH()));
         
+        jPanel1.setComponentZOrder(backgroundLayer, 3);
         jPanel1.setComponentZOrder(bottomLayers, 2);
         jPanel1.setComponentZOrder(selection, 1);
         jPanel1.setComponentZOrder(topLayers, 0);
         
+        currentSimpleRoom.drawBackground(backgroundLayer);
     }//GEN-LAST:event_openMenuActionPerformed
 
     private void newProjectMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProjectMenuActionPerformed
@@ -606,6 +618,7 @@ public class Interfaz extends javax.swing.JFrame {
             layersComboBox.setModel(dcbm);
             showGridButton.setSelected(false);
             previewButton.setSelected(false);
+            currentSimpleRoom.drawBackground(backgroundLayer);
         }
     }//GEN-LAST:event_mapListMouseClicked
 
@@ -779,6 +792,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backgroundLayer;
     private javax.swing.JLabel bottomLayers;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;

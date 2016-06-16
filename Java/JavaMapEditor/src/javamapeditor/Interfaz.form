@@ -223,12 +223,7 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-                          <Component id="bottomLayers" alignment="0" pref="533" max="32767" attributes="0"/>
-                          <Component id="backgroundsLayer" alignment="0" pref="533" max="32767" attributes="0"/>
-=======
                           <Component id="bottomLayers" alignment="0" pref="573" max="32767" attributes="0"/>
->>>>>>> 2bff4a17ad3589390561c8fe6bed85dd16fe02d2
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Component id="selection" alignment="0" pref="573" max="32767" attributes="0"/>
                           </Group>
@@ -247,8 +242,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="bottomLayers" pref="234" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="backgroundsLayer" pref="234" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -270,23 +263,11 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JLabel" name="backgroundsLayer">
+                    <Component class="javax.swing.JLabel" name="backgroundLayer">
                       <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="0" green="0" red="0" type="rgb"/>
-                        </Property>
-                        <Property name="toolTipText" type="java.lang.String" value=""/>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="backgroundsLayerMouseDragged"/>
-                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="backgroundsLayerMouseMoved"/>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backgroundsLayerMouseClicked"/>
-                        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backgroundsLayerMouseEntered"/>
-                        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backgroundsLayerMouseExited"/>
-                        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backgroundsLayerMousePressed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="bottomLayers">
                       <Properties>
@@ -313,12 +294,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="selection">
-                      <Properties>
-                        <Property name="verticalAlignment" type="int" value="1"/>
-                        <Property name="verticalTextPosition" type="int" value="1"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="backgroundLayer">
                       <Properties>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>

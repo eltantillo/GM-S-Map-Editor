@@ -51,7 +51,7 @@ public class Interfaz extends javax.swing.JFrame {
         jSplitPane3 = new javax.swing.JSplitPane();
         jSplitPane4 = new javax.swing.JSplitPane();
         mapScrollPane = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        mapPanel = new javax.swing.JPanel();
         bottomLayers = new javax.swing.JLabel();
         topLayers = new javax.swing.JLabel();
         selection = new javax.swing.JLabel();
@@ -88,11 +88,14 @@ public class Interfaz extends javax.swing.JFrame {
         openMenu = new javax.swing.JMenuItem();
         saveMenu = new javax.swing.JMenuItem();
         saveAsMenu = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        editMenu = new javax.swing.JMenu();
         undoSubMenu = new javax.swing.JMenuItem();
         redoSubMenu = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        resourcesMenu = new javax.swing.JMenu();
+        createBackgroundSubMenu = new javax.swing.JMenuItem();
+        createRoomSubMenu = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -109,9 +112,9 @@ public class Interfaz extends javax.swing.JFrame {
         mapScrollPane.setBackground(new java.awt.Color(0, 0, 0));
         mapScrollPane.setBorder(null);
 
-        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        mapPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jPanel1MouseMoved(evt);
+                mapPanelMouseMoved(evt);
             }
         });
 
@@ -148,32 +151,32 @@ public class Interfaz extends javax.swing.JFrame {
         selection.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         selection.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
+        mapPanel.setLayout(mapPanelLayout);
+        mapPanelLayout.setHorizontalGroup(
+            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        mapPanelLayout.setVerticalGroup(
+            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mapPanelLayout.createSequentialGroup()
                 .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mapPanelLayout.createSequentialGroup()
                     .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addContainerGap()))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mapPanelLayout.createSequentialGroup()
                     .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
-        mapScrollPane.setViewportView(jPanel1);
+        mapScrollPane.setViewportView(mapPanel);
 
         jSplitPane4.setRightComponent(mapScrollPane);
 
@@ -444,27 +447,27 @@ public class Interfaz extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        jMenu1.setText("Edit");
+        editMenu.setText("Edit");
 
         undoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
-        undoSubMenu.setText("undo");
+        undoSubMenu.setText("Undo");
         undoSubMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 undoSubMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(undoSubMenu);
+        editMenu.add(undoSubMenu);
 
         redoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
-        redoSubMenu.setText("redo");
+        redoSubMenu.setText("Redo");
         redoSubMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 redoSubMenuActionPerformed(evt);
             }
         });
-        jMenu1.add(redoSubMenu);
+        editMenu.add(redoSubMenu);
 
-        menuBar.add(jMenu1);
+        menuBar.add(editMenu);
 
         jMenu2.setText("Temp");
 
@@ -473,6 +476,16 @@ public class Interfaz extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         menuBar.add(jMenu2);
+
+        resourcesMenu.setText("Resources");
+
+        createBackgroundSubMenu.setText("Create Background");
+        resourcesMenu.add(createBackgroundSubMenu);
+
+        createRoomSubMenu.setText("Create Room");
+        resourcesMenu.add(createRoomSubMenu);
+
+        menuBar.add(resourcesMenu);
 
         setJMenuBar(menuBar);
 
@@ -505,14 +518,25 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void openMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuActionPerformed
         xml.Project.openProject();
-        currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(0));
+        
+        int number = 0;
+        for (int i = 0; i < xml.Project.assets.backgrounds.size(); i++) {
+            if (xml.Project.assets.backgrounds.get(i).istileset){
+                number = i;
+                break;
+            }
+        }
+        
+        currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(number));
         currentBackground.drawBackgroundTile(tiles);
         currentBackground.setSelection(new Point(0,0), new Point(0,0));
         
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
         
         for(xml.projectAssets.backgrounds.Background bb :xml.Project.assets.backgrounds){
-            dcbm.addElement(bb.name);
+            if(bb.istileset){
+                dcbm.addElement(bb.name);
+            }
         }
         
         tilesCombo.setModel(dcbm);
@@ -543,9 +567,9 @@ public class Interfaz extends javax.swing.JFrame {
         tw.setText(String.valueOf(currentBackground.getTW()));
         th.setText(String.valueOf(currentBackground.getTH()));
         
-        jPanel1.setComponentZOrder(bottomLayers, 2);
-        jPanel1.setComponentZOrder(selection, 1);
-        jPanel1.setComponentZOrder(topLayers, 0);
+        mapPanel.setComponentZOrder(bottomLayers, 2);
+        mapPanel.setComponentZOrder(selection, 1);
+        mapPanel.setComponentZOrder(topLayers, 0);
         
     }//GEN-LAST:event_openMenuActionPerformed
 
@@ -610,7 +634,15 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_mapListMouseClicked
 
     private void tilesComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tilesComboItemStateChanged
-        currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(tilesCombo.getSelectedIndex()));
+        String name = String.valueOf(tilesCombo.getSelectedItem());
+        int number = 0;
+        for (int i = 0; i < xml.Project.assets.backgrounds.size(); i++) {
+            if (xml.Project.assets.backgrounds.get(i).name.equals(name)){
+                number = i;
+            }
+        }
+        
+        currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(number));
         currentBackground.setSelection(new Point(0,0), new Point(0,0));
         currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
         currentBackground.drawBackgroundTile(tiles);
@@ -730,9 +762,9 @@ public class Interfaz extends javax.swing.JFrame {
             currentSimpleRoom.showSelection(false);
     }//GEN-LAST:event_bottomLayersMouseExited
 
-    private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
+    private void mapPanelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapPanelMouseMoved
 
-    }//GEN-LAST:event_jPanel1MouseMoved
+    }//GEN-LAST:event_mapPanelMouseMoved
 
     private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerChangeButtonActionPerformed
         // TODO add your handling code here:
@@ -780,17 +812,18 @@ public class Interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bottomLayers;
+    private javax.swing.JMenuItem createBackgroundSubMenu;
+    private javax.swing.JMenuItem createRoomSubMenu;
+    private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
@@ -804,6 +837,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTabbedPane leftTabs;
     private javax.swing.JList<String> mapList;
     private javax.swing.JScrollPane mapListScrollPane;
+    private javax.swing.JPanel mapPanel;
     private javax.swing.JScrollPane mapScrollPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newLayerButton;
@@ -813,6 +847,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem openMenu;
     private javax.swing.JToggleButton previewButton;
     private javax.swing.JMenuItem redoSubMenu;
+    private javax.swing.JMenu resourcesMenu;
     private javax.swing.JMenuItem saveAsMenu;
     private javax.swing.JMenuItem saveMenu;
     private javax.swing.JLabel selection;

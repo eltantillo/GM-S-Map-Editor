@@ -52,11 +52,10 @@ public class Interfaz extends javax.swing.JFrame {
         jSplitPane4 = new javax.swing.JSplitPane();
         mapScrollPane = new javax.swing.JScrollPane();
         mapPanel = new javax.swing.JPanel();
-        backgroundsLayer = new javax.swing.JLabel();
+        backgroundLayer = new javax.swing.JLabel();
         bottomLayers = new javax.swing.JLabel();
         topLayers = new javax.swing.JLabel();
         selection = new javax.swing.JLabel();
-        backgroundLayer = new javax.swing.JLabel();
         leftTabs = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         tilesCombo = new javax.swing.JComboBox<>();
@@ -120,32 +119,8 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        backgroundsLayer.setBackground(new java.awt.Color(0, 0, 0));
-        backgroundsLayer.setToolTipText("");
-        backgroundsLayer.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        backgroundsLayer.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        backgroundsLayer.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                backgroundsLayerMouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                backgroundsLayerMouseMoved(evt);
-            }
-        });
-        backgroundsLayer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backgroundsLayerMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                backgroundsLayerMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                backgroundsLayerMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                backgroundsLayerMousePressed(evt);
-            }
-        });
+        backgroundLayer.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        backgroundLayer.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         bottomLayers.setBackground(new java.awt.Color(0, 0, 0));
         bottomLayers.setToolTipText("");
@@ -180,42 +155,24 @@ public class Interfaz extends javax.swing.JFrame {
         selection.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         selection.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-<<<<<<< HEAD
-        backgroundLayer.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        backgroundLayer.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addComponent(backgroundLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
-                    .addContainerGap()))
-=======
         javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-            .addComponent(backgroundsLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+            .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
             .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                .addComponent(selection, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
             .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
->>>>>>> b9510637782df12b60505aa03dafb207a36b8d9a
+                .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
+            .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mapPanelLayout.createSequentialGroup()
+                    .addComponent(backgroundLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         mapPanelLayout.setVerticalGroup(
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mapPanelLayout.createSequentialGroup()
                 .addComponent(bottomLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(backgroundsLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mapPanelLayout.createSequentialGroup()
@@ -225,7 +182,7 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(mapPanelLayout.createSequentialGroup()
                     .addComponent(topLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                     .addContainerGap()))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(backgroundLayer, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE))
         );
 
@@ -620,10 +577,17 @@ public class Interfaz extends javax.swing.JFrame {
         tw.setText(String.valueOf(currentBackground.getTW()));
         th.setText(String.valueOf(currentBackground.getTH()));
         
+<<<<<<< HEAD
         mapPanel.setComponentZOrder(bottomLayers, 2);
         mapPanel.setComponentZOrder(selection, 1);
         mapPanel.setComponentZOrder(topLayers, 0);
         mapPanel.setComponentZOrder(backgroundLayer, 3);
+=======
+        mapPanel.setComponentZOrder(backgroundLayer, 3);
+        mapPanel.setComponentZOrder(bottomLayers, 2);
+        mapPanel.setComponentZOrder(selection, 1);
+        mapPanel.setComponentZOrder(topLayers, 0);
+>>>>>>> 0f5127e570d4ffbce80cc34c337fd4548e27621e
         
         currentSimpleRoom.drawBackground(backgroundLayer);
     }//GEN-LAST:event_openMenuActionPerformed
@@ -822,7 +786,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mapPanelMouseMoved
 
-    private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_layerChangeButtonActionPerformed
+    private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
         try{
             Integer newDepth = Integer.valueOf(JOptionPane.showInputDialog("Enter a depth value to move the layer to: "));
@@ -843,32 +807,7 @@ public class Interfaz extends javax.swing.JFrame {
         catch(Exception e){
             System.out.println("Exception: "+e);
         }
-    }//GEN-LAST:event_layerChangeButtonActionPerformed
-
-    private void backgroundsLayerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundsLayerMouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backgroundsLayerMouseDragged
-
-    private void backgroundsLayerMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundsLayerMouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backgroundsLayerMouseMoved
-
-    private void backgroundsLayerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundsLayerMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backgroundsLayerMouseClicked
-
-    private void backgroundsLayerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundsLayerMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backgroundsLayerMouseEntered
-
-    private void backgroundsLayerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundsLayerMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backgroundsLayerMouseExited
-
-    private void backgroundsLayerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backgroundsLayerMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_backgroundsLayerMousePressed
- 
+    }                                                  
     /**
      * @param args the command line arguments
      */
@@ -891,11 +830,7 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
-    private javax.swing.JLabel backgroundsLayer;
-=======
     private javax.swing.JLabel backgroundLayer;
->>>>>>> 2bff4a17ad3589390561c8fe6bed85dd16fe02d2
     private javax.swing.JLabel bottomLayers;
     private javax.swing.JMenuItem createBackgroundSubMenu;
     private javax.swing.JMenuItem createRoomSubMenu;

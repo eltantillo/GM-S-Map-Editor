@@ -620,16 +620,10 @@ public class Interfaz extends javax.swing.JFrame {
         tw.setText(String.valueOf(currentBackground.getTW()));
         th.setText(String.valueOf(currentBackground.getTH()));
         
-<<<<<<< HEAD
-        jPanel1.setComponentZOrder(backgroundLayer, 3);
-        jPanel1.setComponentZOrder(bottomLayers, 2);
-        jPanel1.setComponentZOrder(selection, 1);
-        jPanel1.setComponentZOrder(topLayers, 0);
-=======
         mapPanel.setComponentZOrder(bottomLayers, 2);
         mapPanel.setComponentZOrder(selection, 1);
         mapPanel.setComponentZOrder(topLayers, 0);
->>>>>>> b9510637782df12b60505aa03dafb207a36b8d9a
+        mapPanel.setComponentZOrder(backgroundLayer, 3);
         
         currentSimpleRoom.drawBackground(backgroundLayer);
     }//GEN-LAST:event_openMenuActionPerformed

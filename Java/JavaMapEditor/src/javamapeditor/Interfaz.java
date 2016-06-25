@@ -593,7 +593,6 @@ public class Interfaz extends javax.swing.JFrame {
         mapPanel.setComponentZOrder(bottomLayers, 3);
         mapPanel.setComponentZOrder(currentLayer, 2);
         mapPanel.setComponentZOrder(selection, 1);
-        mapPanel.setComponentZOrder(topLayers, 0);
         
         currentSimpleRoom.drawBackground(backgroundLayer);
     }//GEN-LAST:event_openMenuActionPerformed

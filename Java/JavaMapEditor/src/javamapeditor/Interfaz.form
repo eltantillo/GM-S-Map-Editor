@@ -223,16 +223,22 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="bottomLayers" alignment="0" pref="573" max="32767" attributes="0"/>
+                          <Component id="bottomLayers" alignment="0" pref="583" max="32767" attributes="0"/>
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                              <Component id="selection" alignment="0" pref="573" max="32767" attributes="0"/>
+                              <Component id="selection" alignment="0" pref="583" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-                              <Component id="topLayers" alignment="0" pref="573" max="32767" attributes="0"/>
+                              <Component id="topLayers" alignment="0" pref="583" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="backgroundLayer" pref="563" max="32767" attributes="0"/>
+                                  <Component id="backgroundLayer" pref="573" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="currentLayer" pref="573" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -241,7 +247,7 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="bottomLayers" pref="234" max="32767" attributes="0"/>
+                              <Component id="bottomLayers" pref="474" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -257,7 +263,13 @@
                               </Group>
                           </Group>
                           <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
-                              <Component id="backgroundLayer" alignment="0" pref="245" max="32767" attributes="0"/>
+                              <Component id="backgroundLayer" alignment="0" pref="485" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="currentLayer" pref="474" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -294,6 +306,12 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="selection">
+                      <Properties>
+                        <Property name="verticalAlignment" type="int" value="1"/>
+                        <Property name="verticalTextPosition" type="int" value="1"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="currentLayer">
                       <Properties>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
@@ -487,7 +505,7 @@
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="twFocusGained"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tw.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!tw.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(tw.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(bottomLayers, topLayers);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tw.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!tw.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(tw.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler1">
@@ -527,7 +545,7 @@
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="thFocusGained"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="th.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!th.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(th.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(bottomLayers, topLayers);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="th.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!th.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(th.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">

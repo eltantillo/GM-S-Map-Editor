@@ -3,7 +3,6 @@ package graficos;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -18,7 +17,6 @@ import xml.projectAssets.backgrounds.Background;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import sun.awt.image.ToolkitImage;
 
 import xml.projectAssets.rooms.Tile;
 
@@ -108,7 +106,7 @@ public class SimpleRoom {
      * @param youClickedX
      * @param youClickedY 
      */
-    public void click(JLabel inf,JLabel top,int youClickedX, int youClickedY){
+    public void click(JLabel current,int youClickedX, int youClickedY){
         youClickedX = toGrid(youClickedX, 1);
         youClickedY = toGrid(youClickedY, 2);
         if(prevX != youClickedX || prevY !=youClickedY){
@@ -134,7 +132,7 @@ public class SimpleRoom {
                     checkForTile(temp);
                 }
             }
-            update(inf,top);
+            updateCurrent(current);
             prevX = youClickedX;
             prevY = youClickedY;
         }
@@ -180,20 +178,20 @@ public class SimpleRoom {
      * Actualiza interfaz grafica... 
      * @param inf
      * @param sup
-     * @param x
-     * @param y 
+     * @param current
      */
-    public void update(JLabel inf, JLabel sup){
+    public void update(JLabel inf, JLabel current,JLabel sup){
         // Dibuja los tiles existentes //
         BufferedImage infBI = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
         BufferedImage topBI = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
         
-        // Actualiza grafico //
+        // Actualiza jlabel //
         inf.setLocation(new Point(0,0));
         inf.setMinimumSize(new Dimension(infBI.getWidth(), infBI.getHeight()));
     	inf.setPreferredSize(new Dimension(infBI.getWidth(), infBI.getHeight()));
     	inf.setMaximumSize(new Dimension(infBI.getWidth(), infBI.getHeight()));
         inf.setIcon(new ImageIcon(infBI));
+        
         sup.setMinimumSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
         sup.setPreferredSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
         sup.setMaximumSize(new Dimension(topBI.getWidth(), topBI.getHeight()));
@@ -206,8 +204,7 @@ public class SimpleRoom {
             }
             else if(tempX==currentLayer){
                 if(!preview)
-                    ImageTools.setAlpha(infBI);
-                infBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, infBI);
+                    infBI = ImageTools.darker(infBI);
             }
             else if(preview){
                 topBI = ImageTools.copyPaste(drawLayer(tempX), 0, 0, topBI);
@@ -216,34 +213,8 @@ public class SimpleRoom {
                 topBI = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
             }
         }
-        
-        // Dibujando Grid //
-        if(grid){
-            for(int tempX = 0; tempX<w; tempX+=tw){
-                for(int tempY =0; tempY<h; tempY+=th ){
-                    Graphics g = infBI.getGraphics();
-                    g.setColor(Color.WHITE);
-                    g.drawRect(tempX,tempY,tw,th);
-                }
-            }
-        }
-        
-        // dibuja seleccion //
-        if(!Selection.isTileSet){
-            Graphics g = infBI.getGraphics();
-            int difx = Selection.fin.x - Selection.ini.x;
-            int dify = Selection.fin.y - Selection.ini.y;
-            if(difx != 0 && dify != 0){
-                g.setColor(Color.BLACK);
-                g.drawRect(Selection.ini.x-1,Selection.ini.y-1,difx+2,dify+2);
-                g.setColor(Color.WHITE);
-                g.drawRect(Selection.ini.x,Selection.ini.y,difx,dify);
-                g.setColor(Color.BLACK);
-                g.drawRect(Selection.ini.x+1,Selection.ini.y+1,difx-2,dify-2);
-            }
-        }
-        
-        
+        ImageTools.setAlpha(topBI);
+        updateCurrent(current);
     }
     /**
      * Constructor basico para crear nuevo SimpleRoom a partir de datos nuevos.
@@ -579,4 +550,42 @@ public class SimpleRoom {
             }
         }
     }
+    
+    public void updateCurrent(JLabel current){
+        BufferedImage curBI = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
+
+        current.setMinimumSize(new Dimension(curBI.getWidth(), curBI.getHeight()));
+        current.setPreferredSize(new Dimension(curBI.getWidth(), curBI.getHeight()));
+        current.setMaximumSize(new Dimension(curBI.getWidth(), curBI.getHeight()));
+        current.setIcon(new ImageIcon(curBI));
+        
+        curBI = ImageTools.copyPaste(drawLayer(currentLayer), 0, 0, curBI);
+        
+        // Dibujando Grid //
+        if(grid){
+            for(int tempX = 0; tempX<w; tempX+=tw){
+                for(int tempY =0; tempY<h; tempY+=th ){
+                    Graphics g = curBI.getGraphics();
+                    g.setColor(Color.WHITE);
+                    g.drawRect(tempX,tempY,tw,th);
+                }
+            }
+        }
+        
+        // dibuja seleccion //
+        if(!Selection.isTileSet){
+            Graphics g = curBI.getGraphics();
+            int difx = Selection.fin.x - Selection.ini.x;
+            int dify = Selection.fin.y - Selection.ini.y;
+            if(difx != 0 && dify != 0){
+                g.setColor(Color.BLACK);
+                g.drawRect(Selection.ini.x-1,Selection.ini.y-1,difx+2,dify+2);
+                g.setColor(Color.WHITE);
+                g.drawRect(Selection.ini.x,Selection.ini.y,difx,dify);
+                g.setColor(Color.BLACK);
+                g.drawRect(Selection.ini.x+1,Selection.ini.y+1,difx-2,dify-2);
+            }
+        }   
+    }
+    
 }

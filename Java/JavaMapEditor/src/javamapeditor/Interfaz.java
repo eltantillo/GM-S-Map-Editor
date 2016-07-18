@@ -694,7 +694,6 @@ public class Interfaz extends javax.swing.JFrame {
         mousePosFinY = evt.getY();
         currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
         currentBackground.drawBackgroundTile(tiles);
-        currentSimpleRoom.update(bottomLayers, currentLayer, topLayers);
     }//GEN-LAST:event_tilesMouseDragged
 
     private void previewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewButtonActionPerformed

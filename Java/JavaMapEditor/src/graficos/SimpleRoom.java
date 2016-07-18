@@ -559,7 +559,9 @@ public class SimpleRoom {
         current.setMaximumSize(new Dimension(curBI.getWidth(), curBI.getHeight()));
         current.setIcon(new ImageIcon(curBI));
         
-        curBI = ImageTools.copyPaste(drawLayer(currentLayer), 0, 0, curBI);
+        if(!layerDepth.isEmpty()){
+            curBI = ImageTools.copyPaste(drawLayer(currentLayer), 0, 0, curBI);
+        }
         
         // Dibujando Grid //
         if(grid){

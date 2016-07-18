@@ -51,24 +51,7 @@
     <view visible="0" objName="&lt;undefined&gt;" xview="0" yview="0" wview="1024" hview="768" xport="0" yport="0" wport="1024" hport="768" hborder="32" vborder="32" hspeed="-1" vspeed="-1"/>
   </views>
   <instances/>
-  <tiles>
-    <tile bgName="bgTilesEnviroment" x="160" y="160" w="16" h="16" xo="0" yo="0" id="10000001" name="inst_1EDFBB0C" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="144" y="144" w="16" h="16" xo="0" yo="0" id="10000002" name="inst_ADD6BBFC" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="208" y="128" w="16" h="16" xo="0" yo="0" id="10000003" name="inst_19030006" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="160" y="144" w="16" h="16" xo="0" yo="0" id="10000004" name="inst_32449C01" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="192" y="144" w="16" h="16" xo="0" yo="0" id="10000005" name="inst_7A1D2D52" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="224" y="144" w="16" h="16" xo="0" yo="0" id="10000006" name="inst_D03E1208" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="176" y="128" w="16" h="16" xo="0" yo="0" id="10000007" name="inst_986137E8" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="128" y="128" w="16" h="16" xo="0" yo="0" id="10000008" name="inst_E129A668" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="112" y="160" w="16" h="16" xo="0" yo="0" id="10000009" name="inst_EBE96C64" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="192" y="208" w="16" h="16" xo="0" yo="0" id="10000010" name="inst_3271B450" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="240" y="208" w="16" h="16" xo="0" yo="0" id="10000011" name="inst_E0BB2BE3" depth="-1" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="176" y="208" w="16" h="16" xo="0" yo="51" id="10000012" name="inst_43A99F98" depth="-2" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="208" y="176" w="16" h="16" xo="0" yo="51" id="10000013" name="inst_1557BA1A" depth="-2" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="144" y="176" w="16" h="16" xo="0" yo="51" id="10000014" name="inst_093C4752" depth="-2" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="176" y="192" w="16" h="16" xo="0" yo="51" id="10000015" name="inst_EAA53575" depth="-2" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-    <tile bgName="bgTilesEnviroment" x="192" y="176" w="16" h="16" xo="0" yo="51" id="10000016" name="inst_C24CE979" depth="-2" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
-  </tiles>
+  <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
   <PhysicsWorldLeft>0</PhysicsWorldLeft>

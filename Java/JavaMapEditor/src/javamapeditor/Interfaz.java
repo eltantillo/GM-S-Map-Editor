@@ -495,6 +495,11 @@ public class Interfaz extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("tempBorrar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         menuBar.add(jMenu2);
@@ -502,9 +507,19 @@ public class Interfaz extends javax.swing.JFrame {
         resourcesMenu.setText("Resources");
 
         createBackgroundSubMenu.setText("Create Background");
+        createBackgroundSubMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createBackgroundSubMenuActionPerformed(evt);
+            }
+        });
         resourcesMenu.add(createBackgroundSubMenu);
 
         createRoomSubMenu.setText("Create Room");
+        createRoomSubMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createRoomSubMenuActionPerformed(evt);
+            }
+        });
         resourcesMenu.add(createRoomSubMenu);
 
         menuBar.add(resourcesMenu);
@@ -789,6 +804,36 @@ public class Interfaz extends javax.swing.JFrame {
     private void mapPanelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapPanelMouseMoved
 
     }//GEN-LAST:event_mapPanelMouseMoved
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void createBackgroundSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBackgroundSubMenuActionPerformed
+        // TODO add your handling code here:
+        xml.Project.assets.backgrounds.add(new xml.projectAssets.backgrounds.Background());
+    }//GEN-LAST:event_createBackgroundSubMenuActionPerformed
+
+    private void createRoomSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRoomSubMenuActionPerformed
+        // TODO add your handling code here:
+        xml.Project.assets.rooms.add(new xml.projectAssets.rooms.Room());
+        
+        currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(0));
+        currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);
+        
+        String[] i = new String[xml.Project.assets.rooms.size()];
+        for(xml.projectAssets.rooms.Room r : xml.Project.assets.rooms){
+            i[xml.Project.assets.rooms.indexOf(r)] = r.name;
+        }
+        
+        mapList.setListData(i);
+        mapList.setEnabled(true);
+        
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        
+        for(String s : currentSimpleRoom.getDephts())
+            dcbm.addElement(s);
+    }//GEN-LAST:event_createRoomSubMenuActionPerformed
 
     private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:

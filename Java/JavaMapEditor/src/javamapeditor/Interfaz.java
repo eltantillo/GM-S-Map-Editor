@@ -22,14 +22,14 @@ import javax.swing.event.DocumentListener;
  * @author MarcoM
  */
 public class Interfaz extends javax.swing.JFrame {
-    private int mousePosX,mousePosFinX;
-    private int mousePosY,mousePosFinY;
+    public int mousePosX,mousePosFinX;
+    public int mousePosY,mousePosFinY;
 
-    private int mouseMapPosX,mouseMapPosFinX;
-    private int mouseMapPosY,mouseMapPosFinY;
+    public int mouseMapPosX,mouseMapPosFinX;
+    public int mouseMapPosY,mouseMapPosFinY;
     
-    private SimpleRoom currentSimpleRoom;
-    private BackgroundTile currentBackground;
+    public SimpleRoom currentSimpleRoom;
+    public BackgroundTile currentBackground;
     
     //private JLabel seleccion;
     
@@ -595,9 +595,16 @@ public class Interfaz extends javax.swing.JFrame {
         mapList.setEnabled(true);
         
         dcbm = new DefaultComboBoxModel();
-        
-        for(String s : currentSimpleRoom.getDephts())
-            dcbm.addElement(s);
+        String[] d = currentSimpleRoom.getDephts();
+        if (d.length > 0){
+            for(String s : currentSimpleRoom.getDephts()){
+                dcbm.addElement(s);
+            }
+        }
+        else{
+            dcbm.addElement("1000000");
+            currentSimpleRoom.changeLayer(1000000);
+        }
         
         layersComboBox.setModel(dcbm);
         
@@ -662,9 +669,16 @@ public class Interfaz extends javax.swing.JFrame {
             currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
             
             DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        
-            for(String s : currentSimpleRoom.getDephts())
-                dcbm.addElement(s);
+            String[] d = currentSimpleRoom.getDephts();
+            if (d.length > 0){
+                for(String s : currentSimpleRoom.getDephts()){
+                    dcbm.addElement(s);
+                }
+            }
+            else{
+                dcbm.addElement("1000000");
+                currentSimpleRoom.changeLayer(1000000);
+            }
 
             layersComboBox.setModel(dcbm);
             showGridButton.setSelected(false);
@@ -816,23 +830,10 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void createRoomSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRoomSubMenuActionPerformed
         // TODO add your handling code here:
-        xml.Project.assets.rooms.add(new xml.projectAssets.rooms.Room());
+        NewRoom w = new NewRoom(this);
+        w.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );
+        w.show();
         
-        currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(0));
-        currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);
-        
-        String[] i = new String[xml.Project.assets.rooms.size()];
-        for(xml.projectAssets.rooms.Room r : xml.Project.assets.rooms){
-            i[xml.Project.assets.rooms.indexOf(r)] = r.name;
-        }
-        
-        mapList.setListData(i);
-        mapList.setEnabled(true);
-        
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        
-        for(String s : currentSimpleRoom.getDephts())
-            dcbm.addElement(s);
     }//GEN-LAST:event_createRoomSubMenuActionPerformed
 
     private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
@@ -879,11 +880,11 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel backgroundLayer;
-    private javax.swing.JLabel bottomLayers;
+    protected javax.swing.JLabel backgroundLayer;
+    protected javax.swing.JLabel bottomLayers;
     private javax.swing.JMenuItem createBackgroundSubMenu;
     private javax.swing.JMenuItem createRoomSubMenu;
-    private javax.swing.JLabel currentLayer;
+    protected javax.swing.JLabel currentLayer;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
@@ -903,11 +904,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane4;
     private javax.swing.JButton layerChangeButton;
     private javax.swing.JButton layerDeleteButton;
-    private javax.swing.JComboBox<String> layersComboBox;
+    protected javax.swing.JComboBox<String> layersComboBox;
     private javax.swing.JTabbedPane leftTabs;
-    private javax.swing.JList<String> mapList;
+    protected javax.swing.JList<String> mapList;
     private javax.swing.JScrollPane mapListScrollPane;
-    private javax.swing.JPanel mapPanel;
+    protected javax.swing.JPanel mapPanel;
     private javax.swing.JScrollPane mapScrollPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newLayerButton;
@@ -920,15 +921,15 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenu resourcesMenu;
     private javax.swing.JMenuItem saveAsMenu;
     private javax.swing.JMenuItem saveMenu;
-    private javax.swing.JLabel selection;
+    protected javax.swing.JLabel selection;
     private javax.swing.JToggleButton showGridButton;
-    private javax.swing.JTextField th;
+    protected javax.swing.JTextField th;
     private javax.swing.JLabel tiles;
     private javax.swing.JComboBox<String> tilesCombo;
     private javax.swing.JScrollPane tilesScrollPane;
     private javax.swing.JToolBar toolBar;
-    private javax.swing.JLabel topLayers;
-    private javax.swing.JTextField tw;
+    protected javax.swing.JLabel topLayers;
+    protected javax.swing.JTextField tw;
     private javax.swing.JMenuItem undoSubMenu;
     // End of variables declaration//GEN-END:variables
 }

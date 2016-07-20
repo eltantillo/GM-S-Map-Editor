@@ -7,6 +7,7 @@ package javamapeditor;
 
 import graficos.BackgroundTile;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -29,6 +30,7 @@ public class BackgroundWindow extends javax.swing.JFrame {
     Integer number = xml.Project.assets.backgrounds.size();
     Boolean newBackground = true;
     String imageURI = "";
+    BufferedImage image;
     
     public BackgroundWindow(Interfaz caller) {
         initComponents();
@@ -310,30 +312,28 @@ public class BackgroundWindow extends javax.swing.JFrame {
             }
 
             if (background.istileset){
-                System.out.println(1);
                 mainWindow.currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(number));
                 mainWindow.currentBackground.drawBackgroundTile(mainWindow.tiles);
                 mainWindow.currentBackground.setSelection(new Point(0,0), new Point(0,0));
 
                 DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
 
+                number = 0;
                 for(xml.projectAssets.backgrounds.Background bb :xml.Project.assets.backgrounds){
                     if(bb.istileset){
                         dcbm.addElement(bb.name);
+                        number++;
                     }
                 }
                 
-                System.out.println(2);
                 mainWindow.tilesCombo.setModel(dcbm);
                 mainWindow.tilesCombo.setEnabled(true);
-                mainWindow.tilesCombo.setSelectedIndex(number);
+                mainWindow.tilesCombo.setSelectedIndex(number - 1);
                 
-                System.out.println(3);
                 for(xml.projectAssets.backgrounds.Background bb : xml.Project.assets.backgrounds){
                     xml.Project.assets.backgroundT.add(new BackgroundTile(bb));
                 }
                 
-                System.out.println(4);
             }
             dispose();
         }
@@ -350,6 +350,12 @@ public class BackgroundWindow extends javax.swing.JFrame {
         int returnVal = fileChooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
             imageURI = fileChooser.getCurrentDirectory().getPath() + "\\" + fileChooser.getSelectedFile().getName();
+            try {
+                image = ImageIO.read(new File(imageURI));
+            }
+            catch (IOException ex) {
+                Logger.getLogger(BackgroundWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -402,6 +402,7 @@
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                       </AuxValues>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="tilesScrollPane">
@@ -423,6 +424,9 @@
                             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tilesMousePressed"/>
                             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tilesMouseReleased"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -480,6 +484,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mapListMouseClicked"/>
               </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="mapList.addMouseListener( new MouseAdapter()&#xa;{&#xa;    public void mousePressed(MouseEvent e)&#xa;    {&#xa;        if ( SwingUtilities.isRightMouseButton(e) )&#xa;        {&#xa;            JList list = (JList)e.getSource();&#xa;            int row = list.locationToIndex(e.getPoint());&#xa;            list.setSelectedIndex(row);&#xa;&#xa;            javamapeditor.RoomWindow w = new javamapeditor.RoomWindow(frame, list.getSelectedIndex());&#xa;            w.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );&#xa;            w.show();&#xa;        }&#xa;    }&#xa;&#xa;});"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>

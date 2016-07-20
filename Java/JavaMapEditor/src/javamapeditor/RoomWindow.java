@@ -7,22 +7,40 @@ package javamapeditor;
 
 import graficos.SimpleRoom;
 import javax.swing.DefaultComboBoxModel;
+import xml.projectAssets.rooms.Room;
 
 /**
  *
  * @author eltan
  */
-public class NewRoom extends javax.swing.JFrame {
+public class RoomWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form NewRoom
      */
     Interfaz mainWindow;
     Integer number = xml.Project.assets.rooms.size();
-    public NewRoom(Interfaz caller) {
+    Boolean newRoom = true;
+    public RoomWindow(Interfaz caller) {
         initComponents();
         mainWindow = caller;
-        name.setText("room" + (number- 1));
+        name.setText("room" + (number));
+    }
+    
+    public RoomWindow(Interfaz caller, Integer num) {
+        newRoom = false;
+        initComponents();
+        mainWindow = caller;
+        number = num;
+        
+        Room room = xml.Project.assets.rooms.get(number);
+        
+        name.setText(room.name);
+        width.setText(String.valueOf(room.width));
+        height.setText(String.valueOf(room.height));
+        speed.setText(String.valueOf(room.speed));
+        persistent.setSelected(room.persistent);
+        code.setText(room.code);
     }
 
     /**
@@ -218,15 +236,22 @@ public class NewRoom extends javax.swing.JFrame {
 
     private void acceptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceptMouseClicked
         // TODO add your handling code here:
-        xml.projectAssets.rooms.Room room = new xml.projectAssets.rooms.Room();
+        xml.projectAssets.rooms.Room room;
+        if (newRoom){
+            room = new xml.projectAssets.rooms.Room();
+            xml.Project.assets.rooms.add(room);
+        }
+        else{
+            room = xml.Project.assets.rooms.get(number);
+        }
+        
+        room.hasChanges = true;
         room.name = name.getText();
         room.width = Integer.valueOf(width.getText());
         room.height = Integer.valueOf(height.getText());
         room.speed = Integer.valueOf(speed.getText());
         room.persistent = persistent.isSelected();
         room.code = code.getText();
-        
-        xml.Project.assets.rooms.add(room);
         
         mainWindow.currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(number));
         

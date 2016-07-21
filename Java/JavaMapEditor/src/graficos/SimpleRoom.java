@@ -68,9 +68,6 @@ public class SimpleRoom {
         undo = new Stack();
         redo = new Stack();
         room = r;
-        System.out.println("Layers: "+layerDepth.size());
-        System.out.println("Room-tiles: "+r.tiles.size());
-        System.out.println("Bakcgrounds: "+r.backgrounds.size());
     }
     /**
      * Este metodo activa o desactiva el grid visual en el Map Area
@@ -293,7 +290,6 @@ public class SimpleRoom {
             for(Tile c: layerTile.get(currentLayer)){
                 if(isInside(new Rectangle(c.x,c.y,c.w,c.h), new Rectangle(t.x,t.y,t.w,t.h))){
                     if(!checked){
-                        System.out.println("Agregado");
                         tt.add(t);
                         checked = true;
                     }
@@ -398,6 +394,7 @@ public class SimpleRoom {
     }
     public void showSelection(boolean show){
         inMap = show;
+        unlock();
     }
     public void updateSelection(JLabel sel,int x,int y){
         if(Selection.selectGraphic!=null){
@@ -550,7 +547,6 @@ public class SimpleRoom {
             }
         }
     }
-    
     public void updateCurrent(JLabel current){
         BufferedImage curBI = new BufferedImage( w + 1 , h + 1  , BufferedImage.TYPE_INT_ARGB);
 
@@ -588,6 +584,10 @@ public class SimpleRoom {
                 g.drawRect(Selection.ini.x+1,Selection.ini.y+1,difx-2,dify-2);
             }
         }   
+    }
+    public void unlock(){
+        prevX=-1;
+        prevY=-1;
     }
     
 }

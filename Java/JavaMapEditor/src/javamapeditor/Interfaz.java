@@ -148,6 +148,9 @@ public class Interfaz extends javax.swing.JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 bottomLayersMousePressed(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                bottomLayersMouseReleased(evt);
+            }
         });
 
         topLayers.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -835,13 +838,15 @@ public class Interfaz extends javax.swing.JFrame {
             dcbm.addElement(s);
     }//GEN-LAST:event_createRoomSubMenuActionPerformed
 
+    private void bottomLayersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseReleased
+        currentSimpleRoom.unlock();
+    }//GEN-LAST:event_bottomLayersMouseReleased
+
     private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
         try{
             Integer newDepth = Integer.valueOf(JOptionPane.showInputDialog("Enter a depth value to move the layer to: "));
             Integer curDepth = Integer.valueOf((String)layersComboBox.getSelectedItem());
-            
-            System.out.println(curDepth + " " + newDepth);
             
             currentSimpleRoom.changeLayer(curDepth, newDepth);
 

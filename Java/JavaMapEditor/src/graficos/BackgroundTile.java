@@ -76,10 +76,7 @@ public class BackgroundTile {
         int avanceX = tileWidth+sepX;
         int avanceY = tileHeight+sepY;
         for(int y = Selection.ini.y; y<Selection.fin.y; y+=avanceY){
-            System.out.println("y"+y);
             for(int x = Selection.ini.x; x<Selection.fin.x; x+=avanceX){
-                System.out.println("x"+x);
-                System.out.println(x+","+ y+","+tileWidth+","+tileHeight);
                 BufferedImage cut = backgroundTile.getSubimage(x, y, tileWidth, tileHeight);
                 int cutX = (x/avanceX) - Selection.ini.x/avanceX;
                 int cutY = (y/avanceY) - Selection.ini.y/avanceY;
@@ -137,7 +134,6 @@ public class BackgroundTile {
                 t.yo = y;
                 t.x = (x/avanceX) - i.x/avanceX;
                 t.y = (y/avanceY) - i.y/avanceY;
-                System.out.println("w:"+t.w+"h:"+t.h+"xo:"+t.xo+"yo:"+t.yo+"x:"+t.x+"y:"+t.y);
                 tiles.add(t);
             }
         }

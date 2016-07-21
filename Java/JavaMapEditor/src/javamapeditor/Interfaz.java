@@ -9,8 +9,11 @@ package javamapeditor;
 import graficos.*;
 import java.awt.Point;
 import java.awt.event.InputEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -22,14 +25,15 @@ import javax.swing.event.DocumentListener;
  * @author MarcoM
  */
 public class Interfaz extends javax.swing.JFrame {
-    private int mousePosX,mousePosFinX;
-    private int mousePosY,mousePosFinY;
+    public static Interfaz frame;
+    public int mousePosX,mousePosFinX;
+    public int mousePosY,mousePosFinY;
 
-    private int mouseMapPosX,mouseMapPosFinX;
-    private int mouseMapPosY,mouseMapPosFinY;
+    public int mouseMapPosX,mouseMapPosFinX;
+    public int mouseMapPosY,mouseMapPosFinY;
     
-    private SimpleRoom currentSimpleRoom;
-    private BackgroundTile currentBackground;
+    public SimpleRoom currentSimpleRoom;
+    public BackgroundTile currentBackground;
     
     //private JLabel seleccion;
     
@@ -268,284 +272,301 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         mapListScrollPane.setViewportView(mapList);
+        mapList.addMouseListener( new MouseAdapter()
+            {
+                public void mousePressed(MouseEvent e)
+                {
+                    if ( SwingUtilities.isRightMouseButton(e) )
+                    {
+                        JList list = (JList)e.getSource();
+                        int row = list.locationToIndex(e.getPoint());
+                        list.setSelectedIndex(row);
 
-        jSplitPane3.setRightComponent(mapListScrollPane);
-
-        toolBar.setFloatable(false);
-        toolBar.setRollover(true);
-        toolBar.add(filler2);
-
-        jLabel1.setText("Width:");
-        toolBar.add(jLabel1);
-
-        tw.setMaximumSize(new java.awt.Dimension(25, 20));
-        tw.setMinimumSize(new java.awt.Dimension(25, 20));
-        tw.setPreferredSize(new java.awt.Dimension(25, 20));
-        tw.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                twFocusGained(evt);
-            }
-        });
-        toolBar.add(tw);
-        tw.getDocument().addDocumentListener(new DocumentListener() {
-            public void changedUpdate(DocumentEvent e) {
-                warn();
-            }
-            public void removeUpdate(DocumentEvent e) {
-                warn();
-            }
-            public void insertUpdate(DocumentEvent e) {
-                warn();
-            }
-
-            public void warn() {
-                if (!tw.getText().equals("") && Integer.parseInt(tw.getText())<=0){
-                    JOptionPane.showMessageDialog(null,
-                        "Error: Please enter number bigger than 0", "Error Massage",
-                        JOptionPane.ERROR_MESSAGE);
-                }
-                else{
-                    try{
-                        currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
-                        currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);
-                    }
-                    catch(Exception ex){
-
+                        javamapeditor.RoomWindow w = new javamapeditor.RoomWindow(frame, list.getSelectedIndex());
+                        w.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );
+                        w.show();
                     }
                 }
-            }
-        });
-        toolBar.add(filler1);
 
-        jLabel2.setText("Height:");
-        toolBar.add(jLabel2);
+            });
 
-        th.setMaximumSize(new java.awt.Dimension(25, 20));
-        th.setMinimumSize(new java.awt.Dimension(25, 20));
-        th.setPreferredSize(new java.awt.Dimension(25, 20));
-        th.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                thFocusGained(evt);
-            }
-        });
-        toolBar.add(th);
-        th.getDocument().addDocumentListener(new DocumentListener() {
-            public void changedUpdate(DocumentEvent e) {
-                warn();
-            }
-            public void removeUpdate(DocumentEvent e) {
-                warn();
-            }
-            public void insertUpdate(DocumentEvent e) {
-                warn();
-            }
+            jSplitPane3.setRightComponent(mapListScrollPane);
 
-            public void warn() {
-                if (!th.getText().equals("") && Integer.parseInt(th.getText())<=0){
-                    JOptionPane.showMessageDialog(null,
-                        "Error: Please enter number bigger than 0", "Error Massage",
-                        JOptionPane.ERROR_MESSAGE);
+            toolBar.setFloatable(false);
+            toolBar.setRollover(true);
+            toolBar.add(filler2);
+
+            jLabel1.setText("Width:");
+            toolBar.add(jLabel1);
+
+            tw.setMaximumSize(new java.awt.Dimension(25, 20));
+            tw.setMinimumSize(new java.awt.Dimension(25, 20));
+            tw.setPreferredSize(new java.awt.Dimension(25, 20));
+            tw.addFocusListener(new java.awt.event.FocusAdapter() {
+                public void focusGained(java.awt.event.FocusEvent evt) {
+                    twFocusGained(evt);
                 }
-                else{
-                    try{
-                        currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
-                        currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);
-                    }
-                    catch(Exception ex){
+            });
+            toolBar.add(tw);
+            tw.getDocument().addDocumentListener(new DocumentListener() {
+                public void changedUpdate(DocumentEvent e) {
+                    warn();
+                }
+                public void removeUpdate(DocumentEvent e) {
+                    warn();
+                }
+                public void insertUpdate(DocumentEvent e) {
+                    warn();
+                }
 
+                public void warn() {
+                    if (!tw.getText().equals("") && Integer.parseInt(tw.getText())<=0){
+                        JOptionPane.showMessageDialog(null,
+                            "Error: Please enter number bigger than 0", "Error Massage",
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        try{
+                            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
+                            currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);
+                        }
+                        catch(Exception ex){
+
+                        }
                     }
                 }
-            }
-        });
-        toolBar.add(jSeparator3);
+            });
+            toolBar.add(filler1);
 
-        showGridButton.setText("Show Grid");
-        showGridButton.setFocusable(false);
-        showGridButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        showGridButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        showGridButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showGridButtonActionPerformed(evt);
-            }
-        });
-        toolBar.add(showGridButton);
-        toolBar.add(jSeparator1);
+            jLabel2.setText("Height:");
+            toolBar.add(jLabel2);
 
-        previewButton.setText("Preview");
-        previewButton.setFocusable(false);
-        previewButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        previewButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        previewButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                previewButtonActionPerformed(evt);
-            }
-        });
-        toolBar.add(previewButton);
-        toolBar.add(jSeparator2);
+            th.setMaximumSize(new java.awt.Dimension(25, 20));
+            th.setMinimumSize(new java.awt.Dimension(25, 20));
+            th.setPreferredSize(new java.awt.Dimension(25, 20));
+            th.addFocusListener(new java.awt.event.FocusAdapter() {
+                public void focusGained(java.awt.event.FocusEvent evt) {
+                    thFocusGained(evt);
+                }
+            });
+            toolBar.add(th);
+            th.getDocument().addDocumentListener(new DocumentListener() {
+                public void changedUpdate(DocumentEvent e) {
+                    warn();
+                }
+                public void removeUpdate(DocumentEvent e) {
+                    warn();
+                }
+                public void insertUpdate(DocumentEvent e) {
+                    warn();
+                }
 
-        jLabel3.setText("Layer:");
-        toolBar.add(jLabel3);
+                public void warn() {
+                    if (!th.getText().equals("") && Integer.parseInt(th.getText())<=0){
+                        JOptionPane.showMessageDialog(null,
+                            "Error: Please enter number bigger than 0", "Error Massage",
+                            JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        try{
+                            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));
+                            currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);
+                        }
+                        catch(Exception ex){
 
-        layersComboBox.setMaximumSize(new java.awt.Dimension(56, 20));
-        layersComboBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                layersComboBoxItemStateChanged(evt);
-            }
-        });
-        toolBar.add(layersComboBox);
+                        }
+                    }
+                }
+            });
+            toolBar.add(jSeparator3);
 
-        layerChangeButton.setText(" Change");
-        layerChangeButton.setFocusable(false);
-        layerChangeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        layerChangeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        layerChangeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                layerChangeButtonActionPerformed(evt);
-            }
-        });
-        toolBar.add(layerChangeButton);
+            showGridButton.setText("Show Grid");
+            showGridButton.setFocusable(false);
+            showGridButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            showGridButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            showGridButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    showGridButtonActionPerformed(evt);
+                }
+            });
+            toolBar.add(showGridButton);
+            toolBar.add(jSeparator1);
 
-        layerDeleteButton.setText("Delete");
-        layerDeleteButton.setFocusable(false);
-        layerDeleteButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        layerDeleteButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        layerDeleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                layerDeleteButtonActionPerformed(evt);
-            }
-        });
-        toolBar.add(layerDeleteButton);
+            previewButton.setText("Preview");
+            previewButton.setFocusable(false);
+            previewButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            previewButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            previewButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    previewButtonActionPerformed(evt);
+                }
+            });
+            toolBar.add(previewButton);
+            toolBar.add(jSeparator2);
 
-        newLayerButton.setText("New Layer");
-        newLayerButton.setFocusable(false);
-        newLayerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        newLayerButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        newLayerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newLayerButtonActionPerformed(evt);
-            }
-        });
-        toolBar.add(newLayerButton);
-        toolBar.add(jSeparator5);
+            jLabel3.setText("Layer:");
+            toolBar.add(jLabel3);
 
-        menuBar.setBackground(new java.awt.Color(255, 255, 255));
-        menuBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        menuBar.setDoubleBuffered(true);
+            layersComboBox.setMaximumSize(new java.awt.Dimension(56, 20));
+            layersComboBox.addItemListener(new java.awt.event.ItemListener() {
+                public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                    layersComboBoxItemStateChanged(evt);
+                }
+            });
+            toolBar.add(layersComboBox);
 
-        fileMenu.setText("File");
+            layerChangeButton.setText(" Change");
+            layerChangeButton.setFocusable(false);
+            layerChangeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            layerChangeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            layerChangeButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    layerChangeButtonActionPerformed(evt);
+                }
+            });
+            toolBar.add(layerChangeButton);
 
-        newProjectMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        newProjectMenu.setText("New Project...");
-        newProjectMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newProjectMenuActionPerformed(evt);
-            }
-        });
-        fileMenu.add(newProjectMenu);
+            layerDeleteButton.setText("Delete");
+            layerDeleteButton.setFocusable(false);
+            layerDeleteButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            layerDeleteButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            layerDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    layerDeleteButtonActionPerformed(evt);
+                }
+            });
+            toolBar.add(layerDeleteButton);
 
-        openMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        openMenu.setText("Open...");
-        openMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openMenuActionPerformed(evt);
-            }
-        });
-        fileMenu.add(openMenu);
+            newLayerButton.setText("New Layer");
+            newLayerButton.setFocusable(false);
+            newLayerButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            newLayerButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+            newLayerButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    newLayerButtonActionPerformed(evt);
+                }
+            });
+            toolBar.add(newLayerButton);
+            toolBar.add(jSeparator5);
 
-        saveMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        saveMenu.setText("Save");
-        saveMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveMenuActionPerformed(evt);
-            }
-        });
-        fileMenu.add(saveMenu);
+            menuBar.setBackground(new java.awt.Color(255, 255, 255));
+            menuBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+            menuBar.setDoubleBuffered(true);
 
-        saveAsMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        saveAsMenu.setText("Save As...");
-        saveAsMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveAsMenuActionPerformed(evt);
-            }
-        });
-        fileMenu.add(saveAsMenu);
+            fileMenu.setText("File");
 
-        menuBar.add(fileMenu);
+            newProjectMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+            newProjectMenu.setText("New Project...");
+            newProjectMenu.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    newProjectMenuActionPerformed(evt);
+                }
+            });
+            fileMenu.add(newProjectMenu);
 
-        editMenu.setText("Edit");
+            openMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+            openMenu.setText("Open...");
+            openMenu.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    openMenuActionPerformed(evt);
+                }
+            });
+            fileMenu.add(openMenu);
 
-        undoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
-        undoSubMenu.setText("Undo");
-        undoSubMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                undoSubMenuActionPerformed(evt);
-            }
-        });
-        editMenu.add(undoSubMenu);
+            saveMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+            saveMenu.setText("Save");
+            saveMenu.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    saveMenuActionPerformed(evt);
+                }
+            });
+            fileMenu.add(saveMenu);
 
-        redoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
-        redoSubMenu.setText("Redo");
-        redoSubMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                redoSubMenuActionPerformed(evt);
-            }
-        });
-        editMenu.add(redoSubMenu);
+            saveAsMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+            saveAsMenu.setText("Save As...");
+            saveAsMenu.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    saveAsMenuActionPerformed(evt);
+                }
+            });
+            fileMenu.add(saveAsMenu);
 
-        menuBar.add(editMenu);
+            menuBar.add(fileMenu);
 
-        jMenu2.setText("Temp");
+            editMenu.setText("Edit");
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("tempBorrar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem2);
+            undoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
+            undoSubMenu.setText("Undo");
+            undoSubMenu.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    undoSubMenuActionPerformed(evt);
+                }
+            });
+            editMenu.add(undoSubMenu);
 
-        menuBar.add(jMenu2);
+            redoSubMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
+            redoSubMenu.setText("Redo");
+            redoSubMenu.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    redoSubMenuActionPerformed(evt);
+                }
+            });
+            editMenu.add(redoSubMenu);
 
-        resourcesMenu.setText("Resources");
+            menuBar.add(editMenu);
 
-        createBackgroundSubMenu.setText("Create Background");
-        createBackgroundSubMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createBackgroundSubMenuActionPerformed(evt);
-            }
-        });
-        resourcesMenu.add(createBackgroundSubMenu);
+            jMenu2.setText("Temp");
 
-        createRoomSubMenu.setText("Create Room");
-        createRoomSubMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createRoomSubMenuActionPerformed(evt);
-            }
-        });
-        resourcesMenu.add(createRoomSubMenu);
+            jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+            jMenuItem2.setText("tempBorrar");
+            jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jMenuItem2ActionPerformed(evt);
+                }
+            });
+            jMenu2.add(jMenuItem2);
 
-        menuBar.add(resourcesMenu);
+            menuBar.add(jMenu2);
 
-        setJMenuBar(menuBar);
+            resourcesMenu.setText("Resources");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(toolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane3))
-        );
+            createBackgroundSubMenu.setText("Create Background");
+            createBackgroundSubMenu.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    createBackgroundSubMenuActionPerformed(evt);
+                }
+            });
+            resourcesMenu.add(createBackgroundSubMenu);
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+            createRoomSubMenu.setText("Create Room");
+            createRoomSubMenu.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    createRoomSubMenuActionPerformed(evt);
+                }
+            });
+            resourcesMenu.add(createRoomSubMenu);
+
+            menuBar.add(resourcesMenu);
+
+            setJMenuBar(menuBar);
+
+            javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+            getContentPane().setLayout(layout);
+            layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jSplitPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(toolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
+            );
+            layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jSplitPane3))
+            );
+
+            pack();
+        }// </editor-fold>//GEN-END:initComponents
 
     private void saveAsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsMenuActionPerformed
         xml.Project.saveProjectAs();
@@ -598,9 +619,16 @@ public class Interfaz extends javax.swing.JFrame {
         mapList.setEnabled(true);
         
         dcbm = new DefaultComboBoxModel();
-        
-        for(String s : currentSimpleRoom.getDephts())
-            dcbm.addElement(s);
+        String[] d = currentSimpleRoom.getDephts();
+        if (d.length > 0){
+            for(String s : currentSimpleRoom.getDephts()){
+                dcbm.addElement(s);
+            }
+        }
+        else{
+            dcbm.addElement("1000000");
+            currentSimpleRoom.changeLayer(1000000);
+        }
         
         layersComboBox.setModel(dcbm);
         
@@ -659,21 +687,26 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_bottomLayersMouseDragged
 
     private void mapListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mapListMouseClicked
-        if(evt.getClickCount()==2){
-            currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(mapList.getSelectedIndex()));
-            currentSimpleRoom.update(bottomLayers, currentLayer, topLayers);
-            currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
-            
-            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        
-            for(String s : currentSimpleRoom.getDephts())
-                dcbm.addElement(s);
+        currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(mapList.getSelectedIndex()));
+        currentSimpleRoom.update(bottomLayers, currentLayer, topLayers);
+        currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
 
-            layersComboBox.setModel(dcbm);
-            showGridButton.setSelected(false);
-            previewButton.setSelected(false);
-            currentSimpleRoom.drawBackground(backgroundLayer);
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        String[] d = currentSimpleRoom.getDephts();
+        if (d.length > 0){
+            for(String s : currentSimpleRoom.getDephts()){
+                dcbm.addElement(s);
+            }
         }
+        else{
+            dcbm.addElement("1000000");
+            currentSimpleRoom.changeLayer(1000000);
+        }
+
+        layersComboBox.setModel(dcbm);
+        showGridButton.setSelected(false);
+        previewButton.setSelected(false);
+        currentSimpleRoom.drawBackground(backgroundLayer);
     }//GEN-LAST:event_mapListMouseClicked
 
     private void tilesComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tilesComboItemStateChanged
@@ -814,28 +847,16 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void createBackgroundSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBackgroundSubMenuActionPerformed
         // TODO add your handling code here:
-        xml.Project.assets.backgrounds.add(new xml.projectAssets.backgrounds.Background());
+        BackgroundWindow w = new BackgroundWindow(frame);
+        w.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        w.show();
     }//GEN-LAST:event_createBackgroundSubMenuActionPerformed
 
     private void createRoomSubMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRoomSubMenuActionPerformed
         // TODO add your handling code here:
-        xml.Project.assets.rooms.add(new xml.projectAssets.rooms.Room());
-        
-        currentSimpleRoom = new SimpleRoom(xml.Project.assets.rooms.get(0));
-        currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);
-        
-        String[] i = new String[xml.Project.assets.rooms.size()];
-        for(xml.projectAssets.rooms.Room r : xml.Project.assets.rooms){
-            i[xml.Project.assets.rooms.indexOf(r)] = r.name;
-        }
-        
-        mapList.setListData(i);
-        mapList.setEnabled(true);
-        
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        
-        for(String s : currentSimpleRoom.getDephts())
-            dcbm.addElement(s);
+        RoomWindow w = new RoomWindow(frame);
+        w.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        w.show();
     }//GEN-LAST:event_createRoomSubMenuActionPerformed
 
     private void bottomLayersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bottomLayersMouseReleased
@@ -875,7 +896,7 @@ public class Interfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Interfaz frame = new Interfaz();
+                frame = new Interfaz();
                 frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 frame.setVisible(true);
             }
@@ -884,11 +905,11 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel backgroundLayer;
-    private javax.swing.JLabel bottomLayers;
+    protected javax.swing.JLabel backgroundLayer;
+    protected javax.swing.JLabel bottomLayers;
     private javax.swing.JMenuItem createBackgroundSubMenu;
     private javax.swing.JMenuItem createRoomSubMenu;
-    private javax.swing.JLabel currentLayer;
+    protected javax.swing.JLabel currentLayer;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
@@ -908,11 +929,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JSplitPane jSplitPane4;
     private javax.swing.JButton layerChangeButton;
     private javax.swing.JButton layerDeleteButton;
-    private javax.swing.JComboBox<String> layersComboBox;
+    protected javax.swing.JComboBox<String> layersComboBox;
     private javax.swing.JTabbedPane leftTabs;
-    private javax.swing.JList<String> mapList;
+    protected javax.swing.JList<String> mapList;
     private javax.swing.JScrollPane mapListScrollPane;
-    private javax.swing.JPanel mapPanel;
+    protected javax.swing.JPanel mapPanel;
     private javax.swing.JScrollPane mapScrollPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newLayerButton;
@@ -925,15 +946,15 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenu resourcesMenu;
     private javax.swing.JMenuItem saveAsMenu;
     private javax.swing.JMenuItem saveMenu;
-    private javax.swing.JLabel selection;
+    protected javax.swing.JLabel selection;
     private javax.swing.JToggleButton showGridButton;
-    private javax.swing.JTextField th;
-    private javax.swing.JLabel tiles;
-    private javax.swing.JComboBox<String> tilesCombo;
+    protected javax.swing.JTextField th;
+    protected javax.swing.JLabel tiles;
+    protected javax.swing.JComboBox<String> tilesCombo;
     private javax.swing.JScrollPane tilesScrollPane;
     private javax.swing.JToolBar toolBar;
-    private javax.swing.JLabel topLayers;
-    private javax.swing.JTextField tw;
+    protected javax.swing.JLabel topLayers;
+    protected javax.swing.JTextField tw;
     private javax.swing.JMenuItem undoSubMenu;
     // End of variables declaration//GEN-END:variables
 }

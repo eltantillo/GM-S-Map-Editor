@@ -228,6 +228,9 @@
                   <Events>
                     <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="mapPanelMouseMoved"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                  </AuxValues>
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -289,6 +292,9 @@
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="bottomLayers">
                       <Properties>
@@ -308,24 +314,36 @@
                         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bottomLayersMousePressed"/>
                         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bottomLayersMouseReleased"/>
                       </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="topLayers">
                       <Properties>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="selection">
                       <Properties>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                      </AuxValues>
                     </Component>
                     <Component class="javax.swing.JLabel" name="currentLayer">
                       <Properties>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="verticalTextPosition" type="int" value="1"/>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -385,6 +403,7 @@
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                       </AuxValues>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="tilesScrollPane">
@@ -406,6 +425,9 @@
                             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tilesMousePressed"/>
                             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tilesMouseReleased"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -463,7 +485,9 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mapListMouseClicked"/>
               </Events>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="mapList.addMouseListener( new MouseAdapter()&#xa;{&#xa;    public void mousePressed(MouseEvent e)&#xa;    {&#xa;        if ( SwingUtilities.isRightMouseButton(e) )&#xa;        {&#xa;            JList list = (JList)e.getSource();&#xa;            int row = list.locationToIndex(e.getPoint());&#xa;            list.setSelectedIndex(row);&#xa;&#xa;            javamapeditor.RoomWindow w = new javamapeditor.RoomWindow(frame, list.getSelectedIndex());&#xa;            w.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );&#xa;            w.show();&#xa;        }&#xa;    }&#xa;&#xa;});"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
               </AuxValues>
             </Component>
           </SubComponents>
@@ -516,6 +540,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tw.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!tw.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(tw.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler1">
@@ -556,6 +581,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="th.getDocument().addDocumentListener(new DocumentListener() {&#xa;public void changedUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void removeUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;public void insertUpdate(DocumentEvent e) {&#xa;  warn();&#xa;}&#xa;&#xa;public void warn() {&#xa;    if (!th.getText().equals(&quot;&quot;) &amp;&amp; Integer.parseInt(th.getText())&lt;=0){&#xa;        JOptionPane.showMessageDialog(null,&#xa;            &quot;Error: Please enter number bigger than 0&quot;, &quot;Error Massage&quot;,&#xa;            JOptionPane.ERROR_MESSAGE);&#xa;    }&#xa;    else{&#xa;        try{&#xa;            currentSimpleRoom.changeGrid(Integer.parseInt(tw.getText()),Integer.parseInt(th.getText()));&#xa;            currentSimpleRoom.update(bottomLayers, currentLayer,topLayers);&#xa;        }&#xa;        catch(Exception ex){&#xa;&#xa;        }&#xa;    }&#xa;}&#xa;});"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator3">
@@ -605,6 +631,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="layerChangeButton">

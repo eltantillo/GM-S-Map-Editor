@@ -1,0 +1,6 @@
+[ ] Intentar conquistar el mundo (muy importante)
+[ ] reparar bugs:
+    [ ] Crear background y background tipo tile, background tipo tile no funciona al editar mapa.
+    [ ] ...
+[ ] Por hacer:
+    [ ] ...

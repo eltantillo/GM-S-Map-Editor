@@ -1,6 +1,12 @@
 [ ] Intentar conquistar el mundo (muy importante)
 [ ] reparar bugs:
-    [ ] Crear background y background tipo tile, background tipo tile no funciona al editar mapa.
+    [ ] Crear un background normal y despues crear uno tipo tile deja de funcionar el tipo tile en el editor.
     [ ] ...
 [ ] Por hacer:
     [ ] ...
+
+Pruebas exitosas:
+* Al crear un background tipo tile, se puede utilizar ese background sin problema en el editor de mapas.
+* Igualmente crear el 2do background tipo tile, se puede utilizar ese 2do background sin problema en el editor.
+* Crear un 3er background pero ahora normal, se pueden utilizar los 2 backgrounds anteriores.
+* Bug found: después de crear el 3er background se encontro que el 4to background tipo tile no funciono al editar el mapa.

@@ -66,6 +66,7 @@ public class Interfaz extends javax.swing.JFrame {
         tilesCombo = new javax.swing.JComboBox<>();
         tilesScrollPane = new javax.swing.JScrollPane();
         tiles = new javax.swing.JLabel();
+        editBackgroundButton = new javax.swing.JButton();
         objectsScrollPane = new javax.swing.JScrollPane();
         objectsList = new javax.swing.JList<>();
         mapListScrollPane = new javax.swing.JScrollPane();
@@ -238,19 +239,32 @@ public class Interfaz extends javax.swing.JFrame {
         });
         tilesScrollPane.setViewportView(tiles);
 
+        editBackgroundButton.setText("Edit");
+        editBackgroundButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBackgroundButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tilesCombo, 0, 48, Short.MAX_VALUE)
             .addComponent(tilesScrollPane)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(tilesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editBackgroundButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(tilesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tilesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBackgroundButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addComponent(tilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE))
         );
 
         leftTabs.addTab("Tiles", jPanel2);
@@ -709,44 +723,6 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.drawBackground(backgroundLayer);
     }//GEN-LAST:event_mapListMouseClicked
 
-    private void tilesComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tilesComboItemStateChanged
-        String name = String.valueOf(tilesCombo.getSelectedItem());
-        int number = 0;
-        for (int i = 0; i < xml.Project.assets.backgrounds.size(); i++) {
-            if (xml.Project.assets.backgrounds.get(i).name.equals(name)){
-                number = i;
-            }
-        }
-        
-        currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(number));
-        currentBackground.setSelection(new Point(0,0), new Point(0,0));
-        currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
-        currentBackground.drawBackgroundTile(tiles);
-        currentSimpleRoom.update(bottomLayers, currentLayer, topLayers);
-        
-        tw.setText(String.valueOf(currentBackground.getTW()));
-        th.setText(String.valueOf(currentBackground.getTH()));
-    }//GEN-LAST:event_tilesComboItemStateChanged
-
-    private void tilesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseReleased
-        mousePosFinX = evt.getX();
-        mousePosFinY = evt.getY();
-        currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
-        currentBackground.drawBackgroundTile(tiles);
-    }//GEN-LAST:event_tilesMouseReleased
-
-    private void tilesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMousePressed
-        mousePosX = evt.getX();
-        mousePosY = evt.getY();
-    }//GEN-LAST:event_tilesMousePressed
-
-    private void tilesMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseDragged
-        mousePosFinX = evt.getX();
-        mousePosFinY = evt.getY();
-        currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
-        currentBackground.drawBackgroundTile(tiles);
-    }//GEN-LAST:event_tilesMouseDragged
-
     private void previewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewButtonActionPerformed
         currentSimpleRoom.topLayer();
         currentSimpleRoom.update(bottomLayers,currentLayer ,topLayers);
@@ -863,6 +839,51 @@ public class Interfaz extends javax.swing.JFrame {
         currentSimpleRoom.unlock();
     }//GEN-LAST:event_bottomLayersMouseReleased
 
+    private void tilesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseReleased
+        mousePosFinX = evt.getX();
+        mousePosFinY = evt.getY();
+        currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
+        currentBackground.drawBackgroundTile(tiles);
+    }//GEN-LAST:event_tilesMouseReleased
+
+    private void tilesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMousePressed
+        mousePosX = evt.getX();
+        mousePosY = evt.getY();
+    }//GEN-LAST:event_tilesMousePressed
+
+    private void tilesMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tilesMouseDragged
+        mousePosFinX = evt.getX();
+        mousePosFinY = evt.getY();
+        currentBackground.setSelection(new Point(mousePosX,mousePosY), new Point(mousePosFinX,mousePosFinY));
+        currentBackground.drawBackgroundTile(tiles);
+    }//GEN-LAST:event_tilesMouseDragged
+
+    private void tilesComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tilesComboItemStateChanged
+        String name = String.valueOf(tilesCombo.getSelectedItem());
+        int number = 0;
+        for (int i = 0; i < xml.Project.assets.backgrounds.size(); i++) {
+            if (xml.Project.assets.backgrounds.get(i).name.equals(name)){
+                number = i;
+            }
+        }
+
+        currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(number));
+        currentBackground.setSelection(new Point(0,0), new Point(0,0));
+        currentSimpleRoom.changeGrid(currentBackground.getTW(), currentBackground.getTH());
+        currentBackground.drawBackgroundTile(tiles);
+        currentSimpleRoom.update(bottomLayers, currentLayer, topLayers);
+
+        tw.setText(String.valueOf(currentBackground.getTW()));
+        th.setText(String.valueOf(currentBackground.getTH()));
+    }//GEN-LAST:event_tilesComboItemStateChanged
+
+    private void editBackgroundButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBackgroundButtonActionPerformed
+        // TODO add your handling code here:
+        javamapeditor.BackgroundWindow w = new javamapeditor.BackgroundWindow(frame, tilesCombo.getSelectedItem().toString());
+        w.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );
+        w.show();
+    }//GEN-LAST:event_editBackgroundButtonActionPerformed
+
     private void layerChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
         try{
@@ -910,6 +931,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem createBackgroundSubMenu;
     private javax.swing.JMenuItem createRoomSubMenu;
     protected javax.swing.JLabel currentLayer;
+    private javax.swing.JButton editBackgroundButton;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.Box.Filler filler1;
@@ -949,8 +971,8 @@ public class Interfaz extends javax.swing.JFrame {
     protected javax.swing.JLabel selection;
     private javax.swing.JToggleButton showGridButton;
     protected javax.swing.JTextField th;
-    protected javax.swing.JLabel tiles;
-    protected javax.swing.JComboBox<String> tilesCombo;
+    public javax.swing.JLabel tiles;
+    public javax.swing.JComboBox<String> tilesCombo;
     private javax.swing.JScrollPane tilesScrollPane;
     private javax.swing.JToolBar toolBar;
     protected javax.swing.JLabel topLayers;

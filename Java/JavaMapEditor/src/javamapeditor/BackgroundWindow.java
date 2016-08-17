@@ -6,6 +6,7 @@
 package javamapeditor;
 
 import graficos.BackgroundTile;
+import graficos.ImageTools;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.commons.io.FileUtils;
@@ -108,7 +111,6 @@ public class BackgroundWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        background.setText("jLabel8");
         jScrollPane1.setViewportView(background);
 
         jLabel1.setText("Name:");
@@ -347,9 +349,12 @@ public class BackgroundWindow extends javax.swing.JFrame {
         fileChooser.setFileFilter(filter);*/
         int returnVal = fileChooser.showOpenDialog(null);
         if(returnVal == JFileChooser.APPROVE_OPTION) {
-            imageURI = fileChooser.getCurrentDirectory().getPath() + "\\" + fileChooser.getSelectedFile().getName();
+            
+            imageURI = fileChooser.getSelectedFile().getAbsolutePath();
+            System.out.println(imageURI);
             try {
                 image = ImageIO.read(new File(imageURI));
+                background.setIcon(new ImageIcon(image));
             }
             catch (IOException ex) {
                 Logger.getLogger(BackgroundWindow.class.getName()).log(Level.SEVERE, null, ex);

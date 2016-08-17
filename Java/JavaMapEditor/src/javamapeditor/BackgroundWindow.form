@@ -143,9 +143,6 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="background">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel8"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

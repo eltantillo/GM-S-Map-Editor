@@ -15,7 +15,7 @@ import xml.projectAssets.backgrounds.Background;
 
 public class BackgroundTile {
     private BufferedImage buffer;
-    private final BufferedImage backgroundTile;
+    private BufferedImage backgroundTile;
     private final String backgroundName;
     private final int tileWidth, tileHeight, offsetX, offsetY,sepX,sepY;
     
@@ -143,5 +143,8 @@ public class BackgroundTile {
         if(opc==1)
             return (int) Math.floor(mouse / (tileWidth+sepX)) * (tileWidth+sepX) + offsetX;
         return (int) Math.floor(mouse / (tileHeight+sepY)) * (tileHeight+sepY)+offsetY;
+    }
+    private void setImage(BufferedImage i){
+        backgroundTile = i;
     }
 }

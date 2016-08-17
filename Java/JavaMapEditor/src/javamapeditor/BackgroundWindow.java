@@ -43,14 +43,21 @@ public class BackgroundWindow extends javax.swing.JFrame {
         tileOptions(false);
     }
     
-    public BackgroundWindow(Interfaz caller, Integer num) {
+    public BackgroundWindow(Interfaz caller, String bgName) {
         newBackground = false;
         initComponents();
         mainWindow = caller;
-        number = num;
+        
+        for (int i = 0; i < xml.Project.assets.backgrounds.size(); i++) {
+            if (xml.Project.assets.backgrounds.get(i).name.equals(bgName)){
+                number = i;
+            }
+        }
         
         Background background = xml.Project.assets.backgrounds.get(number);
         
+        image = background.image;
+         backgroundImage.setIcon(new ImageIcon(image));
         name.setText(background.name);
         istileset.setSelected(background.istileset);
         tilewidth.setText(String.valueOf(background.tilewidth));
@@ -89,7 +96,7 @@ public class BackgroundWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        background = new javax.swing.JLabel();
+        backgroundImage = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
         istileset = new javax.swing.JCheckBox();
@@ -107,11 +114,11 @@ public class BackgroundWindow extends javax.swing.JFrame {
         tilevsep = new javax.swing.JTextField();
         accept = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        loadButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(background);
+        jScrollPane1.setViewportView(backgroundImage);
 
         jLabel1.setText("Name:");
 
@@ -174,10 +181,10 @@ public class BackgroundWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Load Background Image");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loadButton.setText("Load Background Image");
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loadButtonActionPerformed(evt);
             }
         });
 
@@ -227,7 +234,7 @@ public class BackgroundWindow extends javax.swing.JFrame {
                         .addComponent(accept)
                         .addGap(18, 18, 18)
                         .addComponent(cancel))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(loadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE))
         );
@@ -265,7 +272,7 @@ public class BackgroundWindow extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(tilevsep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(loadButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(accept)
@@ -278,7 +285,7 @@ public class BackgroundWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void acceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptActionPerformed
-        if (!imageURI.equals("")){
+        if (image != null){//(!imageURI.equals("")){
             xml.projectAssets.backgrounds.Background background;
             if (newBackground){
                 background = new xml.projectAssets.backgrounds.Background();
@@ -302,18 +309,20 @@ public class BackgroundWindow extends javax.swing.JFrame {
             background.width = 960;
             background.height = 544;
             
-            try {
-                File source = new File(imageURI);
-                File dest   = new File(xml.Project.projectFolder + "background\\" + background.data);
-                FileUtils.copyFile(source, dest);
-                
-                background.image = ImageIO.read(new File(xml.Project.projectFolder + "background\\" + background.data));
-            }
-            catch (IOException ex) {
-                Logger.getLogger(BackgroundWindow.class.getName()).log(Level.SEVERE, null, ex);
+            if (!imageURI.equals("")){
+                try {
+                    File source = new File(imageURI);
+                    File dest   = new File(xml.Project.projectFolder + "background\\" + background.data);
+                    FileUtils.copyFile(source, dest);
+
+                    background.image = ImageIO.read(new File(xml.Project.projectFolder + "background\\" + background.data));
+                }
+                catch (IOException ex) {
+                    Logger.getLogger(BackgroundWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
-            if (background.istileset){
+            if (newBackground && background.istileset){
                 mainWindow.currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(number));
                 mainWindow.currentBackground.drawBackgroundTile(mainWindow.tiles);
                 mainWindow.currentBackground.setSelection(new Point(0,0), new Point(0,0));
@@ -343,7 +352,7 @@ public class BackgroundWindow extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cancelActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         /*FileNameExtensionFilter filter = new FileNameExtensionFilter("GameMaker: Studio Project Files", "gmx");
         fileChooser.setFileFilter(filter);*/
@@ -354,13 +363,13 @@ public class BackgroundWindow extends javax.swing.JFrame {
             System.out.println(imageURI);
             try {
                 image = ImageIO.read(new File(imageURI));
-                background.setIcon(new ImageIcon(image));
+                backgroundImage.setIcon(new ImageIcon(image));
             }
             catch (IOException ex) {
                 Logger.getLogger(BackgroundWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_loadButtonActionPerformed
 
     private void istilesetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_istilesetActionPerformed
         // TODO add your handling code here:
@@ -370,10 +379,9 @@ public class BackgroundWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accept;
-    private javax.swing.JLabel background;
+    private javax.swing.JLabel backgroundImage;
     private javax.swing.JButton cancel;
     private javax.swing.JCheckBox istileset;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -382,6 +390,7 @@ public class BackgroundWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton loadButton;
     private javax.swing.JTextField name;
     private javax.swing.JTextField tileheight;
     private javax.swing.JTextField tilehsep;

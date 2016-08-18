@@ -15,7 +15,7 @@ import xml.projectAssets.backgrounds.Background;
 
 public class BackgroundTile {
     private BufferedImage buffer;
-    private final BufferedImage backgroundTile;
+    private BufferedImage backgroundTile;
     private final String backgroundName;
     private final int tileWidth, tileHeight, offsetX, offsetY,sepX,sepY;
     
@@ -45,6 +45,11 @@ public class BackgroundTile {
         sepX = sepv;
         sepY = seph;
     }
+    
+    public void setImage(BufferedImage i){
+        backgroundTile = i;
+    }
+    
     public BufferedImage getImageInPoint(Point punto){
         try{
             return backgroundTile.getSubimage(punto.x,punto.y,tileWidth,tileHeight);

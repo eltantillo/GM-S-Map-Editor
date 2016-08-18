@@ -57,7 +57,7 @@ public class BackgroundWindow extends javax.swing.JFrame {
         Background background = xml.Project.assets.backgrounds.get(number);
         
         image = background.image;
-         backgroundImage.setIcon(new ImageIcon(image));
+        backgroundImage.setIcon(new ImageIcon(image));
         name.setText(background.name);
         istileset.setSelected(background.istileset);
         tilewidth.setText(String.valueOf(background.tilewidth));
@@ -118,6 +118,8 @@ public class BackgroundWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        backgroundImage.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        backgroundImage.setAutoscrolls(true);
         jScrollPane1.setViewportView(backgroundImage);
 
         jLabel1.setText("Name:");
@@ -321,29 +323,42 @@ public class BackgroundWindow extends javax.swing.JFrame {
                     Logger.getLogger(BackgroundWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
+            
+            if (newBackground){
+                xml.Project.assets.backgroundT.add(new BackgroundTile(background));
+            }
+            if (!imageURI.equals("")){
+                xml.Project.assets.backgroundT.get(number).setImage(background.image);
+                mainWindow.currentBackground.setImage(background.image);
+                mainWindow.currentBackground.drawBackgroundTile(mainWindow.tiles);
+            }
+            
+            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+            for(xml.projectAssets.backgrounds.Background bb :xml.Project.assets.backgrounds){
+                if(bb.istileset){
+                    dcbm.addElement(bb.name);
+                }
+            }
+            
             if (newBackground && background.istileset){
                 mainWindow.currentBackground = new BackgroundTile(xml.Project.assets.backgrounds.get(number));
                 mainWindow.currentBackground.drawBackgroundTile(mainWindow.tiles);
                 mainWindow.currentBackground.setSelection(new Point(0,0), new Point(0,0));
-
-                DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-
-                number = 0;
-                for(xml.projectAssets.backgrounds.Background bb :xml.Project.assets.backgrounds){
-                    if(bb.istileset){
-                        dcbm.addElement(bb.name);
-                        number++;
+                xml.Project.assets.backgroundT.add(new BackgroundTile(background));
+            }
+            
+            number = 0;
+            for (int i = 0; i < xml.Project.assets.backgrounds.size(); i++) {
+                if (xml.Project.assets.backgrounds.get(i).istileset){
+                    number++;
+                    if (xml.Project.assets.backgrounds.get(i).name.equals(background.name)){
+                        break;
                     }
                 }
-                
-                mainWindow.tilesCombo.setModel(dcbm);
-                mainWindow.tilesCombo.setEnabled(true);
-                mainWindow.tilesCombo.setSelectedIndex(number - 1);
-                
-                xml.Project.assets.backgroundT.add(new BackgroundTile(background));
-                
             }
+            
+            mainWindow.tilesCombo.setModel(dcbm);
+            mainWindow.tilesCombo.setSelectedIndex(number - 1);
             dispose();
         }
     }//GEN-LAST:event_acceptActionPerformed

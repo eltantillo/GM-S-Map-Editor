@@ -1,8 +1,16 @@
 [ ] Intentar conquistar el mundo (muy importante)
 [ ] reparar bugs:
-    [ ] Crear un background normal y despues crear uno tipo tile deja de funcionar el tipo tile en el editor.
+    [x] Crear un background normal y despues crear uno tipo tile deja de funcionar el tipo tile en el editor.
+    [ ] Cuando se edita un background tile que tiene tiles añadidos en el room actual, esos tiles se ponen corruptones (creo que se dibujan tiles del fondo con index 0 y de tamaño 16x16 pero ocupando un tile de 32x32)
     [ ] ...
 [ ] Por hacer:
+    [ ] Mostrar Grid en la ventana de carga del background si está marcada la casilla tileset.
+    [ ] Que se guarden los rooms al cambiar de room
+    [ ] Que el editor te pregunte si deseas guardar al haber cambios y tratar de cerrarlo
+    [ ] Que se oculten los tiles que se dibujan debajo del mouse cuando el mouse salga del editor de mapa
+    [ ] Cargar Objetos
+    [ ] Colocar y mover objetos en el mapa
+    [ ] Editor de código Ultra powerfull tipo Brackets fusionado con Netbeans con reproductor de música
     [ ] ...
 
 Pruebas exitosas:
